@@ -1,6 +1,27 @@
-<?= $this->extend('index') ?>
-<?= $this->section('content') ?>
+<?php
 
+use App\Models\ApplicationModel;
+
+function getSinglehandler($handler)
+{
+    if ($handler == session('id'))
+        return 'You';
+    $handlerModel = new ApplicationModel('lms_users_' . session('year'), 'lu_id', 'reg_setting_db');
+    $handler = $handlerModel->select(['user_name'])->where('lu_id', $handler)->where('user_report_to', session('report_to'))->first();
+    return $handler ? $handler['user_name'] : '';
+}
+
+
+$admissionStatus = [
+    'Open For Student.',
+    'Application Submited by student.',
+    'Application Under Process.',
+    'Application Reject by Respected Desk.',
+    'Application is a span type given by Respected Desk.',
+    'Application Admission process done.'
+];
+
+?>
 <!-- Include jQuery -->
 <script src="<?= base_url('assets/js/jquery-3.6.4.min.js') ?>"></script>
 
@@ -51,9 +72,27 @@
                 </ol>
 
                 <div class="mb-1 me-2">
-                    <span class="badge bg-green text-white">Total Applications: 30</span>
+                    <span class="badge bg-green text-white">Applicant List [Totals: <?= $total_records ?? 0 ?>]</span>
                 </div>
+                <div class="card-toolbar">
+                    <!--begin::Dropdown-->
 
+                    <!--end::Dropdown-->
+                    <!--begin::Button-->
+                    <a href="<?= base_url('handler/add-lead') ?>" class="btn btn-primary font-weight-bolder">
+                        <span class="svg-icon svg-icon-md">
+                            <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24" />
+                                    <circle fill="#000000" cx="9" cy="15" r="6" />
+                                    <path d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z" fill="#000000" opacity="0.3" />
+                                </g>
+                            </svg>
+                            <!--end::Svg Icon-->
+                        </span>New Applicant</a>
+                    <!--end::Button-->
+                </div>
                 <div class="panel-heading-btn">
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="fa fa-lg fa-fw fa-sliders"></i></a>
@@ -70,7 +109,7 @@
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">Mobile No.</label>
-                                        <input class="form-control" type="tel" placeholder="Enter Mobile No." />
+                                        <input type="tel" name="mobile" class="form-control" placeholder="Search mobile no.." minlength="8" value="<?= isset($_GET['mobile']) ? $_GET['mobile'] : null ?>" maxlength="12">
                                     </div>
 
                                 </div>
