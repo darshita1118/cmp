@@ -171,7 +171,7 @@
                 </a>
                 <div class="menu-submenu">
                     <div class="menu-item">
-                        <a href="<?= base_url('/') ?>" class="menu-link">
+                        <a href="<?= base_url('handler/dashboard') ?>" class="menu-link">
                             <div class="menu-text">Dashboard</div>
                         </a>
                     </div>

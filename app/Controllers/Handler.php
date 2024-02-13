@@ -96,6 +96,16 @@ class Handler extends BaseController
 		return view('handler/index', $data);
 	}
 
+	public function welcome()
+	{
+		if ((session()->get('usertype') == 'handler' || session()->get('usertype') == 'team-leader') && !session('isLoggedIn')) {
+			return redirect()->to('/handler/logout');
+		}
+		$data = [];
+		$data['pagename'] = 'welcome';
+		return view('handler/index', $data);
+	}
+
 	public function dashboard()
 	{
 		if ((session()->get('usertype') == 'handler' || session()->get('usertype') == 'team-leader') && !session('isLoggedIn')) {

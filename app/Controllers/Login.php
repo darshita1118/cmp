@@ -88,7 +88,7 @@ class Login extends BaseController
                 session()->set('year', $this->request->getVar('year'));
                 //$adminmodel->login_status();
                 //return 'Hello';
-                return redirect()->to('/handler');
+                return redirect()->to('/handler/welcome');
             }
         }
         return view("login", $data);
