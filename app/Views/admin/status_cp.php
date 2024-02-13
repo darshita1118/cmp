@@ -30,21 +30,23 @@
 <script src="<?= base_url('assets/plugins/jszip/dist/jszip.min.js') ?>"></script>
 
 
+
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<ol class="breadcrumb panel-title">
 			<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-			<li class="breadcrumb-item"><a href="javascript:;">Lead Source</a></li>
-			<li class="breadcrumb-item active">All Source</li>
+			<li class="breadcrumb-item"><a href="javascript:;">Lead Status</a></li>
+			<li class="breadcrumb-item active">All Status</li>
 		</ol>
 
 		<div class="mb-1 me-2">
-			<span class="badge">Total Source: <?= $total_source ?? 0 ?></span>
+			<span class="badge">Total Status: <?= $total_status ?? 0 ?></span>
 		</div>
 
 		<div class="panel-heading-btn">
 			<a href="javascript:;" class="btn btn-sm btn-icon bg-black" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
 
+			<a href="javascript:;" class="btn btn-sm btn-icon bg-black" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="fa fa-lg fa-sliders"></i></a>
 		</div>
 
 	</div>
@@ -55,68 +57,33 @@
 			<thead>
 				<tr>
 					<th>#S. No. </th>
-					<th>Source Name </th>
-					<th>Source Score </th>
+					<th>Status Name </th>
+					<th>Status Type </th>
+					<th>Status Info </th>
+					<th>Status Score </th>
 					<th width="1%">Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php $count = 1;
-				foreach ($sources as $row) : ?>
+				foreach ($statuses as $row) : ?>
 					<tr>
 						<td>
 							<?= $count ?>
 						</td>
-						<td><?= $row['source_name'] ?></td>
-						<td><?= $row['source_score'] ?></td>
-						<td nowrap="">
-							<a href="<?= base_url('admin/edit-source/' . $row['source_id']) ?>" class="btn btn-warning"><i class="fa fa-pen"></i></a>
-							<a href="<?= base_url('admin/delete/source/' . $row['source_id']) ?>" class="btn btn-danger"><i class="fa fa-trash-can"></i></a>
+						<td><?= $row['status_name'] ?></td>
+						<td><?= $row['status_type'] ?></td>
+						<td><?= $row['status_get_more_info'] ?></td>
+						<td><?= $row['score'] ?></td>
+						<td>
+							<a href="<?= base_url('admin/edit-status/' . $row['status_id']) ?>" class="btn btn-sm btn-primary me-1">Edit</a>
+							<a href="<?= base_url('admin/delete/status/' . $row['status_id']) ?>" class="btn btn-sm btn-danger">Delete</a>
 						</td>
 					</tr>
 				<?php $count++;
 				endforeach; ?>
 			</tbody>
 		</table>
-
-		<!-- script -->
-		<script>
-			var options = {
-				dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-lg-8 d-lg-block"<"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 me-0 me-md-3"l><"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 "B>><"col-lg-4 d-flex d-lg-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
-				buttons: [{
-						extend: 'copy',
-						className: 'btn-sm'
-					},
-					{
-						extend: 'csv',
-						className: 'btn-sm'
-					},
-					{
-						extend: 'excel',
-						className: 'btn-sm'
-					},
-					{
-						extend: 'pdf',
-						className: 'btn-sm'
-					},
-					{
-						extend: 'print',
-						className: 'btn-sm'
-					}
-				],
-				responsive: true,
-				colReorder: true,
-				keys: true,
-				rowReorder: true,
-				select: true
-			};
-
-			if ($(window).width() <= 767) {
-				options.rowReorder = false;
-				options.colReorder = false;
-			}
-			$('#data-table-combine').DataTable(options);
-		</script>
-
 	</div>
+
 </div>
