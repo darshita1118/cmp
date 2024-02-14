@@ -1,77 +1,77 @@
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+<div class="row">
 
-    <!--begin::Entry-->
-    <div class="d-flex flex-column-fluid">
-        <!--begin::Container-->
-        <div class="container">
-            <div class="row mt-4 mx-0">
-                <div class="col-lg-12 px-3">
-                    <div class="card card-custom gutter-b example example-compact">
-                        <div class="card-header">
-                            <h3 class="card-title">Edit Source</h3>
+    <div class="col-xl-12">
 
-                        </div>
-                        <!--begin::Form-->
-                        <form class="form" method="post" action="">
-                            <?= csrf_field() ?>
-                            <div class="card-body">
-                                <div class="form-group row">
-                                    
-                                    <div class="col-lg-6">
-                                        <label for="name">Source Name:</label>
-                                        <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="Enter Source Name" value="<?= old('email') ?? $sourceDetail['source_name'] ?>">
-                                        <span class="form-text text-muted" required>Please enter Source name</span>
-                                    </div>
-                                    
-                                    
-                                    <div class="col-lg-6">
-                                        <label for="score">Status Score:</label>
-                                        <input type="number" name="score" id="score" class="form-control form-control-lg" placeholder="Enter score" value="<?= old('score') ?? $sourceDetail['source_score'] ?>" required>
-                                        <span class="form-text text-muted">Please enter score</span>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <label for="status">Status Type:</label>
-                                        <select class="form-control form-control-lg" id="status" name="status" required>
-                                            <option value="">--Select Type--</option>
-                                            <option value="1" <?= ((old('status')?? $sourceDetail['source_status']) == 1)?'selected':null ?>>Active</option>
-                                            <option value="0" <?= ((old('status')?? $sourceDetail['source_status']) == '0')?'selected':null ?>>Dective</option>
-                                            
-                                        </select>
-                                        <span class="form-text text-muted">Please enter status type</span>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <label for="handler">Choose Handler:</label>
-                                        <select class="form-control form-control-lg selectpicker" id="handler" data-placehodler="Choose handler" name="handler" data-live-search="true" >
-                                            <option value="">Choose Handler</option>
-                                            <?php foreach($handlers as $handler): ?>
-                                            <option value="<?= $handler['id'] ?>" <?= ((old('handler')??($sourceDetail['handler_id']??'')) == $handler['id'])?'selected':null ?>><?= $handler['name'] ?>(<?= $handler['email'] ?>)</option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                        <span class="form-text text-muted">Please enter handler</span>
-                                    </div>
-                                    
-                                </div>
-                                <div class="row">
-                                        <?php if (session('formerror')) : ?>
-                                            <fieldset class="col-lg-12 mx-auto">
-                                                <div class="alert alert-danger">
-                                                    <?= session('formerror')->listErrors() ?>
-                                                </div>
-                                            </fieldset>
-                                        <?php endif; ?>
-                                    
-                                    <div class="col-lg-12 mx-auto">
-                                        <button type="submit" name="btn" value="edit-source" class="btn btn-primary mr-2">Submit</button>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            
-                        </form>
-                        <!--end::Form-->
-                    </div>
+        <div class="panel panel-inverse">
+
+            <div class="panel-heading">
+                <ol class="breadcrumb panel-title">
+                    <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:;">Lead Source</a></li>
+                    <li class="breadcrumb-item active">Create Source</li>
+                </ol>
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
                 </div>
+
             </div>
+            <div class="panel-body">
+                <form action="" method="post">
+                    <?= csrf_field() ?>
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Source Name</label>
+                                    <input class="form-control" type="text" id="name" name="name" placeholder="Enter Status" value="<?= old('email') ?? $sourceDetail['source_name'] ?>" /><span class="form-text text-muted">Please enter Source name</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Source Score</label>
+                                    <input class="form-control" type="text" name="score" id="score" placeholder="Enter Source Score" value="<?= old('score') ?? $sourceDetail['source_score'] ?>" required /><span class="form-text text-muted">Please Enter Source Score</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Status Type</label>
+                                    <select name="handler" id="handler" class="form-select">...
+                                        <option selected>--Select Status Type-- </option>
+                                        <option value="1" <?= ((old('status') ?? $sourceDetail['source_status']) == 1) ? 'selected' : null ?>>Active</option>
+                                        <option value="0" <?= ((old('status') ?? $sourceDetail['source_status']) == '0') ? 'selected' : null ?>>Dective</option>
+                                    </select><span class="form-text text-muted">Please Select Status Type</span>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Choose Counselor</label>
+                                    <select name="handler" id="handler" class="form-select">...
+                                        <option selected>--Select Counselor-- </option>
+                                        <?php foreach ($handlers as $handler) : ?>
+                                            <option value="<?= $handler['id'] ?>" <?= ((old('handler') ?? ($sourceDetail['handler_id'] ?? '')) == $handler['id']) ? 'selected' : null ?>><?= $handler['name'] ?>(<?= $handler['email'] ?>)</option>
+                                        <?php endforeach; ?>
+                                    </select><span class="form-text text-muted">Please Select Counselor</span>
+
+                                </div>
+                            </div>
+
+
+                            <div>
+
+                                <button type="submit" name="btn" value="create-source" class="btn btn-primary me-5px">Edit Source</button>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </form>
+            </div>
+
         </div>
+
     </div>
+
 </div>

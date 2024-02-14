@@ -54,10 +54,9 @@
 
                                             <option value="<?= $country['code'] ?>" <?= old('country_code') == $country['code'] ? 'selected' : ($country['code'] == '+91' ? 'selected' : null) ?>> (<?= $country['isoCode'] ?> ) <?= $country['code'] ?> </option>
                                         <?php endforeach; ?>
-
-
-                                    </select><span class="form-text text-muted">Please enter Mobile number</span>
+                                    </select>
                                 </div>
+                                <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Mobile No." required="" value="<?= old('mobile') ?? '' ?>" required data-validation-required-message="This Mobile No. field is required"><span class="form-text text-muted">Please enter Mobile number</span>
                             </div>
 
                             <div class="col-md-3">
