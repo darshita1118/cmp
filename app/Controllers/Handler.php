@@ -2478,6 +2478,7 @@ class Handler extends BaseController
 		$data['pagename'] = 'handler/application-form-reopen';
 		return view('handler/index', $data);
 	}
+
 	public function edit_application_form($lid = false,  $sid = false, $step = false)
 	{
 		if ((session()->get('usertype') == 'handler' || session()->get('usertype') == 'team-leader') && !session('isLoggedIn')) {
@@ -2536,6 +2537,7 @@ class Handler extends BaseController
 		$data['pagename'] = $pagename;
 		return view('handler/index', $data);
 	}
+
 	public function edit_profile_step_action($lid = false, $sid = false)
 	{
 		if ((session()->get('usertype') == 'handler' || session()->get('usertype') == 'team-leader') && !session('isLoggedIn')) {

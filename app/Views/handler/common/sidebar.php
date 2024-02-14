@@ -38,7 +38,7 @@
                         <a href="<?= base_url('handler/application-form-reopen') ?>" class="dropdown-item">Reopened Application Form</a>
                     </div>
                 </div>
-                <div class="navbar-item dropdown" style="display: <?= (url_is('handler/reports') || url_is('handler/report/created-sid') || url_is('handler/report/registration') || url_is('handler/report/admission-done')) ? 'block' : 'none' ?>;">
+                <div class="navbar-item dropdown">
                     <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
                         <i class="fas fa-chart-pie fa-fw me-1"></i>
                         <span class="d-lg-inline d-md-none">Reports</span>
@@ -66,9 +66,9 @@
             <div class="navbar-item dropdown">
                 <a href="#" data-bs-toggle="dropdown" class="navbar-link dropdown-toggle icon">
                     <i class="fas fa-bell"></i>
-                    <span class="badge">5</span>
+                    <span class="badge">0</span>
                 </a>
-                <div class="dropdown-menu media-list dropdown-menu-end">
+                <!-- <div class="dropdown-menu media-list dropdown-menu-end">
                     <div class="dropdown-header">NOTIFICATIONS (5)</div>
                     <a href="javascript:;" class="dropdown-item media">
                         <div class="media-left">
@@ -123,7 +123,7 @@
                     <div class="dropdown-footer text-center">
                         <a href="javascript:;" class="text-decoration-none">View more</a>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="navbar-item navbar-user dropdown">
                 <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
@@ -136,13 +136,13 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-end me-1">
                     <a href="javascript:void();" class="dropdown-item"><?= session('name') ?></a>
-                    <a href="extra_profile.html" class="dropdown-item">Edit Profile</a>
+                    <!-- <a href="extra_profile.html" class="dropdown-item">Edit Profile</a>
                     <a href="email_inbox.html" class="dropdown-item d-flex align-items-center">
                         Inbox
                         <span class="badge bg-danger rounded-pill ms-auto pb-4px">2</span>
                     </a>
                     <a href="calendar.html" class="dropdown-item">Calendar</a>
-                    <a href="extra_settings_page.html" class="dropdown-item">Settings</a>
+                    <a href="extra_settings_page.html" class="dropdown-item">Settings</a> -->
                     <div class="dropdown-divider"></div>
                     <a href="<?= base_url('handler/logout'); ?>" class="dropdown-item">Log Out</a>
                 </div>
