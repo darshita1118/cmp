@@ -1,438 +1,252 @@
-<link href="<?= base_url('assets/plugins/select2/dist/css/select2.min.css') ?>" rel="stylesheet" />
-<script src="<?= base_url('assets/plugins/select2/dist/js/select2.min.js') ?>"></script>
+<?php
 
-<!-- Time -->
+use App\Models\ApplicationModel;
+
+$year = session('year');
+$suffix = session('suffix');
+
+function getStatusMessage($leadId)
+{
+}
+function getStatusTime($leadId)
+{
+}
+
+?>
+
 <!-- required files -->
-<link href="<?= base_url('assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css') ?>" rel="stylesheet" />
-<script src="<?= base_url('assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js') ?>"></script>
+<link href="<?= base_url('assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css') ?>" rel="stylesheet" />
+<link href="<?= base_url('assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') ?>" rel="stylesheet" />
+<link href="<?= base_url('assets/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') ?>" rel="stylesheet" />
+<link href="<?= base_url('assets/plugins/datatables.net-colreorder-bs5/css/colReorder.bootstrap5.min.css') ?>" rel="stylesheet" />
+<link href="<?= base_url('assets/plugins/datatables.net-keytable-bs5/css/keyTable.bootstrap5.min.css') ?>" rel="stylesheet" />
+<link href="<?= base_url('assets/plugins/datatables.net-rowreorder-bs5/css/rowReorder.bootstrap5.min.css') ?>" rel="stylesheet" />
+<link href="<?= base_url('assets/plugins/datatables.net-select-bs5/css/select.bootstrap5.min.css') ?>" rel="stylesheet" />
+
+<script src="<?= base_url('assets/plugins/datatables.net/js/jquery.dataTables.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-colreorder/js/dataTables.colReorder.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-colreorder-bs5/js/colReorder.bootstrap5.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-keytable/js/dataTables.keyTable.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-keytable-bs5/js/keyTable.bootstrap5.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-rowreorder/js/dataTables.rowReorder.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-rowreorder-bs5/js/rowReorder.bootstrap5.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-select/js/dataTables.select.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-select-bs5/js/select.bootstrap5.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-buttons/js/buttons.flash.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-buttons/js/buttons.html5.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-buttons/js/buttons.print.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/pdfmake/build/pdfmake.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/pdfmake/build/vfs_fonts.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/jszip/dist/jszip.min.js') ?>"></script>
 
 
-<!-- date -->
-<link href=" <?= base_url('assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') ?>" rel="stylesheet" />
 
-<script src=" <?= base_url('assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js') ?>"></script>
+<div class="panel panel-default">
 
-<style>
-	.timeline::before {
-		left: 0;
-	}
+	<div class="panel-heading">
+		<ol class="breadcrumb panel-title">
+			<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+			<li class="breadcrumb-item"><a href="javascript:;">Leads</a></li>
+			<li class="breadcrumb-item active">All Leads</li>
+		</ol>
 
-	.timeline .timeline-icon {
-		position: absolute;
-		width: 0;
-		left: -10px;
-	}
+		<div class="mb-1 me-2">
+			<span class="badge">Total Leads: <?= $total_leads ?? 0 ?></span>
+		</div>
 
-	.timeline .timeline-content {
-		margin-left: 25px;
-	}
+		<div class="panel-heading-btn">
+			<a href="javascript:;" class="btn btn-sm btn-icon bg-black" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
 
-	.timeline .timeline-content {
-		background-color: #e1e1e1;
-	}
+			<a href="javascript:;" class="btn btn-sm btn-icon bg-black" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="fa fa-lg fa-sliders"></i></a>
 
-	.timeline .timeline-content::before {
-		border-right-color: #e1e1e1;
-	}
 
-	@media (max-width: 575.98px) {
-		.timeline .timeline-content:before {
-			top: 22px;
-			left: 0;
-			margin-left: -20px;
+			<div class="offcanvas offcanvas-top ps-5 pe-5" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+				<div class="offcanvas-header border-bottom">
+					<h5 id="offcanvasTopLabel">Filters</h5>
+					<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+				</div>
+				<div class="offcanvas-body mt-md-3">
 
-		}
+					<form action="" class="row">
+						<div class="col-md-3">
+							<div class="mb-3">
+								<label class="form-label">Mobile No.</label>
+								<input name="mobile" class="form-control" type="tel" placeholder="Search mobile no.." minlength="8" value="<?= isset($_GET['mobile']) ? $_GET['mobile'] : null ?>" maxlength="12" />
+							</div>
 
-		.timeline .timeline-content {
-			margin-top: 0;
-		}
-	}
-</style>
+						</div>
+						<div class="col-md-3">
+							<div class="mb-3"><label class="form-label">Date</label>
+								<div class="input-group" id="default-daterange">
 
-<div class="profile container-fluid p-3">
-	<div class="row gx-4">
-		<div class="col-xl-8 mb-xl-0">
-			<div class="panel panel-inverse card border-0 ">
-				<div class="card-header bg-none p-3 h5 m-0 d-flex align-items-center">
-					<i class="fa fa-pen-to-square fa-lg me-2 text-gray text-opacity-50"></i>
-					Profile
+									<input type="text" name="default-daterange" class="form-control" value="" placeholder="click to select the date range">
+									<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="mb-3">
+								<label class="form-label">Status</label>
+								<select class="form-select" name="status[]" id="status">
+									<option selected>--Select -- </option>
+									<?php foreach ($statues as $status) : ?>
+										<option value="<?= $status['status_id'] ?>" <?= (in_array($status['status_id'], $_GET['status'] ?? [])) ? 'selected' : null ?>><?= $status['status_name'] ?> </option>
+									<?php endforeach; ?>
+
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="mb-3">
+								<label class="form-label">Source</label>
+								<select name="source[]" id="source" class="form-select">
+									<option selected>--Select-- </option>
+									<?php foreach ($sources as $source) : ?>
+										<option value="<?= $source['source_id'] ?>" <?= (in_array($source['source_id'], $_GET['source'] ?? [])) ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
+									<?php endforeach; ?>
+
+								</select>
+
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="mb-3">
+								<label class="form-label">Department</label>
+								<select name="department[]" id="department" class="form-select">
+									<option selected>--Department-- </option>
+									<?php foreach ($departments as $dept) : ?>
+										<option value="<?= $dept['dept_id'] ?>" <?= (in_array($dept['dept_id'], $_GET['department'] ?? [])) ? 'selected' : null ?>><?= $dept['dept_name'] ?> </option>
+									<?php endforeach; ?>
+
+								</select>
+
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="mb-3">
+								<label class="form-label">Program</label>
+								<select class="form-select" name="program[]" id="program">
+									<option selected>--Choose Program-- </option>
+									<?php foreach ($courses as $program) : ?>
+										<option data-dept="<?= $program['dept_id'] ?>" data-level="<?= $program['level_id']  ?>" value="<?= $program['sc_id'] ?>" <?= (in_array($program['sc_id'], $_GET['program'] ?? [])) ? 'selected' : null ?>><?= $program['course_name'] ?> </option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+						</div>
+
+						<div class="col-md-3">
+							<div class="mb-3">
+								<label class="form-label">Lead Nationality</label>
+								<select class="form-select" name="nationality[]" id="nationality">
+									<option selected>--Select-- </option>
+									<?php foreach ($student_nationalities as $nation) : ?>
+										<option value="<?= $nation['id'] ?>" <?= (in_array($nation['id'], $_GET['nationality'] ?? [])) ? 'selected' : null ?>><?= $nation['name'] ?> </option>
+									<?php endforeach; ?>
+								</select>
+
+							</div>
+						</div>
+						<div class="col-md-3 mt-md-4">
+							<button type="submit" class="btn btn-primary w-100px me-5px">Search</button>
+						</div>
+					</form>
 
 				</div>
-				<div class="panel-body card-body p-3 text-dark fw-bold" style="overflow-y: scroll; height:400px">
-
-					<div id="bsSpyContent">
-						<div id="general" class="">
-							<h4 class="d-flex align-items-center mb-2 mt-3">
-								<span class="iconify fs-24px me-2 text-body text-opacity-75 my-n1" data-icon="solar:user-bold-duotone"></span> Profile Details
-							</h4>
-							<p>View and update your Profile Details information.</p>
-							<div class="card">
-								<div class="list-group list-group-flush fw-bold">
-									<div class="list-group-item d-flex align-items-center">
-										<div class="flex-fill">
-											<span>Name :</span>&nbsp;
-											<a href="javascript:;" id="username" data-type="text" data-pk="1" data-title="Enter Username">
-												superuser
-											</a>
-										</div>
-										<div class="w-100px">
-											<a href="javascript:;" id="pencil" class="btn btn-secondary w-100px"><i class=" fa fa-pencil"></i> Edit</a>
-										</div>
-									</div>
-
-									<div class="list-group-item d-flex align-items-center">
-										<div class="flex-fill">
-											<div>Mobile No.</div>
-											<div class="text-body text-opacity-60">+1-202-555-0183</div>
-										</div>
-										<div>
-											<a href="#modalEdit" data-bs-toggle="modal" class="btn btn-secondary w-100px">Edit</a>
-										</div>
-									</div>
-									<div class="list-group-item d-flex align-items-center">
-										<div class="flex-fill">
-											<div>Email address</div>
-											<div class="text-body text-opacity-60"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c5b6b0b5b5aab7b185b6a0a4abb1ada0a8a0eba6aaa8">[email&#160;protected]</a>
-											</div>
-										</div>
-										<div>
-											<a href="#modalEdit" data-bs-toggle="modal" class="btn btn-secondary disabled w-100px">Edit</a>
-										</div>
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<div id="academics" class="mb-4 pb-3">
-							<h4 class="d-flex align-items-center mb-2 mt-3">
-								<span class="iconify fs-24px me-2 text-body text-opacity-75 my-n1" data-icon="solar:square-academic-cap-bold-duotone"></span>
-								Academics
-							</h4>
-							<p>Review and update your Academic Profile details.</p>
-							<div class="card">
-								<div class="list-group list-group-flush fw-bold">
-									<div class="list-group-item d-flex align-items-center">
-										<div class="flex-fill">
-											<span>Program:</span>
-
-											<a href="javascript:;" id="country" data-type="select2" data-pk="1" data-value="BS" data-title="Select country" class="editable editable-click" style="background-color: rgba(0, 0, 0, 0);">B.Tech (CSE)</a>
-
-										</div>
-										<div>
-											<a href="javascript:;" class="btn btn-secondary w-100px" id="country" data-type="select2" data-pk="1" data-value="BS" data-title="Select country"><i class="fa fa-pencil"></i> Edit</a>
-										</div>
-									</div>
-									<div class="list-group-item d-flex align-items-center">
-										<div class="flex-fill">
-											<div>SID/Password:</div>
-											<div class="text-body text-opacity-60 d-flex align-items-center">
-												854625/kHoQ4h
-											</div>
-										</div>
-										<div>
-											<a href="#modalEdit" data-bs-toggle="modal" class="btn btn-secondary w-100px">Edit</a>
-										</div>
-									</div>
-									<div class="list-group-item d-flex align-items-center">
-										<div class="flex-fill">
-											<div>Form Step:</div>
-											<div class="text-body text-opacity-60 d-flex align-items-center">
-												<i class="fa fa-circle fs-6px mt-1px fa-fw text-success me-2"></i> Pyment
-											</div>
-										</div>
-										<div>
-											<a href="#modalEdit" data-bs-toggle="modal" class="btn btn-secondary w-100px">Procced </a>
-										</div>
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<div id="studentstatus" class="mb-4 pb-3">
-							<h4 class="d-flex align-items-center mb-2 mt-3 flex-wrap">
-								<span class="iconify fs-24px me-2 text-body text-opacity-75 my-n1" data-icon="solar:bell-bold-duotone"></span>
-								Student Status
-							</h4>
-							<p>Check and update your Student Status</p>
-							<div class="card">
-								<div class="list-group list-group-flush fw-bold">
-									<div class="list-group-item d-flex align-items-center">
-										<div class="flex-fill">
-
-											<label class="form-label">Lead Status:</label>&nbsp;
-											<select class="default-select2 col-md-12 ">
-												<option selected>--Not Given-- </option>
-												<option value="Marketing Qualifying">Marketing Qualifying </option>
-												<option value="SalesQualifying">Sales Qualifying </option>
-												<option value="SID Generated ">SID Generated </option>
-												<option value="Admission Done ">Admission Done </option>
-												<option value="Fall Out ">Fall Out </option>
-												<option value="Call Back Not Answer ">Call Back Not Answer </option>
-											</select>
-											<a href="" data-bs-toggle="modal" class="btn btn-secondary mt-2">Update</a>
-
-											<div></div>
-										</div>
-									</div>
-								</div>
-								<div class="list-group list-group-flush fw-bold">
-									<div class="list-group-item d-flex align-items-center">
-										<div class="flex-fill ">
-											<div class="d-flex align-items-center flex-wrap">
-												<label class="form-label">Message:</label>
-												<input class="form-control mb-2" />
-												<a href="" data-bs-toggle="modal" class="btn btn-secondary ">Update</a>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="list-group list-group-flush fw-bold">
-									<div class="list-group-item d-flex align-items-center">
-										<div class="flex-fill ">
-
-											<label class="form-label">Date & Time:</label>
-											<div class="d-flex justify-content-between mb-2">
-												<div class="input-group" id="default-daterange">
-													<input type="text" class="form-control" id="datepicker-autoClose" />
-													<div class="input-group-text"><i class="fa fa-calendar"></i></div>
-												</div>
-												<div class="input-group bootstrap-timepicker">
-													<input id="timepicker" type="text" class="form-control" />
-													<span class="input-group-text input-group-addon">
-														<i class="fa fa-clock"></i>
-													</span>
-												</div>
-											</div>
-											<a href="#modalEdit" data-bs-toggle="modal" class="btn btn-secondary ">Update</a>
-
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div id="actionInformation" class="mb-4 pb-3">
-							<h4 class="d-flex align-items-center mb-2 mt-3">
-								<span class="iconify fs-24px me-2 text-body text-opacity-75 my-n1" data-icon="solar:bag-4-bold-duotone"></span>
-
-								More Action and Information
-							</h4>
-							<p>Edit your Contact Information for accurate and up-to-date details.</p>
-							<div class="card">
-								<div class="list-group list-group-flush fw-bold">
-									<div class="list-group-item d-flex align-items-center">
-
-										<div class="flex-fill">
-											<div>Alternate Contact:</div>
-										</div>
-										<a href="#modalEdit" data-bs-toggle="modal" class="btn btn-secondary w-100px">Edit</a>
-									</div>
-								</div>
-								<div class="list-group list-group-flush fw-bold">
-									<div class="list-group-item d-flex align-items-center">
-
-										<div class="flex-fill">
-											<div>Address</div>
-										</div>
-										<a href="#modalEdit" data-bs-toggle="modal" class="btn btn-secondary w-100px">Edit</a>
-									</div>
-								</div>
-								<div class="list-group list-group-flush fw-bold">
-									<div class="list-group-item d-flex align-items-center">
-
-										<div class="flex-fill">
-											<div>Transfer Lead</div>
-										</div>
-										<a href="#modalEdit" data-bs-toggle="modal" class="btn btn-warning w-100px">Transfer</a>
-									</div>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-				<hr>
 			</div>
 		</div>
-		<div class="col-xl-4">
-			<div class="card border-0 mb-4">
-				<div class="card-header bg-none p-3 h5 m-0 d-flex align-items-center">
-					<span class="iconify fs-24px me-2 text-body text-opacity-75 my-n1" data-icon="solar:call-chat-bold-duotone"></span>
-					Contact
-				</div>
-				<div class="card-body">
-					<div class="d-flex flex-wrap">
-						<a href="https://wa.me/1234567890" target="_blank" class="widget-icon rounded bg-success me-4  text-white text-decoration-none">
-							<i class="fa-brands fa-whatsapp fs-30px"></i>
-						</a>
-						<a href="tel:+1234567890" class="widget-icon rounded bg-success me-4  text-white text-decoration-none">
-							<i class="fa-solid fa-phone fs-2"></i>
-						</a>
-						<div class="widget-icon rounded bg-success me-4  text-white text-decoration-none">
-							<div data-bs-target="#modalmail" data-bs-toggle="modal"><i class="fa-solid fa-envelope fs-27px"></i></div>
-							<div class="modal fade" id="modalmail">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title text-dark">SEND Email</h5>
-											<button type="button" class="btn-close fs-4" data-bs-dismiss="modal"></button>
-										</div>
-										<div class="modal-body">
-											<div class="">
-												<label class="text-dark h4">Select Email Template</label>
-												<select class="form-select">...
-													<option selected>--Select Email Template-- </option>
-													<option value="1">Admin</option>
-													<option value="2">Handler</option>
-												</select>
-											</div>
-											<button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-theme">Save changes</button>
-										</div>
-									</div>
 
-								</div>
-							</div>
-						</div>
-						<div href="" class="widget-icon rounded bg-success me-4  text-white text-decoration-none">
-							<div data-bs-target="#modalsms" data-bs-toggle="modal"><i class="fa-solid fa-comment-sms fs-30px"></i></div>
-
-							<div class="modal fade" id="modalsms">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title text-dark">SEND SMS</h5>
-											<button type="button" class="btn-close fs-4" data-bs-dismiss="modal"></button>
-										</div>
-										<div class="modal-body">
-											<div class="">
-												<label class="text-dark h4">Select SMS Template</label>
-												<select class="form-select">...
-													<option selected>--Select SMS Template-- </option>
-													<option value="1">Admin</option>
-													<option value="2">Handler</option>
-												</select>
-
-												<button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-theme">Submit</button>
-
-											</div>
-										</div>
-
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<div class="media-icon mt-2"><a href="#" class="btn btn-secondary">Write A message</a></div>
-					</div>
-				</div>
-			</div>
-			<div class="card border-0 mb-4">
-				<div class="card-header bg-none p-3 h5 m-0 d-flex align-items-center">
-					<span class="iconify fs-24px me-2 text-body text-opacity-75 my-n1" data-icon="solar:file-bold-duotone"></span>
-					History
-				</div>
-				<div class="card-body  fw-bold" style="overflow-y: scroll; height:250px">
-					<div class="profile-content">
-						<div class="tab-content p-0">
-							<div class="tab-pane fade show active" id="profile-post">
-								<div class="timeline">
-									<div class="timeline-item">
-										<div class="timeline-icon">
-											<a href="javascript:;">&nbsp;</a>
-										</div>
-										<div class="timeline-content ">
-											<div class="timeline-header">
-												<div class="username">
-													<a href="javascript:;">John Smith <i class="fa fa-check-circle text-blue ms-1"></i></a>
-													<div class="text-muted fs-12px"><span class="date">today</span>
-														<span class="time">04:20</span> <i class="fa fa-globe-americas opacity-5 "></i>
-													</div>
-												</div>
-											</div>
-											<div class="timeline-body">
-												<small> Enquery For: DIPLOMA</small><br>
-												<small>lead status: Not Given</small><br>
-												<small>Source Of Lead: : Apply Now</small><br>
-											</div>
-										</div>
-									</div>
-									<div class="timeline-item">
-										<div class="timeline-icon">
-											<a href="javascript:;">&nbsp;</a>
-										</div>
-										<div class="timeline-content ">
-											<div class="timeline-header">
-												<div class="username">
-													<a href="javascript:;">Darren Parrase</a>
-													<div class="text-muted fs-12px">24 mins <i class="fa fa-globe-americas opacity-5 ms-1"></i></div>
-												</div>
-											</div>
-											<div class="timeline-body">
-												<div class="mb-2">Location: United States</div>
-												<p>Lorem ipsum dolor sitconsectetur adipiscing elit. Nunc faucibus
-													turpis quis tincidunt luctus.</p>
-											</div>
-										</div>
-									</div>
-									<div class="timeline-item">
-										<div class="timeline-icon">
-											<a href="javascript:;">&nbsp;</a>
-
-										</div>
-										<div class="timeline-content ">
-											<div class="timeline-header">
-												<div class="username">
-													<a href="javascript:;">Darren Parrase</a>
-													<div class="text-muted fs-12px">24 mins <i class="fa fa-globe-americas opacity-5 ms-1"></i></div>
-												</div>
-											</div>
-											<div class="timeline-body">
-												<div class="mb-2">Location: United States</div>
-												<p>Lorem ipsum dolor sitconsectetur adipiscing elit. Nunc faucibus
-													turpis quis tincidunt luctus.</p>
-											</div>
-										</div>
-									</div>
-									<div class="timeline-item">
-										<div class="timeline-icon">
-											<a href="javascript:;">&nbsp;</a>
-
-										</div>
-										<div class="timeline-content ">
-											<div class="timeline-header">
-												<div class="username">
-													<a href="javascript:;">Darren Parrase</a>
-													<div class="text-muted fs-12px">24 mins <i class="fa fa-globe-americas opacity-5 ms-1"></i></div>
-												</div>
-											</div>
-											<div class="timeline-body">
-												<div class="mb-2">Location: United States</div>
-												<p>Lorem ipsum dolor sitconsectetur adipiscing elit. Nunc faucibus
-													turpis quis tincidunt luctus.</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<hr>
-			</div>
-		</div>
 	</div>
+
+
+	<div class="panel-body">
+		<table id="data-table-combine" class="table table-striped table-bordered align-middle w-100 text-nowrap cmp-table">
+			<thead>
+				<tr>
+					<th width="1%">ID</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Mobile</th>
+					<th>Department</th>
+					<th>Program</th>
+					<th>Status</th>
+					<th>Source</th>
+					<th>Create At</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+				$count = 1;
+				foreach ($leads as $lead) : ?>
+					<tr class="odd gradeX">
+						<td width="1%" class="fw-bold"><?= $count ?></td>
+						<td><?= trim(ucwords($lead['lead_first_name'] . ' ' . $lead['lead_middle_name'] . ' ' . $lead['lead_last_name'])) ?></td>
+						<td><?= $lead['lead_email'] ?></td>
+						<td><?= "(" . $lead['lead_country_code'] . ")" ?>-<?= $lead['lead_mobile'] ?></td>
+						<td><?= $lead['dept_name'] ?></td>
+						<td><?= $lead['course_name'] ?></td>
+						<td><?= $lead['status_name'] ?></td>
+						<td><?= $lead['source_name'] ?></td>
+						<td><?= date('d/m/Y H:i:s', strtotime($lead['lead_created_at'])) ?></td>
+						<td>
+							<a href="<?= base_url('admin/edit-lead/' . $lead['lid']) ?>" class="btn btn-warning"><i class="fa fa-pen"></i></a>
+							<a href="<?= base_url('admin/delete/lead/' . $lead['lid']) ?>" class="btn btn-danger"><i class="fa fa-trash-can"></i></a>
+						</td>
+					</tr>
+				<?php $count++;
+				endforeach; ?>
+			</tbody>
+		</table>
+
+		<!-- script -->
+		<script>
+			var options = {
+				dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-lg-8 d-lg-block"<"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 me-0 me-md-3"l><"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 "B>><"col-lg-4 d-flex d-lg-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
+				buttons: [{
+						extend: 'copy',
+						className: 'btn-sm'
+					},
+					{
+						extend: 'csv',
+						className: 'btn-sm'
+					},
+					{
+						extend: 'excel',
+						className: 'btn-sm'
+					},
+					{
+						extend: 'pdf',
+						className: 'btn-sm'
+					},
+					{
+						extend: 'print',
+						className: 'btn-sm'
+					}
+				],
+				responsive: true,
+				colReorder: true,
+				keys: true,
+				rowReorder: true,
+				select: true
+			};
+
+			if ($(window).width() <= 767) {
+				options.rowReorder = false;
+				options.colReorder = false;
+			}
+			$('#data-table-combine').DataTable(options);
+		</script>
+	</div>
+
+
+	<div class="hljs-wrapper">
+		<pre><code class="html" data-url="../assets/data/table-manage/buttons.json"></code></pre>
+	</div>
+
 </div>
-
-
-<script>
-	$("#timepicker").timepicker();
-	$(".default-select2").select2();
-	$("#datepicker-autoClose").datepicker({
-		todayHighlight: true,
-		autoclose: true
-	});
-</script>
-
-<script src="<?= base_url('assets/js/iconify.min.js') ?>" type="text/javascript"></script>

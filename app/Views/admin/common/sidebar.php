@@ -22,7 +22,7 @@
 			<div class="collapse d-md-block me-auto" id="top-navbar">
 				<div class="navbar-nav">
 					<div class="navbar-item">
-						<a href="javascript:;" class="navbar-link d-flex align-items-center">
+						<a href="<?= base_url('admin/tickets') ?>" class="navbar-link d-flex align-items-center">
 							<i class="fas fa-ticket fa-fw me-1"></i>
 							<span class="d-lg-inline d-md-none">Tickets</span>
 						</a>
