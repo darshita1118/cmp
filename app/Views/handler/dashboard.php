@@ -135,7 +135,7 @@ $svgClass = [
 					<p><?= $reportStatus['total_leads'] ?? '0' ?></p>
 				</div>
 				<div class="stats-link">
-					<a href="<?= base_url('handler/lead-status-report/' . $reportStatus['id'] . '/today') ?>">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+					<a href="<?= base_url('handler/lead-status-report/' . $reportStatus['id']) ?>">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
 				</div>
 			</div>
 		</div>
