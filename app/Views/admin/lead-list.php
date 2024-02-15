@@ -165,7 +165,7 @@ function getStatusTime($leadId)
 
 
 	<div class="panel-body">
-		<table id="data-table-combine" class="table table-striped table-bordered align-middle w-100 text-nowrap cmp-table">
+		<table id="data-table-combine" class="table table-striped table-bordered align-middle w-100 text-wrap cmp-table">
 			<thead>
 				<tr>
 					<th width="1%">ID</th>

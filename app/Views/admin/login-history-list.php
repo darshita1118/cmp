@@ -130,17 +130,17 @@
             </div>
 
             <div class="panel-body">
-                <table id="data-table-combine" class="table table-striped table-bordered align-middle w-100 text-nowrap cmp-table">
+                <table id="data-table-combine" class="table table-striped table-bordered align-middle w-100 text-wrap cmp-table">
                     <thead>
                         <tr>
                             <th width="1%">ID</th>
-                            <th class="text-nowrap">Name</th>
-                            <th class="text-nowrap">Mobile</th>
-                            <th class="text-nowrap">IP Address</th>
-                            <th class="text-nowrap">Login Time</th>
-                            <th class="text-nowrap">Logout Time</th>
-                            <th class="text-nowrap">Working Hours</th>
-                            <th class="text-nowrap">User Type</th>
+                            <th>Name</th>
+                            <th>Mobile</th>
+                            <th>IP Address</th>
+                            <th>Login Time</th>
+                            <th>Logout Time</th>
+                            <th>Working Hours</th>
+                            <th>User Type</th>
                         </tr>
                     </thead>
                     <tbody>
