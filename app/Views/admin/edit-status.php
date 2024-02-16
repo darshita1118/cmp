@@ -35,14 +35,14 @@
                                         <option value="1" <?= ((old('type') ?? $statusDetail['status_type']) == 1) ? 'selected' : null ?>>Show Handler</option>
                                         <option value="0" <?= ((old('type') ?? $statusDetail['status_type']) == '0') ? 'selected' : null ?>>Not Show</option>
 
-                                    </select><span class="form-text text-muted">Please enter status info</span>
+                                    </select><span class="form-text text-muted">Please enter status type</span>
 
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="mb-3">
                                     <label class="form-label">Status Info:</label>
-                                    <select class="form-select">...
+                                    <select class="form-select" id="info" name="info" required>
                                         <option selected>--Select Info-- </option>
                                         <option value="1" <?= ((old('info') ?? $statusDetail['status_get_more_info']) == 1) ? 'selected' : null ?>>Get Message </option>
                                         <option value="2" <?= ((old('info') ?? $statusDetail['status_get_more_info']) == 2) ? 'selected' : null ?>>Get Message and Time </option>
@@ -70,7 +70,7 @@
 
 
                                 <div>
-                                    <button type="submit" name="btn" value="create-status" class="btn btn-primary me-5px">Add Status</button>
+                                    <button type="submit" name="btn" value="edit-status" class="btn btn-primary me-5px">Edit Status</button>
                                 </div>
                             </div>
                     </fieldset>

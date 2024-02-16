@@ -230,11 +230,11 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                                 </div>
                                                 <?php if ($sidData['form_step'] <= 6) : ?>
                                                     <div>
-                                                        <a href="<?= base_url('admin/process-application/' . $profileDetail['lid'] . '/' . $sidData['sid']) ?>" data-bs-toggle="modal" class="btn btn-secondary w-100px">Proceed </a>
+                                                        <a href="<?= base_url('admin/process-application/' . $profileDetail['lid'] . '/' . $sidData['sid']) ?>" class="btn btn-secondary w-100px">Proceed </a>
                                                     </div>
                                                 <?php else : ?>
                                                     <div>
-                                                        <a href="<?= base_url('admin/process-application/' . $profileDetail['lid'] . '/' . $sidData['sid']) ?>" data-bs-toggle="modal" class="btn btn-secondary w-100px">Application Under Process</a>
+                                                        <a href="<?= base_url('admin/process-application/' . $profileDetail['lid'] . '/' . $sidData['sid']) ?>" class="btn btn-secondary w-100px">Application Under Process</a>
                                                     </div>
                                                 <?php endif; ?>
                                             </div>

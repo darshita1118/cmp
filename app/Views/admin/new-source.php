@@ -46,7 +46,13 @@
                                 </div>
                             </div>
 
-
+                            <?php if (session('formerror')) : ?>
+                                <fieldset class="col-lg-12 mx-auto">
+                                    <div class="alert alert-danger">
+                                        <?= session('formerror')->listErrors() ?>
+                                    </div>
+                                </fieldset>
+                            <?php endif; ?>
                             <div>
 
                                 <button type="submit" name="btn" value="create-source" class="btn btn-primary me-5px">Add Source</button>

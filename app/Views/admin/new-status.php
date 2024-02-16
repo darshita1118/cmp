@@ -29,14 +29,21 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="mb-3">
-                                    <label class="form-label">Status Type</label>
-                                    <input class="form-control" type="text" placeholder="Enter Status Type" /><span class="form-text text-muted">Please enter Status Type</span>
+                                    <label class="form-label">Status Type:</label>
+                                    <select class="form-select" id="type" name="type" required>
+                                        <option selected>--Select Type-- </option>
+                                        <option value="1" <?= (old('type') == 1) ? 'selected' : null ?>>Show Handler</option>
+                                        <option value="0" <?= (old('type') == '0') ? 'selected' : null ?>>Not Show</option>
+
+
+                                    </select><span class="form-text text-muted">Please enter status info</span>
+
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="mb-3">
                                     <label class="form-label">Status Info:</label>
-                                    <select class="form-select">...
+                                    <select class="form-select" id="info" name="info" required>
                                         <option selected>--Select Info-- </option>
                                         <option value="1" <?= (old('info') == 1) ? 'selected' : null ?>>Get Message </option>
                                         <option value="2" <?= (old('info') == 2) ? 'selected' : null ?>>Get Message and Time </option>
@@ -46,7 +53,6 @@
 
                                 </div>
                             </div>
-
                             <div class="col-md-3">
                                 <div class="mb-3">
                                     <label class="form-label">Status Score</label>
@@ -54,8 +60,6 @@
 
                                 </div>
                             </div>
-
-
                             <div>
                                 <button type="submit" name="btn" value="create-status" class="btn btn-primary me-5px">Add Status</button>
                             </div>

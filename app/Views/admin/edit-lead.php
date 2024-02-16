@@ -8,7 +8,7 @@
                 <ol class="breadcrumb panel-title">
                     <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
                     <li class="breadcrumb-item"><a href="javascript:;">Leads</a></li>
-                    <li class="breadcrumb-item active">Create Lead</li>
+                    <li class="breadcrumb-item active">Edit Lead</li>
                 </ol>
                 <div class="panel-heading-btn">
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
@@ -54,7 +54,7 @@
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
-                                <input class="form-control" type="email" placeholder="Mobile No." name="mobile" id="mobile" value="<?= old('mobile') ?? $profile_detail['lead_mobile'] ?>" required data-validation-required-message="This Mobile No. field is required" />
+                                <input class="form-control" type="text" name="mobile" id="mobile" placeholder="Mobile No." value="<?= old('mobile') ?? $profile_detail['lead_mobile'] ?>" required data-validation-required-message="This Mobile No. field is required" />
                             </div>
 
                             <div class="col-md-3">
