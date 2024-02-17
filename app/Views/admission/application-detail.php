@@ -110,7 +110,7 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
     }
 </style>
 <!--4. Personal Details -->
-<div class="details">
+<div class="details active">
     <div class="card border-0 mb-4 pb-3">
         <div class="card-header bg-none p-3 h3 m-0 d-flex align-items-center justify-content-between">
             <span><i class="fa fa-shopping-bag fa-lg me-2 text-gray text-opacity-50"></i>

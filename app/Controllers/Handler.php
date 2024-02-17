@@ -1472,7 +1472,6 @@ class Handler extends BaseController
 			// entrance exam
 			if ($this->request->getVar('btn') == 'profile-detail') {
 				$postData = $this->request->getPost();
-
 				if ($this->request->getVar('nature') == 2) {
 					if (count($postData['course_type']) != 3) {
 						session()->setFlashdata('toastr', ['error' => 'Please select any three subject']);
