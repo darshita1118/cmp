@@ -1,6 +1,6 @@
+	<!-- App Body Start -->
 	<div id="app" class="app app-header-fixed app-sidebar-fixed app-without-sidebar app-with-top-menu">
-
-
+		<!-- header -->
 		<div id="header" class="app-header">
 			<div class="navbar-header">
 				<a href="<?= base_url('/') ?>" class="navbar-brand"><span class="navbar-logo"></span> <b class="me-3px">CMP</b>
@@ -52,10 +52,6 @@
 				</div>
 			</div>
 		</div>
-
-
-
-
 		<!-- top-menu -->
 		<div id="top-menu" class="app-top-menu" data-bs-theme="dark">
 			<div class="menu">
@@ -313,7 +309,5 @@
 				</div>
 			</div>
 		</div>
-
-
-
+		<!-- Content Starts -->
 		<div id="content" class="app-content">

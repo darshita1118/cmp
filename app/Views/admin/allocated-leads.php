@@ -193,7 +193,7 @@ $handlers = getHandlerList([session('unique_id')]);
                                 <td><?= $lead['lal_created_at'] ?></td>
                                 <td nowrap="">
                                     <a href="<?= base_url('admin/lead-profile/' . $lead['lid']) ?>" class="btn btn-sm btn-primary me-1">Edit</a>
-                                    <a href="#modal-dialog" class="btn btn-sm btn-warning" data-bs-toggle="modal">
+                                    <a href="#modal-dialog" onclick="transfer(<?= $lead['lid'] ?>)" class="btn btn-sm btn-warning" data-bs-toggle="modal">
                                         Transfer
                                     </a>
 
@@ -288,3 +288,9 @@ $handlers = getHandlerList([session('unique_id')]);
     </div>
 
 </div>
+<script>
+    function transfer(params) {
+        $('#leadId').val(params)
+        $('#transferlead').modal('show');
+    }
+</script>
