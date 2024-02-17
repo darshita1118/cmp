@@ -193,12 +193,49 @@ $handlers = getHandlerList([session('unique_id')]);
                                 <td><?= $lead['lal_created_at'] ?></td>
                                 <td nowrap="">
                                     <a href="<?= base_url('admin/lead-profile/' . $lead['lid']) ?>" class="btn btn-sm btn-primary me-1">Edit</a>
-                                    <a href="#" class="btn btn-sm btn-warning">Transfer</a>
+                                    <a href="#modal-dialog" class="btn btn-sm btn-warning" data-bs-toggle="modal">
+                                        Transfer
+                                    </a>
+
                                 </td>
                             </tr>
                         <?php $count++;
                         endforeach; ?>
                     </tbody>
+                    <div class="modal fade" id="modal-dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Transfer Lead</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                                </div>
+                                <form action="<?= base_url('admin/transfered-leads') ?>" method="post">
+                                    <?= csrf_field() ?>
+                                    <div class="modal-body">
+                                        <input type="hidden" name='lead' id="leadId" value="">
+                                        <div class="col-md-12 ">
+
+                                            <label class="form-label">Choose Counsellor:</label>
+                                            <select class="form-select" id="handler" name="handler" onchange="getProgramByDept(this.value)" required="">
+                                                <option value="">--Choose Counsellor--</option>
+                                                <?php foreach ($handlers as $handler) : ?>
+                                                    <option value="<?= $handler['lu_id'] ?>"><?= $handler['user_name'] ?></option>
+                                                <?php endforeach; ?>
+
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-warning" name='btn' type="submit" value="transfer">Transfer</button>
+                                        <button type="button" class="btn btn-warning" data-dismiss="modal" aria-label="Close">
+                                            Close
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </table>
 
                 <!-- script -->

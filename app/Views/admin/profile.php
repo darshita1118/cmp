@@ -152,18 +152,27 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                             <p>View and update your Profile Details information.</p>
                             <div class="card">
                                 <div class="list-group list-group-flush fw-bold">
-                                    <div class="list-group-item d-flex align-items-center">
-                                        <div class="flex-fill">
-                                            <span>Name :</span>&nbsp;
-                                            <a href="javascript:;" id="username" data-type="text" data-pk="1" data-title="Enter Username">
-                                                <?= $name ?>
-                                            </a>
-                                        </div>
-                                        <div class="w-100px">
-                                            <a href="javascript:;" id="pencil" class="btn btn-secondary w-100px"><i class=" fa fa-pencil"></i> Edit</a>
-                                        </div>
-                                    </div>
+                                    <form method="post" action="">
+                                        <?= csrf_field() ?>
+                                        <div class="list-group-item d-flex align-items-center">
+                                            <div class="flex-fill">
+                                                <label for="firstname">First Name:</label>
+                                                <input type="text" id="firstname" name="firstname" class="form-control " placeholder="Enter first name" value="<?= old('firstname') ?? $profileDetail['lead_first_name'] ?>" required>
+                                            </div>
+                                            <div class="flex-fill">
+                                                <label for="middlename">Middle Name:</label>
+                                                <input type="text" id="middlename" name="middlename" class="form-control " placeholder="Enter last name" value="<?= old('middlename') ?? ($profileDetail['lead_middle_name'] ?? '') ?>">
+                                            </div>
 
+                                            <div class="flex-fill">
+                                                <label for="lastname">Last Name:</label>
+                                                <input type="text" id="lastname" name="lastname" class="form-control " placeholder="Enter last name" value="<?= old('lastname') ?? ($profileDetail['lead_last_name'] ?? '') ?>">
+                                            </div>
+                                            <div class="w-100px">
+                                                <button class="btn btn-secondary w-100px" name="btn" type="submit" value="update-name">Edit</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                     <div class="list-group-item d-flex align-items-center">
                                         <div class="flex-fill">
                                             <div>Mobile No.</div>
@@ -282,7 +291,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                 </div>
                                 <div class="list-group list-group-flush fw-bold">
                                     <div class="list-group-item d-flex align-items-center">
-                                        <form action="" method="" class="flex-fill ">
+                                        <form action="" method="post" class="flex-fill">
                                             <div class="d-flex align-items-center flex-wrap">
                                                 <label class="form-label">Message:</label>
                                                 <input class="form-control mb-2" />

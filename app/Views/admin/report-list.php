@@ -217,7 +217,7 @@ $query = $uri->getQuery();
                                 <td><?= date('d/m/Y H:i:s', strtotime($lead['dated'])) ?></td>
 
                                 <td class="">
-                                    <a href="<?= base_url('handler/process-application/' . $lead['lead_id'] . '/' . $lead['sid']) ?>" class="btn btn-sm btn-clean" title="Proceed Application">
+                                    <a href="<?= base_url('admin/process-application/' . $lead['lead_id'] . '/' . $lead['sid']) ?>" class="btn btn-sm btn-clean" title="Proceed Application">
                                         <i class="flaticon2-sheet"></i> Proceed App.
                                     </a>
                                 </td>
