@@ -1150,7 +1150,10 @@ class Handler extends BaseController
 			];
 			$admin->save($data);
 		}
+		// Destroy the session
 		session()->destroy();
+
+		// Redirect to the base URL after logout
 		return redirect()->to(base_url());
 	}
 
@@ -1334,6 +1337,7 @@ class Handler extends BaseController
 
 	public function profile_step_action($lid = false, $sid = false)
 	{
+
 		if ((session()->get('usertype') == 'handler' || session()->get('usertype') == 'team-leader') && !session('isLoggedIn')) {
 			return redirect()->to('/handler/logout');
 		}
@@ -1382,10 +1386,13 @@ class Handler extends BaseController
 
 		if ($this->request->getMethod() == 'post') {
 			$urlPreffix = 'handler/process-application/' . $lid . '/' . $sid;
+			//dd($this->request->getVar('btn'));
 			// career couselling
 			if ($this->request->getVar('btn') == 'schedule-meeting') {
 				$postData = $this->request->getPost();
+
 				$validtionRulesAndError = $this->getValidationRulesAndErrors($this->request, 'schedule-meeting');
+
 				if (!$this->validate($validtionRulesAndError['rules'] ?? [], $validtionRulesAndError['errors'] ?? [])) {
 					$err = $this->validator;
 					session()->setFlashdata('toastr', ['error' => 'Something Went Wrong']);
@@ -1393,6 +1400,8 @@ class Handler extends BaseController
 				} else {
 					$adminModel = new ApplicationModel('admin_info', 'aid', $this->ssoDb);
 					$adminUsers = $adminModel->select(['aid'])->where(['admin_status' => 1, 'admin_delete_status' => 0, 'admin_role' => 1])->findAll() ?? [];
+
+					// dd($adminUsers);
 					$scModel = new ApplicationModel('student_counselling_' . session('year'), 'sc_id', $this->ssoDb);
 					$scLast = $scModel->select(['sc_admin'])->orderBy('sc_id', 'DESC')->first() ?? [];
 					//dd($scLast);
@@ -1461,7 +1470,6 @@ class Handler extends BaseController
 				}
 			}
 			// entrance exam
-
 			if ($this->request->getVar('btn') == 'profile-detail') {
 				$postData = $this->request->getPost();
 

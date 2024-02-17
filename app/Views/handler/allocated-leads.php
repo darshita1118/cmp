@@ -2,14 +2,14 @@
 
 use App\Models\ApplicationModel;
 
-function getHandlerList($notIn = [] , $in=[])
+function getHandlerList($notIn = [], $in = [])
 {
-    $handlerModel = new ApplicationModel('lms_users_'.session('year'), 'lu_id', 'reg_setting_db');
-    $handlers = $handlerModel->select(['lu_id','user_name', 'user_role', 'user_report_to'])->where(['user_status'=>1, 'user_deleted_status'=>0, 'user_report_to'=>session('report_to')])->whereIn('lu_id', $in);
-    if(!empty($notIn)){
+    $handlerModel = new ApplicationModel('lms_users_' . session('year'), 'lu_id', 'reg_setting_db');
+    $handlers = $handlerModel->select(['lu_id', 'user_name', 'user_role', 'user_report_to'])->where(['user_status' => 1, 'user_deleted_status' => 0, 'user_report_to' => session('report_to')])->whereIn('lu_id', $in);
+    if (!empty($notIn)) {
         $handlers->whereNotIn('lu_id', $notIn);
     }
-    return $handlers->findAll()??[];
+    return $handlers->findAll() ?? [];
 }
 $handlers = getHandlerList([session('id')], $teamMembers);
 ?>
@@ -26,11 +26,11 @@ $handlers = getHandlerList([session('id')], $teamMembers);
             <div class="card card-custom gutter-b ">
                 <div class="card-header flex-wrap py-3">
                     <div class="card-title">
-                        <h3 class="card-label">All Team Allocated Leads [Totals: <?= $total_records??0 ?>]
+                        <h3 class="card-label">All Team Allocated Leads [Totals: <?= $total_records ?? 0 ?>]
 
                         </h3>
                     </div>
-                    
+
                 </div>
                 <div class="card-body mx-3">
 
@@ -65,7 +65,7 @@ $handlers = getHandlerList([session('id')], $teamMembers);
 
                                         </div>
                                     </div>
-                                    
+
 
                                     <div class="col-lg-3 col-xl-3">
                                         <div class="align-items-center form-group">
@@ -132,9 +132,9 @@ $handlers = getHandlerList([session('id')], $teamMembers);
 
                                             <div class="m-auto ">
                                                 <label for="handlers">Nationality</label>
-                                                <select name="nationality[]" id="nationality" class="form-control selectpicker" data-live-search="true"  multiple>
+                                                <select name="nationality[]" id="nationality" class="form-control selectpicker" data-live-search="true" multiple>
                                                     <?php foreach ($student_nationalities as $nation) : ?>
-                                                        <option  value="<?= $nation['id'] ?>" <?= (in_array($nation['id'], $_GET['nationality'] ?? [])) ? 'selected' : null ?>><?= $nation['name'] ?> </option>
+                                                        <option value="<?= $nation['id'] ?>" <?= (in_array($nation['id'], $_GET['nationality'] ?? [])) ? 'selected' : null ?>><?= $nation['name'] ?> </option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
@@ -179,26 +179,28 @@ $handlers = getHandlerList([session('id')], $teamMembers);
                                     <tr>
                                         <td><?= $count ?></td>
                                         <td><?= trim(ucwords($lead['lead_first_name'] . ' ' . $lead['lead_middle_name'] . ' ' . $lead['lead_last_name'])) ?><br>
-                                        <small><?= $lead['lead_email'] ?></small><br>
-                                        <small><?= "(" . $lead['lead_country_code'] . ")" ?>-<?= $lead['lead_mobile'] ?></small></td>
-                                        
-                                        <td><?= $lead['dept_name'].'/'.$lead['course_name'] ?></td>
+                                            <small><?= $lead['lead_email'] ?></small><br>
+                                            <small><?= "(" . $lead['lead_country_code'] . ")" ?>-<?= $lead['lead_mobile'] ?></small>
+                                        </td>
+
+                                        <td><?= $lead['dept_name'] . '/' . $lead['course_name'] ?></td>
                                         <td><?= trim(ucwords($lead['user_name'])) ?>
-                                        <?= ($lead['user_email']==session('email') && $lead['user_mobile'] == session('mobile'))?"(You)":null ?>
-                                        <br>
-                                        <small><?= $lead['user_email'] ?></small><br>
-                                        <small><?= $lead['user_mobile'] ?></small></td>
+                                            <?= ($lead['user_email'] == session('email') && $lead['user_mobile'] == session('mobile')) ? "(You)" : null ?>
+                                            <br>
+                                            <small><?= $lead['user_email'] ?></small><br>
+                                            <small><?= $lead['user_mobile'] ?></small>
+                                        </td>
                                         <td><?= $lead['lal_created_at'] ?></td>
                                         <td><?= $lead['status_name'] ?></td>
                                         <td><?= $lead['source_name'] ?></td>
 
                                         <td>
                                             <a href="<?= base_url('handler/lead-profile/' . $lead['lid']) ?>" class="btn table_edit" title="Profile Open"> Edit
-											</a>
-                                            <button type="button" onclick="transfer(<?= $lead['lid'] ?>)"  class="btn table_warning" title="Transfer Lead"> 
+                                            </a>
+                                            <button type="button" onclick="transfer(<?= $lead['lid'] ?>)" class="btn table_warning" title="Transfer Lead">
                                                 Transfer
                                             </button>
-                                            
+
                                         </td>
 
                                     </tr>
@@ -208,80 +210,80 @@ $handlers = getHandlerList([session('id')], $teamMembers);
                             </tbody>
                         </table>
                     </div>
-                    
-                    <style>
-						.pagination-nav nav ul>.active>a {
-							margin-left: .4rem;
-							margin-right: .4rem;
-							outline: 0 !important;
-							cursor: pointer;
-							display: -webkit-box;
-							display: -ms-flexbox;
-							display: flex;
-							-webkit-box-pack: center;
-							-ms-flex-pack: center;
-							justify-content: center;
-							-webkit-box-align: center;
-							-ms-flex-align: center;
-							align-items: center;
-							height: 2.25rem;
-							min-width: 2.25rem;
-							padding: .5rem;
-							text-align: center;
-							position: relative;
-							font-size: 1rem;
-							line-height: 1rem;
-							font-weight: 500;
-							border-radius: .42rem;
-							border: 0;
-							-webkit-transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
-							transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
-							transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
-							transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease, -webkit-box-shadow .15s ease;
-							background-color: #3699ff;
-							color: #fff;
-						}
 
-						.pagination-nav nav ul li a {
-							margin-left: .4rem !important;
-							margin-right: .4rem !important;
-							outline: 0 !important;
-							cursor: pointer;
-							display: -webkit-box;
-							display: -ms-flexbox;
-							display: flex;
-							-webkit-box-pack: center;
-							-ms-flex-pack: center;
-							justify-content: center;
-							-webkit-box-align: center;
-							-ms-flex-align: center;
-							align-items: center;
-							height: 2.25rem !important;
-							min-width: 2.25rem !important;
-							padding: .5rem;
-							text-align: center;
-							position: relative;
-							font-size: 1rem;
-							line-height: 1rem;
-							font-weight: 500;
-							border-radius: .42rem;
-							border: 0;
-							-webkit-transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
-							transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
-							transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
-							transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease, -webkit-box-shadow .15s ease;
-							color: #7e8299;
-							background-color: transparent;
-						}
-					</style>
-					<hr>
-					<div class="row mt-4">
-						<div class="col-lg-12 text-center">
-							<div id='pagination' class='pagination-nav'>
-								<?= $pager->links() ?>
-							</div>
-						</div>
-					</div>
+                    <style>
+                        .pagination-nav nav ul>.active>a {
+                            margin-left: .4rem;
+                            margin-right: .4rem;
+                            outline: 0 !important;
+                            cursor: pointer;
+                            display: -webkit-box;
+                            display: -ms-flexbox;
+                            display: flex;
+                            -webkit-box-pack: center;
+                            -ms-flex-pack: center;
+                            justify-content: center;
+                            -webkit-box-align: center;
+                            -ms-flex-align: center;
+                            align-items: center;
+                            height: 2.25rem;
+                            min-width: 2.25rem;
+                            padding: .5rem;
+                            text-align: center;
+                            position: relative;
+                            font-size: 1rem;
+                            line-height: 1rem;
+                            font-weight: 500;
+                            border-radius: .42rem;
+                            border: 0;
+                            -webkit-transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
+                            transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
+                            transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+                            transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease, -webkit-box-shadow .15s ease;
+                            background-color: #3699ff;
+                            color: #fff;
+                        }
+
+                        .pagination-nav nav ul li a {
+                            margin-left: .4rem !important;
+                            margin-right: .4rem !important;
+                            outline: 0 !important;
+                            cursor: pointer;
+                            display: -webkit-box;
+                            display: -ms-flexbox;
+                            display: flex;
+                            -webkit-box-pack: center;
+                            -ms-flex-pack: center;
+                            justify-content: center;
+                            -webkit-box-align: center;
+                            -ms-flex-align: center;
+                            align-items: center;
+                            height: 2.25rem !important;
+                            min-width: 2.25rem !important;
+                            padding: .5rem;
+                            text-align: center;
+                            position: relative;
+                            font-size: 1rem;
+                            line-height: 1rem;
+                            font-weight: 500;
+                            border-radius: .42rem;
+                            border: 0;
+                            -webkit-transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
+                            transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
+                            transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+                            transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease, -webkit-box-shadow .15s ease;
+                            color: #7e8299;
+                            background-color: transparent;
+                        }
+                    </style>
+                    <hr>
+                    <div class="row mt-4">
+                        <div class="col-lg-12 text-center">
+                            <div id='pagination' class='pagination-nav'>
+                                <?= $pager->links() ?>
+                            </div>
+                        </div>
+                    </div>
 
                     <!--end: Datatable-->
                 </div>
@@ -309,9 +311,9 @@ $handlers = getHandlerList([session('id')], $teamMembers);
                         <!--end::Heading-->
                         <div class="form-group col-lg-12">
                             <label for="handler">Choose Handler:</label>
-                            <select  id="handler" name="handler" class="form-control form-control-solid" required="">
+                            <select id="handler" name="handler" class="form-control form-control-solid" required="">
                                 <option value="">--Choose Handler--</option>
-                                <?php foreach($handlers as $handler): ?>
+                                <?php foreach ($handlers as $handler) : ?>
                                     <option value="<?= $handler['lu_id'] ?>"><?= $handler['user_name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -365,7 +367,7 @@ $handlers = getHandlerList([session('id')], $teamMembers);
     });
 </script>
 <script>
-    function transfer(params){
+    function transfer(params) {
         $('#leadId').val(params)
         $('#transferlead').modal('show');
     }

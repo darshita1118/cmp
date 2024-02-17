@@ -98,6 +98,4 @@ class Home extends BaseController
     {
         return view('error_404');
     }
-
-
 }

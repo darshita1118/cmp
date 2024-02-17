@@ -1,106 +1,67 @@
+<!-- Include jQuery -->
+<script src="<?= base_url('assets/js/jquery-3.6.4.min.js') ?>"></script>
+<!-- date -->
+<link href=" <?= base_url('assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') ?>" rel="stylesheet" />
+<script src=" <?= base_url('assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js') ?>"></script>
+<!-- drop down -->
+<link href="<?= base_url('assets/plugins/select2/dist/css/select2.min.css') ?>" rel="stylesheet" />
+<script src="<?= base_url('assets/plugins/select2/dist/js/select2.min.js') ?>"></script>
+<style>
+    .form-step {
+        /* pointer-events: none;
+        opacity: 0.5; */
+        display: none;
+    }
 
-<!--begin::Content-->
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-    <!--begin::Subheader-->
+    .form-step.active {
+        display: block;
+    }
 
-    <!--end::Subheader-->
-    <!--begin::Entry-->
-    <div class="d-flex flex-column-fluid ">
-        <!--begin::Container-->
-        <div class="container">
-            <div class="card card-custom">
-                <div class="card-body p-0">
+    button {
+        margin-top: 10px;
+    }
+</style>
 
-                    <!--begin::Wizard-->
-                    <div class="wizard wizard-1 " id="kt_wizards" data-wizard-state="step-first" data-wizard-clickable="false">
-                        <!--begin::Wizard Nav-->
-                        <div class="wizard-nav border-bottom py-2 ">
-                            <div class="wizard-steps flex-row ">
+<div class="row ">
+    <div class="col-md-2">
+        <nav class="navbar navbar-sticky d-none d-xl-block  py-4 h-100 text-end">
+            <nav class="nav">
+                <?php $count = 1;
+                foreach ($formSteps as $step) : ?>
 
-                                <?php $count=1; foreach($formSteps as $step): ?>
-                                    
-                                    <?php if($availablePosition >= $step['position']): ?>
-                                        <?php if(in_array($step['position'], [1,2,3]) !== false): ?>
-                                            <?php if($step['position'] == $currentPosition): ?>
-                                                <div class="wizard-step wizard_clip_active" >
-                                                    <div class="wizard-label">
-                                                        <h3 class="wizard-title d-flex"><?= $count++; ?>.<span class="d-none d-lg-flex">&nbsp;<a style="color:#fff" href="<?= base_url($route.$lid.'/'.$sid.'/'.$step['slug']) ?>"><?= $step['fs_name'] ?></a></span></h3>
-                                                    </div>
-                                                </div>
-                                            <?php else: ?>
-                                                <div class="wizard-step wizard_clip_success" >
-                                                    <div class="wizard-label">
-                                                        <h3 class="wizard-title d-flex"><?= $count++; ?>.<span class="d-none d-lg-flex">&nbsp;<a style="color:#fff" href="javascript:showFire('info', 'This Form Step has been lock.')"><?= $step['fs_name'] ?></a></span></h3>
-                                                    </div>
-                                                </div>
-                                            <?php endif; ?>
-                                            
-                                        <?php else: ?>
-                                            <div class="wizard-step <?= $step['position'] == $currentPosition?'wizard_clip_active':'wizard_clip_success' ?>" >
-                                                <div class="wizard-label">
-                                                    <h3 class="wizard-title d-flex"><?= $count++; ?>.<span class="d-none d-lg-flex">&nbsp;<a style="color:#fff" href="<?= base_url($route.$lid.'/'.$sid.'/'.$step['slug']) ?>"><?= $step['fs_name'] ?></a></span></h3>
-                                                </div>
-                                            </div>
-                                        <?php endif; ?>
-                                        
-                                    <?php else: ?>
-                                        <div class="wizard-step wizard_clip_unprogress" style="cursor: not-allowed !important;" >
-                                            <div class="wizard-label">
-                                                <h3 class="wizard-title d-flex"><?= $count++; ?>.<span class="d-none d-lg-flex">&nbsp;<a style="color:#000" href="javascript:showFire('error', 'This Form Step not available')"><?= $step['fs_name'] ?></a></span></h3>
-                                            </div>
-                                        </div>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
+                    <?php if ($availablePosition >= $step['position']) : ?>
+                        <?php if (in_array($step['position'], [1, 2, 3]) !== false) : ?>
+                            <?php if ($step['position'] == $currentPosition) : ?>
+                                <a class="nav-link form-step-menu active" href="<?= base_url($route . $lid . '/' . $sid . '/' . $step['slug']) ?>"><?= $count++; ?> . <?= $step['fs_name'] ?></a>
+                            <?php else : ?>
+                                <a class="nav-link form-step-menu" href="javascript:showFire('info', 'This Form Step has been lock.')"><?= $count++; ?> .<?= $step['fs_name'] ?></a>
 
-                                <?php /*
-                                
-                                <!--begin::Wizard Step 2 Nav-->
-                                
-                                <!--end::Wizard Step 2 Nav-->
-                                <!--begin::Wizard Step 3 Nav-->
-                                <div class="wizard-step wizard_clip_unprogress">
-                                    <div class="wizard-label">
-                                        <h3 class="wizard-title d-flex">2.<span class="d-none d-lg-flex">&nbsp;<a style="color:#000" href="<?= base_url($route.$lid.'/'.$sid.'/academic-detail') ?>">Academic Details</a></span></h3>
-                                    </div>
-                                </div>
-                                <!--end::Wizard Step 3 Nav-->
-                                <!--begin::Wizard Step 4 Nav-->
-                                <div class="wizard-step wizard_clip_unprogress">
-                                    <div class="wizard-label">
-                                        <h3 class="wizard-title d-flex">3.<span class="d-none d-lg-flex">&nbsp;<a style="color:#000" href="<?= base_url($route.$lid.'/'.$sid.'/document-upload') ?>">Documents Upload</a></span></h3>
-                                    </div>
-                                </div>
-                                <!--end::Wizard Step 4 Nav-->
-                                <!--begin::Wizard Step 5 Nav-->
-                                <div class="wizard-step wizard_clip_unprogress">
-                                    <div class="wizard-label">
-                                        <h3 class="wizard-title d-flex">4.<span class="d-none d-lg-flex">&nbsp;<a style="color:#000" href="<?= base_url($route.$lid.'/'.$sid.'/review') ?>">Review and Submit</a></span></h3>
-                                    </div>
-                                </div>
-                                <!--end::Wizard Step 5 Nav-->
-                                */ 
-                                ?>
-                            </div>
-                        </div>
-                        <!--end::Wizard Nav-->
-                        <!--begin::Wizard Body-->
-                        <div class="row justify-content-center my-5 px-8 my-lg-5 px-lg-10">
-                            <div class="col-xl-12 col-xl-12">
-                                <!--begin::Wizard Form-->
-                                <?= $this->include($formView); ?>
-                                <!--end::Wizard Form-->
-                            </div>
-                        </div>
-                        <!--end::Wizard Body-->
-                    </div>
-                    <!--end::Wizard-->
-                </div>
-                <!--end::Wizard-->
-            </div>
-        </div>
-        <!--end::Container-->
+                            <?php endif; ?>
+                        <?php else : ?>
+                            <a class="nav-link form-step-menu <?= $step['position'] == $currentPosition ? 'active' : '' ?>" href="<?= base_url($route . $lid . '/' . $sid . '/' . $step['slug']) ?>"><?= $count++; ?> . <?= $step['fs_name'] ?></a>
+                        <?php endif; ?>
+                    <?php else : ?>
+                        <a class="nav-link form-step-menu" href="javascript:showFire('error', 'This Form Step not available')"><?= $count++; ?> . <?= $step['fs_name'] ?></a>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </nav>
+        </nav>
     </div>
-    <!--end::Entry-->
+    <div class="col-xl-9 py-4">
+        <!--begin::Wizard Form-->
+        <?= $this->include($formView); ?>
+        <!--end::Wizard Form-->
+    </div>
 </div>
-
-<!--end::Content-->
+<script src="<?= base_url('assets/js/iconify.min.js') ?>" type="text/javascript"></script>
+<script>
+    $("#datepicker-timeSedual").datepicker({
+        todayHighlight: true,
+        autoclose: true
+    });
+    $("#datepicker-dob").datepicker({
+        todayHighlight: true,
+        autoclose: true
+    });
+    $(".default-select2").select2();
+</script>

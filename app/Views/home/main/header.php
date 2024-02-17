@@ -18,6 +18,7 @@
 
 
     <link href="<?= base_url('assets/plugins/jvectormap-next/jquery-jvectormap.css') ?>" rel="stylesheet">
+    <link href="<?= base_url('assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assets/plugins/gritter/css/jquery.gritter.css') ?>" rel="stylesheet">
 
 

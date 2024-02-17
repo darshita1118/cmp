@@ -13,7 +13,8 @@ function getStatusTime($leadId)
 }
 
 ?>
-
+<!-- required files -->
+<link href="<?= base_url('assets/plugins/bootstrap-daterangepicker/daterangepicker.css') ?>" rel="stylesheet" />
 <!-- Include jQuery -->
 <script src="<?= base_url('assets/js/jquery-3.6.4.min.js') ?>"></script>
 
@@ -48,6 +49,8 @@ function getStatusTime($leadId)
 <script src="<?= base_url('assets/plugins/pdfmake/build/vfs_fonts.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/jszip/dist/jszip.min.js') ?>"></script>
 
+<script src="<?= base_url('assets/plugins/moment/min/moment.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/bootstrap-daterangepicker/daterangepicker.js') ?>"></script>
 
 <div class="row">
 
@@ -86,6 +89,11 @@ function getStatusTime($leadId)
                                 </div>
                                 <div class="col-md-3">
                                     <div class="mb-3"><label class="form-label">Date From</label>
+                                        <!-- html -->
+                                        <div class="input-group" id="default-daterange">
+                                            <input type="text" name="default-daterange" class="form-control" value="" placeholder="click to select the date range" />
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
                                         <div class="input-group" id="default-daterange">
 
                                             <input type="text" name="from" id="from" placeholder="dd-mm-yyyy" class="form-control" value="<?= isset($_GET['from']) ? $_GET['from'] : null ?>">
@@ -268,3 +276,17 @@ function getStatusTime($leadId)
     </div>
 
 </div>
+<!-- script -->
+<script>
+    $("#default-daterange").daterangepicker({
+        opens: "right",
+        format: "MM/DD/YYYY",
+        separator: " to ",
+        startDate: moment().subtract(29, "days"),
+        endDate: moment(),
+        minDate: "01/01/2023",
+        maxDate: "12/31/2023",
+    }, function(start, end) {
+        $("#default-daterange input").val(start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY"));
+    });
+</script>

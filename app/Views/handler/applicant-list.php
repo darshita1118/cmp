@@ -122,7 +122,7 @@ $admissionStatus = [
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <!-- <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">Status</label>
                                         <select class="form-select">...
@@ -132,20 +132,20 @@ $admissionStatus = [
 
                                         </select>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">Source</label>
-                                        <select class="form-select">...
-                                            <option selected>--Select-- </option>
-                                            <option value="1">Suspended</option>
-                                            <option value="2">Active</option>
-
+                                        <select name="source[]" id="source" multiple class="form-select">
+                                            <option value="">--Select--</option>
+                                            <?php foreach ($sources as $source) : ?>
+                                                <option value="<?= $source['source_id'] ?>" <?= (in_array($source['source_id'], $_GET['source'] ?? [])) ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
+                                            <?php endforeach; ?>
                                         </select>
 
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <!-- <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">Department</label>
                                         <select class="form-select">...
@@ -156,14 +156,15 @@ $admissionStatus = [
                                         </select>
 
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">Program</label>
-                                        <select class="form-select">...
-                                            <option selected>--Chooes Program-- </option>
-                                            <option value="1">Suspended</option>
-                                            <option value="2">Active</option>
+                                        <select class="form-select" name="program[]" id="program" multiple>
+                                            <option value="">--Select--</option>
+                                            <?php foreach ($courses as $program) : ?>
+                                                <option data-dept="<?= $program['dept_id'] ?>" data-level="<?= $program['level_id']  ?>" value="<?= $program['coi_id'] ?>" <?= (in_array($program['coi_id'], $_GET['program'] ?? [])) ? 'selected' : null ?>><?= $program['course_name'] ?> </option>
+                                            <?php endforeach; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -171,10 +172,10 @@ $admissionStatus = [
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label class="form-label">Lead Nationality</label>
-                                        <select class="form-select">...
-                                            <option selected>--Select-- </option>
-                                            <option value="1">Suspended</option>
-                                            <option value="2">Active</option>
+                                        <select class="form-select" name="nationality[]" id="nationality" multiple>
+                                            <?php foreach ($student_nationalities as $nation) : ?>
+                                                <option value="<?= $nation['id'] ?>" <?= (in_array($nation['id'], $_GET['nationality'] ?? [])) ? 'selected' : null ?>><?= $nation['name'] ?> </option>
+                                            <?php endforeach; ?>
                                         </select>
 
                                     </div>
@@ -195,743 +196,50 @@ $admissionStatus = [
 
 
             <div class="panel-body">
-                <table id="data-table-combine" class="table table-striped table-bordered align-middle w-100 text-nowrap cmp-table">
+                <table id="data-table-combine" class="table table-striped table-bordered align-middle w-100 text-wrap cmp-table">
                     <thead>
                         <tr>
-                            <th width="1%">ID</th>
-                            <th class="text-nowrap">Name</th>
-                            <th class="text-nowrap">Email</th>
-                            <th class="text-nowrap">Mobile</th>
-                            <th class="text-nowrap">Sid/Password</th>
-                            <th class="text-nowrap">Form Step</th>
-                            <th class="text-nowrap">Admission Status</th>
-                            <th class="text-nowrap">Program</th>
-                            <th class="text-nowrap">Counselor</th>
-                            <th class="text-nowrap">Register At</th>
-                            <th class="text-nowrap">Actions</th>
+                            <th>id</th>
+                            <th>Name and Email</th>
+                            <th>Mobile</th>
+                            <th>SID/Password</th>
+                            <th>Form Step</th>
+                            <th>Admission Status</th>
+                            <th>Program</th>
+                            <th>Handler</th>
+                            <th>Source</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="odd gradeX">
-                            <td width="1%" class="fw-bold">1</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 4.0</td>
-                            <td>Win 95+</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="even gradeC">
-                            <td width="1%" class="fw-bold">2</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="odd gradeA">
-                            <td width="1%" class="fw-bold">3</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="even gradeA">
-                            <td width="1%" class="fw-bold">4</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="odd gradeA">
-                            <td width="1%" class="fw-bold">5</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="even gradeA">
-                            <td width="1%" class="fw-bold">6</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">7</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">8</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">9</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">10</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">11</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">12</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">13</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">14</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">15</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">16</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">17</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">18</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">19</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">20</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">21</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">22</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">23</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">24</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">25</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">26</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">27</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">28</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">29</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">30</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">31</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">32</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">33</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">34</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">35</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">36</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">37</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">38</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">39</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">40</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">41</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">42</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">43</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeC">
-                            <td width="1%" class="fw-bold">44</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">45</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td width="1%" class="fw-bold">46</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeX">
-                            <td width="1%" class="fw-bold">47</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
-                        <tr class="gradeC">
-                            <td width="1%" class="fw-bold">48</td>
-                            <td>Trident</td>
-                            <td>Internet Explorer 5.0</td>
-                            <td>Win 95+</td>
-                            <td>5</td>
-                            <td>C</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td nowrap="">
-                                <a href="#" class="btn btn-sm btn-warning me-1"> <i class="fa fa-shuffle"></i> Process Application</a>
-                            </td>
-                        </tr>
+                        <?php
+                        $count = 1;
+                        foreach ($leads as $lead) : ?>
+                            <tr>
+                                <td><?= $count ?></td>
+                                <td><?= trim(ucwords($lead['lead_name'])) ?><br>
+                                    <small> <b>Email:</b> <?= $lead['lead_email'] ?> <small>
+                                </td>
+                                <td><?= "(" . $lead['lead_country_code'] . ")" ?>-<?= $lead['lead_mobile'] ?></td>
+                                <td><?= $lead['sid']; ?>/<?= base64_decode($lead['password']) ?></td>
+                                <td><?= $lead['fs_name'] ?? 'Form Step Unknown'; ?></td>
+                                <td><?= $admissionStatus[$lead['admisn_status']] ?></td>
+                                <td><?= $lead['course_name'] ?></td>
+                                <td><?= getSinglehandler($lead['handler_id']) ?></td>
+
+                                <td><?= $lead['source_name'] ?></td>
+
+                                <td class="">
+                                    <a href="<?= base_url('handler/process-application/' . $lead['lead_id'] . '/' . $lead['sid']) ?>" class="btn btn-sm btn-clean" title="Proceed Application">
+                                        <i class="flaticon2-sheet"></i> Proceed App.
+                                    </a>
+
+
+                                </td>
+
+                            </tr>
+                        <?php $count++;
+                        endforeach; ?>
                     </tbody>
                 </table>
 

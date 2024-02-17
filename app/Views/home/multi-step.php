@@ -1,6 +1,4 @@
-<?= $this->extend('home/index') ?>
-
-<?= $this->section('content') ?>
+<?= $this->extend('index') ?>
 <?= $this->section('content') ?>
 <!-- Include jQuery -->
 <script src="<?= base_url('assets/js/jquery-3.6.4.min.js') ?>"></script>
@@ -30,18 +28,20 @@
     <div class="col-md-2">
         <nav class="navbar navbar-sticky d-none d-xl-block  py-4 h-100 text-end">
             <nav class="nav">
-                <a class="nav-link form-step-menu active" href="#payment">Payment</a>
-                <a class="nav-link form-step-menu" href="#counseling">Counseling</a>
-                <a class="nav-link form-step-menu" href="#exam">Entrance Exam</a>
-                <a class="nav-link form-step-menu" href="#person">Personal Details</a>
-                <a class="nav-link form-step-menu" href="#academic">Academic Details</a>
-                <a class="nav-link form-step-menu" href="#upload">Document Upload</a>
+                <a class="nav-link active" href="#payment">Payment</a>
+                <a class="nav-link" href="#counseling">Counseling</a>
+                <a class="nav-link" href="#exam">Entrance Exam
+                </a>
+                <a class="nav-link" href="#person">Personal Details
+                </a>
+                <a class=" nav-link" href="#academic">Academic Details</a>
+                <a class="nav-link" href="#upload">Document Upload</a>
             </nav>
         </nav>
     </div>
     <div class="col-xl-9 py-4">
         <!--1. Application Payment: -->
-        <div id="payment" class="form-step active">
+        <div id="payment" class="form-step active  ">
             <div class="card border-0 mb-4">
                 <div class="card-header bg-none p-3 h3 m-0 ">
                     <i class="fa fa-shopping-bag fa-lg me-2 text-gray text-opacity-50"></i>
@@ -106,7 +106,7 @@
             </div>
         </div>
         <!-- 2. Career Counseling-->
-        <div id="counseling" class="form-step">
+        <div id="counseling" class="form-step ">
             <div class="card border-0  mb-4">
                 <div class="card-header bg-none p-3 h3 m-0 d-flex align-items-center">
                     <i class="fa fa-credit-card fa-lg me-2 text-gray text-opacity-50"></i>
@@ -139,13 +139,13 @@
                     </div>
                 </div>
                 <div class=" d-flex p-2 ">
-                    <a href="#" class="btn btn-default m-auto me-3 " onclick="prevStep()">Previous</a>
+                    <a href="#" class="btn btn-default m-auto me-3 " onclick="prevStep()">Privious</a>
                     <a href="#" class="btn btn-primary " onclick="nextStep()">Next</a>
                 </div>
             </div>
         </div>
         <!-- 3.Entrance Exam -->
-        <div id="exam" class="form-step">
+        <div id="exam" class="form-step ">
             <div class="card border-0 mb-4 pb-3">
                 <div class="card-header bg-none p-3 h3 m-0 d-flex align-items-center">
                     <i class="fa fa-shopping-bag fa-lg me-2 text-gray text-opacity-50"></i>
@@ -172,13 +172,13 @@
 
                 </div>
                 <div class=" d-flex p-2 ">
-                    <a href="#" class="btn btn-default m-auto me-3 " onclick="prevStep()">Previous</a>
+                    <a href="#" class="btn btn-default m-auto me-3 " onclick="prevStep()">Privious</a>
                     <a href="#" class="btn btn-primary " onclick="nextStep()">Next</a>
                 </div>
             </div>
         </div>
         <!--4. Personal Details -->
-        <div id="person" class="form-step">
+        <div id="person" class="form-step ">
             <div class="card border-0 mb-4 pb-3">
                 <div class="card-header bg-none p-3 h3 m-0 d-flex align-items-center">
                     <i class="fa fa-shopping-bag fa-lg me-2 text-gray text-opacity-50"></i>
@@ -495,13 +495,13 @@
                     </div>
                 </div>
                 <div class=" d-flex p-2 ">
-                    <a href="#" class="btn btn-default m-auto me-3 " onclick="prevStep()">Previous</a>
+                    <a href="#" class="btn btn-default m-auto me-3 " onclick="prevStep()">Privious</a>
                     <a href="#" class="btn btn-primary " onclick="nextStep()">Next</a>
                 </div>
             </div>
         </div>
         <!--5. Acadmic Details-->
-        <div id="academic" class="form-step">
+        <div id="academic" class="form-step ">
             <div class="card border-0 mb-4 pb-3">
                 <div class="card-header bg-none p-3 h3 m-0 d-flex align-items-center">
                     <i class="fa fa-shopping-bag fa-lg me-2 text-gray text-opacity-50"></i>
@@ -707,13 +707,13 @@
                     </div>
                 </div>
                 <div class=" d-flex p-2 ">
-                    <a href="#" class="btn btn-default m-auto me-3 " onclick="prevStep()">Previous</a>
+                    <a href="#" class="btn btn-default m-auto me-3 " onclick="prevStep()">Privious</a>
                     <a href="#" class="btn btn-primary " onclick="nextStep()">Next</a>
                 </div>
             </div>
         </div>
         <!-- 6. Document Upload -->
-        <div id="upload" class="mb-4 pb-3 pb-3 form-step">
+        <div id="upload" class="mb-4 pb-3 pb-3 form-step ">
             <div class="card border-0">
                 <div class="card-header bg-none p-3 h3 m-0 d-flex align-items-center">
                     <i class="fa fa-credit-card fa-lg me-2 text-gray text-opacity-50"></i>
@@ -738,7 +738,7 @@
                     </div>
                 </div>
                 <div class=" d-flex p-2">
-                    <a href="#" class="btn btn-default m-auto me-3" onclick="prevStep()">Previous</a>
+                    <a href="#" class="btn btn-default m-auto me-3" onclick="prevStep()">Privious</a>
                     <a href="#" class="btn btn-primary " onclick="nextStep()">Next</a>
                 </div>
             </div>
@@ -762,37 +762,27 @@
 
 <script>
     let currentStep = 0;
-    const menuStep = document.querySelectorAll('.form-step-menu');
     const formSteps = document.querySelectorAll('.form-step');
 
     function nextStep() {
-        //remove the class active 
         formSteps[currentStep].classList.remove('active');
-        menuStep[currentStep].classList.remove('active');
-
-        //increment by 1
         currentStep = (currentStep + 1) % formSteps.length;
-
-        //add the class active
         formSteps[currentStep].classList.add('active');
-        menuStep[currentStep].classList.add('active');
     }
 
     function prevStep() {
-        //remove the class active 
         formSteps[currentStep].classList.remove('active');
-        menuStep[currentStep].classList.remove('active');
-        //Decrement by 1
         currentStep = (currentStep - 1 + formSteps.length) % formSteps.length;
-        //add the class active
         formSteps[currentStep].classList.add('active');
-        menuStep[currentStep].classList.add('active');
     }
 
     document.getElementById('multiStepForm').addEventListener('submit', function(event) {
         event.preventDefault();
         alert('Form submitted successfully!');
     });
+
+    $(document).ready(function() {
+        $("#payment").addClass("active");
+    });
 </script>
-<?= $this->endSection() ?>
 <?= $this->endSection() ?>
