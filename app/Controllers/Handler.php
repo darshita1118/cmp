@@ -2320,8 +2320,6 @@ class Handler extends BaseController
 		*/
 	}
 
-
-
 	public function upload_documents($lid = false, $sid = false)
 	{
 		if ((session()->get('usertype') == 'handler' || session()->get('usertype') == 'team-leader') && !session('isLoggedIn')) {

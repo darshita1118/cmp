@@ -14,361 +14,296 @@ function getHandlerList($notIn = [], $in = [])
 $handlers = getHandlerList([session('id')], $teamMembers);
 ?>
 
-<!--begin::Content-->
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 
-    <!--begin::Entry-->
-    <div class="d-flex flex-column-fluid">
-        <!--begin::Container-->
-        <div class="container">
+<!-- DataTables CSS -->
+<link href="<?= base_url() ?>assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+<link href="<?= base_url() ?>assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
+<link href="<?= base_url() ?>assets/plugins/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet" />
 
-            <!--begin::Card-->
-            <div class="card card-custom gutter-b ">
-                <div class="card-header flex-wrap py-3">
-                    <div class="card-title">
-                        <h3 class="card-label">All Team Allocated Leads [Totals: <?= $total_records ?? 0 ?>]
 
-                        </h3>
-                    </div>
+<link href="<?= base_url('assets/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') ?>" rel="stylesheet" />
+<link href="<?= base_url('assets/plugins/datatables.net-select-bs5/css/select.bootstrap5.min.css') ?>" rel="stylesheet" />
 
+<link href="<?= base_url() ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+
+<link href="<?= base_url() ?>assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
+
+
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Home</a></li>
+                <li class="breadcrumb-item">Leads</a></li>
+                <li class="breadcrumb-item">All Leads</li>
+            </ol>
+        </h4>
+        <div class="mb-1 me-2">
+            <span>Total Leads: <?= $total_leads ?? 0 ?></span>
+        </div>
+        <div class="panel-heading-btn">
+            <a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
+            <a href="javascript:;" class="btn btn-sm btn-icon btn-warning" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="fa fa-lg fa-fw fa-sliders"></i></a>
+            <div class="offcanvas offcanvas-top ps-5 pe-5" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+                <div class="offcanvas-header border-bottom">
+                    <h5 id="offcanvasTopLabel">Filters</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                <div class="card-body mx-3">
-
-                    <div class="row align-items-center mx-0">
-                        <form action="" method="get">
-                            <div class="col-lg-12 col-xl-12">
-                                <div class="row align-items-center">
-
-                                    <div class="col-lg-3 col-xl-3">
-                                        <div class="form-group">
-                                            <label for="mobile">Mobile</label>
-                                            <div class="input-icon">
-                                                <input type="tel" name="mobile" class="form-control" placeholder="Search mobile no.." minlength="8" value="<?= isset($_GET['mobile']) ? $_GET['mobile'] : null ?>" maxlength="12">
-                                                <span>
-                                                    <i class="flaticon2-search-1 text-muted"></i>
-                                                </span>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-xl-3">
-                                        <div class="form-group">
-                                            <label for="from">From</label>
-                                            <input type="text" name="from" id="from" placeholder="dd-mm-yyyy" class="form-control" value="<?= isset($_GET['from']) ? $_GET['from'] : null ?>">
-
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-xl-3">
-                                        <div class="form-group">
-                                            <label for="to">To</label>
-                                            <input type="text" name="to" id="to" placeholder="dd-mm-yyyy" class="form-control" value="<?= isset($_GET['to']) ? $_GET['to'] : null ?>">
-
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-lg-3 col-xl-3">
-                                        <div class="align-items-center form-group">
-
-                                            <div class="m-auto ">
-                                                <label for="status">Status</label>
-                                                <select name="status[]" id="status" class="form-control selectpicker" multiple>
-                                                    <option value="">--Select--</option>
-                                                    <?php foreach ($statues as $status) : ?>
-                                                        <option value="<?= $status['status_id'] ?>" <?= (in_array($status['status_id'], $_GET['status'] ?? [])) ? 'selected' : null ?>><?= $status['status_name'] ?> </option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-3 col-xl-3">
-                                        <div class="align-items-center form-group">
-
-                                            <div class="m-auto ">
-                                                <label for="source">Source</label>
-                                                <select name="source[]" id="source" class="form-control selectpicker" multiple>
-                                                    <option value="">--Select--</option>
-                                                    <?php foreach ($sources as $source) : ?>
-                                                        <option value="<?= $source['source_id'] ?>" <?= (in_array($source['source_id'], $_GET['source'] ?? [])) ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
-                                                    <?php endforeach; ?>
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-xl-3">
-                                        <div class=" align-items-center form-group">
-
-                                            <div class="m-auto ">
-                                                <label for="department">Department</label>
-                                                <select name="department[]" id="department" class="form-control selectpicker" multiple>
-                                                    <option value="">--Select--</option>
-                                                    <?php foreach ($departments as $dept) : ?>
-                                                        <option value="<?= $dept['dept_id'] ?>" <?= (in_array($dept['dept_id'], $_GET['department'] ?? [])) ? 'selected' : null ?>><?= $dept['dept_name'] ?> </option>
-                                                    <?php endforeach; ?>
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-xl-3">
-                                        <div class=" align-items-center form-group">
-
-                                            <div class="m-auto ">
-                                                <label for="program">Program</label>
-                                                <select name="program[]" id="program" class="form-control selectpicker" multiple>
-                                                    <option value="">--Select--</option>
-                                                    <?php foreach ($courses as $program) : ?>
-                                                        <option data-dept="<?= $program['dept_id'] ?>" data-level="<?= $program['level_id']  ?>" value="<?= $program['coi_id'] ?>" <?= (in_array($program['coi_id'], $_GET['program'] ?? [])) ? 'selected' : null ?>><?= $program['course_name'] ?> </option>
-                                                    <?php endforeach; ?>
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-xl-3">
-                                        <div class=" align-items-center form-group">
-
-                                            <div class="m-auto ">
-                                                <label for="handlers">Nationality</label>
-                                                <select name="nationality[]" id="nationality" class="form-control selectpicker" data-live-search="true" multiple>
-                                                    <?php foreach ($student_nationalities as $nation) : ?>
-                                                        <option value="<?= $nation['id'] ?>" <?= (in_array($nation['id'], $_GET['nationality'] ?? [])) ? 'selected' : null ?>><?= $nation['name'] ?> </option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-lg-3 col-xl-3 form-group">
-                                        <label for="">&nbsp;</label>
-                                        <button type="submit" class="form-control btn btn-light-primary font-weight-bold" style="height: 32px; padding: 7px;">Search</button>
-
-                                    </div>
-
-                                </div>
+                <div class="offcanvas-body mt-md-3">
+                    <form action="" class="row">
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Mobile No.</label>
+                                <input class="form-control" type="number" placeholder="Enter Mobile No." />
                             </div>
 
-                        </form>
-                    </div>
-
-
-
-
-                    <!--begin: Datatable-->
-                    <div class="datatable datatable-default datatable-bordered datatable-loaded">
-                        <table class="table table-bordered table-checkable" id="kt_datatable">
-                            <thead>
-                                <tr>
-                                    <th>id</th>
-                                    <th>Name</th>
-                                    <th>School/Program</th>
-                                    <th>Handler Information</th>
-                                    <th>Allocation Date</th>
-                                    <th>Status</th>
-                                    <th>Source</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $count = 1;
-                                foreach ($leads as $lead) : ?>
-                                    <tr>
-                                        <td><?= $count ?></td>
-                                        <td><?= trim(ucwords($lead['lead_first_name'] . ' ' . $lead['lead_middle_name'] . ' ' . $lead['lead_last_name'])) ?><br>
-                                            <small><?= $lead['lead_email'] ?></small><br>
-                                            <small><?= "(" . $lead['lead_country_code'] . ")" ?>-<?= $lead['lead_mobile'] ?></small>
-                                        </td>
-
-                                        <td><?= $lead['dept_name'] . '/' . $lead['course_name'] ?></td>
-                                        <td><?= trim(ucwords($lead['user_name'])) ?>
-                                            <?= ($lead['user_email'] == session('email') && $lead['user_mobile'] == session('mobile')) ? "(You)" : null ?>
-                                            <br>
-                                            <small><?= $lead['user_email'] ?></small><br>
-                                            <small><?= $lead['user_mobile'] ?></small>
-                                        </td>
-                                        <td><?= $lead['lal_created_at'] ?></td>
-                                        <td><?= $lead['status_name'] ?></td>
-                                        <td><?= $lead['source_name'] ?></td>
-
-                                        <td>
-                                            <a href="<?= base_url('handler/lead-profile/' . $lead['lid']) ?>" class="btn table_edit" title="Profile Open"> Edit
-                                            </a>
-                                            <button type="button" onclick="transfer(<?= $lead['lid'] ?>)" class="btn table_warning" title="Transfer Lead">
-                                                Transfer
-                                            </button>
-
-                                        </td>
-
-                                    </tr>
-                                <?php $count++;
-                                endforeach; ?>
-
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <style>
-                        .pagination-nav nav ul>.active>a {
-                            margin-left: .4rem;
-                            margin-right: .4rem;
-                            outline: 0 !important;
-                            cursor: pointer;
-                            display: -webkit-box;
-                            display: -ms-flexbox;
-                            display: flex;
-                            -webkit-box-pack: center;
-                            -ms-flex-pack: center;
-                            justify-content: center;
-                            -webkit-box-align: center;
-                            -ms-flex-align: center;
-                            align-items: center;
-                            height: 2.25rem;
-                            min-width: 2.25rem;
-                            padding: .5rem;
-                            text-align: center;
-                            position: relative;
-                            font-size: 1rem;
-                            line-height: 1rem;
-                            font-weight: 500;
-                            border-radius: .42rem;
-                            border: 0;
-                            -webkit-transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
-                            transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
-                            transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
-                            transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease, -webkit-box-shadow .15s ease;
-                            background-color: #3699ff;
-                            color: #fff;
-                        }
-
-                        .pagination-nav nav ul li a {
-                            margin-left: .4rem !important;
-                            margin-right: .4rem !important;
-                            outline: 0 !important;
-                            cursor: pointer;
-                            display: -webkit-box;
-                            display: -ms-flexbox;
-                            display: flex;
-                            -webkit-box-pack: center;
-                            -ms-flex-pack: center;
-                            justify-content: center;
-                            -webkit-box-align: center;
-                            -ms-flex-align: center;
-                            align-items: center;
-                            height: 2.25rem !important;
-                            min-width: 2.25rem !important;
-                            padding: .5rem;
-                            text-align: center;
-                            position: relative;
-                            font-size: 1rem;
-                            line-height: 1rem;
-                            font-weight: 500;
-                            border-radius: .42rem;
-                            border: 0;
-                            -webkit-transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
-                            transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
-                            transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
-                            transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease, -webkit-box-shadow .15s ease;
-                            color: #7e8299;
-                            background-color: transparent;
-                        }
-                    </style>
-                    <hr>
-                    <div class="row mt-4">
-                        <div class="col-lg-12 text-center">
-                            <div id='pagination' class='pagination-nav'>
-                                <?= $pager->links() ?>
+                        </div>
+                        <div class="col-md-3">
+                            <!-- html -->
+                            <label class="form-label">Date</label>
+                            <div class="input-group" id="default-daterange">
+                                <input type="dt" name="default-daterange" class="form-control" value="" placeholder="click to select the date range" />
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
                         </div>
-                    </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <select class="form-select">...
+                                    <option selected>--Select -- </option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Handler</option>
 
-                    <!--end: Datatable-->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Source</label>
+                                <select class="form-select">...
+                                    <option selected>--Select-- </option>
+                                    <option value="1">Suspended</option>
+                                    <option value="2">Active</option>
+
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Department</label>
+                                <select class="form-select">...
+                                    <option selected>--Department-- </option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Handler</option>
+
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Program</label>
+                                <select class="default-select2 form-select">
+                                    <option value="AK">Test</option>
+                                    <option value="AK">Test</option>
+                                    <option value="AK">Test</option>
+                                    <option value="AK">Test</option>
+                                    <option value="AK">Test</option>
+                                    <option value="HI">Hawaii</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Lead Nationality</label>
+                                <select class="form-select">...
+                                    <option selected>--Select-- </option>
+                                    <option value="1">Suspended</option>
+                                    <option value="2">Active</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3 mt-md-4">
+                            <button type="submit" class="btn btn-primary w-100px me-5px">Apply Filter</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <!--end::Card-->
-        </div>
-        <!--end::Container-->
-    </div>
-    <!--end::Entry-->
-</div>
-<div class="modal fade" id="transferlead" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="transferlead">Transfer Lead</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i aria-hidden="true" class="ki ki-close"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form class="form" action="<?= base_url('handler/transfered-leads') ?>" method="post">
-                    <?= csrf_field() ?>
-                    <div class="row mx-0">
-                        <input type="hidden" name='lead' id="leadId" value="">
-                        <!--end::Heading-->
-                        <div class="form-group col-lg-12">
-                            <label for="handler">Choose Handler:</label>
-                            <select id="handler" name="handler" class="form-control form-control-solid" required="">
-                                <option value="">--Choose Handler--</option>
-                                <?php foreach ($handlers as $handler) : ?>
-                                    <option value="<?= $handler['lu_id'] ?>"><?= $handler['user_name'] ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="form-group col-lg-12 mx-auto">
-
-                            <button class=" btn btn-primary font-weight-bold" name='btn' type="submit" value="transfer">Transfer</button>
-                            <button type="button" class="btn btn-primary font-weight-bold" data-dismiss="modal" aria-label="Close">
-                                Close
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
         </div>
     </div>
+
+    <div class="panel-body">
+        <!-- html -->
+        <table id="data-table-fixed-header" class="table table-striped table-bordered align-middle w-100 text-wrap ">
+            <thead>
+                <tr>
+                    <th width="1%">ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Department</th>
+                    <th>Program</th>
+                    <th>Status</th>
+                    <th>Source</th>
+                    <th>Create At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $count = 1;
+                foreach ($leads as $lead) : ?>
+                    <tr class="odd gradeX">
+                        <td width="1%" class="fw-bold"><?= $count ?></td>
+                        <td><?= trim(ucwords($lead['lead_first_name'] . ' ' . $lead['lead_middle_name'] . ' ' . $lead['lead_last_name'])) ?></td>
+                        <td><?= $lead['lead_email'] ?></td>
+                        <td><?= "(" . $lead['lead_country_code'] . ")" ?>-<?= $lead['lead_mobile'] ?></td>
+                        <td><?= $lead['dept_name'] ?></td>
+                        <td><?= $lead['course_name'] ?></td>
+                        <td><?= $lead['status_name'] ?></td>
+                        <td><?= $lead['source_name'] ?></td>
+                        <td><?= date('d/m/Y H:i:s', strtotime($lead['lead_created_at'])) ?></td>
+                        <td>
+                            <a href="<?= base_url('admin/edit-lead/' . $lead['lid']) ?>" class="btn btn-warning btn-icon btn-sm"><i class="fa fa-pen"></i></a>
+                            <a href="<?= base_url('admin/delete/lead/' . $lead['lid']) ?>" class="btn btn-danger btn-icon btn-sm"><i class="fa fa-trash-can"></i></a>
+                        </td>
+                    </tr>
+                <?php $count++;
+                endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 </div>
-<!--end::Content-->
+
+<!-- DataTables JS -->
+<script src="<?= base_url() ?>assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net-fixedheader-bs5/js/fixedHeader.bootstrap5.min.js"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-select/js/dataTables.select.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-select-bs5/js/select.bootstrap5.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-buttons/js/buttons.flash.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-buttons/js/buttons.html5.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-buttons/js/buttons.print.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/pdfmake/build/pdfmake.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/pdfmake/build/vfs_fonts.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/jszip/dist/jszip.min.js') ?>"></script>
+
+<!-- Select2 JS -->
+<script src="<?= base_url('assets/plugins/select2/dist/js/select2.min.js') ?>"></script>
+
+<!-- Form Plugins Scripts -->
+<script src="<?= base_url() ?>assets/plugins/moment/min/moment.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+<!--Code Script -->
 <script>
-    "use strict";
-    var KTDatatablesBasicPaginations = function() {
-
-        var initTable2 = function() {
-            var table = $('#kt_datatable');
-
-            // begin first table
-            table.DataTable({
-                responsive: true,
-                pagingType: 'full_numbers',
-                lengthMenu: [5, 10, 25, 50, 100, 120, 200, 300, 400, 500, 1000],
-
-                pageLength: 50,
-
-            });
-        };
-
-
-        return {
-
-            //main function to initiate the module
-            init: function() {
-                initTable2();
-
+    var options = {
+        dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-lg-8 d-lg-block"<"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 me-0 me-md-3"l><"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 "B>><"col-lg-4 d-flex d-lg-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
+        buttons: [{
+                extend: 'copy',
+                className: 'btn-sm'
+            },
+            {
+                extend: 'csv',
+                className: 'btn-sm'
+            },
+            {
+                extend: 'excel',
+                className: 'btn-sm'
+            },
+            {
+                extend: 'pdf',
+                className: 'btn-sm'
+            },
+            {
+                extend: 'print',
+                className: 'btn-sm'
             }
-        };
-    }();
+        ],
+        keys: true,
+        select: true,
+        paging: true,
+        lengthMenu: [20, 40, 60],
+        fixedHeader: {
+            header: true,
+            headerOffset: $('#header').height()
+        },
+        responsive: true
+    };
 
-    jQuery(document).ready(function() {
-        KTDatatablesBasicPaginations.init();
+    $('#data-table-fixed-header').DataTable(options);
+</script>
+<script>
+    $(".default-select2").select2({
+        dropdownParent: $('#offcanvasTop')
+    });
+
+    // Datepicker JS
+
+    var handleRenderDateRangePicker = function() {
+        $("#default-daterange").daterangepicker({
+            opens: "right",
+            format: "MM/DD/YYYY",
+            separator: " to ",
+            startDate: moment(),
+            endDate: moment(),
+            showDropdowns: true,
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+            locale: {
+                applyLabel: 'Apply',
+                cancelLabel: 'Cancel',
+                fromLabel: 'From',
+                toLabel: 'To',
+                customRangeLabel: 'Custom Range',
+                weekLabel: 'W',
+                daysOfWeek: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+                monthNames: [
+                    "January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ],
+                firstDay: 1
+            }
+        }, function(start, end) {
+            $("#default-daterange input").val(
+                start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY")
+            );
+        });
+    };
+
+    var FormPlugins = (function() {
+        "use strict";
+        return {
+            init: function() {
+                handleRenderDateRangePicker();
+            },
+        };
+    })();
+
+    $(document).ready(function() {
+        FormPlugins.init();
+        $(document).on("theme-reload", function() {
+            handleRenderColorpicker();
+        });
     });
 </script>
-<script>
-    function transfer(params) {
-        $('#leadId').val(params)
-        $('#transferlead').modal('show');
+
+<style>
+    .daterangepicker {
+        z-index: 9999 !important;
     }
-</script>
+</style>

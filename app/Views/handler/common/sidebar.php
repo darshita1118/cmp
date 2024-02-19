@@ -156,18 +156,18 @@
 							<div class="menu-icon">
 								<i class="fa fa-database"></i>
 							</div>
-							<div class="menu-text">Members</div>
+							<div class="menu-text">Counselor</div>
 							<div class="menu-caret"></div>
 						</a>
 						<div class="menu-submenu">
 							<div class="menu-item">
 								<a href="<?= base_url('handler/members') ?>" class="menu-link">
-									<div class="menu-text">All Members</div>
+									<div class="menu-text">All Counselor</div>
 								</a>
 							</div>
 							<div class="menu-item">
 								<a href="<?= base_url('handler/create-member') ?>" class="menu-link">
-									<div class="menu-text">Create Member</div>
+									<div class="menu-text">Create Counselor</div>
 								</a>
 							</div>
 						</div>

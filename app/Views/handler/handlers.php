@@ -55,7 +55,7 @@
 							<th>Role</th>
 							<th>Status</th>
 							<th>Create At</th>
-							<th>Actions</th>
+							<!-- <th>Actions</th> -->
 						</tr>
 					</thead>
 					<tbody>
@@ -70,9 +70,9 @@
 								<td><?= $handler['user_status'] == 1 ? 'Active' : 'Suspend' ?></td>
 								<td><?= date('l d M Y', strtotime($handler['user_created_at'])) ?></td>
 
-								<td nowrap="">
+								<!-- <td nowrap="">
 									<a href="<?= base_url('handler/delete/team-leader/' . $handler['lu_id']) ?>" class="btn btn-sm btn-danger w-60px">Delete</a>
-								</td>
+								</td> -->
 							</tr>
 						<?php $count++;
 						endforeach; ?>
