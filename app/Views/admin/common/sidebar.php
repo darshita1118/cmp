@@ -3,7 +3,7 @@
 		<!-- header -->
 		<div id="header" class="app-header">
 			<div class="navbar-header">
-				<a href="<?= base_url('/') ?>" class="navbar-brand"><span class="navbar-logo"></span> <b class="me-3px">CMP</b>
+				<a href="<?= base_url('/') ?>" class="navbar-brand"><span class="navbar-logo"></span> <b class="me-3px">LDM</b>
 					Admin</a>
 				<button type="button" class="navbar-mobile-toggler" data-bs-toggle="collapse" data-bs-target="#top-navbar">
 					<span class="fa-stack fa-lg">
