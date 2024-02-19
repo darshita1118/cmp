@@ -361,7 +361,8 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
                                 <?php if (pathinfo($student['sd_url'], PATHINFO_EXTENSION) == 'pdf') : ?>
                                     <iframe class="card-img" src="https://docs.google.com/gview?url=<?= $url . substr($student['sd_url'] ?? './', '1') ?>&embedded=true"></iframe>
                                 <?php else : ?>
-                                    <a href="//<?= $url . substr($student['sd_url'] ?? './', '1') ?>" target="_blank"><img class="card-img" src="//<?= $url . substr($student['sd_url'] ?? './', '1') ?>"></a>
+                                    <a href="<?= $url . substr($student['sd_url'] ?? './', '1') ?>" target="_blank">
+                                        <img class="card-img" src="<?= base_url() . 'sso.gyanvihar.org' . substr($student['sd_url'] ?? './', '1') ?>"></a>
                                 <?php endif; ?>
                             </div>
 

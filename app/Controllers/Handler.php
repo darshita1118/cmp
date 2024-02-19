@@ -2359,7 +2359,7 @@ class Handler extends BaseController
 					$mobile = $this->request->getFile('document');
 					if ($mobile->isValid() && !$mobile->hasMoved()) {
 						$fileURL = "/assets/uploads/" . session('year') . '/' . $sid;
-						$mobile->move('../sso.gyanvihar.org' . $fileURL, $mobile->getRandomName());
+						$mobile->move('sso.gyanvihar.org' . $fileURL, $mobile->getRandomName());
 						$sdModel = new ApplicationModel('student_document_' . session('year'), 'sd_id', $this->ssoDb);
 						$sd_dat = [
 							'sid' => $sid,
@@ -3688,6 +3688,13 @@ class Handler extends BaseController
 			return redirect()->to('/handler/logout');
 		}
 		$data = [];
+		$userModel = new ApplicationModel('lms_users_' . session('year'), 'lu_id', SETTINGDB);
+		$userDetail = $userModel->where(['user_status' => 1, 'user_deleted_status' => 0, 'user_role' => 1, 'lu_id' => session('id'), 'db_name' => session('db_priffix')])->first();
+		if (!$userDetail) {
+			session()->setFlashdata('toastr', ['error' => 'this member is not a team leader.']);
+			return redirect()->back();
+		}
+		$data['userDetail'] = $userDetail;
 		$handlerModel = new ApplicationModel('lms_users_' . session('year'), 'lu_id', SETTINGDB);
 		$data['handlers'] = $handlerModel->select(['lu_id', 'user_name', 'user_email', 'user_mobile', 'user_role', 'user_status', 'user_created_at'])->where('user_deleted_status', 0)->where(['db_name' => session('db_priffix'), 'user_role' => 0])->whereIn('lu_id', function (BaseBuilder $builder) {
 			return $builder->select('handler_id')->from($this->lmsDb . '.team_leader_' . session('year'))->where('team_leader', session('id'));
