@@ -31,7 +31,6 @@
 				<div class="navbar-item navbar-user dropdown">
 					<a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
 						<span>&nbsp;&nbsp; Session: <?= session('year') . '-' . (session('year') + 1) ?> &nbsp;&nbsp;</span>
-						<img src="<?= base_url('assets/img/user/user-13.jpg') ?>" alt="">
 						<span>
 							<span class="d-none d-md-inline"><?= substr(session('name'), 0, 1) ?></span>
 							<b class="caret"></b>
@@ -39,13 +38,9 @@
 					</a>
 					<div class="dropdown-menu dropdown-menu-end me-1">
 						<a href="javascript:void();" class="dropdown-item"><?= session('name') ?></a>
-						<a href="extra_profile.html" class="dropdown-item">Edit Profile</a>
-						<a href="email_inbox.html" class="dropdown-item d-flex align-items-center">
-							Inbox
-							<span class="badge bg-danger rounded-pill ms-auto pb-4px">2</span>
-						</a>
-						<a href="calendar.html" class="dropdown-item">Calendar</a>
-						<a href="extra_settings_page.html" class="dropdown-item">Settings</a>
+						<a href="#" class="dropdown-item">Edit Profile</a>
+						<a href="#" class="dropdown-item">Calendar</a>
+						<a href="#" class="dropdown-item">Settings</a>
 						<div class="dropdown-divider"></div>
 						<a href="<?= base_url('/admin/logout'); ?>" class="dropdown-item">Log Out</a>
 					</div>

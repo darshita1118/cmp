@@ -42312,3 +42312,9 @@ a.editable-click:hover {
 .hide {
     display: none !important
 }
+
+.form-select:focus,
+.form-control:focus {
+    outline: none;
+    box-shadow: none;
+}

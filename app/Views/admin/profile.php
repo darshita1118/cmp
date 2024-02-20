@@ -135,237 +135,193 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
 
 <div class="profile container-fluid p-3">
     <div class="row gx-4">
+
         <div class="col-xl-8 mb-xl-0">
             <div class="panel panel-inverse card border-0 ">
                 <div class="card-header bg-none p-3 h5 m-0 d-flex align-items-center">
                     <i class="fa fa-pen-to-square fa-lg me-2 text-gray text-opacity-50"></i>
                     Profile
-
                 </div>
-                <div class="panel-body card-body p-3 text-dark fw-bold" style="overflow-y: scroll; height:400px">
+                <div class="panel-body card-body p-3 text-dark fw-bold" style="overflow-y: scroll; height:60vh;">
 
                     <div id="bsSpyContent">
-                        <div id="general" class="">
-                            <h4 class="d-flex align-items-center mb-2 mt-3">
-                                <span class="iconify fs-24px me-2 text-body text-opacity-75 my-n1" data-icon="solar:user-bold-duotone"></span> Profile Details
+                        <div id="general">
+                            <h4 class="d-flex align-items-center mb-2">
+                                <span class="iconify fs-24px me-2 text-body text-opacity-75" data-icon="solar:user-bold-duotone"></span> Profile Details
                             </h4>
                             <p>View and update your Profile Details information.</p>
-                            <div class="card">
-                                <div class="list-group list-group-flush fw-bold">
-                                    <form method="post" action="">
-                                        <?= csrf_field() ?>
-                                        <div class="list-group-item d-flex align-items-center">
-                                            <div class="flex-fill">
-                                                <label for="firstname">First Name:</label>
-                                                <input type="text" id="firstname" name="firstname" class="form-control " placeholder="Enter first name" value="<?= old('firstname') ?? $profileDetail['lead_first_name'] ?>" required>
-                                            </div>
-                                            <div class="flex-fill">
-                                                <label for="middlename">Middle Name:</label>
-                                                <input type="text" id="middlename" name="middlename" class="form-control " placeholder="Enter last name" value="<?= old('middlename') ?? ($profileDetail['lead_middle_name'] ?? '') ?>">
-                                            </div>
-
-                                            <div class="flex-fill">
-                                                <label for="lastname">Last Name:</label>
-                                                <input type="text" id="lastname" name="lastname" class="form-control " placeholder="Enter last name" value="<?= old('lastname') ?? ($profileDetail['lead_last_name'] ?? '') ?>">
-                                            </div>
-                                            <div class="w-100px">
-                                                <button class="btn btn-secondary w-100px" name="btn" type="submit" value="update-name">Edit</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <div class="list-group-item d-flex align-items-center">
-                                        <div class="flex-fill">
-                                            <div>Mobile No.</div>
-                                            <div class="text-body text-opacity-60"><a href="tel:<?= $profileDetail['lead_country_code'] . $profileDetail['lead_mobile'] ?>" class="text-muted text-hover-primary">
-                                                    <span class="text-muted">(<?= $profileDetail['lead_country_code'] ?>)<?= $profileDetail['lead_mobile'] ?></span>
-                                                </a></div>
-                                        </div>
-                                        <div>
-                                            <a href="#" data-bs-toggle="modal" class="btn btn-secondary w-100px">Edit</a>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item d-flex align-items-center">
-                                        <div class="flex-fill">
-                                            <div>Email address</div>
-                                            <div class="text-body text-opacity-60"><a href="mailto:<?= $profileDetail['lead_email'] ?>" class="text-muted text-hover-primary"><?= $profileDetail['lead_email'] ?></a>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <a href="#" data-bs-toggle="modal" class="btn btn-secondary disabled w-100px">Edit</a>
-                                        </div>
-                                    </div>
-
-                                </div>
+                            <div class="table-responsive form-inline">
+                                <table class="table table-profile align-middle">
+                                    <tbody>
+                                        <tr class="highlight">
+                                            <td class="field">Name</td>
+                                            <td>
+                                                <div class="text-body text-opacity-60"> <?= $name ?></div>
+                                            </td>
+                                        </tr>
+                                        <tr class="highlight">
+                                            <td class="field">Program</td>
+                                            <td>
+                                                <div class="text-body text-opacity-60"> <?= $profileDetail['coursename'] ?></div>
+                                            </td>
+                                        </tr>
+                                        <tr class="highlight">
+                                            <?php if ($sidData = checkSidCreated($profileDetail['lid'])) :  ?>
+                                                <td class="field">SID/Password</td>
+                                                <td>
+                                                    <div class="text-body text-opacity-60"><?= $sidData['sid'] . '/' . base64_decode($sidData['password']) ?></div>
+                                                </td>
+                                        </tr>
+                                        <tr class="highlight">
+                                            <td class="field">Form Step</td>
+                                            <td>
+                                                <div class="text-body text-opacity-60"> <?= $formStep[$sidData['form_step']] ?? '' ?>
+                                                    <?php if ($sidData['form_step'] <= 6) : ?>
+                                                        <a href="<?= base_url('admin/process-application/' . $profileDetail['lid'] . '/' . $sidData['sid']) ?>" class="btn btn-sm btn-success me-1 float-end"> <i class="fa fa-shuffle"></i> Proceed Application</a>
+                                                    <?php else : ?>
+                                                        <a href="<?= base_url('admin/process-application/' . $profileDetail['lid'] . '/' . $sidData['sid']) ?>" class="btn btn-sm btn-success me-1 float-end"> <i class="fa fa-shuffle"></i> Application Under Process</a>
+                                                    <?php endif; ?>
+                                                <?php else : ?>
+                                                    <a href="<?= base_url('admin/apply-now/' . $profileDetail['lid']) ?>" class="btn btn-sm btn-success me-1 float-end"> <i class="fa fa-shuffle"></i>Generate Sid</a>
+                                                <?php endif; ?>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="highlight">
+                                            <td class="field">Email</td>
+                                            <td>
+                                                <div class="text-body text-opacity-60"> <a href="mailto:<?= $profileDetail['lead_email'] ?>" class="text-muted text-hover-primary"><?= $profileDetail['lead_email'] ?></a></div>
+                                            </td>
+                                        </tr>
+                                        <tr class="highlight">
+                                            <td class="field">Moblie</td>
+                                            <td>
+                                                <div class="text-body text-opacity-60"><a href="tel:<?= $profileDetail['lead_country_code'] . $profileDetail['lead_mobile'] ?>" class="text-muted text-hover-primary">(<?= $profileDetail['lead_country_code'] ?>)<?= $profileDetail['lead_mobile'] ?></a></div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div id="academics" class="mb-4 pb-3">
+                        <div id="academics">
                             <h4 class="d-flex align-items-center mb-2 mt-3">
                                 <span class="iconify fs-24px me-2 text-body text-opacity-75 my-n1" data-icon="solar:square-academic-cap-bold-duotone"></span>
                                 Academics
                             </h4>
                             <p>Review and update your Academic Profile details.</p>
-                            <div class="card">
-                                <div class="list-group list-group-flush fw-bold">
-                                    <div class="list-group-item d-flex align-items-center">
-                                        <div class="flex-fill">
-                                            <span>Program:</span>
+                            <div class="table-responsive form-inline">
+                                <table class="table table-profile align-middle">
+                                    <tbody>
+                                        <tr class="highlight">
+                                            <form class="form" method="post" action="">
+                                                <?= csrf_field() ?>
+                                                <td class="field">
+                                                    <div class="form-group">
+                                                        <label for="status">Lead
+                                                            Status</label>
 
-                                            <a href="javascript:;" id="country" data-type="select2" data-pk="1" data-value="BS" data-title="Select country" class="editable editable-click" style="background-color: rgba(0, 0, 0, 0);"><?= $profileDetail['coursename'] ?></a>
-
-                                        </div>
-                                        <div>
-                                            <a href="javascript:;" class="btn btn-secondary w-100px" id="country" data-type="select2" data-pk="1" data-value="BS" data-title="Select country"><i class="fa fa-pencil"></i> Edit</a>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <?php if ($sidData = checkSidCreated($profileDetail['lid'])) :  ?>
-                                            <div class="list-group-item d-flex align-items-center">
-                                                <div class="flex-fill">
-                                                    <div>SID/Password:</div>
-                                                    <div class="text-body text-opacity-60 d-flex align-items-center">
-                                                        <?= $sidData['sid'] . '/' . base64_decode($sidData['password']) ?>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <a href="#" data-bs-toggle="modal" class="btn btn-secondary w-100px">Edit</a>
-                                                </div>
-                                            </div>
-                                            <div class="list-group-item d-flex align-items-center">
-                                                <div class="flex-fill">
-                                                    <div>Form Step:</div>
-                                                    <div class="text-body text-opacity-60 d-flex align-items-center">
-                                                        <i class="fa fa-circle fs-6px mt-1px fa-fw text-success me-2"></i> <?= $formStep[$sidData['form_step']] ?? '' ?>
-                                                    </div>
-                                                </div>
-                                                <?php if ($sidData['form_step'] <= 6) : ?>
-                                                    <div>
-                                                        <a href="<?= base_url('admin/process-application/' . $profileDetail['lid'] . '/' . $sidData['sid']) ?>" class="btn btn-secondary w-100px">Proceed </a>
-                                                    </div>
-                                                <?php else : ?>
-                                                    <div>
-                                                        <a href="<?= base_url('admin/process-application/' . $profileDetail['lid'] . '/' . $sidData['sid']) ?>" class="btn btn-secondary w-100px">Application Under Process</a>
-                                                    </div>
-                                                <?php endif; ?>
-                                            </div>
-                                        <?php else : ?>
-                                            <div class="list-group-item d-flex align-items-center">
-                                                <div class="flex-fill">
-                                                    <div>SID/Password:</div>
-                                                    <div class="text-body text-opacity-60 d-flex align-items-center">
-                                                        N/A
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <a href="<?= base_url('admin/apply-now/' . $profileDetail['lid']) ?>" data-bs-toggle="modal" class="btn btn-secondary w-100px">Generate Sid</a>
-                                                </div>
-                                            </div>
-                                        <?php endif; ?>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="studentstatus" class="mb-4 pb-3">
-                            <h4 class="d-flex align-items-center mb-2 mt-3 flex-wrap">
-                                <span class="iconify fs-24px me-2 text-body text-opacity-75 my-n1" data-icon="solar:bell-bold-duotone"></span>
-                                Student Status
-                            </h4>
-                            <p>Check and update your Student Status</p>
-                            <div class="card">
-                                <div class="list-group list-group-flush fw-bold">
-                                    <div class="list-group-item d-flex align-items-center">
-                                        <form action="" method="post" class="flex-fill">
-                                            <?= csrf_field() ?>
-                                            <label class="form-label">Lead Status:</label>&nbsp;
-                                            <select class="default-select2 col-md-12 " id="status" name="status" required="" onchange="getInfoProfile($(this).find(':selected').attr('data-getinfo')
+                                                        <select class="form-control form-control-solid" id="status" name="status" required="" onchange="getInfoProfile($(this).find(':selected').attr('data-getinfo')
                                                     );">
-                                                <?php foreach ($status_list as $status) : ?>
-                                                    <option data-statusscore='<?= $status['score'] ?>' data-getinfo='<?= $status['status_get_more_info'] ?>' value="<?= $status['status_id'] ?>" <?= (old('status') ?? $profileDetail['lead_status']) == $status['status_id'] ? 'selected' : null ?>><?= $status['status_name'] ?> </option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                            <a href="" data-bs-toggle="modal" class="btn btn-secondary mt-2">Update</a>
+                                                            <?php foreach ($status_list as $status) : ?>
+                                                                <option data-statusscore='<?= $status['score'] ?>' data-getinfo='<?= $status['status_get_more_info'] ?>' value="<?= $status['status_id'] ?>" <?= (old('status') ?? $profileDetail['lead_status']) == $status['status_id'] ? 'selected' : null ?>><?= $status['status_name'] ?> </option>
+                                                            <?php endforeach; ?>
 
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="list-group list-group-flush fw-bold">
-                                    <div class="list-group-item d-flex align-items-center">
-                                        <form action="" method="post" class="flex-fill">
-                                            <div class="d-flex align-items-center flex-wrap">
-                                                <label class="form-label">Message:</label>
-                                                <input class="form-control mb-2" />
-                                                <a href="" data-bs-toggle="modal" class="btn btn-secondary ">Update</a>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+                                                        </select>
 
-                                <div class="list-group list-group-flush fw-bold">
-                                    <div class="list-group-item d-flex align-items-center">
-                                        <form action="" method="" class="flex-fill ">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="text-body text-opacity-60">
+                                                        <label for="">&nbsp;</label>
+                                                        <button class="form-control btn btn-primary font-weight-bold btn-sm" name="btn" type="submit" value="update-status">Update</button>
+                                                    </div>
+                                                </td>
+                                            </form>
+                                        </tr>
+                                        <tr class="highlight">
+                                            <form class="form" method="post" action="">
+                                                <?= csrf_field() ?>
+                                                <td class="field">
+                                                    <div class="form-group">
+                                                        <label for="program">Program:</label>
+                                                        <select type="text" id="program" name="program" onchange="$('#level').val($(this).find(':selected').attr('data-level')); $('#dept').val($(this).find(':selected').attr('data-dept'));" class="form-control form-control-solid default-select2" required="">
+                                                            <option value="">--select program--</option>
+                                                            <?php foreach ($courses as $course) : ?>
+                                                                <option data-level='<?= $course['level_id'] ?>' data-dept='<?= $course['dept_id'] ?>' value="<?= $course['coi_id'] ?>" <?= (old('program') ?? $profileDetail['lead_programe']) == $course['coi_id'] ? 'selected' : null ?>><?= $course['course_name'] ?> </option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                        <input type="hidden" name="level" value="5" id="level">
+                                                        <input type="hidden" name="dept" value="16" id="dept">
 
-                                            <label class="form-label">Date & Time:</label>
-                                            <div class="d-flex justify-content-between mb-2">
-                                                <div class="input-group" id="default-daterange">
-                                                    <input type="text" class="form-control" id="datepicker-autoClose" />
-                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                </div>
-                                                <div class="input-group bootstrap-timepicker">
-                                                    <input id="timepicker" type="text" class="form-control" />
-                                                    <span class="input-group-text input-group-addon">
-                                                        <i class="fa fa-clock"></i>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <a href="#" data-bs-toggle="modal" class="btn btn-secondary ">Update</a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="text-body text-opacity-60">
+                                                        <div class="form-group">
+                                                            <label for="">&nbsp;</label>
 
-                                        </form>
-                                    </div>
-                                </div>
+                                                            <button class="form-control btn btn-primary btn-sm font-weight-bold" type="submit" name="btn" value="lead-program">Update</button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </form>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
+
                         </div>
-                        <div id="actionInformation" class="mb-4 pb-3">
+                        <div id="studentinfo">
                             <h4 class="d-flex align-items-center mb-2 mt-3">
-                                <span class="iconify fs-24px me-2 text-body text-opacity-75 my-n1" data-icon="solar:bag-4-bold-duotone"></span>
-
-                                More Action and Information
+                                <span class="iconify fs-24px me-2 text-body text-opacity-75 my-n1" data-icon="solar:square-academic-cap-bold-duotone"></span>
+                                Student Info
                             </h4>
-                            <p>Edit your Contact Information for accurate and up-to-date details.</p>
-                            <div class="card">
-                                <div class="list-group list-group-flush fw-bold">
-                                    <div class="list-group-item d-flex align-items-center">
-
-                                        <div class="flex-fill">
-                                            <div>Alternate Contact:</div>
-                                        </div>
-                                        <a href="#" data-bs-toggle="modal" class="btn btn-secondary w-100px">Edit</a>
-                                    </div>
-                                </div>
-                                <div class="list-group list-group-flush fw-bold">
-                                    <div class="list-group-item d-flex align-items-center">
-
-                                        <div class="flex-fill">
-                                            <div>Address</div>
-                                        </div>
-                                        <a href="#" data-bs-toggle="modal" class="btn btn-secondary w-100px">Edit</a>
-                                    </div>
-                                </div>
-                                <div class="list-group list-group-flush fw-bold">
-                                    <div class="list-group-item d-flex align-items-center">
-
-                                        <div class="flex-fill">
-                                            <div>Transfer Lead</div>
-                                        </div>
-                                        <a href="#" data-bs-toggle="modal" class="btn btn-warning w-100px">Transfer</a>
-                                    </div>
-                                </div>
-
+                            <p>Review and update your Academic Profile details.</p>
+                            <div class="table-responsive form-inline">
+                                <table class="table table-profile align-middle">
+                                    <tbody>
+                                        <tr class="highlight">
+                                            <form class="form" method="post" action="">
+                                                <?= csrf_field() ?>
+                                                <td class="field">
+                                                    <div class="row">
+                                                        <div class="flex-fill col-md-4">
+                                                            <label for="firstname">First Name:</label>
+                                                            <input type="text" id="firstname" name="firstname" class="form-control " placeholder="Enter first name" value="<?= old('firstname') ?? $profileDetail['lead_first_name'] ?>" required>
+                                                        </div>
+                                                        <div class="flex-fill col-md-4">
+                                                            <label for="middlename">Middle Name:</label>
+                                                            <input type="text" id="middlename" name="middlename" class="form-control " placeholder="Enter last name" value="<?= old('middlename') ?? ($profileDetail['lead_middle_name'] ?? '') ?>">
+                                                        </div>
+                                                        <div class="flex-fill col-md-4">
+                                                            <label for="lastname">Last Name:</label>
+                                                            <input type="text" id="lastname" name="lastname" class="form-control " placeholder="Enter last name" value="<?= old('lastname') ?? ($profileDetail['lead_last_name'] ?? '') ?>">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="text-body text-opacity-60">
+                                                        <label for="">&nbsp;</label>
+                                                        <button class="form-control btn btn-primary btn-sm font-weight-bold" name="btn" type="submit" value="update-name">Update</button>
+                                                    </div>
+                                                </td>
+                                            </form>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
+
                         </div>
                     </div>
                 </div>
-                <hr>
+                <div class="card-footer bg-none d-flex p-3">
+                    <h4 class="d-flex align-items-center">
+                        <span class="iconify fs-24px me-2 text-body text-opacity-75 my-n1" data-icon="solar:add-circle-bold-duotone"></span>
+                        More Action and Information
+                    </h4>
+                    <a data-bs-target="#modalaltrcont" data-bs-toggle="modal" class="btn btn-default ms-auto">Alternate Contact</a>
+                    <a data-bs-target="#modaltrnld" data-bs-toggle="modal" class="btn btn-warning ms-2">Transfer Lead</a>
+                </div>
             </div>
         </div>
         <div class="col-xl-4">
@@ -472,62 +428,6 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="timeline-item">
-                                        <div class="timeline-icon">
-                                            <a href="javascript:;">&nbsp;</a>
-                                        </div>
-                                        <div class="timeline-content ">
-                                            <div class="timeline-header">
-                                                <div class="username">
-                                                    <a href="javascript:;">Darren Parrase</a>
-                                                    <div class="text-muted fs-12px">24 mins <i class="fa fa-globe-americas opacity-5 ms-1"></i></div>
-                                                </div>
-                                            </div>
-                                            <div class="timeline-body">
-                                                <div class="mb-2">Location: United States</div>
-                                                <p>Lorem ipsum dolor sitconsectetur adipiscing elit. Nunc faucibus
-                                                    turpis quis tincidunt luctus.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-item">
-                                        <div class="timeline-icon">
-                                            <a href="javascript:;">&nbsp;</a>
-
-                                        </div>
-                                        <div class="timeline-content ">
-                                            <div class="timeline-header">
-                                                <div class="username">
-                                                    <a href="javascript:;">Darren Parrase</a>
-                                                    <div class="text-muted fs-12px">24 mins <i class="fa fa-globe-americas opacity-5 ms-1"></i></div>
-                                                </div>
-                                            </div>
-                                            <div class="timeline-body">
-                                                <div class="mb-2">Location: United States</div>
-                                                <p>Lorem ipsum dolor sitconsectetur adipiscing elit. Nunc faucibus
-                                                    turpis quis tincidunt luctus.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-item">
-                                        <div class="timeline-icon">
-                                            <a href="javascript:;">&nbsp;</a>
-
-                                        </div>
-                                        <div class="timeline-content ">
-                                            <div class="timeline-header">
-                                                <div class="username">
-                                                    <a href="javascript:;">Darren Parrase</a>
-                                                    <div class="text-muted fs-12px">24 mins <i class="fa fa-globe-americas opacity-5 ms-1"></i></div>
-                                                </div>
-                                            </div>
-                                            <div class="timeline-body">
-                                                <div class="mb-2">Location: United States</div>
-                                                <p>Lorem ipsum dolor sitconsectetur adipiscing elit. Nunc faucibus
-                                                    turpis quis tincidunt luctus.</p>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -540,6 +440,83 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
 </div>
 
 
+
+<!-- Contact_Alternet Model -->
+<div class="modal fade" id="modalaltrcont">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Alternet Contact</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="">
+                    <?= csrf_field() ?>
+                    <div class="row">
+                        <div class="flex-fill col-md-4">
+                            <label for="firstname">First Name:</label>
+                            <input type="text" id="firstname" name="firstname" class="form-control " placeholder="Enter first name" value="<?= old('firstname') ?? $profileDetail['lead_first_name'] ?>" required>
+                        </div>
+                        <div class="flex-fill col-md-4">
+                            <label for="middlename">Middle Name:</label>
+                            <input type="text" id="middlename" name="middlename" class="form-control " placeholder="Enter last name" value="<?= old('middlename') ?? ($profileDetail['lead_middle_name'] ?? '') ?>">
+                        </div>
+                        <div class="flex-fill col-md-4">
+                            <label for="lastname">Last Name:</label>
+                            <input type="text" id="lastname" name="lastname" class="form-control " placeholder="Enter last name" value="<?= old('lastname') ?? ($profileDetail['lead_last_name'] ?? '') ?>">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                <button type="submit" name="btn" class="btn btn-theme" value="update-name">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Transfer Lead Model -->
+<div class="modal fade" id="modaltrnld">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Transfer Lead</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="">
+                    <?= csrf_field() ?>
+                    <div class="row">
+                        <div class="flex-fill col-md-4">
+                            <label for="handler">Choose Handler:</label>
+                            <select id="handler" name="handler" class="form-control form-control-lg form-control-solid" required="">
+                                <option value="">--Choose Handler--</option>
+                                <?php foreach ($handlers as $handler) : ?>
+                                    <option value="<?= $handler['lu_id'] ?>"><?= $handler['user_name'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                <button name='btn' type="submit" value="transfer" class="btn btn-theme" value="update-name">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
 <script>
     $("#timepicker").timepicker();
     $(".default-select2").select2();
@@ -550,3 +527,144 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
 </script>
 
 <script src="<?= base_url('assets/js/iconify.min.js') ?>" type="text/javascript"></script>
+<script>
+    const base_url = '<?= base_url() ?>'
+</script>
+<script src="<?= base_url('assets/js/custum.js') ?>"></script>
+
+<script>
+    let stateList = [];
+
+    function getAttachment(params) {
+        if (params == 1) {
+            $('#attachment').html(`<label for="attach">Select Email Template:</label>
+                            <select id="attach" name="attachment" class="form-control form-control-solid"  required>
+                                <option value="">--Select Attachment Template--</option>
+                                
+                            </select>`).addClass('form-group col-lg-12')
+        } else {
+            $('#attachment').text("No Attachment").addClass('form-group col-lg-12')
+        }
+    }
+
+    function getStateList(params = '', dist = '') {
+        $.ajax({
+            url: base_url + '/assets/json/india.json',
+            type: 'get',
+            dataType: 'JSON',
+            async: false,
+            success: function(result) {
+                stateList = result
+                $('#state').html(`<option value="">--select state--</option>`);
+
+                for (let index = 0; index < result.length; index++) {
+                    const stateIndex = index;
+                    if (params == result[index].state) {
+                        $('#state').append($('<option>', {
+                            value: result[index].state,
+                            "data-index": index,
+                            text: result[index].state,
+                            selected: true,
+                        }))
+                        getDistrictList(stateIndex, dist)
+                    } else {
+                        $('#state').append($('<option>', {
+                            value: result[index].state,
+                            "data-index": index,
+                            text: result[index].state,
+                        }))
+                    }
+
+                }
+
+            },
+            error: function() {
+                //console.log(result)
+                showFire(`error`, `Something Went Wrong on Server Side`);
+            }
+
+        });
+        return
+    }
+
+    function getDistrictList(stateId = '', district = '') {
+
+        var districts = stateList[stateId].districts;
+        $('#district').html(`<option value="">--select state--</option>`);
+        for (let index = 0; index < districts.length; index++) {
+            if (district == districts[index]) {
+                $('#district').append($('<option>', {
+                    value: districts[index],
+                    text: districts[index],
+                    selected: true,
+                }))
+            } else {
+                $('#district').append($('<option>', {
+                    value: districts[index],
+                    text: districts[index],
+                }))
+            }
+
+        }
+        return;
+    }
+
+    function countrySelect(p, s = '', d = '') {
+        $.ajax({
+            url: base_url + '/helper/countrySelect',
+            type: 'POST',
+            data: {
+                'country': p,
+                'dist': d
+            },
+            async: false,
+            success: function(result) {
+                //console.log(result)
+                $('#countryType').html('');
+                $('#countryType').html(result);
+                if (p == 'India') {
+                    $('#zipcode').prop('required', true)
+                    getStateList(s, d)
+                } else {
+                    $('#zipcode').prop('required', false)
+                }
+            },
+            error: function() {
+                //console.log(result)
+                showFire(`error`, `Something Went Wrong on Server Side`);
+            }
+        })
+        return;
+    }
+    <?php if (old('country') || isset($address['la_country'])) : ?>
+        <?php if ((old('country') ?? ($address['la_country'] ?? '')) == 'India') : ?>
+            countrySelect(`<?= old('country') ?? ($address['la_country'] ?? '') ?>`, `<?= old('state') ?? ($address['la_state'] ?? '') ?>`, `<?= old('district') ?? ($address['la_district'] ?? '') ?>`)
+        <?php else : ?>
+            countrySelect(`<?= old('country') ?? ($address['la_country'] ?? '') ?>`, ``, `<?= old('district') ?? ($address['la_district'] ?? '') ?>`)
+        <?php endif; ?>
+    <?php else : ?>
+        countrySelect($('#country').val())
+    <?php endif; ?>
+    <?php if (old('program') || (isset($profileDetail['lead_programe']) && !empty($profileDetail['lead_programe']))) : ?>
+        $('#level').val($('#program').find(':selected').attr('data-level'));
+        $('#dept').val($('#program').find(':selected').attr('data-dept'))
+    <?php endif; ?>
+
+    <?php if (session('addressError')) : ?>
+        $('#addressModel').modal('show')
+    <?php endif; ?>
+    <?php if (old('status') !== 0 && old('statusinfo')) : ?>
+        console.log('te')
+        getInfoProfile('<?= old('statusinfo') ?>', '<?= old('message') ?>', '<?= old('date') ?>', '<?= old('time') ?>');
+    <?php else : ?>
+        console.log('tes')
+
+        getInfoProfile($('#status').find(':selected').attr('data-getinfo'), '<?= $getMessage['message'] ?? '' ?>', '<?= $getMessage['ls_date'] ?? '' ?>', '<?= $getMessage['ls_time'] ?? '' ?>');
+    <?php endif; ?>
+    <?php if (session('alterError')) : ?>
+        $('#alternatecontact').modal('show')
+    <?php endif; ?>
+    <?php if (session('transferError')) : ?>
+        $('#transferlead').modal('show')
+    <?php endif; ?>
+</script>

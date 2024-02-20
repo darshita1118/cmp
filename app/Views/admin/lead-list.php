@@ -16,8 +16,11 @@ function getStatusTime($leadId)
 
 
 <!-- DataTables CSS -->
-<link href="<?= base_url('assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css') ?>" rel="stylesheet" />
-<link href="<?= base_url('assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') ?>" rel="stylesheet" />
+<link href="<?= base_url() ?>assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+<link href="<?= base_url() ?>assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
+<link href="<?= base_url() ?>assets/plugins/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet" />
+
+
 <link href="<?= base_url('assets/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') ?>" rel="stylesheet" />
 <link href="<?= base_url('assets/plugins/datatables.net-select-bs5/css/select.bootstrap5.min.css') ?>" rel="stylesheet" />
 
@@ -38,77 +41,62 @@ function getStatusTime($leadId)
 		<div class="mb-1 me-2">
 			<span>Total Leads: <?= $total_leads ?? 0 ?></span>
 		</div>
-		<div class="card-toolbar">
-			<!--begin::Dropdown-->
-
-			<!--end::Dropdown-->
-			<!--begin::Button-->
-			<a href="<?= base_url('admin/add-lead') ?>" class="btn btn-primary btn-xs me-2 font-weight-bolder">
-				<span class="svg-icon svg-icon-md">
-					<i class="fa fa-user-plus"></i>
-				</span>Create Lead</a>
-			<!--end::Button-->
-		</div>
 		<div class="panel-heading-btn">
 			<a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
 			<a href="javascript:;" class="btn btn-sm btn-icon btn-warning" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="fa fa-lg fa-fw fa-sliders"></i></a>
-
-
 			<div class="offcanvas offcanvas-top ps-5 pe-5" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
 				<div class="offcanvas-header border-bottom">
 					<h5 id="offcanvasTopLabel">Filters</h5>
 					<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 				</div>
 				<div class="offcanvas-body mt-md-3">
-
 					<form action="" class="row">
 						<div class="col-md-3">
 							<div class="mb-3">
 								<label class="form-label">Mobile No.</label>
-								<input type="tel" name="mobile" class="form-control" placeholder="Search mobile no.." minlength="8" value="<?= isset($_GET['mobile']) ? $_GET['mobile'] : null ?>" maxlength="12">
+								<input class="form-control" type="number" placeholder="Enter Mobile No." />
 							</div>
 
 						</div>
 						<div class="col-md-3">
-							<div class="mb-3"><label class="form-label">Date</label>
-								<div class="input-group" id="default-daterange">
-
-									<input type="text" name="default-daterange" class="form-control" value="" placeholder="click to select the date range">
-									<div class="input-group-text"><i class="fa fa-calendar"></i></div>
-								</div>
+							<!-- html -->
+							<label class="form-label">Date</label>
+							<div class="input-group" id="default-daterange">
+								<input type="dt" name="default-daterange" class="form-control" value="" placeholder="click to select the date range" />
+								<div class="input-group-text"><i class="fa fa-calendar"></i></div>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="mb-3">
 								<label class="form-label">Status</label>
-								<select name="status[]" id="status" multiple class="form-select">
-									<option value="">--Select--</option>
-									<?php foreach ($statues as $status) : ?>
-										<option value="<?= $status['status_id'] ?>" <?= (in_array($status['status_id'], $_GET['status'] ?? [])) ? 'selected' : null ?>><?= $status['status_name'] ?> </option>
-									<?php endforeach; ?>
+								<select class="form-select">...
+									<option selected>--Select -- </option>
+									<option value="1">Admin</option>
+									<option value="2">Handler</option>
+
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="mb-3">
+								<label class="form-label">Source</label>
+								<select class="form-select">...
+									<option selected>--Select-- </option>
+									<option value="1">Suspended</option>
+									<option value="2">Active</option>
+
 								</select>
 
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="mb-3">
-								<label class="form-label">Source</label>
-								<select name="source[]" id="source" multiple class="form-select">
-									<option value="">--Select--</option>
-									<?php foreach ($sources as $source) : ?>
-										<option value="<?= $source['source_id'] ?>" <?= (in_array($source['source_id'], $_GET['source'] ?? [])) ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
-									<?php endforeach; ?>
-								</select>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="mb-3">
 								<label class="form-label">Department</label>
-								<select name="department[]" id="department" multiple class="form-select">
-									<option value="">--Select--</option>
-									<?php foreach ($departments as $dept) : ?>
-										<option value="<?= $dept['dept_id'] ?>" <?= (in_array($dept['dept_id'], $_GET['department'] ?? [])) ? 'selected' : null ?>><?= $dept['dept_name'] ?> </option>
-									<?php endforeach; ?>
+								<select class="form-select">...
+									<option selected>--Department-- </option>
+									<option value="1">Admin</option>
+									<option value="2">Handler</option>
+
 								</select>
 
 							</div>
@@ -116,22 +104,23 @@ function getStatusTime($leadId)
 						<div class="col-md-3">
 							<div class="mb-3">
 								<label class="form-label">Program</label>
-								<select class="form-select" name="program[]" id="program" multiple>
-									<option value="">--Select--</option>
-									<?php foreach ($courses as $program) : ?>
-										<option data-dept="<?= $program['dept_id'] ?>" data-level="<?= $program['level_id']  ?>" value="<?= $program['sc_id'] ?>" <?= (in_array($program['sc_id'], $_GET['program'] ?? [])) ? 'selected' : null ?>><?= $program['course_name'] ?> </option>
-									<?php endforeach; ?>
+								<select class="default-select2 form-select">
+									<option value="AK">Test</option>
+									<option value="AK">Test</option>
+									<option value="AK">Test</option>
+									<option value="AK">Test</option>
+									<option value="AK">Test</option>
+									<option value="HI">Hawaii</option>
 								</select>
 							</div>
 						</div>
-
 						<div class="col-md-3">
 							<div class="mb-3">
 								<label class="form-label">Lead Nationality</label>
-								<select class="form-select" name="nationality[]" id="nationality" multiple>
-									<?php foreach ($student_nationalities as $nation) : ?>
-										<option value="<?= $nation['id'] ?>" <?= (in_array($nation['id'], $_GET['nationality'] ?? [])) ? 'selected' : null ?>><?= $nation['name'] ?> </option>
-									<?php endforeach; ?>
+								<select class="form-select">...
+									<option selected>--Select-- </option>
+									<option value="1">Suspended</option>
+									<option value="2">Active</option>
 								</select>
 
 							</div>
@@ -140,7 +129,6 @@ function getStatusTime($leadId)
 							<button type="submit" class="btn btn-primary w-100px me-5px">Apply Filter</button>
 						</div>
 					</form>
-
 				</div>
 			</div>
 		</div>
@@ -148,7 +136,7 @@ function getStatusTime($leadId)
 
 	<div class="panel-body">
 		<!-- html -->
-		<table id="data-table-combine" class="table table-striped table-bordered align-middle w-100 text-wrap ">
+		<table id="data-table-fixed-header" class="table table-striped table-bordered align-middle w-100 text-wrap ">
 			<thead>
 				<tr>
 					<th width="1%">ID</th>
@@ -190,10 +178,12 @@ function getStatusTime($leadId)
 </div>
 
 <!-- DataTables JS -->
-<script src="<?= base_url('assets/plugins/datatables.net/js/jquery.dataTables.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js') ?>"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net-fixedheader-bs5/js/fixedHeader.bootstrap5.min.js"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-select/js/dataTables.select.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-select-bs5/js/select.bootstrap5.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js') ?>"></script>
@@ -238,21 +228,19 @@ function getStatusTime($leadId)
 				className: 'btn-sm'
 			}
 		],
-		responsive: true,
 		keys: true,
 		select: true,
-		fixedColumns: true,
 		paging: true,
-		scrollCollapse: true,
-		scrollY: '300px'
+		lengthMenu: [20, 40, 60],
+		fixedHeader: {
+			header: true,
+			headerOffset: $('#header').height()
+		},
+		responsive: true
 	};
 
-	if ($(window).width() <= 767) {
-		options.rowReorder = false;
-		options.colReorder = false;
-	}
+	$('#data-table-fixed-header').DataTable(options);
 
-	$('#data-table-combine').DataTable(options);
 </script>
 <script>
 	$(".default-select2").select2({
