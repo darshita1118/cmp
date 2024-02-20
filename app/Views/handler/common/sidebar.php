@@ -51,7 +51,7 @@
 					<a href="<?= base_url('handler/welcome') ?>" class="menu-link">
 
 						<div class="menu-icon">
-							<i class="fa fa-cubes"></i>
+							<i class="fa fa-gauge-high"></i>
 						</div>
 
 						<div class="menu-text">Dashboard </div>
@@ -71,7 +71,7 @@
 				<div class="menu-item has-sub">
 					<a href="javascript:;" class="menu-link">
 						<div class="menu-icon">
-							<i class="fa fa-database"></i>
+							<i class="fa fa-podcast"></i>
 						</div>
 						<div class="menu-text">By Self</div>
 						<div class="menu-caret"></div>
@@ -122,9 +122,11 @@
 				</div>
 
 				<div class="menu-item has-sub">
+
 					<a href="javascript:;" class="menu-link">
 						<div class="menu-icon">
 							<i class="fa fa-sitemap"></i>
+
 						</div>
 						<div class="menu-text">Leads</div>
 						<div class="menu-caret"></div>
