@@ -144,88 +144,82 @@ function getStatusTime($leadId)
             <div class="panel-body">
                 <!-- statics -->
                 <div class="row">
-                    <h3 class="pb-3">Handler Work Report </h3>
-                    <!--Stats -->
-                    <div class="col-xl-3 mb-3">
-                        <div class="card " style="border: 1px solid #f64e60;">
-                            <div class="card-body px-3">
-                                <div class="d-flex align-items-center justify-content-between">
-
-                                    <div class="d-flex flex-column">
-                                        <span class="fw-bold text-muted mt-2">Leads
-                                        </span>
-                                        <span class="fw-bolder fs-20px"> <?= array_sum(array_column($statusWise, 'total_leads')); ?></span>
-                                    </div>
-                                    <span class="iconify fs-35px" data-icon="solar:sticker-smile-circle-2-bold-duotone"></span>
+                    <div class="col-lg-3 col-sm-4 mb-3">
+                        <div class="widget widget-stats bg-teal mb-7px">
+                            <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                            <div class="stats-content">
+                                <div class="stats-title">Lead</div>
+                                <div class="stats-number"><?= array_sum(array_column($statusWise, 'total_leads')); ?></div>
+                                <div class="stats-progress progress">
+                                    <div class="progress-bar" style="width: 70.1%;"></div>
                                 </div>
+                                <div class="stats-desc">Better than last week (70.1%)</div>
                             </div>
                         </div>
-                        <!--End -->
                     </div>
-
+                    <!--Stats -->
                     <?php foreach ($statusWise as $report) : ?>
-                        <div class="col-xl-3 mb-3">
-                            <div class="card " style="border: 1px solid #3699ff;">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center justify-content-between  ">
-                                        <div class="d-flex flex-column">
-                                            <span class="fw-bold text-muted mt-2"> <?= $report['name'] ?>
-                                            </span>
-                                            <span class="fw-bolder fs-20px"><?= $report['total_leads'] ?>
-                                            </span>
-                                        </div>
-                                        <span class="iconify fs-35px" data-icon="solar:refresh-circle-bold-duotone"></span>
+                        <div class="col-lg-3 col-sm-4">
+                            <div class="widget widget-stats bg-blue mb-7px">
+                                <div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
+                                <div class="stats-content">
+                                    <div class="stats-title"><?= $report['name'] ?></div>
+                                    <div class="stats-number"><?= $report['total_leads'] ?></div>
+                                    <div class="stats-progress progress">
+                                        <div class="progress-bar" style="width: 40.5%;"></div>
                                     </div>
+                                    <div class="stats-desc">Better than last week (40.5%)</div>
                                 </div>
                             </div>
-
-                            <!--Stats -->
                         </div>
+
                     <?php endforeach; ?>
                 </div>
                 <!-- statics end -->
                 <!-- History -->
-                <div class="card p-3">
-                    <div class="card-body  fw-bold">
-                        <div class="profile-content">
-                            <div class="tab-content p-0">
-                                <div class="tab-pane fade show active" id="profile-post">
-                                    <div class="timeline">
-                                        <?php foreach ($remarks as $row) :  ?>
-                                            <div class="timeline-item handler-worker-report">
-                                                <div class="timeline-time">
-                                                    <span class="date"><?= $row['lr_created_at'] ?></span>
-                                                    <span class="time">04:20</span>
-                                                </div>
-                                                <div class="timeline-icon">
-                                                    <a href="javascript:;">&nbsp;</a>
-                                                </div>
-                                                <div class="timeline-content ">
-                                                    <div class="timeline-header">
-                                                        <div class="username">
-                                                            <a href="javascript:;"> <?= ucwords(trim($row['lead_first_name'] . ' ' . $row['lead_middle_name'] . ' ' . $row['lead_last_name'])) ?> <i class="fa fa-check-circle text-blue ms-1"></i></a>
-                                                            <div class="text-muted fs-12px"><span class="date"> <?= $row['lead_email'] ?> | <i class="la la-phone"></i>
-                                                                    <?= $row['lead_mobile'] ?></span>
 
-                                                            </div>
+                <div class="border">
+                    <div class="profile-content col-md-8 m-auto">
+                        <h3 class="text-center ">Work Report History</h3>
+                        <div class="tab-content p-0">
+                            <div class="tab-pane fade show active" id="profile-post">
+                                <div class="timeline ">
+                                    <?php foreach ($remarks as $row) :  ?>
+                                        <div class="timeline-item handler-worker-report">
+                                            <div class="timeline-time">
+                                                <span class="pt-2 date fs-4 fs-lg-4 "><?= $row['lr_created_at'] ?></span>
+                                                <!-- <span class="time"></span> -->
+                                            </div>
+                                            <div class="timeline-icon">
+                                                <a href="javascript:;">&nbsp;</a>
+                                            </div>
+                                            <div class="timeline-content ">
+                                                <div class="timeline-header">
+                                                    <div class="username">
+                                                        <a href="javascript:;"> <?= ucwords(trim($row['lead_first_name'] . ' ' . $row['lead_middle_name'] . ' ' . $row['lead_last_name'])) ?> <i class="fa fa-check-circle text-blue ms-1"></i></a>
+                                                        <div class="text-muted fs-12px"><span class="date"> <?= $row['lead_email'] ?> | <i class="la la-phone"></i>
+                                                                <?= $row['lead_mobile'] ?></span>
+
                                                         </div>
                                                     </div>
-                                                    <div class="timeline-body">
-                                                        <small> <?= $row['lr_remark'] ?>
-                                                        </small><br>
-                                                        <small> Handler: <?= $row['user_name'] ?></small>
+                                                </div>
+                                                <div class="timeline-body">
+                                                    <small> <?= $row['lr_remark'] ?>
+                                                    </small><br>
+                                                    <small> Handler: <?= $row['user_name'] ?></small>
 
-                                                    </div>
                                                 </div>
                                             </div>
-                                        <?php endforeach; ?>
-                                    </div>
+                                        </div>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <!-- History end -->
+
             </div>
         </div>
     </div>
@@ -303,5 +297,12 @@ function getStatusTime($leadId)
 <style>
     .daterangepicker {
         z-index: 9999 !important;
+    }
+
+
+    @media (max-width: 575.98px) {
+        .timeline .timeline-content {
+            margin-top: 70px;
+        }
     }
 </style>
