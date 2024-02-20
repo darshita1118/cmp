@@ -1,51 +1,52 @@
-<?php 
+<?php
+
 use App\Models\ApplicationModel;
+
 function getStudentInfo($sid)
 {
-    $departmentModel = new ApplicationModel('student_info_'.session('year'),'si_id', 'sso_'.session('suffix'));
-    return $departmentModel->where(['sid'=>$sid])->first()??[];
+    $departmentModel = new ApplicationModel('student_info_' . session('year'), 'si_id', 'sso_' . session('suffix'));
+    return $departmentModel->where(['sid' => $sid])->first() ?? [];
 }
-function getDepartments($id=false)
+function getDepartments($id = false)
 {
-    $departmentModel = new ApplicationModel('departments','dept_id', 'sso_'.session('suffix'));
-    $detail = $departmentModel->select(['dept_id','dept_name'])->where(['dept_id'=>$id])->first()??[];
-    return $detail['dept_name']??'';
+    $departmentModel = new ApplicationModel('departments', 'dept_id', 'sso_' . session('suffix'));
+    $detail = $departmentModel->select(['dept_id', 'dept_name'])->where(['dept_id' => $id])->first() ?? [];
+    return $detail['dept_name'] ?? '';
 }
 
 function getProgram($id)
 {
-    $programModel = new ApplicationModel('session_courses_'.session('year'), 'sc_id', 'sso_' . session('suffix'));
-    $detail =  $programModel->select(['course_code','course_name','sc_id as coi_id','validation_level','course_type','dept_id','level_id'])->join('course_info', 'course_info.coi_id=session_courses_'. session('year') . '.course_id')->where(['sc_course_delete'=>0])->where(['sc_id'=>$id])->first()??[];
-    return $detail['course_name']??'';
+    $programModel = new ApplicationModel('session_courses_' . session('year'), 'sc_id', 'sso_' . session('suffix'));
+    $detail =  $programModel->select(['course_code', 'course_name', 'sc_id as coi_id', 'validation_level', 'course_type', 'dept_id', 'level_id'])->join('course_info', 'course_info.coi_id=session_courses_' . session('year') . '.course_id')->where(['sc_course_delete' => 0])->where(['sc_id' => $id])->first() ?? [];
+    return $detail['course_name'] ?? '';
 }
 function getReligionById($id)
 {
-    $religionModel = new ApplicationModel('religions','r_id', 'sso_'.session('suffix'));
-    $detail = $religionModel->select(['r_name','r_id'])->where(['r_id'=>$id])->first()??[];
-    return $detail['r_name']??'';
-    
+    $religionModel = new ApplicationModel('religions', 'r_id', 'sso_' . session('suffix'));
+    $detail = $religionModel->select(['r_name', 'r_id'])->where(['r_id' => $id])->first() ?? [];
+    return $detail['r_name'] ?? '';
 }
 
 function getCasteById($id)
 {
-    $casteModel = new ApplicationModel('castes','cid', 'sso_'.session('suffix'));
-    $detail = $casteModel->select(['c_name','cid'])->where(['cid'=>$id])->first()??[];
-    return $detail['c_name']??'';
+    $casteModel = new ApplicationModel('castes', 'cid', 'sso_' . session('suffix'));
+    $detail = $casteModel->select(['c_name', 'cid'])->where(['cid' => $id])->first() ?? [];
+    return $detail['c_name'] ?? '';
 }
 function getStudentContact($sid)
 {
-    $contactModel = new ApplicationModel('student_contact_info_'.session('year'),'sci_id', 'sso_'.session('suffix'));
-    return $contactModel->where(['sid'=>$sid])->first()??[];
+    $contactModel = new ApplicationModel('student_contact_info_' . session('year'), 'sci_id', 'sso_' . session('suffix'));
+    return $contactModel->where(['sid' => $sid])->first() ?? [];
 }
 function getStudentOther($sid)
 {
-    $studentOtherModel = new ApplicationModel('student_other_info_'.session('year'),'soi_id', 'sso_'.session('suffix'));
-    return $studentOtherModel->where(['sid'=>$sid])->first()??[];
+    $studentOtherModel = new ApplicationModel('student_other_info_' . session('year'), 'soi_id', 'sso_' . session('suffix'));
+    return $studentOtherModel->where(['sid' => $sid])->first() ?? [];
 }
 function getParentInfo($sid)
 {
-    $departmentModel = new ApplicationModel('student_family_info_'.session('year'),'sfi_id', 'sso_'.session('suffix'));
-    return $departmentModel->where(['sid'=>$sid])->first()??[];
+    $departmentModel = new ApplicationModel('student_family_info_' . session('year'), 'sfi_id', 'sso_' . session('suffix'));
+    return $departmentModel->where(['sid' => $sid])->first() ?? [];
 }
 function getAddress($sid)
 {
@@ -55,41 +56,41 @@ function getAddress($sid)
 function getStudentEducation($sid)
 {
     $academicModel = new ApplicationModel('student_education_' . session('year'), 'se_id', 'sso_' . session('suffix'));
-    $academic = $academicModel->join('education_level', 'education_level.el_id=student_education_'.session('year').'.education_level')->where('sid', $sid)->orderBy('education_level', 'ASC');
+    $academic = $academicModel->join('education_level', 'education_level.el_id=student_education_' . session('year') . '.education_level')->where('sid', $sid)->orderBy('education_level', 'ASC');
     return $academic->findAll() ?? [];
 }
 function getStudentDocument($sid)
 {
     $academicModel = new ApplicationModel('student_document_' . session('year'), 'sd_id', 'sso_' . session('suffix'));
-    $academic = $academicModel->select(['document_type','sd_url','dt_name','sd_id'])->join('document_type','document_type.dt_id=student_document_' . session('year').'.document_type')->where('sd_url!=','')->where('sid', $sid)->orderBy('document_type', 'ASC');
+    $academic = $academicModel->select(['document_type', 'sd_url', 'dt_name', 'sd_id'])->join('document_type', 'document_type.dt_id=student_document_' . session('year') . '.document_type')->where('sd_url!=', '')->where('sid', $sid)->orderBy('document_type', 'ASC');
     return $academic->findAll() ?? [];
 }
 function getSpecialization($id)
 {
-    if($id == null){
+    if ($id == null) {
         return '---';
     }
-    $casteModel = new ApplicationModel('specializations','sz_id', 'sso_'.session('suffix'));
-    $detail = $casteModel->select(['sz_name'])->where(['sz_id'=>$id])->first()??[];
-    return $detail['sz_name']??'--';
+    $casteModel = new ApplicationModel('specializations', 'sz_id', 'sso_' . session('suffix'));
+    $detail = $casteModel->select(['sz_name'])->where(['sz_id' => $id])->first() ?? [];
+    return $detail['sz_name'] ?? '--';
 }
 function getGroup($id)
 {
-    if($id == null){
+    if ($id == null) {
         return '---';
     }
-    $casteModel = new ApplicationModel('stream_groups','sg_id', 'sso_'.session('suffix'));
-    $detail = $casteModel->select(['sg_name'])->where(['sg_id'=>$id])->first()??[];
-    return $detail['sg_name']??'--';
+    $casteModel = new ApplicationModel('stream_groups', 'sg_id', 'sso_' . session('suffix'));
+    $detail = $casteModel->select(['sg_name'])->where(['sg_id' => $id])->first() ?? [];
+    return $detail['sg_name'] ?? '--';
 }
 function getStream($id)
 {
-    if($id == null){
+    if ($id == null) {
         return [];
     }
     $id = json_decode($id, true);
-    $casteModel = new ApplicationModel('course_streams','cs_id', 'sso_'.session('suffix'));
-    $detail = $casteModel->select(['cs_name'])->whereIn('cs_id',$id)->findAll()??[];
+    $casteModel = new ApplicationModel('course_streams', 'cs_id', 'sso_' . session('suffix'));
+    $detail = $casteModel->select(['cs_name'])->whereIn('cs_id', $id)->findAll() ?? [];
     return $detail;
 }
 
@@ -100,7 +101,7 @@ $other = getStudentOther($sid);
 $address = getAddress($sid);
 $education = getStudentEducation($sid);
 $student_docs = getStudentDocument($sid);
-$url = '//sso.gyanvihar.org/';
+$url = '//ldm.merishiksha.org/';
 ?>
 <div class="text-white text-center d-block d-lg-none py-2 bg-primary">
     <h4 class="mb-0 font-weight-normal">Review Your Application</h4>
@@ -119,7 +120,7 @@ $url = '//sso.gyanvihar.org/';
 
             <hr class="my-3" style="border-top: 1px solid #000;">
             <div class="row">
-            	<div class="col-xl-2">
+                <div class="col-xl-2">
                     <div class="form-group mb-4">
                         <label for="Medium">Medium</label>
                         <input disabled type="text" id="medium" class="form-control form-control-solid form-control-lg" name="medium" value="<?= ($sidInfo['medium'] == '0') ? 'English' : (($sidInfo['medium'] == '1') ? 'Hindi' : null) ?>" />
@@ -143,8 +144,16 @@ $url = '//sso.gyanvihar.org/';
                 </div>
                 <div class="col-xl-4">
                     <div class="form-group" id="program_nature">
-                        <label for="course_type"><?php if ($sidInfo['si_course_nature']== 1) echo 'Stream'; elseif ($sidInfo['si_course_nature'] == 2) echo 'Subjects'; elseif($sidInfo['si_course_nature'] == 3) echo 'Specialization'; else echo "Stream/Group/Specailization"; ?></label>
-                        <input type="text" class="form-control form-control-solid form-control-lg" disabled value="<?php if($sidInfo['si_course_nature']== 1): echo getGroup($sidInfo['si_stream_group']); elseif($sidInfo['si_course_nature']== 2): $stream = getStream($sidInfo['si_stream_group']);  echo !empty($stream)?implode(',',array_column($stream, 'cs_name')):'Stream Not Selected Yet'; elseif($sidInfo['si_course_nature']== 3): echo getSpecialization($sidInfo['si_stream_group']);  else: echo "Not Selected Yet"; endif; ?>" >
+                        <label for="course_type"><?php if ($sidInfo['si_course_nature'] == 1) echo 'Stream';
+                                                    elseif ($sidInfo['si_course_nature'] == 2) echo 'Subjects';
+                                                    elseif ($sidInfo['si_course_nature'] == 3) echo 'Specialization';
+                                                    else echo "Stream/Group/Specailization"; ?></label>
+                        <input type="text" class="form-control form-control-solid form-control-lg" disabled value="<?php if ($sidInfo['si_course_nature'] == 1) : echo getGroup($sidInfo['si_stream_group']);
+                                                                                                                    elseif ($sidInfo['si_course_nature'] == 2) : $stream = getStream($sidInfo['si_stream_group']);
+                                                                                                                        echo !empty($stream) ? implode(',', array_column($stream, 'cs_name')) : 'Stream Not Selected Yet';
+                                                                                                                    elseif ($sidInfo['si_course_nature'] == 3) : echo getSpecialization($sidInfo['si_stream_group']);
+                                                                                                                    else : echo "Not Selected Yet";
+                                                                                                                    endif; ?>">
                     </div>
                 </div>
             </div>
@@ -428,9 +437,9 @@ $url = '//sso.gyanvihar.org/';
                         <h6 class="mb-2 text-center" style="border-bottom: 1px solid #ebedf3;"><?= $student['dt_name'] ?></h6>
                         <div class="card">
                             <?php if (pathinfo($student['sd_url'], PATHINFO_EXTENSION) == 'pdf') : ?>
-                                <iframe class="card-img" src="https://docs.google.com/gview?url=https:<?= $url.substr($student['sd_url'],1) ?>&embedded=true"></iframe>
+                                <iframe class="card-img" src="https://docs.google.com/gview?url=https:<?= $url . substr($student['sd_url'], 1) ?>&embedded=true"></iframe>
                             <?php else : ?>
-                                <img class="card-img" src="<?= $url.substr($student['sd_url'],1) ?>" alt="">
+                                <img class="card-img" src="<?= $url . substr($student['sd_url'], 1) ?>" alt="">
                             <?php endif; ?>
                         </div>
                     </div>
@@ -438,15 +447,15 @@ $url = '//sso.gyanvihar.org/';
             </div>
             <hr class="my-3" style="border-top: 1px solid #000;">
             <div class="form-group mb-4 fv-plugins-icon-container">
-                <form id='final_form' method="post" action="<?= base_url('handler/profile-step-action/'.$lid.'/'.$sid) ?>">
+                <form id='final_form' method="post" action="<?= base_url('handler/profile-step-action/' . $lid . '/' . $sid) ?>">
                     <?= csrf_field() ?>
-                <div class="checkbox-inline my-3">
-                    <label class="checkbox checkbox-lg">
-                        <input  id="final_submit" type="checkbox" onclick="ch()" <?php if (old('final_submit') == 1) echo 'checked'; ?> name="final_submit"  value="1" >
-                        <span></span>
-                        This Final Submit.
-                    </label>
-                </div>
+                    <div class="checkbox-inline my-3">
+                        <label class="checkbox checkbox-lg">
+                            <input id="final_submit" type="checkbox" onclick="ch()" <?php if (old('final_submit') == 1) echo 'checked'; ?> name="final_submit" value="1">
+                            <span></span>
+                            This Final Submit.
+                        </label>
+                    </div>
                 </form>
             </div>
 
@@ -457,9 +466,9 @@ $url = '//sso.gyanvihar.org/';
                 <a href="<?= base_url('handler/process-application/' . $lid . '/' . $sid . '/document-upload') ?>" class="btn btn-light-primary font-weight-bolder text-uppercase">Previous</a>
             </div>
             <div>
-                
-                    <button type="submit" id='btn' form='final_form' disabled name="btn" value="review" class="btn btn-primary font-weight-bolder text-uppercase">Final Submit</button>
-                
+
+                <button type="submit" id='btn' form='final_form' disabled name="btn" value="review" class="btn btn-primary font-weight-bolder text-uppercase">Final Submit</button>
+
             </div>
         </div>
         <!--end::Wizard Actions-->
@@ -467,11 +476,10 @@ $url = '//sso.gyanvihar.org/';
 </div>
 <script>
     function ch() {
-        if($('#final_submit').is(':checked')){
-            $('#btn').prop('disabled',false)
-        }else{
-            $('#btn').prop('disabled',true)
+        if ($('#final_submit').is(':checked')) {
+            $('#btn').prop('disabled', false)
+        } else {
+            $('#btn').prop('disabled', true)
         }
     }
-    
 </script>

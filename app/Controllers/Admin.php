@@ -2051,7 +2051,7 @@ class Admin extends BaseController
 					// sms 
 					$sid = $student['sid'];
 					$pass = base64_decode($getPassword['password']);
-					$url = 'https://sso.gyanvihar.org';
+					$url = 'https://ldm.merishiksha.org';
 					$templateId = '1707168863578982012';
 					$message = "Welcome to Suresh Gyan Vihar University. Your Sid is $sid. and password is $pass Click on the url for login $url Thanks.";
 					$this->SendMessageApi($leadProfileDetail['lead_mobile'], $message, $templateId);
@@ -2115,7 +2115,7 @@ class Admin extends BaseController
 				if ($leadProfileDetail['lead_country_code'] == '91' || $leadProfileDetail['lead_country_code'] == '+91') {
 					// sms 
 					$pass = $getSidDetail['password'];
-					$url = 'https://sso.gyanvihar.org';
+					$url = 'https://ldm.merishiksha.org';
 					$templateId = '1707168863578982012';
 					$message = "Welcome to Suresh Gyan Vihar University. Your Sid is $sid. and password is $pass Click on the url for login $url Thanks.";
 					$this->SendMessageApi($leadProfileDetail['lead_mobile'], $message, $templateId);
@@ -2738,7 +2738,7 @@ class Admin extends BaseController
 					$mobile = $this->request->getFile('document');
 					if ($mobile->isValid() && !$mobile->hasMoved()) {
 						$fileURL = "/assets/uploads/" . session('year') . '/' . $sid;
-						$mobile->move('../sso.gyanvihar.org' . $fileURL, $mobile->getRandomName());
+						$mobile->move('ldm.merishiksha.org' . $fileURL, $mobile->getRandomName());
 						$sdModel = new ApplicationModel('student_document_' . session('year'), 'sd_id', $this->ssoDb);
 						$sd_dat = [
 							'sid' => $sid,
@@ -6029,7 +6029,7 @@ class Admin extends BaseController
 		$data['actionUrl'] = 'admin/profile-step-action/';
 		$data['actionUrlDoc'] = 'admin/upload-documents/';
 		$data['skipCouselling'] = 'admin/skip-counselling/';
-		$data['ssoUrl'] = 'https://sso.gyanvihar.org/';
+		$data['ssoUrl'] = 'https://ldm.merishiksha.org/';
 		$data['controller'] = 'admin';
 		$data['lid'] = $lid;
 		$data['sid'] = $sid;

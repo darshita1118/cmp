@@ -73,7 +73,7 @@ function getStream($id)
 $previousPositionKey  = array_search($currentPosition - 1, array_column($formSteps, 'position'));
 $previous = $formSteps[$previousPositionKey ?? '']['slug'] ?? '';
 
-$url = '//sso.gyanvihar.org/';
+$url = '//ldm.merishiksha.org/';
 ?>
 <div id="upload" class="mb-4 pb-3 pb-3 form-step active show">
     <div class="card border-0">
@@ -414,7 +414,7 @@ $url = '//sso.gyanvihar.org/';
                                     <?php if (pathinfo($student['sd_url'], PATHINFO_EXTENSION) == 'pdf') : ?>
                                         <iframe class="card-img" src="https://docs.google.com/gview?url=https:<?= $url . substr($student['sd_url'] ?? './', 1) ?>&embedded=true"></iframe>
                                     <?php else : ?>
-                                        <img class="card-img" src="<?= base_url() . 'sso.gyanvihar.org' . substr($student['sd_url'] ?? './', 1) ?>" alt="">
+                                        <img class="card-img" src="<?= base_url() . 'ldm.merishiksha.org' . substr($student['sd_url'] ?? './', 1) ?>" alt="">
                                     <?php endif; ?>
                                 </div>
                             </div>

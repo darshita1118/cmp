@@ -109,7 +109,7 @@ $other = getStudentOther($sid);
 $address = getAddress($sid);
 $education = getStudentEducation($sid);
 $student_docs = getStudentDocument($sid);
-$url = 'sso.gyanvihar.org/';
+$url = 'ldm.merishiksha.org/';
 $photo_key = array_search('1', array_column($student_docs, 'document_type')) ?? '';
 $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url'] : '//';
 ?>

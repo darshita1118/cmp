@@ -15,19 +15,16 @@
                 <tr>
                     <td style="background-color:#f5f5f6;text-align:center">
                         <center>
-                            <table border="0" cellpadding="0" cellspacing="0" style="border:3px solid #254aa5"
-                                width="600">
+                            <table border="0" cellpadding="0" cellspacing="0" style="border:3px solid #254aa5" width="600">
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <table border="0" cellpadding="0" cellspacing="0"
-                                                style="background-color:#fff" width="600">
+                                            <table border="0" cellpadding="0" cellspacing="0" style="background-color:#fff" width="600">
                                                 <tbody>
                                                     <tr>
                                                         <td>
                                                             <center>
-                                                                <table border="0" cellpadding="0" cellspacing="0"
-                                                                    width="580">
+                                                                <table border="0" cellpadding="0" cellspacing="0" width="580">
                                                                     <tbody>
                                                                         <tr>
                                                                             <td align="left">&nbsp;</td>
@@ -38,11 +35,8 @@
                                                                             <td align="right">&nbsp;</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td><img src="<?= base_url('assets/media/logos/logo.png') ?>"
-                                                                                    class="CToWUd"></td>
-                                                                            <td style="font-family:Calibri;font-size:20px;color:#323232;text-decoration:none;line-height:25px;padding-top:5px;text-align:right"
-                                                                                width="233"><span
-                                                                                    style="text-align:right"><strong>Contact
+                                                                            <td><img src="<?= base_url('assets/media/logos/logo.png') ?>" class="CToWUd"></td>
+                                                                            <td style="font-family:Calibri;font-size:20px;color:#323232;text-decoration:none;line-height:25px;padding-top:5px;text-align:right" width="233"><span style="text-align:right"><strong>Contact
                                                                                         at:
                                                                                         7895-4623-10 </strong></span>
                                                                             </td>
@@ -56,22 +50,20 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td
-                                                            style="background-color:rgb(238,238,238);font-family:Calibri;font-size:30px;line-height:5px;color:#323232;text-decoration:none;padding:1px;text-align:justify">
+                                                        <td style="background-color:rgb(238,238,238);font-family:Calibri;font-size:30px;line-height:5px;color:#323232;text-decoration:none;padding:1px;text-align:justify">
                                                             &nbsp;</td>
                                                     </tr>
                                                     <tr>
-                                                        <td
-                                                            style="background-color:#fff;text-align:justify;font-family:Calibri;font-size:15px;line-height:20px;color:#323232;text-decoration:none;padding:15px">
+                                                        <td style="background-color:#fff;text-align:justify;font-family:Calibri;font-size:15px;line-height:20px;color:#323232;text-decoration:none;padding:15px">
                                                             <strong>Dear <?= ucwords(trim($name)); ?>,</strong>
                                                             <p>This is for your information that, application for
                                                                 admission at Suresh Gyan VIhar
                                                                 University.</p>
-                                                                <h3 style="margin-bottom: 5px;">Your Login Credentials:</h3>
-                                                                <p style="margin: 5px auto;"><b>Username:</b> <?= $sid ?></p>
-                                                                <p style="margin: 5px auto;"><b>Password:</b> <?= $password ?></p>
-                                                              
-                                                            <p><a href="https://sso.gyanvihar.org/" target="_blank"><b>Click
+                                                            <h3 style="margin-bottom: 5px;">Your Login Credentials:</h3>
+                                                            <p style="margin: 5px auto;"><b>Username:</b> <?= $sid ?></p>
+                                                            <p style="margin: 5px auto;"><b>Password:</b> <?= $password ?></p>
+
+                                                            <p><a href="https://ldm.merishiksha.org/" target="_blank"><b>Click
                                                                         here</b></a>&nbsp;to log in to your
                                                                 <strong>Registration</strong> dashboard and submit the
                                                                 complete application.
@@ -83,16 +75,11 @@
                                                                 Admission Team,<br>Suresh Gyan Vihar University</p>
                                                         </td>
                                                     </tr>
-                                                    
+
                                                     <tr>
-                                                        <td
-                                                            style="font-family:Calibri;font-size:12px;background-color:#254aa5;color:#fff;text-decoration:none;line-height:20px;padding:5px;text-align:Center">
+                                                        <td style="font-family:Calibri;font-size:12px;background-color:#254aa5;color:#fff;text-decoration:none;line-height:20px;padding:5px;text-align:Center">
                                                             Suresh Gyan Vihar University, Jagatpura, Jaipur, Rajasthan-302017 (INDIA)<br>Ph: 7895463210 |
-                                                            Email: <a
-                                                                href="mailto:admissions@mygyanvihar.com"
-                                                                style="text-decoration:none;border-bottom:1px dotted #fff;color:#fff"
-                                                                target="_blank">admissions@mygyanvihar.com</a> | Website: <a
-                                                                href="https://gyanvihar.org" style="text-decoration:none;border-bottom:1px dotted #fff;color:#fff">www.gyanvihar.org</a><br>To ensure our emails
+                                                            Email: <a href="mailto:admissions@mygyanvihar.com" style="text-decoration:none;border-bottom:1px dotted #fff;color:#fff" target="_blank">admissions@mygyanvihar.com</a> | Website: <a href="https://gyanvihar.org" style="text-decoration:none;border-bottom:1px dotted #fff;color:#fff">www.gyanvihar.org</a><br>To ensure our emails
                                                             continue to reach your inbox, please add our email address
                                                             to your address book.</td>
                                                     </tr>

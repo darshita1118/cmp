@@ -1,11 +1,13 @@
 <?php
+
 use App\Models\ApplicationModel;
+
 function getRequiredDocumentList($course_id)
 {
     $courseModel = new ApplicationModel('course_info', 'coi_id', 'sso_' . session('suffix'));
     $courseInfo = $courseModel->select(['validation_level'])->where('coi_id', $course_id)->first();
     $elModel = new ApplicationModel('document_type', 'dt_id', 'sso_' . session('suffix'));
-    $el = $elModel->select(['dt_id', 'dt_name'])->whereIn('dt_equivalent', json_decode($courseInfo['validation_level'] ?? ''))->orWhereIn('dt_id',[1,2])->where('dt_status', 0)->orderBy('dt_id', 'ASC')->findAll();
+    $el = $elModel->select(['dt_id', 'dt_name'])->whereIn('dt_equivalent', json_decode($courseInfo['validation_level'] ?? ''))->orWhereIn('dt_id', [1, 2])->where('dt_status', 0)->orderBy('dt_id', 'ASC')->findAll();
     return $el ?? [];
 }
 function getStudentInfo($sid)
@@ -16,20 +18,20 @@ function getStudentInfo($sid)
 function getStudentDocument($sid)
 {
     $academicModel = new ApplicationModel('student_document_' . session('year'), 'sd_id', 'sso_' . session('suffix'));
-    $academic = $academicModel->select(['document_type','sd_url','dt_name','sd_id'])->join('document_type','document_type.dt_id=student_document_' . session('year').'.document_type')->where('sd_url!=','')->where('sid', $sid)->orderBy('document_type', 'ASC');
+    $academic = $academicModel->select(['document_type', 'sd_url', 'dt_name', 'sd_id'])->join('document_type', 'document_type.dt_id=student_document_' . session('year') . '.document_type')->where('sd_url!=', '')->where('sid', $sid)->orderBy('document_type', 'ASC');
     return $academic->findAll() ?? [];
 }
 function getDocument()
 {
     $elModel = new ApplicationModel('document_type', 'dt_id', 'sso_' . session('suffix'));
-    $el = $elModel->select(['dt_id','dt_name'])->where('dt_status', 0)->orderBy('dt_id','ASC')->findAll();
-    return $el??[];
+    $el = $elModel->select(['dt_id', 'dt_name'])->where('dt_status', 0)->orderBy('dt_id', 'ASC')->findAll();
+    return $el ?? [];
 }
 $studentInfo = getStudentInfo($sid) ?? [];
 $require = getRequiredDocumentList($studentInfo['program_id'] ?? '');
 $student_docs = getStudentDocument($sid);
 $levels = getDocument();
-$url = 'sso.gyanvihar.org/';
+$url = 'ldm.merishiksha.org/';
 
 ?>
 <div class="text-white text-center d-block d-lg-none py-2 bg-primary">
@@ -37,8 +39,8 @@ $url = 'sso.gyanvihar.org/';
 </div>
 <div class="px-4 py-2">
     <!--begin::Wizard Step 1-->
-    <div class="pb-5" >
-        <form class="form" id="kt_forms" action="<?= base_url('handler/upload-documents/'.$lid.'/'.$sid) ?>" method="post" enctype="multipart/form-data">
+    <div class="pb-5">
+        <form class="form" id="kt_forms" action="<?= base_url('handler/upload-documents/' . $lid . '/' . $sid) ?>" method="post" enctype="multipart/form-data">
             <div class="row mb-3">
                 <?= csrf_field() ?>
                 <div class="col-xl-5">
@@ -90,16 +92,16 @@ $url = 'sso.gyanvihar.org/';
                     <h6 class="mb-2 text-center" style="border-bottom: 1px solid #ebedf3;"><?= $student['dt_name'] ?></h6>
                     <div class="card">
                         <?php if (pathinfo($student['sd_url'], PATHINFO_EXTENSION) == 'pdf') : ?>
-                            <a href="<?= $url.substr($student['sd_url'],'1') ?>" target="_blank">
-                                <iframe class="card-img" src="https://docs.google.com/gview?url=https://<?= $url.substr($student['sd_url'],'1') ?>&embedded=true"></iframe>
+                            <a href="<?= $url . substr($student['sd_url'], '1') ?>" target="_blank">
+                                <iframe class="card-img" src="https://docs.google.com/gview?url=https://<?= $url . substr($student['sd_url'], '1') ?>&embedded=true"></iframe>
 
                             </a>
                         <?php else : ?>
-                            <img class="card-img" src="//<?= $url.substr($student['sd_url'],'1') ?>" alt="">
+                            <img class="card-img" src="//<?= $url . substr($student['sd_url'], '1') ?>" alt="">
                         <?php endif; ?>
                     </div>
                     <div class="text-center my-3" style="position: absolute;top: 5px;right: 5px;width: 25px;background: #fff;height: 25px;padding: 5px 5px;border-radius: 50%;box-shadow: 4px 4px 5px 0px #dddcdc, -4px -4px 5px 0px #dddcdc, 4px -4px 5px 0px #dddcdc, -4px 4px 5px 0px #dddcdc;">
-                        <a href="<?= base_url('handler/upload-documents/'.$lid.'/'.$sid) ?><?='?delete=' . $student['sd_id'] ?>" style="color:red; font-size: 1rem; font-weight: 500;"><i style="color:red; font-size: 1.3rem;" class="fa fa-trash"></i></a>
+                        <a href="<?= base_url('handler/upload-documents/' . $lid . '/' . $sid) ?><?= '?delete=' . $student['sd_id'] ?>" style="color:red; font-size: 1rem; font-weight: 500;"><i style="color:red; font-size: 1.3rem;" class="fa fa-trash"></i></a>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -125,7 +127,7 @@ $url = 'sso.gyanvihar.org/';
     </div>
     <!--end::Wizard Step 1-->
 
-    <form class="form" action="<?= base_url('handler/profile-step-action/'.$lid.'/'.$sid) ?>" method="post">
+    <form class="form" action="<?= base_url('handler/profile-step-action/' . $lid . '/' . $sid) ?>" method="post">
         <?= csrf_field() ?>
         <!--begin::Wizard Actions-->
         <div class="d-flex justify-content-between border-top mt-5 pt-5">
@@ -134,21 +136,21 @@ $url = 'sso.gyanvihar.org/';
             </div>
             <div>
                 <?php
-                    $stuDocs = (array_column($student_docs??[], 'document_type'))??[];
-                    $reqDocs = (array_column($require, 'dt_id'));
-                    $ch = true;
-                    if(empty($stuDocs) || empty($reqDocs) ){
-                        $ch = false;
-                        sort($stuDocs);
-                        sort($reqDocs);
-                    }
-                    
+                $stuDocs = (array_column($student_docs ?? [], 'document_type')) ?? [];
+                $reqDocs = (array_column($require, 'dt_id'));
+                $ch = true;
+                if (empty($stuDocs) || empty($reqDocs)) {
+                    $ch = false;
+                    sort($stuDocs);
+                    sort($reqDocs);
+                }
+
                 ?>
                 <?php foreach ($require as $lev) :
-                        if (!in_array($lev['dt_id'], array_column($student_docs, 'document_type')) !== false) : ?>
-                            <input type="hidden" name="require[]" value="<?= $lev['dt_name']; ?>">
-                    <?php endif;
-                endforeach; ?>                                   
+                    if (!in_array($lev['dt_id'], array_column($student_docs, 'document_type')) !== false) : ?>
+                        <input type="hidden" name="require[]" value="<?= $lev['dt_name']; ?>">
+                <?php endif;
+                endforeach; ?>
                 <button type="submit" class="btn btn-primary font-weight-bolder text-uppercase" name="btn" value="document-upload">Save & Next</button>
             </div>
         </div>
@@ -156,13 +158,13 @@ $url = 'sso.gyanvihar.org/';
     </form>
 </div>
 <script>
-	function typeChange(id){
-		if(id==6){
-			$("#typeText").text("(Max. size Image = 500 kb and PDF = 2MB)");
-			$("#document").attr("accept","image/jpeg,image/gif,image/png,,application/pdf");
-		}else{
-			$("#typeText").text("(Max. size Image = 500 kb)");
-			$("#document").attr("accept","image/jpeg,image/gif,image/png");
-		}
-	}
+    function typeChange(id) {
+        if (id == 6) {
+            $("#typeText").text("(Max. size Image = 500 kb and PDF = 2MB)");
+            $("#document").attr("accept", "image/jpeg,image/gif,image/png,,application/pdf");
+        } else {
+            $("#typeText").text("(Max. size Image = 500 kb)");
+            $("#document").attr("accept", "image/jpeg,image/gif,image/png");
+        }
+    }
 </script>

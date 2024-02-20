@@ -17,7 +17,7 @@ $student_docs = $academicModel->select(['document_type', 'sd_url', 'dt_name', 's
 
 $levels = $elModel->select(['dt_id', 'dt_name'])->where('dt_status', 0)->orderBy('dt_id', 'ASC')->findAll();
 
-//$url = 'sso.gyanvihar.org/';
+//$url = 'ldm.merishiksha.org/';
 $previousPositionKey  = array_search($currentPosition - 1, array_column($formSteps, 'position'));
 $previous = $formSteps[$previousPositionKey ?? '']['slug'] ?? '';
 ?>
@@ -87,7 +87,7 @@ $previous = $formSteps[$previousPositionKey ?? '']['slug'] ?? '';
 
                                     </a>
                                 <?php else : ?>
-                                    <img class="card-img" src="<?= base_url() . 'sso.gyanvihar.org' . substr($student['sd_url'], '1') ?>" alt="">
+                                    <img class="card-img" src="<?= base_url() . 'ldm.merishiksha.org' . substr($student['sd_url'], '1') ?>" alt="">
                                 <?php endif; ?>
                             </div>
                             <div class="text-center my-3" style="position: absolute;top: 5px;right: 5px;width: 25px;background: #fff;height: 25px;padding: 5px 5px;border-radius: 50%;box-shadow: 4px 4px 5px 0px #dddcdc, -4px -4px 5px 0px #dddcdc, 4px -4px 5px 0px #dddcdc, -4px 4px 5px 0px #dddcdc;">

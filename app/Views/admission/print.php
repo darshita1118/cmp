@@ -79,7 +79,7 @@ function getStream($id)
     return $detail;
 }
 
-$url = 'sso.gyanvihar.org/';
+$url = 'ldm.merishiksha.org/';
 $photo_key = array_search('1', array_column($student_docs, 'document_type')) ?? '';
 $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url'] : '//';
 //dd($sidInfo);
@@ -201,7 +201,7 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
 
                                     </td>
                                     <td width="30%" align="right">
-                                        <img id="ContentPlaceHolder2_Image1" src="<?= base_url() . 'sso.gyanvihar.org' . substr($photoUrl ?? '', 1) ?>" style="height:130px;width:130px; padding:4px; background:#E9E9E9" class="img-rounded">
+                                        <img id="ContentPlaceHolder2_Image1" src="<?= base_url() . 'ldm.merishiksha.org' . substr($photoUrl ?? '', 1) ?>" style="height:130px;width:130px; padding:4px; background:#E9E9E9" class="img-rounded">
                                     </td>
                                 </tr>
 
@@ -446,7 +446,7 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
                                         <?php if (pathinfo($student['sd_url'], PATHINFO_EXTENSION) == 'pdf') : ?>
                                             <a style="text-decoration:none" href="//<?= $url . substr($student['sd_url'], '1') ?>"><img src="<?= base_url() ?>/assets/media/logos/icon-pdf.png" height="120" width="120" class="img-rounded"></a>
                                         <?php else : ?>
-                                            <img src="<?= base_url() . 'sso.gyanvihar.org' .  substr($student['sd_url'], '1') ?>" height="120" width="120" class="img-rounded">
+                                            <img src="<?= base_url() . 'ldm.merishiksha.org' .  substr($student['sd_url'], '1') ?>" height="120" width="120" class="img-rounded">
                                         <?php endif; ?>
                                     </td>
                                 <?php endforeach; ?>

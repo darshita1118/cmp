@@ -64,6 +64,8 @@ writable/debugbar/*
 
 php_errors.log
 
+public/ldm.merishiksha.org/*
+!public/ldm.merishiksha.org/index.html
 
 #-------------------------
 # User Guide Temp Files

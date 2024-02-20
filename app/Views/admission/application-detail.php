@@ -79,7 +79,7 @@ function getStream($id)
     return $detail;
 }
 
-$url = 'sso.gyanvihar.org/';
+$url = 'ldm.merishiksha.org/';
 $photo_key = array_search('1', array_column($student_docs, 'document_type')) ?? '';
 $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url'] : '//';
 ?>
@@ -362,7 +362,7 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
                                     <iframe class="card-img" src="https://docs.google.com/gview?url=<?= $url . substr($student['sd_url'] ?? './', '1') ?>&embedded=true"></iframe>
                                 <?php else : ?>
                                     <a href="<?= $url . substr($student['sd_url'] ?? './', '1') ?>" target="_blank">
-                                        <img class="card-img" src="<?= base_url() . 'sso.gyanvihar.org' . substr($student['sd_url'] ?? './', '1') ?>"></a>
+                                        <img class="card-img" src="<?= base_url() . 'ldm.merishiksha.org' . substr($student['sd_url'] ?? './', '1') ?>"></a>
                                 <?php endif; ?>
                             </div>
 
