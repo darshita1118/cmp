@@ -62,91 +62,70 @@ const programs = <?= $programsJson ?>;
 
         <div class="row gx-2 mb-20px">
 
-            <div class="col-lg-4 col-sm-6" onclick="window.location.href='<?= base_url('handler/report/created-sid') ?>'">
+            <div class="col-lg-2" onclick="window.location.href='<?= base_url('handler/report/created-sid') ?>'">
                 <div class="widget widget-stats bg-teal mb-7px">
                     <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
                     <div class="stats-content">
                         <div class="stats-title">Created SID</div>
                         <div class="stats-number"><?= $totalRegistered ?></div>
-                        <div class="stats-progress progress">
-                            <div class="progress-bar" style="width: 70.1%;"></div>
-                        </div>
-                        <div class="stats-desc">Better than last week (70.1%)</div>
+
                     </div>
                 </div>
             </div>
 
 
-            <div class="col-lg-4 col-sm-6" onclick="window.location.href='<?= base_url('handler/report/registration') ?>'">
+            <div class="col-lg-2" onclick="window.location.href='<?= base_url('handler/report/registration') ?>'">
                 <div class="widget widget-stats bg-blue mb-7px">
                     <div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
                     <div class="stats-content">
                         <div class="stats-title">Total Registration</div>
                         <div class="stats-number"><?= $totalRegisterPayment ?></div>
-                        <div class="stats-progress progress">
-                            <div class="progress-bar" style="width: 40.5%;"></div>
-                        </div>
-                        <div class="stats-desc">Better than last week (40.5%)</div>
+
                     </div>
                 </div>
             </div>
 
 
-            <div class="col-lg-4 col-sm-6" onclick="window.location.href='<?= base_url('handler/report/admission-done') ?>'">
+            <div class="col-lg-2" onclick="window.location.href='<?= base_url('handler/report/admission-done') ?>'">
                 <div class="widget widget-stats bg-purple mb-7px">
                     <div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
                     <div class="stats-content">
                         <div class="stats-title">Total Admission Done</div>
                         <div class="stats-number"><?= $totalProvisionalModel ?></div>
-                        <div class="stats-progress progress">
-                            <div class="progress-bar" style="width: 76.3%;"></div>
-                        </div>
-                        <div class="stats-desc">Better than last week (76.3%)</div>
+
                     </div>
                 </div>
             </div>
 
 
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-lg-2">
                 <div class="widget widget-stats bg-dark mb-7px">
                     <div class="stats-icon stats-icon-lg"><i class="fa fa-comment-alt fa-fw"></i></div>
                     <div class="stats-content">
                         <div class="stats-title">Total Leads</div>
                         <div class="stats-number"><?= $totalLeads ?></div>
-                        <div class="stats-progress progress">
-                            <div class="progress-bar" style="width: 54.9%;"></div>
-                        </div>
-                        <div class="stats-desc">Better than last week (54.9%)</div>
                     </div>
                 </div>
             </div>
 
 
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-lg-2">
                 <div class="widget widget-stats bg-orange mb-7px">
                     <div class="stats-icon stats-icon-lg"><i class="fa fa-file-alt fa-fw"></i></div>
                     <div class="stats-content">
                         <div class="stats-title">Allocated Leads</div>
                         <div class="stats-number"><?= $totalAllocated ?></div>
-                        <div class="stats-progress progress">
-                            <div class="progress-bar" style="width: 23.5%;"></div>
-                        </div>
-                        <div class="stats-desc">More than last week (23.5%)</div>
                     </div>
                 </div>
             </div>
 
 
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-lg-2">
                 <div class="widget widget-stats bg-pink mb-7px">
                     <div class="stats-icon stats-icon-lg"><i class="fa fa-exclamation-triangle fa-fw"></i></div>
                     <div class="stats-content">
                         <div class="stats-title">Unlocated Lead</div>
                         <div class="stats-number"><?= $totalUnallocated ?></div>
-                        <div class="stats-progress progress">
-                            <div class="progress-bar" style="width: 10.5%;"></div>
-                        </div>
-                        <div class="stats-desc">More than last week (10.5%)</div>
                     </div>
                 </div>
             </div>
@@ -452,91 +431,70 @@ const programs = <?= $programsJson ?>;
 
         <div class="row gx-2 mb-20px">
 
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-lg-2">
                 <div class="widget widget-stats bg-teal mb-7px">
                     <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
                     <div class="stats-content">
                         <div class="stats-title">Open Student</div>
                         <div class="stats-number">7,842,900</div>
-                        <div class="stats-progress progress">
-                            <div class="progress-bar" style="width: 70.1%;"></div>
-                        </div>
-                        <div class="stats-desc">Better than last week (70.1%)</div>
+
                     </div>
                 </div>
             </div>
 
 
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-lg-2">
                 <div class="widget widget-stats bg-blue mb-7px">
                     <div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
                     <div class="stats-content">
                         <div class="stats-title">Application Form</div>
                         <div class="stats-number">180,200</div>
-                        <div class="stats-progress progress">
-                            <div class="progress-bar" style="width: 40.5%;"></div>
-                        </div>
-                        <div class="stats-desc">Better than last week (40.5%)</div>
+
                     </div>
                 </div>
             </div>
 
 
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-lg-2">
                 <div class="widget widget-stats bg-purple mb-7px">
                     <div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
                     <div class="stats-content">
                         <div class="stats-title">Under Process</div>
                         <div class="stats-number">38,900</div>
-                        <div class="stats-progress progress">
-                            <div class="progress-bar" style="width: 76.3%;"></div>
-                        </div>
-                        <div class="stats-desc">Better than last week (76.3%)</div>
+
                     </div>
                 </div>
             </div>
 
 
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-lg-2">
                 <div class="widget widget-stats bg-dark mb-7px">
                     <div class="stats-icon stats-icon-lg"><i class="fa fa-comment-alt fa-fw"></i></div>
                     <div class="stats-content">
                         <div class="stats-title">Rejected Form</div>
                         <div class="stats-number">3,988</div>
-                        <div class="stats-progress progress">
-                            <div class="progress-bar" style="width: 54.9%;"></div>
-                        </div>
-                        <div class="stats-desc">Better than last week (54.9%)</div>
                     </div>
                 </div>
             </div>
 
 
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-lg-2">
                 <div class="widget widget-stats bg-orange mb-7px">
                     <div class="stats-icon stats-icon-lg"><i class="fa fa-file-alt fa-fw"></i></div>
                     <div class="stats-content">
                         <div class="stats-title">Spam Form</div>
                         <div class="stats-number">20</div>
-                        <div class="stats-progress progress">
-                            <div class="progress-bar" style="width: 23.5%;"></div>
-                        </div>
-                        <div class="stats-desc">More than last week (23.5%)</div>
                     </div>
                 </div>
             </div>
 
 
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-lg-2">
                 <div class="widget widget-stats bg-pink mb-7px">
                     <div class="stats-icon stats-icon-lg"><i class="fa fa-exclamation-triangle fa-fw"></i></div>
                     <div class="stats-content">
                         <div class="stats-title">Admission Dome</div>
                         <div class="stats-number">5</div>
-                        <div class="stats-progress progress">
-                            <div class="progress-bar" style="width: 10.5%;"></div>
-                        </div>
-                        <div class="stats-desc">More than last week (10.5%)</div>
                     </div>
                 </div>
             </div>
@@ -1731,33 +1689,33 @@ const programs = <?= $programsJson ?>;
                                 <div class="col-lg-12">
                                     <h4>Lead Program Wise</h4>
 
-                                        <div class='row'>
-                                            <?php $count = 0;
-                                            foreach ($programWise as $program) :
-                                                if ($count == count($color))
-                                                    $count = 0;
-                                            ?>
-                                                <div class="col-xl-2 mb-2">
-                                                    <!--begin::Stats Widget 10-->
-                                                    <div class="card card-custom card-stretch gutter-b" style="border: 1px solid <?= $color[$count++] ?>; height:100%;">
-                                                        <!--begin::Body-->
-                                                        <div class="card-body p-0">
-                                                            <div class="align-items-center justify-content-between px-3 py-2 flex-grow-1 " style="">
+                                    <div class='row'>
+                                        <?php $count = 0;
+                                        foreach ($programWise as $program) :
+                                            if ($count == count($color))
+                                                $count = 0;
+                                        ?>
+                                            <div class="col-xl-2 mb-2">
+                                                <!--begin::Stats Widget 10-->
+                                                <div class="card card-custom card-stretch gutter-b" style="border: 1px solid <?= $color[$count++] ?>; height:100%;">
+                                                    <!--begin::Body-->
+                                                    <div class="card-body p-0">
+                                                        <div class="align-items-center justify-content-between px-3 py-2 flex-grow-1 " style="">
 
-                                                                <div class="d-flex flex-column text-center">
-                                                                    <span class="text-dark-75 font-weight-bolder font-size-h3"><?= $program['value'] ?? '0'; ?></span>
-                                                                    <span class="text-muted font-weight-bold mt-2 text-center"><?= $program['category'] ?></span>
-                                                                </div>
+                                                            <div class="d-flex flex-column text-center">
+                                                                <span class="text-dark-75 font-weight-bolder font-size-h3"><?= $program['value'] ?? '0'; ?></span>
+                                                                <span class="text-muted font-weight-bold mt-2 text-center"><?= $program['category'] ?></span>
                                                             </div>
-
                                                         </div>
-                                                        <!--end::Body-->
-                                                    </div>
-                                                    <!--end::Stats Widget 10-->
-                                                </div>
 
-                                            <?php endforeach; ?>
-                                        </div>
+                                                    </div>
+                                                    <!--end::Body-->
+                                                </div>
+                                                <!--end::Stats Widget 10-->
+                                            </div>
+
+                                        <?php endforeach; ?>
+                                    </div>
 
                                 </div>
                                 <!-- Pie Chart -->
