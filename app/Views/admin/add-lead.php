@@ -49,7 +49,7 @@
                             <div class="col-md-3">
                                 <div class="mb-3">
                                     <label class="form-label">Mobile No.</label>
-                                    <select class="form-select" id="country_code" name="country_code" required="">
+                                    <select class="" id="country_code" name="country_code" required="">
                                         <?php foreach ($countries as $country) : ?>
 
                                             <option value="<?= $country['code'] ?>" <?= old('country_code') == $country['code'] ? 'selected' : ($country['code'] == '+91' ? 'selected' : null) ?>> (<?= $country['isoCode'] ?> ) <?= $country['code'] ?> </option>

@@ -19141,7 +19141,7 @@ a:focus {
 @media (max-width:767.98px) {
     .app-content {
         margin-left: 0;
-        padding: 20px 20px
+        /* padding: 20px 20px */
     }
 }
 
@@ -20730,6 +20730,8 @@ a:focus {
         left: 0;
         margin-left: 0
     }
+
+
 }
 
 .app-content-full-height {

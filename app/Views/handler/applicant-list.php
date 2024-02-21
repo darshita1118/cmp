@@ -76,14 +76,12 @@ $admissionStatus = [
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body mt-md-3">
-
                     <form action="" class="row">
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Mobile No.</label>
                                 <input type="tel" name="mobile" class="form-control" placeholder="Search mobile no.." minlength="8" value="<?= isset($_GET['mobile']) ? $_GET['mobile'] : null ?>" maxlength="12">
                             </div>
-
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3"><label class="form-label">Date</label>
@@ -103,7 +101,6 @@ $admissionStatus = [
                                         <option value="<?= $source['source_id'] ?>" <?= (in_array($source['source_id'], $_GET['source'] ?? [])) ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
                                     <?php endforeach; ?>
                                 </select>
-
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -375,5 +372,18 @@ $admissionStatus = [
 <style>
     .daterangepicker {
         z-index: 9999 !important;
+    }
+
+    .offcanvas-body {
+        overflow: visible !important;
+
+
+    }
+
+    @media (max-width: 767px) {
+        .offcanvas-body {
+            overflow: visible !important;
+
+        }
     }
 </style>
