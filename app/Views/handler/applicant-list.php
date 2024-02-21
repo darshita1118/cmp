@@ -105,6 +105,17 @@ $admissionStatus = [
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3">
+                                <label class="form-label">Source</label>
+                                <select name="source[]" id="source" multiple class="form-select">
+                                    <option value="">--Select--</option>
+                                    <?php foreach ($sources as $source) : ?>
+                                        <option value="<?= $source['source_id'] ?>" <?= (in_array($source['source_id'], $_GET['source'] ?? [])) ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
                                 <label class="form-label">Program</label>
                                 <select class="form-select" name="program[]" id="program" multiple>
                                     <option value="">--Select--</option>
@@ -381,9 +392,15 @@ $admissionStatus = [
     }
 
     @media (max-width: 767px) {
+        /* .offcanvas-top {
+            height: 200vh;
+            overflow-y: auto;
+        } */
+
         .offcanvas-body {
             overflow: visible !important;
-
+            height: 300vh;
+            overflow-y: scroll;
         }
     }
 </style>
