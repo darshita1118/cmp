@@ -187,38 +187,37 @@
 						<div class="menu-text">Dashboard </div>
 					</a>
 				</div>
-				<div class="menu-item ">
-					<a href="<?= base_url('handler/tickets') ?>" class="menu-link">
-
-						<div class="menu-icon">
-							<i class="fa fa-ticket"></i>
-						</div>
-
-						<div class="menu-text">Tickets </div>
-					</a>
-				</div>
 
 				<div class="menu-item has-sub">
 					<a href="javascript:;" class="menu-link">
 						<div class="menu-icon">
-							<i class="fa fa-podcast"></i>
+							<i class="fa fa-sitemap"></i>
 						</div>
-						<div class="menu-text">By Self</div>
+						<div class="menu-text">Leads</div>
 						<div class="menu-caret"></div>
 					</a>
+
 					<div class="menu-submenu">
+						<?php if (session('role') == 1) : ?>
+							<div class="menu-item">
+								<a href="<?= base_url('handler/leads') ?>" class="menu-link">
+									<div class="menu-text">All Leads</div>
+								</a>
+							</div>
+						<?php endif; ?>
 						<div class="menu-item">
-							<a href="<?= base_url('handler/applicant-list') ?>" class="menu-link">
-								<div class="menu-text">Process Application</div>
+							<a href="<?= base_url('handler/add-lead') ?>" class="menu-link ">
+								<div class="menu-text">Create Lead</div>
 							</a>
 						</div>
 						<div class="menu-item">
-							<a href="<?= base_url('handler/application-form-reopen') ?>" class="menu-link">
-								<div class="menu-text">Reopened Application</div>
+							<a href="<?= base_url('handler') ?>" class="menu-link">
+								<div class="menu-text">Self Allocated Leads</div>
 							</a>
 						</div>
 					</div>
 				</div>
+
 				<div class="menu-item has-sub">
 					<a href="javascript:;" class="menu-link">
 						<div class="menu-icon">
@@ -250,36 +249,39 @@
 						</div>
 					</div>
 				</div>
+				<div class="menu-item ">
+					<a href="<?= base_url('handler/tickets') ?>" class="menu-link">
 
+						<div class="menu-icon">
+							<i class="fa fa-ticket"></i>
+						</div>
+
+						<div class="menu-text">Tickets </div>
+					</a>
+				</div>
 				<div class="menu-item has-sub">
 					<a href="javascript:;" class="menu-link">
 						<div class="menu-icon">
-							<i class="fa fa-sitemap"></i>
+							<i class="fa fa-podcast"></i>
 						</div>
-						<div class="menu-text">Leads</div>
+						<div class="menu-text">Application Form</div>
 						<div class="menu-caret"></div>
 					</a>
-
 					<div class="menu-submenu">
-						<?php if (session('role') == 1) : ?>
-							<div class="menu-item">
-								<a href="<?= base_url('handler/leads') ?>" class="menu-link">
-									<div class="menu-text">All Leads</div>
-								</a>
-							</div>
-						<?php endif; ?>
 						<div class="menu-item">
-							<a href="<?= base_url('handler/add-lead') ?>" class="menu-link ">
-								<div class="menu-text">Create Lead</div>
+							<a href="<?= base_url('handler/applicant-list') ?>" class="menu-link">
+								<div class="menu-text">Process Application</div>
 							</a>
 						</div>
 						<div class="menu-item">
-							<a href="<?= base_url('handler') ?>" class="menu-link">
-								<div class="menu-text">Self Allocated Leads</div>
+							<a href="<?= base_url('handler/application-form-reopen') ?>" class="menu-link">
+								<div class="menu-text">Reopened Application</div>
 							</a>
 						</div>
 					</div>
 				</div>
+
+
 				<?php if (session('role') == 1) : ?>
 					<div class="menu-item has-sub">
 						<a href="javascript:;" class="menu-link">
