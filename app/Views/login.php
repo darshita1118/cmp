@@ -43,9 +43,10 @@
 
 					<select class="form-select" name="year" id="year" required>
 						<option value="">-- Select --</option>
-						<?php for ($i = 2024; $i >= 2021; $i--) : ?>
+						<?php
+						foreach ($sessionData as $i) : ?>
 							<option value="<?= $i ?>" <?= (set_value('year') ?? old('year') == $i) ? 'Selected' : NULL ?>><?= $i ?></option>
-						<?php endfor; ?>
+						<?php endforeach; ?>
 					</select>
 					<label for="emailAddress" class="d-flex align-items-center fs-13px text-gray-600">Select Session
 					</label>
