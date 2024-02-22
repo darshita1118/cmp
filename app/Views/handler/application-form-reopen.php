@@ -54,11 +54,8 @@ $query = $uri->getQuery();
             <span class="text-white">Edit Application Form (Reopen) Totals: <?= $total_records ?? 0 ?></span>
         </div>
         <div class="card-toolbar">
-            <!--begin::Dropdown-->
-
-            <!--end::Dropdown-->
             <!--begin::Button-->
-            <a href="<?= base_url('handler/add-lead') ?>" class="btn btn-primary btn-xs me-2 font-weight-bolder">
+            <a href="<?= base_url('handler/add-lead') ?>" class="btn btn-default btn-xs me-2 font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <i class="fa fa-user-plus"></i>
                 </span>New Applicant</a>
@@ -66,7 +63,11 @@ $query = $uri->getQuery();
         </div>
         <div class="panel-heading-btn">
             <a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
-            <a href="javascript:;" class="btn btn-sm btn-icon btn-warning" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="fa fa-lg fa-fw fa-sliders"></i></a>
+            <a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" title="Filter" aria-controls="offcanvasTop">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-right" viewBox="0 0 16 16">
+                    <path d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5m0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5m0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5"></path>
+                </svg>
+            </a>
 
 
             <div class="offcanvas offcanvas-top ps-5 pe-5" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
@@ -93,21 +94,10 @@ $query = $uri->getQuery();
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="col-md-3">
-                                    <div class="mb-3">
-                                        <label class="form-label">Status</label>
-                                        <select class="form-select">...
-                                            <option selected>--Select -- </option>
-                                            <option value="1">Admin</option>
-                                            <option value="2">Handler</option>
-
-                                        </select>
-                                    </div>
-                                </div> -->
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Source</label>
-                                <select name="source[]" id="source" multiple class="form-select">
+                                <select name="source[]" id="source" multiple class="form-select zindex-tooltip">
                                     <option value="">--Select--</option>
                                     <?php foreach ($sources as $source) : ?>
                                         <option value="<?= $source['source_id'] ?>" <?= (in_array($source['source_id'], $_GET['source'] ?? [])) ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
@@ -116,18 +106,6 @@ $query = $uri->getQuery();
 
                             </div>
                         </div>
-                        <!-- <div class="col-md-3">
-                                    <div class="mb-3">
-                                        <label class="form-label">Department</label>
-                                        <select class="form-select">...
-                                            <option selected>--Department-- </option>
-                                            <option value="1">Admin</option>
-                                            <option value="2">Handler</option>
-
-                                        </select>
-
-                                    </div>
-                                </div> -->
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Program</label>
@@ -139,20 +117,10 @@ $query = $uri->getQuery();
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="mb-3">
-                                <label class="form-label">Handler</label>
-                                <select class="form-select" name="handlers[]" id="handlers" multiple>
-                                    <?php foreach ($handlers as $handler) : ?>
-                                        <option value="<?= $handler['lu_id'] ?>" <?= (in_array($handler['lu_id'], $_GET['handlers'] ?? [])) ? 'selected' : null ?>><?= $handler['user_name'] ?> </option>
-                                    <?php endforeach; ?>
-                                </select>
 
-                            </div>
-                        </div>
                         <div class="col-md-3">
                             <div class="mb-3">
-                                <label class="form-label">Nationality</label>
+                                <label class="form-label">Lead Nationality</label>
                                 <select class="form-select" name="nationality[]" id="nationality" multiple>
                                     <?php foreach ($student_nationalities as $nation) : ?>
                                         <option value="<?= $nation['id'] ?>" <?= (in_array($nation['id'], $_GET['nationality'] ?? [])) ? 'selected' : null ?>><?= $nation['name'] ?> </option>
@@ -211,8 +179,8 @@ $query = $uri->getQuery();
                         <td><?= $lead['source_name'] ?></td>
 
                         <td class="">
-                            <a href="<?= base_url('handler/edit-application-form/' . $lead['lead_id'] . '/' . $lead['sid']) ?>" class="btn btn-sm btn-clean" title="Edit Application Form">
-                                <i class="flaticon2-sheet"></i>Edit App. Form
+                            <a href="<?= base_url('handler/edit-application-form/' . $lead['lead_id'] . '/' . $lead['sid']) ?>" class="btn btn-warning btn-icon btn-lg" title="Edit Application Form">
+                                <i class="fa fa-file-pen"></i>
                             </a>
 
 

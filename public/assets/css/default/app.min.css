@@ -8872,7 +8872,7 @@ fieldset:disabled .btn {
 .offcanvas-xxxl {
     --bs-offcanvas-zindex: 1045;
     --bs-offcanvas-width: 400px;
-    --bs-offcanvas-height: 50vh;
+    --bs-offcanvas-height: 60vh;
     --bs-offcanvas-padding-x: 0.9375rem;
     --bs-offcanvas-padding-y: 0.9375rem;
     --bs-offcanvas-color: var(--bs-body-color);
@@ -19141,7 +19141,7 @@ a:focus {
 @media (max-width:767.98px) {
     .app-content {
         margin-left: 0;
-        padding: 20px 20px
+        /* padding: 20px 20px */
     }
 }
 
@@ -20730,6 +20730,8 @@ a:focus {
         left: 0;
         margin-left: 0
     }
+
+
 }
 
 .app-content-full-height {

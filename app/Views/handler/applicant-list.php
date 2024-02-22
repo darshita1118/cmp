@@ -55,7 +55,7 @@ $admissionStatus = [
 
             <!--end::Dropdown-->
             <!--begin::Button-->
-            <a href="<?= base_url('handler/add-lead') ?>" class="btn btn-primary btn-xs me-2 font-weight-bolder">
+            <a href="<?= base_url('handler/add-lead') ?>" class="btn btn-default btn-xs me-2 font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <i class="fa fa-user-plus"></i>
                 </span>New Applicant</a>
@@ -63,7 +63,11 @@ $admissionStatus = [
         </div>
         <div class="panel-heading-btn">
             <a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
-            <a href="javascript:;" class="btn btn-sm btn-icon btn-warning" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="fa fa-lg fa-fw fa-sliders"></i></a>
+            <a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" title="Filter" aria-controls="offcanvasTop">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-right" viewBox="0 0 16 16">
+                    <path d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5m0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5m0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5"></path>
+                </svg>
+            </a>
 
 
             <div class="offcanvas offcanvas-top ps-5 pe-5" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
@@ -72,14 +76,12 @@ $admissionStatus = [
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body mt-md-3">
-
                     <form action="" class="row">
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Mobile No.</label>
                                 <input type="tel" name="mobile" class="form-control" placeholder="Search mobile no.." minlength="8" value="<?= isset($_GET['mobile']) ? $_GET['mobile'] : null ?>" maxlength="12">
                             </div>
-
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3"><label class="form-label">Date</label>
@@ -90,17 +92,6 @@ $admissionStatus = [
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="col-md-3">
-                                    <div class="mb-3">
-                                        <label class="form-label">Status</label>
-                                        <select class="form-select">...
-                                            <option selected>--Select -- </option>
-                                            <option value="1">Admin</option>
-                                            <option value="2">Handler</option>
-
-                                        </select>
-                                    </div>
-                                </div> -->
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Source</label>
@@ -110,21 +101,19 @@ $admissionStatus = [
                                         <option value="<?= $source['source_id'] ?>" <?= (in_array($source['source_id'], $_GET['source'] ?? [])) ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
                                     <?php endforeach; ?>
                                 </select>
-
                             </div>
                         </div>
-                        <!-- <div class="col-md-3">
-                                    <div class="mb-3">
-                                        <label class="form-label">Department</label>
-                                        <select class="form-select">...
-                                            <option selected>--Department-- </option>
-                                            <option value="1">Admin</option>
-                                            <option value="2">Handler</option>
-
-                                        </select>
-
-                                    </div>
-                                </div> -->
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Source</label>
+                                <select name="source[]" id="source" multiple class="form-select">
+                                    <option value="">--Select--</option>
+                                    <?php foreach ($sources as $source) : ?>
+                                        <option value="<?= $source['source_id'] ?>" <?= (in_array($source['source_id'], $_GET['source'] ?? [])) ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Program</label>
@@ -198,8 +187,8 @@ $admissionStatus = [
                         <td><?= $lead['source_name'] ?></td>
 
                         <td class="">
-                            <a href="<?= base_url('handler/process-application/' . $lead['lead_id'] . '/' . $lead['sid']) ?>" class="btn btn-warning btn-icon btn-sm" title="Proceed Application">
-                                <i class="fa fa-shuffle"></i>
+                            <a href="<?= base_url('handler/process-application/' . $lead['lead_id'] . '/' . $lead['sid']) ?>" class="btn btn-warning btn-icon btn-lg" title="Proceed Application">
+                                <i class="fa fa-file-pen"></i>
                             </a>
 
                         </td>
@@ -394,5 +383,24 @@ $admissionStatus = [
 <style>
     .daterangepicker {
         z-index: 9999 !important;
+    }
+
+    .offcanvas-body {
+        overflow: visible !important;
+
+
+    }
+
+    @media (max-width: 767px) {
+        /* .offcanvas-top {
+            height: 200vh;
+            overflow-y: auto;
+        } */
+
+        .offcanvas-body {
+            overflow: visible !important;
+            height: 300vh;
+            overflow-y: scroll;
+        }
     }
 </style>

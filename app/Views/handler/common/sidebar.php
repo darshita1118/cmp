@@ -5,12 +5,6 @@
 			<div class="navbar-header">
 				<a href="<?= base_url('handler/welcome') ?>" class="navbar-brand"><span class="navbar-logo"></span> <b class="me-3px">LDM</b>
 					Admin</a>
-				<button type="button" class="navbar-mobile-toggler" data-bs-toggle="collapse" data-bs-target="#top-navbar">
-					<span class="fa-stack fa-lg">
-						<i class="far fa-square fa-stack-2x"></i>
-						<i class="fas fa-cog fa-stack-1x p-2"></i>
-					</span>
-				</button>
 				<button type="button" class="navbar-mobile-toggler" data-toggle="app-top-menu-mobile">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
@@ -20,14 +14,7 @@
 			</div>
 
 			<div class="navbar-nav">
-				<div class="navbar-item navbar-form">
-					<form action="" method="POST" name="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Enter keyword">
-							<button type="submit" class="btn btn-search"><i class="fas fa-search"></i></button>
-						</div>
-					</form>
-				</div>
+
 				<div class="navbar-item navbar-user dropdown">
 					<a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
 						<span>&nbsp;&nbsp; Session: <?= session('year') . '-' . (session('year') + 1) ?> &nbsp;&nbsp;</span>
@@ -40,6 +27,149 @@
 						<a href="javascript:void();" class="dropdown-item"><?= session('name') ?></a>
 						<div class="dropdown-divider"></div>
 						<a href="<?= base_url('/handler/logout'); ?>" class="dropdown-item">Log Out</a>
+					</div>
+				</div>
+				<a href="javascript:;" class="btn btn-sm me-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTopst" title="Our Stacks" aria-controls="offcanvasTop"><i class="fa fa-xl fa-th-large"></i></a>
+				<div class="offcanvas offcanvas-top ps-5 pe-5" tabindex="-1" id="offcanvasTopst" aria-labelledby="offcanvasTopLabel">
+					<div class="offcanvas-header border-bottom">
+						<h5 id="offcanvasTopLabel">Our Stacks</h5>
+						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+					</div>
+					<div class="offcanvas-body mt-md-3">
+						<div class="row">
+							<div class="col-md-2">
+								<!-- begin widget-stats -->
+								<div class="widget widget-stats bg-teal mb-10px">
+									<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+									<div class="stats-content">
+										<div class="stats-title">Marketing Qalifay</div>
+										<div class="stats-number">7,842,900</div>
+									</div>
+								</div>
+								<!-- end widget-stats -->
+							</div>
+							<div class="col-md-2">
+								<!-- begin widget-stats -->
+								<div class="widget widget-stats bg-teal mb-10px">
+									<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+									<div class="stats-content">
+										<div class="stats-title">Marketing Qalifay</div>
+										<div class="stats-number">7,842,900</div>
+									</div>
+								</div>
+								<!-- end widget-stats -->
+							</div>
+							<div class="col-md-2">
+								<!-- begin widget-stats -->
+								<div class="widget widget-stats bg-teal mb-10px">
+									<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+									<div class="stats-content">
+										<div class="stats-title">Marketing Qalifay</div>
+										<div class="stats-number">7,842,900</div>
+									</div>
+								</div>
+								<!-- end widget-stats -->
+							</div>
+							<div class="col-md-2">
+								<!-- begin widget-stats -->
+								<div class="widget widget-stats bg-teal mb-10px">
+									<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+									<div class="stats-content">
+										<div class="stats-title">Marketing Qalifay</div>
+										<div class="stats-number">7,842,900</div>
+									</div>
+								</div>
+								<!-- end widget-stats -->
+							</div>
+							<div class="col-md-2">
+								<!-- begin widget-stats -->
+								<div class="widget widget-stats bg-teal mb-10px">
+									<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+									<div class="stats-content">
+										<div class="stats-title">Marketing Qalifay</div>
+										<div class="stats-number">7,842,900</div>
+									</div>
+								</div>
+								<!-- end widget-stats -->
+							</div>
+							<div class="col-md-2">
+								<!-- begin widget-stats -->
+								<div class="widget widget-stats bg-teal mb-10px">
+									<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+									<div class="stats-content">
+										<div class="stats-title">Marketing Qalifay</div>
+										<div class="stats-number">7,842,900</div>
+									</div>
+								</div>
+								<!-- end widget-stats -->
+							</div>
+							<div class="col-md-2">
+								<!-- begin widget-stats -->
+								<div class="widget widget-stats bg-teal mb-10px">
+									<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+									<div class="stats-content">
+										<div class="stats-title">Marketing Qalifay</div>
+										<div class="stats-number">7,842,900</div>
+									</div>
+								</div>
+								<!-- end widget-stats -->
+							</div>
+							<div class="col-md-2">
+								<!-- begin widget-stats -->
+								<div class="widget widget-stats bg-teal mb-10px">
+									<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+									<div class="stats-content">
+										<div class="stats-title">Marketing Qalifay</div>
+										<div class="stats-number">7,842,900</div>
+									</div>
+								</div>
+								<!-- end widget-stats -->
+							</div>
+							<div class="col-md-2">
+								<!-- begin widget-stats -->
+								<div class="widget widget-stats bg-teal mb-10px">
+									<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+									<div class="stats-content">
+										<div class="stats-title">Marketing Qalifay</div>
+										<div class="stats-number">7,842,900</div>
+									</div>
+								</div>
+								<!-- end widget-stats -->
+							</div>
+							<div class="col-md-2">
+								<!-- begin widget-stats -->
+								<div class="widget widget-stats bg-teal mb-10px">
+									<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+									<div class="stats-content">
+										<div class="stats-title">Marketing Qalifay</div>
+										<div class="stats-number">7,842,900</div>
+									</div>
+								</div>
+								<!-- end widget-stats -->
+							</div>
+							<div class="col-md-2">
+								<!-- begin widget-stats -->
+								<div class="widget widget-stats bg-teal mb-10px">
+									<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+									<div class="stats-content">
+										<div class="stats-title">Marketing Qalifay</div>
+										<div class="stats-number">7,842,900</div>
+									</div>
+								</div>
+								<!-- end widget-stats -->
+							</div>
+							<div class="col-md-2">
+								<!-- begin widget-stats -->
+								<div class="widget widget-stats bg-teal mb-10px">
+									<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+									<div class="stats-content">
+										<div class="stats-title">Marketing Qalifay</div>
+										<div class="stats-number">7,842,900</div>
+									</div>
+								</div>
+								<!-- end widget-stats -->
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -122,11 +252,9 @@
 				</div>
 
 				<div class="menu-item has-sub">
-
 					<a href="javascript:;" class="menu-link">
 						<div class="menu-icon">
 							<i class="fa fa-sitemap"></i>
-
 						</div>
 						<div class="menu-text">Leads</div>
 						<div class="menu-caret"></div>
@@ -176,8 +304,6 @@
 					</div>
 
 				<?php endif; ?>
-
-
 
 
 				<div class="menu-item menu-control menu-control-start">
