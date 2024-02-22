@@ -27,7 +27,7 @@ class Login extends BaseController
 
         try {
             $modelSession = new ApplicationModel('lms_sessions', 'ls_id', SETTINGDB);
-            $sessionData = $modelSession->select('session_tb_suffix')->where('session_status', 1)->where('session_delete_status', 0)->findAll();
+            $sessionData = $modelSession->select('session_tb_suffix')->where('session_status', 1)->where('session_delete_status', 0)->orderBy('ls_id', 'desc')->findAll();
             // Example array
             $sessionMakingYear = [];
             // Iterate over each value and trim to last 4 digits
@@ -122,7 +122,7 @@ class Login extends BaseController
         $data = [];
         try {
             $modelSession = new ApplicationModel('lms_sessions', 'ls_id', SETTINGDB);
-            $sessionData = $modelSession->select('session_tb_suffix')->where('session_status', 1)->where('session_delete_status', 0)->findAll();
+            $sessionData = $modelSession->select('session_tb_suffix')->where('session_status', 1)->where('session_delete_status', 0)->orderBy('ls_id', 'desc')->findAll();
             // Example array
             $sessionMakingYear = [];
             // Iterate over each value and trim to last 4 digits
