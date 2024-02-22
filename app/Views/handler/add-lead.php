@@ -1,5 +1,5 @@
      <!-- Select CSS -->
-     <link href="<?= base_url() ?>assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
+     <link href="<?= base_url('assets/plugins/select2/dist/css/select2.min.css') ?>" rel="stylesheet" />
 
      <div class="panel panel-inverse">
 
@@ -24,7 +24,7 @@
                  <?= csrf_field() ?>
                  <fieldset>
                      <!-- <legend class="mb-3">Legend</legend> -->
-                     <div class="row">
+                     <div class="row" id="newlead">
                          <div class="col-md-3">
                              <div class="mb-3">
                                  <label class="form-label">First Name</label>
@@ -75,7 +75,7 @@
                          <div class="col-md-3">
                              <div class="mb-3">
                                  <label class="form-label">Department</label>
-                                 <select class="form-select default-select2" id="department" name="department" onchange="getProgramByDept(this.value)" required="">
+                                 <select class="form-select selectpicker" multiple id="department" name="department" onchange="getProgramByDept(this.value)" required="">
                                      <option value="">--Select A Desipline--</option>
                                      <?php foreach ($departments as $dept) : ?>
                                          <option value="<?= $dept['dept_id'] ?>" <?= old('department') == $dept['dept_id'] ? 'selected' : null ?>><?= $dept['dept_name'] ?></option>
@@ -88,7 +88,7 @@
                          <div class="col-md-3">
                              <div class="mb-3">
                                  <label class="form-label">Program</label>
-                                 <select class="form-select default-select2" id="programnameid" name="programe" required="">
+                                 <select class="form-select selectpicker" multiple id="programnameid" name="programe" required="">
                                      <option value="">--Select A Programe--</option>
 
                                  </select><span class="form-text text-muted">Please enter handler status</span>
@@ -183,5 +183,12 @@
          const $_SELECT_PICKER = $('#country_code');
          $_SELECT_PICKER.selectpicker();
 
-         $(".default-select2").select2();
+         //  $(".default-select2").select2();
+         $('#program,#status,#department,#source,#nationality').picker({
+             search: true
+         });
+         $('#newlead .selectpicker').picker();
+         $(".default-select2").select2({
+             dropdownParent: $('#newlead')
+         });
      </script>

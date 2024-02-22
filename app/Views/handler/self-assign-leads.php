@@ -183,8 +183,8 @@ function getStatusTime($leadId)
                         <td><?= $lead['status_name'] ?></td>
                         <td><?= $lead['source_name'] ?></td>
 
-                        <td>
-                            <a href="<?= base_url('handler/lead-profile/' . $lead['lid']) ?>" class="btn btn-warning btn-icon btn-sm" title="Lead Profile"><i class="fa fa-pen"></i></a>
+                        <td class="text-center">
+                            <a href="<?= base_url('handler/lead-profile/' . $lead['lid']) ?>" class="btn btn-warning btn-icon btn-lg" title="Lead Profile"><i class="fa fa-pen-to-square ms-1"></i></a>
                             </a>
                         </td>
 

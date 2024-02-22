@@ -50,18 +50,9 @@ $admissionStatus = [
         <div class="mb-1 me-2">
             <span class="text-white">Applicant List Totals: <?= $total_records ?? 0 ?> </span>
         </div>
-        <div class="card-toolbar">
-            <!--begin::Dropdown-->
 
-            <!--end::Dropdown-->
-            <!--begin::Button-->
-            <a href="<?= base_url('handler/add-lead') ?>" class="btn btn-default btn-xs me-2 font-weight-bolder">
-                <span class="svg-icon svg-icon-md">
-                    <i class="fa fa-user-plus"></i>
-                </span>New Applicant</a>
-            <!--end::Button-->
-        </div>
         <div class="panel-heading-btn">
+            <a href="<?= base_url('handler/add-lead') ?>" class="btn btn-sm btn-icon btn-default"> <i class="fa fa-user-plus" data-bs-toggle="tooltip" data-bs-placement="left" title="New Applicant"></i></a>
             <a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
             <a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" title="Filter" aria-controls="offcanvasTop">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-right" viewBox="0 0 16 16">
@@ -186,9 +177,9 @@ $admissionStatus = [
 
                         <td><?= $lead['source_name'] ?></td>
 
-                        <td class="">
+                        <td class="text-center">
                             <a href="<?= base_url('handler/process-application/' . $lead['lead_id'] . '/' . $lead['sid']) ?>" class="btn btn-warning btn-icon btn-lg" title="Proceed Application">
-                                <i class="fa fa-file-pen"></i>
+                                <i class="fa fa-file-pen ms-1"></i>
                             </a>
 
                         </td>
