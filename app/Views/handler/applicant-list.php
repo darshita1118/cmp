@@ -76,22 +76,13 @@ $admissionStatus = [
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3"><label class="form-label">Date</label>
+                                <!-- html -->
                                 <div class="input-group" id="default-daterange">
-
-                                    <input type="text" name="default-daterange" class="form-control" value="" placeholder="click to select the date range">
+                                    <input type="text" name="default-daterange" class="form-control" value="" placeholder="click to select the date range" />
+                                    <input type="hidden" name="to" id="to" class="form-control" value="" />
+                                    <input type="hidden" name="from" id="from" class="form-control" value="" />
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="mb-3">
-                                <label class="form-label">Source</label>
-                                <select name="source[]" id="source" multiple class="form-select">
-                                    <option value="">--Select--</option>
-                                    <?php foreach ($sources as $source) : ?>
-                                        <option value="<?= $source['source_id'] ?>" <?= (in_array($source['source_id'], $_GET['source'] ?? [])) ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
-                                    <?php endforeach; ?>
-                                </select>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -147,7 +138,7 @@ $admissionStatus = [
         <table id="data-table-fixed-header" class="table table-striped table-bordered align-middle w-100 text-wrap cmp-table">
             <thead>
                 <tr>
-                    <th>id</th>
+                    <th>Id</th>
                     <th>Name and Email</th>
                     <th>Mobile</th>
                     <th>SID/Password</th>
@@ -351,6 +342,16 @@ $admissionStatus = [
             $("#default-daterange input").val(
                 start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY")
             );
+            //date formate 2024-01-28
+            if (start.isValid() && end.isValid()) {
+                // Set the values in the HTML input fields
+                $("#to").val(start.format("YYYY-MM-D"));
+                $("#from").val(end.format("YYYY-MM-D"));
+            } else {
+                // Clear the input fields if dates are not valid
+                $("#from").val("");
+                $("#to").val("");
+            }
         });
     };
 

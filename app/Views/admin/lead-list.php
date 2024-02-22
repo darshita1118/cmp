@@ -174,6 +174,79 @@ function getStatusTime($leadId)
 				endforeach; ?>
 			</tbody>
 		</table>
+		<style>
+			.pagination-nav nav ul>.active>a {
+				margin-left: .4rem;
+				margin-right: .4rem;
+				outline: 0 !important;
+				cursor: pointer;
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-box-pack: center;
+				-ms-flex-pack: center;
+				justify-content: center;
+				-webkit-box-align: center;
+				-ms-flex-align: center;
+				align-items: center;
+				height: 2.25rem;
+				min-width: 2.25rem;
+				padding: .5rem;
+				text-align: center;
+				position: relative;
+				font-size: 1rem;
+				line-height: 1rem;
+				font-weight: 500;
+				border-radius: .42rem;
+				border: 0;
+				-webkit-transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
+				transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
+				transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+				transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease, -webkit-box-shadow .15s ease;
+				background-color: #3699ff;
+				color: #fff;
+			}
+
+			.pagination-nav nav ul li a {
+				margin-left: .4rem !important;
+				margin-right: .4rem !important;
+				outline: 0 !important;
+				cursor: pointer;
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-box-pack: center;
+				-ms-flex-pack: center;
+				justify-content: center;
+				-webkit-box-align: center;
+				-ms-flex-align: center;
+				align-items: center;
+				height: 2.25rem !important;
+				min-width: 2.25rem !important;
+				padding: .5rem;
+				text-align: center;
+				position: relative;
+				font-size: 1rem;
+				line-height: 1rem;
+				font-weight: 500;
+				border-radius: .42rem;
+				border: 0;
+				-webkit-transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
+				transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
+				transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+				transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease, -webkit-box-shadow .15s ease;
+				color: #7e8299;
+				background-color: transparent;
+			}
+		</style>
+		<hr>
+		<div class="row mt-4">
+			<div class="col-lg-12 text-center">
+				<div id='pagination' class='pagination-nav'>
+					<?= $pager->links() ?>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -231,16 +304,16 @@ function getStatusTime($leadId)
 		keys: true,
 		select: true,
 		paging: true,
-		lengthMenu: [20, 40, 60],
+		// lengthMenu: [20, 40, 60, 100, 120, 200, 300, 400, 500, 1000],
 		fixedHeader: {
 			header: true,
 			headerOffset: $('#header').height()
 		},
-		responsive: true
+		responsive: true,
+		pageLength: 50,
 	};
 
 	$('#data-table-fixed-header').DataTable(options);
-
 </script>
 <script>
 	$(".default-select2").select2({

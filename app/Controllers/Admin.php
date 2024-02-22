@@ -164,7 +164,7 @@ class Admin extends BaseController
 		}
 
 		$data['total_handlers'] = $data['handlers']->countAllResults(false);
-		$data['handlers'] = $data['handlers']->orderBy('lu_id', 'DESC')->paginate(500);
+		$data['handlers'] = $data['handlers']->orderBy('lu_id', 'DESC')->paginate(50);
 		$data['pager'] = $handlerModel->pager;
 
 		$data['pagename'] = 'admin/handlers';
@@ -767,7 +767,7 @@ class Admin extends BaseController
 			$data['leads'] = $data['leads']->where($whereDate);
 
 		$data['total_leads'] = $data['leads']->countAllResults(false);
-		$data['leads'] = $data['leads']->orderBy('lid', 'DESC')->paginate(500);
+		$data['leads'] = $data['leads']->orderBy('lid', 'DESC')->paginate(50);
 		$data['pager'] = $leadModel->pager;
 
 		$sourceModel = new ApplicationModel('sources', 'source_id', $this->lmsDb);
@@ -935,7 +935,7 @@ class Admin extends BaseController
 			$data['leads'] = $data['leads']->where($whereDate);
 
 		$data['total_leads'] = $data['leads']->countAllResults(false);
-		$data['leads'] = $data['leads']->orderBy('lid', 'DESC')->paginate(500);
+		$data['leads'] = $data['leads']->orderBy('lid', 'DESC')->paginate(50);
 		$data['pager'] = $leadModel->pager;
 
 		$sourceModel = new ApplicationModel('sources', 'source_id', $this->lmsDb);
@@ -1018,7 +1018,7 @@ class Admin extends BaseController
 			$data['leads'] = $data['leads']->where($whereDate);
 
 		$data['total_leads'] = $data['leads']->countAllResults(false);
-		$data['leads'] = $data['leads']->orderBy('lid', 'DESC')->paginate(500);
+		$data['leads'] = $data['leads']->orderBy('lid', 'DESC')->paginate(50);
 		$data['pager'] = $leadModel->pager;
 
 		$sourceModel = new ApplicationModel('sources', 'source_id', $this->lmsDb);
@@ -1384,7 +1384,7 @@ class Admin extends BaseController
 			$data['leads'] = $data['leads']->where($whereDate);
 
 		$data['total_leads'] = $data['leads']->countAllResults(false);
-		$data['leads'] = $data['leads']->orderBy('lid', 'DESC')->paginate(500);
+		$data['leads'] = $data['leads']->orderBy('lid', 'DESC')->paginate(50);
 		$data['pager'] = $leadModel->pager;
 
 		$sourceModel = new ApplicationModel('sources', 'source_id', $this->lmsDb);
@@ -2199,7 +2199,7 @@ class Admin extends BaseController
 			$appliantDetail = $appliantDetail->where($whereDate);
 
 		$data['total_leads'] = $appliantDetail->countAllResults(false);
-		$data['leads'] = $appliantDetail->orderBy('lr_id', 'DESC')->paginate(500);
+		$data['leads'] = $appliantDetail->orderBy('lr_id', 'DESC')->paginate(50);
 		$data['pager'] = $lmsReferenceModel->pager;
 		$courseModel = new ApplicationModel('course_info', 'coi_id', $this->ssoDb);
 		$data['courses'] = $courseModel->select(['course_name', 'course_code', 'dept_id', 'coi_id', 'level_id'])->findAll();
@@ -2836,7 +2836,7 @@ class Admin extends BaseController
 			$appliantDetail = $appliantDetail->where($whereDate);
 		$appliantDetail->where('er_status', 0)->where(['er_from<' => date('Y-m-d H:i:s'), 'er_to>' => date('Y-m-d H:i:s')]);
 		$data['total_leads'] = $appliantDetail->countAllResults(false);
-		$data['leads'] = $appliantDetail->orderBy('er_id', 'DESC')->paginate(500);
+		$data['leads'] = $appliantDetail->orderBy('er_id', 'DESC')->paginate(50);
 		$data['pager'] = $lmsReferenceModel->pager;
 		$courseModel = new ApplicationModel('session_courses_' . session('year'), 'sc_id', $this->ssoDb);
 		$data['courses'] = $courseModel->select(['sc_id as coi_id', 'course_name', 'course_code', 'dept_id', 'level_id'])->join('course_info', 'course_info.coi_id=session_courses_' . session('year') . '.course_id')->where(['sc_course_delete' => 0])->findAll();
@@ -3549,7 +3549,7 @@ class Admin extends BaseController
 		}
 
 		$data['total_status'] = $data['statuses']->countAllResults(false);
-		$data['statuses'] = $data['statuses']->orderBy('status_id', 'DESC')->paginate(500);
+		$data['statuses'] = $data['statuses']->orderBy('status_id', 'DESC')->paginate(50);
 		$data['pager'] = $statusModel->pager;
 
 		$data['pagename'] = 'admin/status';
@@ -3722,7 +3722,7 @@ class Admin extends BaseController
 		$data['sources'] = $sourceModel->select(['source_id', 'source_name', 'source_score'])->where('source_status', 1);
 
 		$data['total_source'] = $data['sources']->countAllResults(false);
-		$data['sources'] = $data['sources']->orderBy('source_id', 'DESC')->paginate(500);
+		$data['sources'] = $data['sources']->orderBy('source_id', 'DESC')->paginate(50);
 		$data['pager'] = $sourceModel->pager;
 
 		$data['pagename'] = 'admin/source';
@@ -3949,7 +3949,7 @@ class Admin extends BaseController
 		$data['email_templates'] = $emailTemplateModel->select(['et_id', 'et_name', 'et_template_url', 'et_have_attachment', 'et_type', 'et_status', 'et_score'])->where('et_delete_status', 0);
 
 		$data['total_templates'] = $data['email_templates']->countAllResults(false);
-		$data['email_templates'] = $data['email_templates']->orderBy('et_id', 'DESC')->paginate(500);
+		$data['email_templates'] = $data['email_templates']->orderBy('et_id', 'DESC')->paginate(50);
 		$data['pager'] = $emailTemplateModel->pager;
 
 		$data['pagename'] = 'admin/email-template-list';
@@ -4131,7 +4131,7 @@ class Admin extends BaseController
 		$data['sms_templates'] = $smsTemplateModel->select(['st_id', 'st_name', 'st_approved_id', 'st_message', 'st_parameter', 'st_type', 'st_score', 'st_status'])->where('st_delete_status', 0);
 
 		$data['total_templates'] = $data['sms_templates']->countAllResults(false);
-		$data['sms_templates'] = $data['sms_templates']->orderBy('st_id', 'DESC')->paginate(500);
+		$data['sms_templates'] = $data['sms_templates']->orderBy('st_id', 'DESC')->paginate(50);
 		$data['pager'] = $smsTemplateModel->pager;
 
 		$data['pagename'] = 'admin/sms-template-list';
@@ -5712,7 +5712,7 @@ class Admin extends BaseController
 		}
 		$data['userDetail'] = $userDetail;
 		$teamMemberModel = new ApplicationModel('team_leader_' . session('year'), 'tl_id', $this->lmsDb);
-		$data['teamMembers'] = $teamMemberModel->join(SETTINGDB . '.lms_users_' . session('year'), 'team_leader_' . session('year') . '.handler_id=' . SETTINGDB . '.lms_users_' . session('year') . '.lu_id')->where(['team_leader' => $teamLeader])->paginate(500);
+		$data['teamMembers'] = $teamMemberModel->join(SETTINGDB . '.lms_users_' . session('year'), 'team_leader_' . session('year') . '.handler_id=' . SETTINGDB . '.lms_users_' . session('year') . '.lu_id')->where(['team_leader' => $teamLeader])->paginate(50);
 		$data['pager'] = $teamMemberModel->pager;
 
 		$data['pagename'] = "admin/team-members";
@@ -5804,7 +5804,7 @@ class Admin extends BaseController
 		}
 		$userDetails->where(['db_name' => session('db_priffix')])->where('user_deleted_status', 0);
 		$data['total_records'] = $userDetails->countAllResults(false);
-		$data['users'] = $userDetails->orderBy($key, 'DESC')->paginate(500);
+		$data['users'] = $userDetails->orderBy($key, 'DESC')->paginate(50);
 		$data['pager'] = $model->pager;
 		$handlerModel = new ApplicationModel('lms_users_' . session('year'), 'lu_id', SETTINGDB);
 		if ($userType == 'admin') {
@@ -5940,7 +5940,7 @@ class Admin extends BaseController
 
 
 		$data['total_records'] = $studentList->countAllResults(false);
-		$data['studentList'] = $studentList->orderBy('lr_id', 'DESC')->paginate(500);
+		$data['studentList'] = $studentList->orderBy('lr_id', 'DESC')->paginate(50);
 		$data['pager'] = $modelReferenceDb->pager;
 		$data['pageInfo'] = $pageInfo[$slug];
 		$data['pagename'] = "admin/report-list";

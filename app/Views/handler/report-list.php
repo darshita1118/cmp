@@ -67,7 +67,7 @@ $query = $uri->getQuery();
                 </div>
                 <div class="offcanvas-body mt-md-3">
 
-                    <form action="" class="row">
+                    <form action="" method="get" class="row">
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Mobile No.</label>
@@ -77,9 +77,11 @@ $query = $uri->getQuery();
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3"><label class="form-label">Date</label>
+                                <!-- html -->
                                 <div class="input-group" id="default-daterange">
-
-                                    <input type="text" name="default-daterange" class="form-control" value="" placeholder="click to select the date range" value="<?= isset($_GET['from']) ? $_GET['from'] : null ?>" placeholder="dd-mm-yyyy">
+                                    <input type="text" name="default-daterange" class="form-control" value="" placeholder="click to select the date range" />
+                                    <input type="hidden" name="to" id="to" class="form-control" value="" />
+                                    <input type="hidden" name="from" id="from" class="form-control" value="" />
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
                             </div>
@@ -118,18 +120,7 @@ $query = $uri->getQuery();
 
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="mb-3">
-                                <label class="form-label">Select Team</label>
-                                <select class="form-select selectpicker" name="tl[]" id="team" multiple>
-                                    <?php foreach ($teamLeaders ?? [] as $leader) : ?>
-                                        <option value="<?= $leader['lu_id'] ?>" <?= (in_array($leader['lu_id'], ($_GET['tl'] ?? [])) !== false) ? 'selected' : null ?>><?= $leader['user_name'] ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
 
-                            </div>
-                        </div>
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Lead Nationality</label>
@@ -199,7 +190,79 @@ $query = $uri->getQuery();
                 endforeach; ?>
             </tbody>
         </table>
+        <style>
+            .pagination-nav nav ul>.active>a {
+                margin-left: .4rem;
+                margin-right: .4rem;
+                outline: 0 !important;
+                cursor: pointer;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                height: 2.25rem;
+                min-width: 2.25rem;
+                padding: .5rem;
+                text-align: center;
+                position: relative;
+                font-size: 1rem;
+                line-height: 1rem;
+                font-weight: 500;
+                border-radius: .42rem;
+                border: 0;
+                -webkit-transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
+                transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
+                transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+                transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease, -webkit-box-shadow .15s ease;
+                background-color: #3699ff;
+                color: #fff;
+            }
 
+            .pagination-nav nav ul li a {
+                margin-left: .4rem !important;
+                margin-right: .4rem !important;
+                outline: 0 !important;
+                cursor: pointer;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                height: 2.25rem !important;
+                min-width: 2.25rem !important;
+                padding: .5rem;
+                text-align: center;
+                position: relative;
+                font-size: 1rem;
+                line-height: 1rem;
+                font-weight: 500;
+                border-radius: .42rem;
+                border: 0;
+                -webkit-transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
+                transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
+                transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+                transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease, -webkit-box-shadow .15s ease;
+                color: #7e8299;
+                background-color: transparent;
+            }
+        </style>
+        <hr>
+        <div class="row mt-4">
+            <div class="col-lg-12 text-center">
+                <div id='pagination' class='pagination-nav'>
+                    <?= $pager->links() ?>
+                </div>
+            </div>
+        </div>
         <!-- script -->
         <script>
             var options = {
@@ -229,7 +292,8 @@ $query = $uri->getQuery();
                 colReorder: true,
                 keys: true,
                 rowReorder: true,
-                select: true
+                select: true,
+                pageLength: 50
             };
 
             if ($(window).width() <= 767) {
@@ -378,5 +442,11 @@ $query = $uri->getQuery();
 <style>
     .daterangepicker {
         z-index: 9999 !important;
+    }
+
+    .offcanvas-body {
+        overflow: visible !important;
+
+
     }
 </style>

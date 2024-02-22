@@ -80,7 +80,7 @@ class Handler extends BaseController
 			$data['leads'] = $data['leads']->where($whereDate);
 
 		$data['total_records'] = $data['leads']->countAllResults(false);
-		$data['leads'] = $data['leads']->orderBy('lid', 'DESC')->paginate(500);
+		$data['leads'] = $data['leads']->orderBy('lid', 'DESC')->paginate(50);
 		$data['pager'] = $leadModel->pager;
 
 		$sourceModel = new ApplicationModel('sources', 'source_id', $this->lmsDb);
@@ -1224,7 +1224,7 @@ class Handler extends BaseController
 			$appliantDetail = $appliantDetail->where($whereDate);
 		$appliantDetail->whereIn('handler_id', $teamMembers);
 		$data['total_records'] = $appliantDetail->countAllResults(false);
-		$data['leads'] = $appliantDetail->orderBy('lr_id', 'DESC')->paginate(500);
+		$data['leads'] = $appliantDetail->orderBy('lr_id', 'DESC')->paginate(50);
 		$data['pager'] = $lmsReferenceModel->pager;
 		$courseModel = new ApplicationModel('session_courses_' . session('year'), 'sc_id', $this->ssoDb);
 		$data['courses'] = $courseModel->select(['sc_id as coi_id', 'course_name', 'course_code', 'dept_id', 'level_id'])->join('course_info', 'course_info.coi_id=session_courses_' . session('year') . '.course_id')->where(['sc_course_delete' => 0])->findAll();
@@ -2466,7 +2466,7 @@ class Handler extends BaseController
 			$appliantDetail = $appliantDetail->where($whereDate);
 		$appliantDetail->where('er_status', 0)->where(['er_from<' => date('Y-m-d H:i:s'), 'er_to>' => date('Y-m-d H:i:s')]);
 		$data['total_records'] = $appliantDetail->countAllResults(false);
-		$data['leads'] = $appliantDetail->orderBy('er_id', 'DESC')->paginate(500);
+		$data['leads'] = $appliantDetail->orderBy('er_id', 'DESC')->paginate(50);
 		$data['pager'] = $lmsReferenceModel->pager;
 		$courseModel = new ApplicationModel('session_courses_' . session('year'), 'sc_id', $this->ssoDb);
 		$data['courses'] = $courseModel->select(['sc_id as coi_id', 'course_name', 'course_code', 'dept_id', 'level_id'])->join('course_info', 'course_info.coi_id=session_courses_' . session('year') . '.course_id')->where(['sc_course_delete' => 0])->findAll();
@@ -3709,7 +3709,7 @@ class Handler extends BaseController
 		}
 
 		$data['total_records'] = $data['handlers']->countAllResults(false);
-		$data['handlers'] = $data['handlers']->orderBy('lu_id', 'DESC')->paginate(500);
+		$data['handlers'] = $data['handlers']->orderBy('lu_id', 'DESC')->paginate(50);
 		$data['pager'] = $handlerModel->pager;
 
 		$data['pagename'] = 'handler/handlers';
@@ -4000,7 +4000,7 @@ class Handler extends BaseController
 			$data['leads'] = $data['leads']->where($whereDate);
 
 		$data['total_records'] = $data['leads']->countAllResults(false);
-		$data['leads'] = $data['leads']->orderBy('lid', 'DESC')->paginate(500);
+		$data['leads'] = $data['leads']->orderBy('lid', 'DESC')->paginate(50);
 		$data['pager'] = $leadModel->pager;
 
 		$sourceModel = new ApplicationModel('sources', 'source_id', $this->lmsDb);
@@ -4740,7 +4740,7 @@ class Handler extends BaseController
 
 		$studentList->whereIn('handler_id', $tlTeamMembers);
 		$data['total_records'] = $studentList->countAllResults(false);
-		$data['studentList'] = $studentList->orderBy('lr_id', 'DESC')->paginate(500);
+		$data['studentList'] = $studentList->orderBy('lr_id', 'DESC')->paginate(50);
 		$data['pager'] = $modelReferenceDb->pager;
 		$data['pageInfo'] = $pageInfo[$slug];
 		$data['pagename'] = "handler/report-list";
@@ -4936,7 +4936,7 @@ class Handler extends BaseController
 			$data['leads'] = $data['leads']->where($whereDate);
 
 		$data['total_leads'] = $data['leads']->countAllResults(false);
-		$data['leads'] = $data['leads']->orderBy('lid', 'DESC')->paginate(500);
+		$data['leads'] = $data['leads']->orderBy('lid', 'DESC')->paginate(50);
 		$data['pager'] = $leadModel->pager;
 
 		$sourceModel = new ApplicationModel('sources', 'source_id', $this->lmsDb);
