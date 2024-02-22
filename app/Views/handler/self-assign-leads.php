@@ -69,6 +69,8 @@ function getStatusTime($leadId)
                                 <!-- html -->
                                 <div class="input-group" id="default-daterange">
                                     <input type="text" name="default-daterange" class="form-control" value="" placeholder="click to select the date range" />
+                                    <input type="hidden" name="to" id="to" class="form-control" value="" />
+                                    <input type="hidden" name="from" id="from" class="form-control" value="" />
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
                             </div>
@@ -310,6 +312,19 @@ function getStatusTime($leadId)
             $("#default-daterange input").val(
                 start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY")
             );
+            // Check if start and end are valid dates
+
+            //date formate 2024-01-28
+            if (start.isValid() && end.isValid()) {
+                // Set the values in the HTML input fields
+                $("#to").val(start.format("YYYY-MM-D"));
+                $("#from").val(end.format("YYYY-MM-D"));
+            } else {
+                // Clear the input fields if dates are not valid
+                $("#from").val("");
+                $("#to").val("");
+            }
+
         });
     };
 
