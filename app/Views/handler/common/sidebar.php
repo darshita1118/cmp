@@ -262,7 +262,7 @@
 				<div class="menu-item has-sub">
 					<a href="javascript:;" class="menu-link">
 						<div class="menu-icon">
-							<i class="fa fa-podcast"></i>
+							<i class="fa-solid fa-file-lines"></i>
 						</div>
 						<div class="menu-text">Application Form</div>
 						<div class="menu-caret"></div>

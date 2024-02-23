@@ -131,10 +131,68 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
             margin-top: 0;
         }
     }
-</style>
-<style>
+
     input {
         margin-bottom: 10px;
+    }
+
+    /* Note box */
+    .right-bottom {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px;
+        z-index: 999;
+        border-radius: 11px;
+        background: #fff;
+        box-shadow: 20px 20px 60px #bebebe,
+            -20px -20px 60px #ffffff;
+    }
+
+    .chat-container {
+        flex: 1;
+        overflow-y: scroll;
+        max-height: 50vh;
+    }
+
+
+    .send-button {
+        border: none;
+        background-color: #00acac;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 50%;
+    }
+
+    .message-container {
+        margin-bottom: 20px;
+    }
+
+    .message {
+        background-color: #f2f3f4;
+
+        border-radius: 5px;
+        padding: 10px;
+
+    }
+
+    .timestamp {
+        color: #6c757d;
+        font-size: 10px;
+        margin: 5px 0 15px 10px;
+    }
+
+    .widget-input-container .widget-input-icon {
+        padding: .375rem 0;
+        margin-bottom: 10px;
+    }
+
+    .widget-input-container .widget-input-icon a {
+        display: block;
+
+        font-size: 13px;
+        padding: 5px;
     }
 </style>
 
@@ -159,9 +217,6 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
         </div>
 
     </div>
-
-
-
     <div class="panel-body">
         <div class="profile">
             <div class="row gx-4">
@@ -335,11 +390,56 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <a href="#" target="_blank" class="widget-icon rounded bg-success me-2  text-white text-decoration-none">
+                                                <a href="#" class="widget-icon rounded bg-success me-2  text-white text-decoration-none toggle">
                                                     <i class="fa fa-commenting"></i>
                                                 </a>
+
+                                                <div class="col-8 col-md-3  right-bottom" id="target">
+
+                                                    <div class="modal-content">
+                                                        <!-- note Header -->
+                                                        <div class="modal-header border-bottom mb-3">
+
+                                                            <h5 class="text-success">
+                                                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-text" viewBox="0 0 16 16">
+                                                                    <path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5" />
+                                                                    <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2" />
+                                                                    <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z" />
+                                                                </svg> --><i class="fa fa-note-sticky"></i>
+                                                                &nbsp;Note
+                                                            </h5>
+                                                            <a type="button" class="text-success close-btn"><i class="fa fa-x"></i></a>
+                                                        </div>
+
+                                                        <!-- note Body -->
+                                                        <div class="modal-body">
+                                                            <div class="container-fluid chat-container">
+                                                                <div id="messageContainer" class="message-container"></div>
+                                                            </div>
+
+                                                            <!-- Chat-like Input and "Send" Button -->
+                                                            <div class="chat-input-container">
+                                                                <form action="" method="POST" name="">
+                                                                    <div class="widget-input-container">
+                                                                        <div class="widget-input-box">
+                                                                            <input type="text" id="messageInput" class="form-control chat-input" placeholder="Type your message...">
+                                                                        </div>
+                                                                        <div class="widget-input-icon"><a href="#" class="send-button text-success text-opacity-50" id="sendButton"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" id="send">
+                                                                                    <path fill="none" d="M0 0h24v24H0V0z"></path>
+                                                                                    <path d="M3.4 20.4l17.45-7.48c.81-.35.81-1.49 0-1.84L3.4 3.6c-.66-.29-1.39.2-1.39.91L2 9.12c0 .5.37.93.87.99L17 12 2.87 13.88c-.5.07-.87.5-.87 1l.01 4.61c0 .71.73 1.2 1.39.91z"></path>
+                                                                                </svg></a></div>
+                                                                    </div>
+
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
                                             </div>
                                         </div>
+
                                         <hr>
                                         <h4 class="d-flex align-items-center mb-2">
                                             <span class="iconify fs-24px me-2 text-body text-opacity-75" data-icon="solar:cardholder-bold-duotone"></span> More Actions & Information
@@ -624,16 +724,6 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
 <script>
     $("#timepicker").timepicker();
 
@@ -791,4 +881,39 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
     <?php if (session('transferError')) : ?>
         $('#transferlead').modal('show')
     <?php endif; ?>
+</script>
+<!-- note box -->
+<script>
+    $(document).ready(function() {
+        $(document).ready(function() {
+            $(".toggle").click(function() {
+                $("#target").fadeIn();
+            });
+
+            $(".close-btn").click(function() {
+                $("#target").fadeOut();
+            });
+        });
+        $("#sendButton").click(function() {
+            var message = $("#messageInput").val();
+
+            if (message.trim() !== "") {
+                // Get the current date and time
+                var timestamp = new Date().toLocaleString();
+
+                // Create a new message element with timestamp
+                var messageElement = $("<div class='message'>").text(message);
+                var timestampElement = $("<div class='timestamp'>").text(timestamp);
+
+                // Append the message and timestamp to the container
+                $("#messageContainer").append(messageElement, timestampElement);
+
+                // Clear the input field after sending
+                $("#messageInput").val("");
+
+                // Scroll to the bottom of the container
+                $(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+            }
+        });
+    });
 </script>
