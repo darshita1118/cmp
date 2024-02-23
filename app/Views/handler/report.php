@@ -266,106 +266,26 @@ const programs = <?= $programsJson ?>;
         </div>
 
         <div class="row gx-2 mb-20px">
+            <?php $chartData = [];
+            foreach ($dataAdmissionStatus as $admssion) : ?>
+                <div class="col-lg-2">
+                    <div class="widget widget-stats  mb-7px" style="background-color:  <?= $admssion['color'] ?>;">
+                        <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                        <div class="stats-content">
+                            <div class="stats-title"><?= $admssion['name'] ?></div>
+                            <div class="stats-number"><?php $key = array_search($admssion['id'], $sqlAdmissionStatus, true); ?><?php $stats = ($key !== false) ? $admissionStatus[$key]['sid'] : '0';
+                                                                                                                                echo $stats; ?></div>
 
-            <div class="col-lg-2">
-                <div class="widget widget-stats bg-teal mb-7px">
-                    <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
-                    <div class="stats-content">
-                        <div class="stats-title">Open Student</div>
-                        <div class="stats-number">7,842,900</div>
-
+                        </div>
+                        <?php $chartData[] = ['category' => $admssion['name'], 'value' => (int) $stats]; ?>
                     </div>
                 </div>
-            </div>
-
-
-            <div class="col-lg-2">
-                <div class="widget widget-stats bg-blue mb-7px">
-                    <div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
-                    <div class="stats-content">
-                        <div class="stats-title">Application Form</div>
-                        <div class="stats-number">180,200</div>
-
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-lg-2">
-                <div class="widget widget-stats bg-purple mb-7px">
-                    <div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
-                    <div class="stats-content">
-                        <div class="stats-title">Under Process</div>
-                        <div class="stats-number">38,900</div>
-
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-lg-2">
-                <div class="widget widget-stats bg-dark mb-7px">
-                    <div class="stats-icon stats-icon-lg"><i class="fa fa-comment-alt fa-fw"></i></div>
-                    <div class="stats-content">
-                        <div class="stats-title">Rejected Form</div>
-                        <div class="stats-number">3,988</div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-lg-2">
-                <div class="widget widget-stats bg-orange mb-7px">
-                    <div class="stats-icon stats-icon-lg"><i class="fa fa-file-alt fa-fw"></i></div>
-                    <div class="stats-content">
-                        <div class="stats-title">Spam Form</div>
-                        <div class="stats-number">20</div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-lg-2">
-                <div class="widget widget-stats bg-pink mb-7px">
-                    <div class="stats-icon stats-icon-lg"><i class="fa fa-exclamation-triangle fa-fw"></i></div>
-                    <div class="stats-content">
-                        <div class="stats-title">Admission Dome</div>
-                        <div class="stats-number">5</div>
-                    </div>
-                </div>
-            </div>
-
+            <?php endforeach; ?>
         </div>
-
 
         <div class="col-lg-12">
             <div class="card-body px-2">
-                <div class="mb-3">
-                    <div class="row mx-0">
-                        <?php $chartData = [];
-                        foreach ($dataAdmissionStatus as $admssion) : ?>
-                            <div class="col-xl-2 mb-2">
-                                <!--begin::Stats Widget 10-->
-                                <div class="card card-custom card-stretch gutter-b" style="border: 1px solid <?= $admssion['color'] ?>;">
-                                    <!--begin::Body-->
-                                    <div class="card-body p-0">
-                                        <div class="align-items-center justify-content-between px-3 py-2 flex-grow-1 " style="">
 
-                                            <div class="d-flex flex-column text-center">
-                                                <span class="text-dark-75 font-weight-bolder font-size-h3"><?php $key = array_search($admssion['id'], $sqlAdmissionStatus, true); ?><?php $stats = ($key !== false) ? $admissionStatus[$key]['sid'] : '0';
-                                                                                                                                                                                    echo $stats; ?></span>
-                                                <span class="text-muted font-weight-bold mt-2 text-center"><?= $admssion['name'] ?></span>
-                                            </div>
-                                        </div>
-                                        <?php $chartData[] = ['category' => $admssion['name'], 'value' => (int) $stats]; ?>
-                                    </div>
-                                    <!--end::Body-->
-                                </div>
-                                <!--end::Stats Widget 10-->
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
 
 
                 <!--begin::Entry-->
@@ -731,106 +651,26 @@ const programs = <?= $programsJson ?>;
                     </div>
 
                     <div class="row gx-2 mb-20px">
+                        <?php $count = 0;
+                        foreach ($leadStatusWise as $status) :
+                            if ($count == count($color))
+                                $count = 0;
+                        ?>
 
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-teal mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Open Student</div>
-                                    <div class="stats-number">7,842,900</div>
+                            <div class="col-lg-2">
+                                <div class="widget widget-stats  mb-7px" style="background-color: <?= $color[$count++] ?>">
+                                    <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                                    <div class="stats-content">
+                                        <div class="stats-title"><?= $status['category'] ?></div>
+                                        <div class="stats-number"><?= $status['value'] ?? '0'; ?></div>
 
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-blue mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Application Form</div>
-                                    <div class="stats-number">180,200</div>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-purple mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Under Process</div>
-                                    <div class="stats-number">38,900</div>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-dark mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-comment-alt fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Rejected Form</div>
-                                    <div class="stats-number">3,988</div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-orange mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-file-alt fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Spam Form</div>
-                                    <div class="stats-number">20</div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-pink mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-exclamation-triangle fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Admission Dome</div>
-                                    <div class="stats-number">5</div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-12">
-                        <div class='row'>
-                            <?php $count = 0;
-                            foreach ($leadStatusWise as $status) :
-                                if ($count == count($color))
-                                    $count = 0;
-                            ?>
-                                <div class="col-xl-2 mb-2">
-                                    <!--begin::Stats Widget 10-->
-                                    <div class="card card-custom card-stretch gutter-b" style="border: 1px solid <?= $color[$count++] ?>; height:100%;">
-                                        <!--begin::Body-->
-                                        <div class="card-body p-0">
-                                            <div class="align-items-center justify-content-between px-3 py-2 flex-grow-1 " style="">
-
-                                                <div class="d-flex flex-column text-center">
-                                                    <span class="text-dark-75 font-weight-bolder font-size-h3"><?= $status['value'] ?? '0'; ?></span>
-                                                    <span class="text-muted font-weight-bold mt-2 text-center"><?= $status['category'] ?></span>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <!--end::Body-->
                                     </div>
-                                    <!--end::Stats Widget 10-->
                                 </div>
-
-                            <?php endforeach; ?>
-                        </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
+
+
                     <!-- Pie Chart -->
                     <script>
                         am5.ready(function() {
@@ -1070,106 +910,24 @@ const programs = <?= $programsJson ?>;
                     </div>
 
                     <div class="row gx-2 mb-20px">
+                        <?php $count = 0;
+                        foreach ($leadSourceWise as $source) :
+                            if ($count == count($color))
+                                $count = 0;
+                        ?>
+                            <div class="col-lg-2">
+                                <div class="widget widget-stats  mb-7px" style="background-color:<?= $color[$count++] ?>">
+                                    <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                                    <div class="stats-content">
+                                        <div class="stats-title"><?= $source['category'] ?></div>
+                                        <div class="stats-number"><?= $source['value'] ?? '0'; ?></div>
 
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-teal mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Open Student</div>
-                                    <div class="stats-number">7,842,900</div>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-blue mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Application Form</div>
-                                    <div class="stats-number">180,200</div>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-purple mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Under Process</div>
-                                    <div class="stats-number">38,900</div>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-dark mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-comment-alt fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Rejected Form</div>
-                                    <div class="stats-number">3,988</div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-orange mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-file-alt fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Spam Form</div>
-                                    <div class="stats-number">20</div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-pink mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-exclamation-triangle fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Admission Dome</div>
-                                    <div class="stats-number">5</div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-12">
-                        <div class='row'>
-                            <?php $count = 0;
-                            foreach ($leadSourceWise as $source) :
-                                if ($count == count($color))
-                                    $count = 0;
-                            ?>
-                                <div class="col-xl-2 mb-2">
-                                    <!--begin::Stats Widget 10-->
-                                    <div class="card card-custom card-stretch gutter-b" style="border: 1px solid <?= $color[$count++] ?>; height:100%;">
-                                        <!--begin::Body-->
-                                        <div class="card-body p-0">
-                                            <div class="align-items-center justify-content-between px-3 py-2 flex-grow-1 " style="">
-
-                                                <div class="d-flex flex-column text-center">
-                                                    <span class="text-dark-75 font-weight-bolder font-size-h3"><?= $source['value'] ?? '0'; ?></span>
-                                                    <span class="text-muted font-weight-bold mt-2 text-center"><?= $source['category'] ?></span>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <!--end::Body-->
                                     </div>
-                                    <!--end::Stats Widget 10-->
                                 </div>
-
-                            <?php endforeach; ?>
-                        </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
+
                     <!-- Pie Chart -->
                     <script>
                         am5.ready(function() {
@@ -1409,106 +1167,25 @@ const programs = <?= $programsJson ?>;
                     </div>
 
                     <div class="row gx-2 mb-20px">
+                        <?php $count = 0;
+                        foreach ($departmentWise as $dept) :
+                            if ($count == count($color))
+                                $count = 0;
+                        ?>
+                            <div class="col-lg-3">
+                                <div class="widget widget-stats  mb-7px" style="background-color:<?= $color[$count++] ?>">
+                                    <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                                    <div class="stats-content">
+                                        <div class="stats-title"><?= $dept['category'] ?></div>
+                                        <div class="stats-number"><?= $dept['value'] ?? '0'; ?></div>
 
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-teal mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Open Student</div>
-                                    <div class="stats-number">7,842,900</div>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-blue mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Application Form</div>
-                                    <div class="stats-number">180,200</div>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-purple mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Under Process</div>
-                                    <div class="stats-number">38,900</div>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-dark mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-comment-alt fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Rejected Form</div>
-                                    <div class="stats-number">3,988</div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-orange mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-file-alt fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Spam Form</div>
-                                    <div class="stats-number">20</div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-pink mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-exclamation-triangle fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Admission Dome</div>
-                                    <div class="stats-number">5</div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-12">
-                        <div class='row'>
-                            <?php $count = 0;
-                            foreach ($departmentWise as $dept) :
-                                if ($count == count($color))
-                                    $count = 0;
-                            ?>
-                                <div class="col-xl-2 mb-2">
-                                    <!--begin::Stats Widget 10-->
-                                    <div class="card card-custom card-stretch gutter-b" style="border: 1px solid <?= $color[$count++] ?>; height:100%;">
-                                        <!--begin::Body-->
-                                        <div class="card-body p-0">
-                                            <div class="align-items-center justify-content-between px-3 py-2 flex-grow-1 " style="">
-
-                                                <div class="d-flex flex-column text-center">
-                                                    <span class="text-dark-75 font-weight-bolder font-size-h3"><?= $dept['value'] ?? '0'; ?></span>
-                                                    <span class="text-muted font-weight-bold mt-2 text-center"><?= $dept['category'] ?></span>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <!--end::Body-->
                                     </div>
-                                    <!--end::Stats Widget 10-->
                                 </div>
-
-                            <?php endforeach; ?>
-                        </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
+
+
                     <!-- Pie Chart -->
                     <script>
                         am5.ready(function() {
@@ -1748,108 +1425,24 @@ const programs = <?= $programsJson ?>;
                     </div>
 
                     <div class="row gx-2 mb-20px">
+                        <?php $count = 0;
+                        foreach ($programWise as $program) :
+                            if ($count == count($color))
+                                $count = 0;
+                        ?>
+                            <div class="col-lg-2">
+                                <div class="widget widget-stats mb-7px" style="background-color:<?= $color[$count++] ?>">
+                                    <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                                    <div class="stats-content">
+                                        <div class="stats-title"><?= $program['category'] ?></div>
+                                        <div class="stats-number"><?= $program['value'] ?? '0'; ?></div>
 
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-teal mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Open Student</div>
-                                    <div class="stats-number">7,842,900</div>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-blue mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Application Form</div>
-                                    <div class="stats-number">180,200</div>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-purple mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Under Process</div>
-                                    <div class="stats-number">38,900</div>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-dark mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-comment-alt fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Rejected Form</div>
-                                    <div class="stats-number">3,988</div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-orange mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-file-alt fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Spam Form</div>
-                                    <div class="stats-number">20</div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-2">
-                            <div class="widget widget-stats bg-pink mb-7px">
-                                <div class="stats-icon stats-icon-lg"><i class="fa fa-exclamation-triangle fa-fw"></i></div>
-                                <div class="stats-content">
-                                    <div class="stats-title">Admission Dome</div>
-                                    <div class="stats-number">5</div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="col-lg-12">
-                        <div class='row'>
-                            <?php $count = 0;
-                            foreach ($programWise as $program) :
-                                if ($count == count($color))
-                                    $count = 0;
-                            ?>
-                                <div class="col-xl-2 mb-2">
-                                    <!--begin::Stats Widget 10-->
-                                    <div class="card card-custom card-stretch gutter-b" style="border: 1px solid <?= $color[$count++] ?>; height:100%;">
-                                        <!--begin::Body-->
-                                        <div class="card-body p-0">
-                                            <div class="align-items-center justify-content-between px-3 py-2 flex-grow-1 " style="">
-
-                                                <div class="d-flex flex-column text-center">
-                                                    <span class="text-dark-75 font-weight-bolder font-size-h3"><?= $program['value'] ?? '0'; ?></span>
-                                                    <span class="text-muted font-weight-bold mt-2 text-center"><?= $program['category'] ?></span>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <!--end::Body-->
                                     </div>
-                                    <!--end::Stats Widget 10-->
                                 </div>
-
-                            <?php endforeach; ?>
-                        </div>
-
+                            </div>
+                        <?php endforeach; ?>
                     </div>
+
                     <!-- Pie Chart -->
                     <script>
                         am5.ready(function() {
