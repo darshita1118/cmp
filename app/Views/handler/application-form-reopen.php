@@ -48,20 +48,14 @@ $query = $uri->getQuery();
             <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
             <li class="breadcrumb-item"><a href="javascript:;">By Self</a></li>
             <li class="breadcrumb-item active"> Reopen Process Application</li>
+            <div class="p-2">
+                <span class="badge bg-warning text-white rounded-pill fs-6"><?= $total_records ?? 0 ?></span>
+            </div>
         </ol>
 
-        <div class="mb-1 me-2">
-            <span class="text-white">Edit Application Form (Reopen) Totals: <?= $total_records ?? 0 ?></span>
-        </div>
-        <div class="card-toolbar">
-            <!--begin::Button-->
-            <a href="<?= base_url('handler/add-lead') ?>" class="btn btn-default btn-xs me-2 font-weight-bolder">
-                <span class="svg-icon svg-icon-md">
-                    <i class="fa fa-user-plus"></i>
-                </span>New Applicant</a>
-            <!--end::Button-->
-        </div>
+
         <div class="panel-heading-btn">
+            <a href="<?= base_url('handler/add-lead') ?>" class="btn btn-sm btn-icon btn-default"> <i class="fa fa-user-plus" data-bs-toggle="tooltip" data-bs-placement="left" title="New Applicant"></i></a>
             <a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
             <a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" title="Filter" aria-controls="offcanvasTop">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-right" viewBox="0 0 16 16">
@@ -76,20 +70,20 @@ $query = $uri->getQuery();
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body mt-md-3">
-
                     <form action="" class="row">
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Mobile No.</label>
                                 <input type="tel" name="mobile" class="form-control" placeholder="Search mobile no.." minlength="8" value="<?= isset($_GET['mobile']) ? $_GET['mobile'] : null ?>" maxlength="12">
                             </div>
-
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3"><label class="form-label">Date</label>
+                                <!-- html -->
                                 <div class="input-group" id="default-daterange">
-
-                                    <input type="text" name="default-daterange" class="form-control" value="" placeholder="click to select the date range">
+                                    <input type="text" name="default-daterange" class="form-control" value="" placeholder="click to select the date range" />
+                                    <input type="hidden" name="to" id="to" class="form-control" value="" />
+                                    <input type="hidden" name="from" id="from" class="form-control" value="" />
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
                             </div>
@@ -97,13 +91,12 @@ $query = $uri->getQuery();
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Source</label>
-                                <select name="source[]" id="source" multiple class="form-select zindex-tooltip">
+                                <select name="source[]" id="source" multiple class="form-select">
                                     <option value="">--Select--</option>
                                     <?php foreach ($sources as $source) : ?>
                                         <option value="<?= $source['source_id'] ?>" <?= (in_array($source['source_id'], $_GET['source'] ?? [])) ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
                                     <?php endforeach; ?>
                                 </select>
-
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -192,50 +185,8 @@ $query = $uri->getQuery();
             </tbody>
         </table>
 
-        <!-- script -->
-        <script>
-            var options = {
-                dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-lg-8 d-lg-block"<"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 me-0 me-md-3"l><"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 "B>><"col-lg-4 d-flex d-lg-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
-                buttons: [{
-                        extend: 'copy',
-                        className: 'btn-sm'
-                    },
-                    {
-                        extend: 'csv',
-                        className: 'btn-sm'
-                    },
-                    {
-                        extend: 'excel',
-                        className: 'btn-sm'
-                    },
-                    {
-                        extend: 'pdf',
-                        className: 'btn-sm'
-                    },
-                    {
-                        extend: 'print',
-                        className: 'btn-sm'
-                    }
-                ],
-                responsive: true,
-                colReorder: true,
-                keys: true,
-                rowReorder: true,
-                select: true
-            };
-
-            if ($(window).width() <= 767) {
-                options.rowReorder = false;
-                options.colReorder = false;
-            }
-            $('#data-table-combine').DataTable(options);
-        </script>
     </div>
 
-
-    <div class="hljs-wrapper">
-        <pre><code class="html" data-url="../assets/data/table-manage/buttons.json"></code></pre>
-    </div>
 
 </div>
 

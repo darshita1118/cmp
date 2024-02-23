@@ -36,11 +36,10 @@ function getStatusTime($leadId)
             <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
             <li class="breadcrumb-item"><a href="javascript:;">Leads</a></li>
             <li class="breadcrumb-item active">Self Assign Leads</li>
+            <div class="p-2">
+                <span class="badge bg-warning text-white rounded-pill fs-6"><?= $total_records ?? 0 ?></span>
+            </div>
         </ol>
-
-        <div class="mb-1 me-2">
-            <span class="text-white">Total Leads: <?= $total_records ?? 0 ?></span>
-        </div>
 
         <div class="panel-heading-btn">
             <a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
@@ -175,7 +174,8 @@ function getStatusTime($leadId)
                         <td><?= $lead['source_name'] ?></td>
 
                         <td class="text-center">
-                            <a href="<?= base_url('handler/lead-profile/' . $lead['lid']) ?>" class="btn btn-warning btn-icon btn-lg" title="Lead Profile"><i class="fa fa-pen-to-square ms-1"></i></a>
+                            <a href="<?= base_url('handler/lead-profile/' . $lead['lid']) ?>" class="btn btn-warning btn-icon btn-sm" title="Proceed Lead" data-bs-toggle="tooltip" data-bs-placement="left">
+                                <i class="fa fa-file-pen"></i></a>
                             </a>
                         </td>
 

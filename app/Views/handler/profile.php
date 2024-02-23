@@ -90,7 +90,6 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
 <link href="<?= base_url('assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css') ?>" rel="stylesheet" />
 <script src="<?= base_url('assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js') ?>"></script>
 
-
 <!-- date -->
 <link href=" <?= base_url('assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') ?>" rel="stylesheet" />
 
@@ -159,9 +158,6 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
         </div>
 
     </div>
-
-
-
     <div class="panel-body">
         <div class="profile">
             <div class="row gx-4">
@@ -274,13 +270,13 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                         <div class="card-body">
                                             <div class="d-flex flex-wrap">
                                                 <a href="https://web.whatsapp.com/send?phone=<?= trim($profileDetail['lead_country_code'] . $profileDetail['lead_mobile']) ?>" target="_blank" class="widget-icon rounded bg-success me-2  text-white text-decoration-none">
-                                                    <i class="fa-brands fa-whatsapp"></i>
+                                                    <img src="<?= base_url() ?>assets/img/svg/whatsapp.svg" alt="">
                                                 </a>
                                                 <a href="tel:<?= $profileDetail['lead_country_code'] . $profileDetail['lead_mobile'] ?>" class="widget-icon rounded bg-success text-white text-decoration-none me-2">
-                                                    <i class="fa fa-phone"></i>
+                                                    <img src="<?= base_url() ?>assets/img/svg/telephone.svg" alt="">
                                                 </a>
                                                 <div class="widget-icon rounded bg-success me-2  text-white text-decoration-none">
-                                                    <div data-bs-target="#modalmail" data-bs-toggle="modal"><i class="fa-solid fa-envelope fs-27px"></i></div>
+                                                    <div data-bs-target="#modalmail" data-bs-toggle="modal"><img src="<?= base_url() ?>assets/img/svg/envelope-arrow-up.svg" alt=""></div>
                                                     <div class="modal fade" id="modalmail">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
@@ -306,7 +302,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                                     </div>
                                                 </div>
                                                 <div class="widget-icon rounded bg-success me-2  text-white text-decoration-none">
-                                                    <div data-bs-target="#modalsms" data-bs-toggle="modal"><i class="fa-solid fa-comment-sms fs-30px"></i></div>
+                                                    <div data-bs-target="#modalsms" data-bs-toggle="modal"><img src="<?= base_url() ?>assets/img/svg/chat-quote.svg" alt=""></i></div>
 
                                                     <div class="modal fade" id="modalsms">
                                                         <div class="modal-dialog">
@@ -335,49 +331,165 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <a href="#" target="_blank" class="widget-icon rounded bg-success me-2  text-white text-decoration-none">
-                                                    <i class="fa fa-commenting"></i>
+                                                <a href="#" class="btn bg-warning me-2  text-white text-decoration-none toggle">
+                                                    <img src="<?= base_url() ?>assets/img/svg/stickies-fill.svg" alt=""> Key Notes
                                                 </a>
+                                                <style>
+                                                    /* Note box */
+                                                    .right-bottom {
+                                                        display: none;
+                                                        position: fixed;
+                                                        bottom: 20px;
+                                                        right: 20px;
+                                                        padding: 10px;
+                                                        z-index: 999;
+                                                        border-radius: 11px;
+                                                        background: #fff;
+                                                        box-shadow: 20px 20px 60px #bebebe,
+                                                            -20px -20px 60px #ffffff;
+                                                    }
+
+                                                    .chat-container {
+                                                        flex: 1;
+                                                        overflow-y: scroll;
+                                                        max-height: 50vh;
+                                                    }
+
+
+                                                    .send-button {
+                                                        border: none;
+                                                        background-color: #00acac;
+                                                        color: #fff;
+                                                        cursor: pointer;
+                                                        border-radius: 50%;
+                                                    }
+
+                                                    .message-container {
+                                                        margin-bottom: 20px;
+                                                    }
+
+                                                    .message {
+                                                        background-color: #f2f3f4;
+
+                                                        border-radius: 5px;
+                                                        padding: 10px;
+
+                                                    }
+
+                                                    .timestamp {
+                                                        color: #6c757d;
+                                                        font-size: 10px;
+                                                        margin: 5px 0 15px 10px;
+                                                    }
+
+                                                    .widget-input-container .widget-input-icon {
+                                                        padding: .375rem 0;
+                                                        margin-bottom: 10px;
+                                                    }
+
+                                                    .widget-input-container .widget-input-icon a {
+                                                        display: block;
+
+                                                        font-size: 13px;
+                                                        padding: 5px;
+                                                    }
+                                                </style>
+
+                                                <div class="col-8 col-md-3  right-bottom" id="target">
+
+                                                    <div class="modal-content">
+                                                        <!-- note Header -->
+                                                        <div class="modal-header border-bottom mb-3">
+
+                                                            <h5 class="text-success">
+                                                                <img src="<?= base_url() ?>assets/img/svg/sticky-fill_key.svg" alt="">
+                                                                &nbsp;Note
+                                                            </h5>
+                                                            <a type="button" class="text-success close-btn"><i class="fa fa-x"></i></a>
+                                                        </div>
+
+                                                        <!-- note Body -->
+                                                        <div class="modal-body">
+                                                            <div class="container-fluid chat-container">
+                                                                <div id="messageContainer" class="message-container"></div>
+                                                            </div>
+
+                                                            <!-- Chat-like Input and "Send" Button -->
+                                                            <div class="chat-input-container">
+                                                                <form action="" method="POST" name="">
+                                                                    <div class="widget-input-container">
+                                                                        <div class="widget-input-box">
+                                                                            <input type="text" id="messageInput" class="form-control chat-input" placeholder="Type your message...">
+                                                                        </div>
+                                                                        <div class="widget-input-icon"><a class="send-button text-success text-opacity-50" id="sendButton">
+                                                                                <img src="<?= base_url() ?>assets/img/svg/send-plus-fill.svg" alt="">
+
+                                                                            </a></div>
+                                                                    </div>
+
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div><!-- note box -->
+                                                <script>
+                                                    $(document).ready(function() {
+                                                        $(document).ready(function() {
+                                                            $(".toggle").click(function() {
+                                                                $("#target").fadeIn();
+                                                            });
+
+                                                            $(".close-btn").click(function() {
+                                                                $("#target").fadeOut();
+                                                            });
+                                                        });
+                                                        $("#sendButton").click(function() {
+                                                            var message = $("#messageInput").val();
+
+                                                            if (message.trim() !== "") {
+                                                                // Get the current date and time
+                                                                var timestamp = new Date().toLocaleString();
+
+                                                                // Create a new message element with timestamp
+                                                                var messageElement = $("<div class='message'>").text(message);
+                                                                var timestampElement = $("<div class='timestamp'>").text(timestamp);
+
+                                                                // Append the message and timestamp to the container
+                                                                $("#messageContainer").append(messageElement, timestampElement);
+
+                                                                // Clear the input field after sending
+                                                                $("#messageInput").val("");
+
+                                                                // Scroll to the bottom of the container
+                                                                $(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+                                                            }
+                                                        });
+                                                    });
+                                                </script>
+
+
+
+
+
+
+
+
+
+
                                             </div>
                                         </div>
                                         <hr>
                                         <h4 class="d-flex align-items-center mb-2">
-                                            <span class="iconify fs-24px me-2 text-body text-opacity-75" data-icon="solar:cardholder-bold-duotone"></span> More Actions & Information
+                                            <span class="iconify fs-24px me-2 text-body text-opacity-75" data-icon="solar:align-vertical-center-bold-duotone"></span> More Actions & Information
                                         </h4>
                                         <hr>
 
                                         <div class="card-body">
-                                            <div>
-                                                <div data-toggle="modal" data-target="#alternatecontact" class="d-flex align-items-center mb-2 px-2 py-2" style="cursor: pointer;background: #efefef; border-radius: 5px;">
-                                                    <!--begin::Symbol-->
-                                                    <div class="symbol symbol-35 symbol-light mr-4">
-                                                        <span class="symbol-label">
-                                                            <span class="svg-icon svg-icon-2x svg-icon-dark-50">
-                                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Home/Globe.svg-->
-                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                        <rect x="0" y="0" width="24" height="24"></rect>
-                                                                        <path d="M17,2 L19,2 C20.6568542,2 22,3.34314575 22,5 L22,19 C22,20.6568542 20.6568542,22 19,22 L17,22 L17,2 Z" fill="#000000" opacity="0.3"></path>
-                                                                        <path d="M4,2 L16,2 C17.6568542,2 19,3.34314575 19,5 L19,19 C19,20.6568542 17.6568542,22 16,22 L4,22 C3.44771525,22 3,21.5522847 3,21 L3,3 C3,2.44771525 3.44771525,2 4,2 Z M11.1176481,13.709585 C10.6725287,14.1547043 9.99251947,14.2650547 9.42948307,13.9835365 C8.86644666,13.7020183 8.18643739,13.8123686 7.74131803,14.2574879 L6.2303083,15.7684977 C6.17542087,15.8233851 6.13406645,15.8902979 6.10952004,15.9639372 C6.02219616,16.2259088 6.16377615,16.5090688 6.42574781,16.5963927 L7.77956724,17.0476658 C9.07965249,17.4810276 10.5130001,17.1426601 11.4820264,16.1736338 L15.4812434,12.1744168 C16.3714821,11.2841781 16.5921828,9.92415954 16.0291464,8.79808673 L15.3965752,7.53294436 C15.3725414,7.48487691 15.3409156,7.44099843 15.302915,7.40299777 C15.1076528,7.20773562 14.7910703,7.20773562 14.5958082,7.40299777 L13.0032662,8.99553978 C12.5581468,9.44065914 12.4477965,10.1206684 12.7293147,10.6837048 C13.0108329,11.2467412 12.9004826,11.9267505 12.4553632,12.3718698 L11.1176481,13.709585 Z" fill="#000000"></path>
-                                                                    </g>
-                                                                </svg>
-                                                                <!--end::Svg Icon-->
-                                                            </span>
-                                                        </span>
-                                                    </div>
-                                                    <!--end::Symbol-->
-                                                    <!--begin::Text-->
-                                                    <div class="d-flex flex-column flex-grow-1">
-                                                        <div class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">
-                                                            Alternate Contact</div>
-
-                                                    </div>
-                                                    <!--end::Text-->
-
-                                                </div>
-                                                <a data-bs-target="#modalaltrcont" data-bs-toggle="modal" class="btn btn-success mt-1 w-100">Address</a>
-                                                <a data-bs-target="#modalaltrcont" data-bs-toggle="modal" class="btn btn-default mt-1 w-100">Alternate Contact</a>
-                                                <a data-bs-target="#modaltrnld" data-bs-toggle="modal" class="btn btn-warning mt-1 w-100">Transfer Lead</a>
+                                            <div class="float-start">
+                                                <a data-bs-target="#modalaltrcont" style="text-align: start;" data-bs-toggle="modal" class="btn btn-success mt-1 w-80"><img src="<?= base_url() ?>assets/img/svg/house-add.svg" alt=""> Address</a>
+                                                <a data-bs-target="#modalaltrcont" style="text-align: start;" data-bs-toggle="modal" class="btn btn-default mt-1 w-80"><img src="<?= base_url() ?>assets/img/svg/person-lines-fill.svg" alt=""> Alternate Contact</a>
+                                                <a data-bs-target="#modaltrnld" style="text-align: start;" data-bs-toggle="modal" class="btn btn-warning mt-1 w-80"><img src="<?= base_url() ?>assets/img/svg/box-arrow-up-right.svg" alt=""> Transfer Lead</a>
                                             </div>
                                         </div>
                                     </div>
@@ -406,7 +518,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                                 <div class="timeline-content ">
                                                     <div class="timeline-header">
                                                         <div class="username">
-                                                            <a href="javascript:;">John Smith <i class="fa fa-check-circle text-blue ms-1"></i></a>
+                                                            <a href="javascript:;"><?= $name ?><i class="fa fa-check-circle text-blue ms-1"></i></a>
                                                             <div class="text-muted fs-12px"><span class="date">today</span>
                                                                 <span class="time">04:20</span> <i class="fa fa-globe-americas opacity-5 "></i>
                                                             </div>

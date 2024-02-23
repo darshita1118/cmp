@@ -45,11 +45,10 @@ $admissionStatus = [
             <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
             <li class="breadcrumb-item"><a href="javascript:;">By Self</a></li>
             <li class="breadcrumb-item active">Process Application</li>
+            <div class="p-2">
+                <span class="badge bg-warning text-white rounded-pill fs-6"><?= $total_records ?? 0 ?></span>
+            </div>
         </ol>
-
-        <div class="mb-1 me-2">
-            <span class="text-white">Applicant List Totals: <?= $total_records ?? 0 ?> </span>
-        </div>
 
         <div class="panel-heading-btn">
             <a href="<?= base_url('handler/add-lead') ?>" class="btn btn-sm btn-icon btn-default"> <i class="fa fa-user-plus" data-bs-toggle="tooltip" data-bs-placement="left" title="New Applicant"></i></a>
@@ -169,7 +168,7 @@ $admissionStatus = [
                         <td><?= $lead['source_name'] ?></td>
 
                         <td class="text-center">
-                            <a href="<?= base_url('handler/process-application/' . $lead['lead_id'] . '/' . $lead['sid']) ?>" class="btn btn-warning btn-icon btn-lg" title="Proceed Application">
+                            <a href="<?= base_url('handler/process-application/' . $lead['lead_id'] . '/' . $lead['sid']) ?>" class="btn btn-warning btn-icon btn-sm" title="Proceed Application">
                                 <i class="fa fa-file-pen ms-1"></i>
                             </a>
 
@@ -219,11 +218,6 @@ $admissionStatus = [
             }
             $('#data-table-combine').DataTable(options);
         </script>
-    </div>
-
-
-    <div class="hljs-wrapper">
-        <pre><code class="html" data-url="../assets/data/table-manage/buttons.json"></code></pre>
     </div>
 
 </div>
