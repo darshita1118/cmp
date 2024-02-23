@@ -53,13 +53,11 @@ $admissionStatus = [
         <div class="panel-heading-btn">
             <a href="<?= base_url('handler/add-lead') ?>" class="btn btn-sm btn-icon btn-default"> <i class="fa fa-user-plus" data-bs-toggle="tooltip" data-bs-placement="left" title="New Applicant"></i></a>
             <a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
-            <a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" title="Filter" aria-controls="offcanvasTop">
+            <a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" data-bs-toggle="tooltip" data-bs-placement="left" title="Filter" aria-controls="offcanvasTop">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-right" viewBox="0 0 16 16">
                     <path d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5m0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5m0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5"></path>
                 </svg>
             </a>
-
-
             <div class="offcanvas offcanvas-top ps-5 pe-5" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
                 <div class="offcanvas-header border-bottom">
                     <h5 id="offcanvasTopLabel">Filters</h5>
@@ -75,13 +73,22 @@ $admissionStatus = [
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3"><label class="form-label">Date</label>
-                                <!-- html -->
                                 <div class="input-group" id="default-daterange">
-                                    <input type="text" name="default-daterange" class="form-control" value="" placeholder="click to select the date range" />
-                                    <input type="hidden" name="to" id="to" class="form-control" value="" />
-                                    <input type="hidden" name="from" id="from" class="form-control" value="" />
+
+                                    <input type="text" name="default-daterange" class="form-control" value="" placeholder="click to select the date range">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Source</label>
+                                <select name="source[]" id="source" multiple class="form-select">
+                                    <option value="">--Select--</option>
+                                    <?php foreach ($sources as $source) : ?>
+                                        <option value="<?= $source['source_id'] ?>" <?= (in_array($source['source_id'], $_GET['source'] ?? [])) ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -129,15 +136,11 @@ $admissionStatus = [
 
     </div>
 
-
-
-
-
     <div class="panel-body">
         <table id="data-table-fixed-header" class="table table-striped table-bordered align-middle w-100 text-wrap cmp-table">
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>id</th>
                     <th>Name and Email</th>
                     <th>Mobile</th>
                     <th>SID/Password</th>
@@ -336,16 +339,6 @@ $admissionStatus = [
             $("#default-daterange input").val(
                 start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY")
             );
-            //date formate 2024-01-28
-            if (start.isValid() && end.isValid()) {
-                // Set the values in the HTML input fields
-                $("#to").val(start.format("YYYY-MM-D"));
-                $("#from").val(end.format("YYYY-MM-D"));
-            } else {
-                // Clear the input fields if dates are not valid
-                $("#from").val("");
-                $("#to").val("");
-            }
         });
     };
 
