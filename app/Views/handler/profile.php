@@ -223,21 +223,38 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                                         </tr>
                                                         <tr class="highlight">
                                                             <td class="field">Form Step</td>
+
+                                                            <?php if ($sidData['form_step'] <= 6) : ?>
+                                                                <td>
+                                                                    <div class="text-body text-opacity-60"> <?= $formStep[$sidData['form_step']] ?? '' ?>
+
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="<?= base_url('admin/process-application/' . $profileDetail['lid'] . '/' . $sidData['sid']) ?>" class="btn btn-sm btn-warning me-1 btn-icon" title="Next Step"> <i class="fa fa-file-pen"></i> Proceed Application</a>
+                                                                </td>
+                                                            <?php else : ?>
+                                                                <td>
+                                                                    <div class="text-body text-opacity-60"> <?= $formStep[$sidData['form_step']] ?? '' ?>
+
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="<?= base_url('admin/process-application/' . $profileDetail['lid'] . '/' . $sidData['sid']) ?>" class="btn btn-sm btn-warning me-1 btn-icon" title="Next Step"> <i class="fa fa-file-pen"></i> Application Under Process</a>
+                                                                </td>
+                                                            <?php endif; ?>
+                                                        <?php else : ?>
                                                             <td>
                                                                 <div class="text-body text-opacity-60"> <?= $formStep[$sidData['form_step']] ?? '' ?>
-                                                                    <?php if ($sidData['form_step'] <= 6) : ?>
-                                                                        <a href="<?= base_url('admin/process-application/' . $profileDetail['lid'] . '/' . $sidData['sid']) ?>" class="btn btn-sm btn-warning me-1 btn-icon" title="Next Step"> <i class="fa fa-file-pen"></i> Proceed Application</a>
-                                                                    <?php else : ?>
-                                                                        <a href="<?= base_url('admin/process-application/' . $profileDetail['lid'] . '/' . $sidData['sid']) ?>" class="btn btn-sm btn-warning me-1 btn-icon" title="Next Step"> <i class="fa fa-file-pen"></i> Application Under Process</a>
-                                                                    <?php endif; ?>
-                                                                <?php else : ?>
-                                                                    <a href="<?= base_url('admin/apply-now/' . $profileDetail['lid']) ?>" class="btn btn-sm btn-warning me-1 btn-icon" title="Next Step"> <i class="fa fa-file-pen"></i>Generate Sid</a>
-                                                                <?php endif; ?>
+
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <a href="#" class="btn btn-sm btn-warning me-1 btn-icon" title="Next Form Step"> <i class="fa fa-file-pen"></i></a>
+                                                                <a href="<?= base_url('admin/apply-now/' . $profileDetail['lid']) ?>" class="btn btn-sm btn-warning me-1 btn-icon" title="Next Step"> <i class="fa fa-file-pen"></i>Generate Sid</a>
                                                             </td>
+                                                        <?php endif; ?>
+
+
                                                         </tr>
                                                         <tr class="highlight">
                                                             <td class="field">Email</td>
@@ -263,42 +280,47 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                     <div class="col-md-6">
 
                                         <h4 class="d-flex align-items-center mb-2">
-                                            <span class="iconify fs-24px me-2 text-body text-opacity-75" data-icon="solar:call-chat-bold-duotone"></span> Contact
+                                            <span class="iconify fs-24px me-2 text-body text-opacity-75" data-icon="solar:call-chat-bold-duotone"></span> Contact To
                                         </h4>
                                         <hr>
 
                                         <div class="card-body">
                                             <div class="d-flex flex-wrap">
-                                                <a href="https://web.whatsapp.com/send?phone=<?= trim($profileDetail['lead_country_code'] . $profileDetail['lead_mobile']) ?>" target="_blank" class="widget-icon rounded bg-success me-2  text-white text-decoration-none">
+                                                <a href="https://web.whatsapp.com/send?phone=<?= trim($profileDetail['lead_country_code'] . $profileDetail['lead_mobile']) ?>" target="_blank" class="widget-icon rounded bg-success me-2  text-white text-decoration-none" title="Whatsapp">
                                                     <img src="<?= base_url() ?>assets/img/svg/whatsapp.svg" alt="">
                                                 </a>
-                                                <a href="tel:<?= $profileDetail['lead_country_code'] . $profileDetail['lead_mobile'] ?>" class="widget-icon rounded bg-success text-white text-decoration-none me-2">
+                                                <a href="tel:<?= $profileDetail['lead_country_code'] . $profileDetail['lead_mobile'] ?>" class="widget-icon rounded bg-success text-white text-decoration-none me-2" title="Phone Call">
                                                     <img src="<?= base_url() ?>assets/img/svg/telephone.svg" alt="">
                                                 </a>
                                                 <div class="widget-icon rounded bg-success me-2  text-white text-decoration-none">
                                                     <div data-bs-target="#modalmail" data-bs-toggle="modal"><img src="<?= base_url() ?>assets/img/svg/envelope-arrow-up.svg" alt=""></div>
                                                     <div class="modal fade" id="modalmail">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title text-dark">SEND Email</h5>
-                                                                    <button type="button" class="btn-close fs-4" data-bs-dismiss="modal"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="">
-                                                                        <label class="text-dark h4">Select Email Template</label>
-                                                                        <select class="form-select">...
-                                                                            <option selected>--Select Email Template-- </option>
-                                                                            <option value="1">Admin</option>
-                                                                            <option value="2">Handler</option>
-                                                                        </select>
+                                                        <form class="form" action="" method="post">
+                                                            <?= csrf_field() ?>
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title text-dark">SEND Email</h5>
+                                                                        <button type="button" class="btn-close fs-4" data-bs-dismiss="modal"></button>
                                                                     </div>
-                                                                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                                                                    <button type="button" class="btn btn-theme">Save changes</button>
+                                                                    <div class="modal-body">
+                                                                        <div class="">
+                                                                            <label class="text-dark h4">Select Email Template:</label>
+                                                                            <select class="form-select" id="email" name="email" onchange="getAttachment($(this).find(':selected').attr('data-attachment'))" required>
+                                                                                <option value="">--Select Email Template--</option>
+                                                                                <?php foreach ($emailTemplates as $email) : ?>
+                                                                                    <option data-attachment='<?= $email['et_have_attachment'] ?>' value="<?= $email['et_id'] ?>"><?= $email['et_name'] ?></option>
+                                                                                <?php endforeach; ?>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div id='attachment'></div>
+                                                                        <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                                                                        <button type="submit" name='btn' value="sendEmail" class="btn btn-theme">Save changes</button>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
 
-                                                        </div>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                                 <div class="widget-icon rounded bg-success me-2  text-white text-decoration-none">
@@ -311,29 +333,32 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                                                     <h5 class="modal-title text-dark">SEND SMS</h5>
                                                                     <button type="button" class="btn-close fs-4" data-bs-dismiss="modal"></button>
                                                                 </div>
-                                                                <div class="modal-body">
-                                                                    <div class="">
-                                                                        <label class="text-dark h4">Select SMS Template</label>
-                                                                        <select class="form-select">...
-                                                                            <option selected>--Select SMS Template-- </option>
-                                                                            <option value="1">Admin</option>
-                                                                            <option value="2">Handler</option>
-                                                                        </select>
+                                                                <form class="form" action="" method="post">
+                                                                    <?= csrf_field() ?>
+                                                                    <div class="modal-body">
+                                                                        <div class="">
+                                                                            <label class="text-dark h4">Select SMS Template</label>
+                                                                            <select id="sms" name="sms" class="form-select" required>
+                                                                                <option value="">--select SMS Template--</option>
+                                                                                <?php foreach ($smsTemplates as $sms) : ?>
+                                                                                    <option value="<?= $sms['st_id'] ?>"><?= $sms['st_name'] ?></option>
+                                                                                <?php endforeach; ?>
+                                                                            </select>
 
-                                                                        <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                                                                        <button type="button" class="btn btn-theme">Submit</button>
+                                                                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                                                                            <button type="submit" name='btn' value="sendSMS" class="btn btn-theme">Submit</button>
 
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-
+                                                                </form>
                                                             </div>
 
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <a href="#" class="btn bg-warning me-2  text-white text-decoration-none toggle">
+                                                <button class="btn bg-warning me-2  text-white text-decoration-none toggle">
                                                     <img src="<?= base_url() ?>assets/img/svg/stickies-fill.svg" alt=""> Key Notes
-                                                </a>
+                                                </button>
                                                 <style>
                                                     /* Note box */
                                                     .right-bottom {
@@ -403,7 +428,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
 
                                                             <h5 class="text-success">
                                                                 <img src="<?= base_url() ?>assets/img/svg/sticky-fill_key.svg" alt="">
-                                                                &nbsp;Note
+                                                                &nbsp;<?= $name ?>
                                                             </h5>
                                                             <a type="button" class="text-success close-btn"><i class="fa fa-x"></i></a>
                                                         </div>
@@ -416,15 +441,18 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
 
                                                             <!-- Chat-like Input and "Send" Button -->
                                                             <div class="chat-input-container">
-                                                                <form action="" method="POST" name="">
+                                                                <form action="" method="POST">
+                                                                    <?= csrf_field() ?>
                                                                     <div class="widget-input-container">
                                                                         <div class="widget-input-box">
-                                                                            <input type="text" id="messageInput" class="form-control chat-input" placeholder="Type your message...">
+                                                                            <input type="text" name='remarkMessage' id="messageInput" class="form-control chat-input" placeholder="Type your message...">
                                                                         </div>
-                                                                        <div class="widget-input-icon"><a class="send-button text-success text-opacity-50" id="sendButton">
+                                                                        <div class="widget-input-icon">
+                                                                            <button type="submit" name="btn" value="remark" class="send-button text-success text-opacity-50" id="sendButton">
                                                                                 <img src="<?= base_url() ?>assets/img/svg/send-plus-fill.svg" alt="">
 
-                                                                            </a></div>
+                                                                            </button>
+                                                                        </div>
                                                                     </div>
 
                                                                 </form>
@@ -470,13 +498,6 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
 
 
 
-
-
-
-
-
-
-
                                             </div>
                                         </div>
                                         <hr>
@@ -487,7 +508,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
 
                                         <div class="card-body">
                                             <div class="float-start">
-                                                <a data-bs-target="#modalaltrcont" style="text-align: start;" data-bs-toggle="modal" class="btn btn-success mt-1 w-80"><img src="<?= base_url() ?>assets/img/svg/house-add.svg" alt=""> Address</a>
+                                                <a data-bs-target="#modaladdress" style="text-align: start;" data-bs-toggle="modal" class="btn btn-success mt-1 w-80"><img src="<?= base_url() ?>assets/img/svg/house-add.svg" alt=""> Address</a>
                                                 <a data-bs-target="#modalaltrcont" style="text-align: start;" data-bs-toggle="modal" class="btn btn-default mt-1 w-80"><img src="<?= base_url() ?>assets/img/svg/person-lines-fill.svg" alt=""> Alternate Contact</a>
                                                 <a data-bs-target="#modaltrnld" style="text-align: start;" data-bs-toggle="modal" class="btn btn-warning mt-1 w-80"><img src="<?= base_url() ?>assets/img/svg/box-arrow-up-right.svg" alt=""> Transfer Lead</a>
                                             </div>
@@ -511,26 +532,35 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                 <div class="tab-content p-0">
                                     <div class="tab-pane fade show active" id="profile-post">
                                         <div class="timeline">
-                                            <div class="timeline-item">
-                                                <div class="timeline-icon">
-                                                    <a href="javascript:;">&nbsp;</a>
-                                                </div>
-                                                <div class="timeline-content ">
-                                                    <div class="timeline-header">
-                                                        <div class="username">
-                                                            <a href="javascript:;"><?= $name ?><i class="fa fa-check-circle text-blue ms-1"></i></a>
-                                                            <div class="text-muted fs-12px"><span class="date">today</span>
-                                                                <span class="time">04:20</span> <i class="fa fa-globe-americas opacity-5 "></i>
+                                            <?php foreach ($remarks as $rmk) :
+                                                $remarkTypes = ['Status', 'Source', 'Program', 'Personal Detail', 'Transfer', 'Address', 'Alternative or Contact', 'SMS Send', 'Email Send', 'Remark Message'];
+                                                $remarkIcon = ['flaticon-medal', '
+                                                    flaticon-customer', 'flaticon-clipboard', 'flaticon-clipboard', 'flaticon-more-v4', 'flaticon-map-location', 'flaticon2-phone', 'flaticon2-sms', 'flaticon2-mail', 'flaticon-interface-2'];
+                                                if ($rmk['handler_id'] == session('id')) :
+                                                    $handlername = 'You';
+                                                else :
+                                                    $handlername = getSinglehandler($rmk['handler_id']);
+                                                endif;
+                                            ?>
+                                                <div class="timeline-item">
+                                                    <div class="timeline-icon">
+                                                        <a href="javascript:;">&nbsp;</a>
+                                                    </div>
+                                                    <div class="timeline-content ">
+                                                        <div class="timeline-header">
+                                                            <div class="username">
+                                                                <a href="javascript:;"><?= $name ?><i class="fa fa-check-circle text-blue ms-1"></i></a>
+                                                                <div class="text-muted fs-12px"><span class="date"><?= date('h:i A l d M Y', strtotime($rmk['lr_created_at'])) ?></span>
+                                                                    <i class="fa fa-globe-americas opacity-5 "></i>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="timeline-body">
-                                                        <small> Enquery For: DIPLOMA</small><br>
-                                                        <small>lead status: Not Given</small><br>
-                                                        <small>Source Of Lead: : Apply Now</small><br>
+                                                        <div class="timeline-body">
+                                                            <small><?= $rmk['lr_remark'] ?></small>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            <?php endforeach; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -549,9 +579,6 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
 <!-- End Content -->
 
 
-
-
-
 <!-- Name Model -->
 <div class="modal fade" id="modalname">
     <div class="modal-dialog">
@@ -560,9 +587,10 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                 <h5 class="modal-title">Edit Name</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
-                <form method="post" action="">
-                    <?= csrf_field() ?>
+            <form method="post" action="">
+                <?= csrf_field() ?>
+                <div class="modal-body">
+
                     <div class="row">
                         <div class="flex-fill col-md-4">
                             <label for="firstname">First Name:</label>
@@ -577,12 +605,12 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                             <input type="text" id="lastname" name="lastname" class="form-control " placeholder="Enter last name" value="<?= old('lastname') ?? ($profileDetail['lead_last_name'] ?? '') ?>">
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                <button type="submit" name="btn" class="btn btn-theme" type="submit" value="update-name">Save Changes</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                    <button name="btn" class="btn btn-theme" type="submit" value="update-name">Save Changes</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -595,10 +623,9 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                 <h5 class="modal-title">Edit Program</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
-
-                <form class="form" method="post" action="">
-                    <?= csrf_field() ?>
+            <form class="form" method="post" action="">
+                <?= csrf_field() ?>
+                <div class="modal-body">
                     <div class="form-group">
                         <label for="program">Program:</label>
                         <select type="text" id="program" name="program" onchange="$('#level').val($(this).find(':selected').attr('data-level')); $('#dept').val($(this).find(':selected').attr('data-dept'));" class="form-control form-control-solid default-select2" required="">
@@ -611,19 +638,13 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                         <input type="hidden" name="dept" value="16" id="dept">
 
                     </div>
-                    <div class="text-body text-opacity-60">
-                        <div class="form-group">
-                            <label for="">&nbsp;</label>
 
-                            <button class="form-control btn btn-success btn-sm font-weight-bold" type="submit" name="btn" value="lead-program"><i class="fa fa-check"></i></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                <button type="submit" name="btn" class="btn btn-theme" type="submit" value="lead-program">Save Changes</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" name="btn" class="btn btn-theme" type="submit" value="lead-program">Save Changes</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -636,10 +657,11 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                 <h5 class="modal-title">Add Lead Status</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
-                <div class="status_lead">
-                    <form class="form" method="post" action="">
-                        <?= csrf_field() ?>
+            <form class="form" method="post" action="">
+                <?= csrf_field() ?>
+                <div class="modal-body">
+                    <div class="status_lead">
+
                         <td class="field">
                             <div class="form-group">
                                 <label for="status">Lead
@@ -654,22 +676,80 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                 </select>
 
                             </div>
-                        </td>
-                        <td>
-                            <div class="text-body text-opacity-60">
-                                <label for="">&nbsp;</label>
-                                <button class="form-control btn btn-success font-weight-bold btn-sm" name="btn" type="submit" value="update-status">
-                                    <i class="fa fa-check"></i>
-                                </button>
+                            <div id='getExtraField' class="col-lg-12">
+
                             </div>
+
                         </td>
-                    </form>
+                    </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" name="btn" class="btn btn-theme" type="submit" value="update-status">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Address Model -->
+<div class="modal fade" id="modaladdress">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Address</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                <button type="submit" name="btn" class="btn btn-theme" type="submit" value="lead-program">Save Changes</button>
-            </div>
+            <form method="post" action="">
+                <?= csrf_field() ?>
+                <div class="modal-body">
+
+                    <div class="row ">
+
+                        <!--end::Heading-->
+                        <div class="form-group col-lg-12">
+                            <label for="country">Country:</label>
+                            <select id="country" name="country" onchange="countrySelect(this.value)" class="form-control form-control-solid default-select2" required>
+                                <option value="">-- Select --</option>
+                                <?php foreach ($countries as $country) : ?>
+                                    <option value="<?= $country['name'] ?>" <?php if (old('country') || isset($address['la_country'])) : ?> <?= (old('country') ?? ($address['la_country']) ?? '') == $country['name'] ? 'selected' : null ?> <?php else : ?> <?= 'India' == $country['name'] ? 'selected' : null ?> <?php endif; ?>><?= $country['name'] ?> </option>
+                                <?php endforeach; ?>
+                            </select>
+
+                        </div>
+                        <div id="countryType" class="form-group col-lg-12 mb-0">
+
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label for="street_address">Street:</label>
+                            <input type="text" id="street_address" name="street_address" class="form-control" placeholder="Enter Street Address" value="<?= old('street_address') ?? ($address['la_street_address'] ?? '') ?>" required="">
+
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <label for="zipcode">PIN/ZIP Code:</label>
+                            <input type="tel" id="zipcode" name="zipcode" class="form-control" placeholder="Enter pin/zip code" value="<?= old('zipcode') ?? ($address['la_zipcode'] ?? '') ?>" required>
+
+                        </div>
+
+                        <?php if (session('addressError')) : ?>
+                            <fieldset class="col-lg-12 mx-auto">
+                                <div class="alert alert-danger">
+                                    <?php foreach (session('addressError') as $error) : ?>
+                                        <li><?= $error ?></li>
+                                    <?php endforeach; ?>
+                                </div>
+                            </fieldset>
+                        <?php endif; ?>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" name="btn" value="address-btn" class="btn btn-theme">Save changes</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -679,28 +759,35 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Alternet Contact</h5>
+                <h5 class="modal-title">Alternate Contact</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
-                <form method="post" action="">
-                    <?= csrf_field() ?>
-                    <div class="row">
-                        <div class="flex-fill col-md-6">
-                            <label for="firstname">Name:</label>
-                            <input type="text" id="firstname" name="firstname" class="form-control " placeholder="Enter first name" value="<?= old('firstname') ?? $profileDetail['lead_first_name'] ?>" required>
+            <form class="form" method="post" action="">
+                <?= csrf_field() ?>
+                <div class="modal-body">
+
+                    <div class="row ">
+
+                        <div class="form-group col-lg-12">
+                            <label for="tel">Mobile No.:</label>
+                            <input type="tel" name="alter_mobile" class="form-control" value="<?= (old('alter_mobile') ?? @$alternatives['ci_mobile']) ?? '' ?>" placeholder="Mobile No." required="" minlength="8" maxlength="12">
+
                         </div>
-                        <div class="flex-fill col-md-6">
-                            <label for="middlename">Number:</label>
-                            <input type="text" id="middlename" name="middlename" class="form-control " placeholder="Enter last name" value="<?= old('middlename') ?? ($profileDetail['lead_middle_name'] ?? '') ?>">
+                        <div class="form-group col-lg-12">
+                            <label for="email">Email:</label>
+                            <input type="email" id="zipcode" name="zipcode" class="form-control" id="email" name="alter_email" value="<?= (old('alter_email') ?? @$alternatives['ci_email']) ?? '' ?>" placeholder="Email" required="">
+
                         </div>
+
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                <button type="submit" name="btn" class="btn btn-theme" value="update-name">Save changes</button>
-            </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" name="btn" value="lead-alternative" class="btn btn-theme">Save changes</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -713,9 +800,11 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                 <h5 class="modal-title">Transfer Lead</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
-                <form method="post" action="">
-                    <?= csrf_field() ?>
+            <form class="form" method="post" action="">
+                <?= csrf_field() ?>
+                <div class="modal-body">
+
+
                     <div class="row">
                         <div class="flex-fill col-md-4">
                             <label for="handler">Choose Handler:</label>
@@ -727,24 +816,16 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                             </select>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                <button name='btn' type="submit" value="transfer" class="btn btn-theme" value="update-name">Save changes</button>
-            </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                    <button name='btn' type="submit" value="transfer" class="btn btn-theme" value="update-name">Transfer</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
 
 <script>
     $("#timepicker").timepicker();
