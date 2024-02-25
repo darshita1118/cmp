@@ -22,7 +22,6 @@ function getTLName($handler)
 <link href="<?= base_url('assets/plugins/datatables.net-colreorder-bs5/css/colReorder.bootstrap5.min.css') ?>" rel="stylesheet" />
 <link href="<?= base_url('assets/plugins/datatables.net-keytable-bs5/css/keyTable.bootstrap5.min.css') ?>" rel="stylesheet" />
 <link href="<?= base_url('assets/plugins/datatables.net-rowreorder-bs5/css/rowReorder.bootstrap5.min.css') ?>" rel="stylesheet" />
-<link href="<?= base_url('assets/plugins/datatables.net-select-bs5/css/select.bootstrap5.min.css') ?>" rel="stylesheet" />
 
 <script src="<?= base_url('assets/plugins/datatables.net/js/jquery.dataTables.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js') ?>"></script>
@@ -34,8 +33,6 @@ function getTLName($handler)
 <script src="<?= base_url('assets/plugins/datatables.net-keytable-bs5/js/keyTable.bootstrap5.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-rowreorder/js/dataTables.rowReorder.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-rowreorder-bs5/js/rowReorder.bootstrap5.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-select/js/dataTables.select.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-select-bs5/js/select.bootstrap5.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js') ?>"></script>
@@ -67,7 +64,6 @@ function getTLName($handler)
 				<div class="panel-heading-btn">
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="fa fa-lg fa-fw fa-sliders"></i></a>
-
 
 					<div class="offcanvas offcanvas-top ps-5 pe-5" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
 						<div class="offcanvas-header border-bottom">
@@ -173,7 +169,7 @@ function getTLName($handler)
 				<table id="data-table-combine" class="table table-striped table-bordered align-middle w-100 text-nowrap cmp-table">
 					<thead>
 						<tr>
-							<th><input type="checkbox" class="form-check-input" id="emailSelectAll" onclick="toggleAllCheckboxes()"></th>
+							<th><input type="checkbox" class="form-check-input" id="emailSelectAll" onclick="toggleAllCheckboxes(this)"></th>
 							<th width="1%">ID</th>
 							<th class="text-nowrap">Name</th>
 							<th class="text-nowrap">Email</th>
@@ -350,10 +346,10 @@ function getTLName($handler)
 </script>
 <!-- checkbox -->
 <script>
-	function toggleAllCheckboxes() {
+	function toggleAllCheckboxes(checkbox) {
 		var emailCheckboxes = $(".email-checkbox");
-		emailCheckboxes.prop("checked", $("#emailSelectAll").prop("checked"));
-		toggleRow(emailCheckboxes);
+		emailCheckboxes.prop("checked", checkbox.checked);
+		toggleRow(checkbox);
 		toggleDropdown();
 	}
 

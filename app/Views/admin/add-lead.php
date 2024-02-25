@@ -46,17 +46,19 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="mb-3">
-                                    <label class="form-label">Mobile No.</label>
-                                    <select class="" id="country_code" name="country_code" required="">
-                                        <?php foreach ($countries as $country) : ?>
 
+                            <div class="col-md-3 mb-3">
+
+                                <label class="form-label">Mobile No.</label>
+                                <div class="input-group ">
+                                    <select class="input-group-text" id="country_code" name="country_code" required="">
+                                        <?php foreach ($countries as $country) : ?>
                                             <option value="<?= $country['code'] ?>" <?= old('country_code') == $country['code'] ? 'selected' : ($country['code'] == '+91' ? 'selected' : null) ?>> (<?= $country['isoCode'] ?> ) <?= $country['code'] ?> </option>
                                         <?php endforeach; ?>
                                     </select>
+                                    <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Mobile No." required="" value="<?= old('mobile') ?? '' ?>" required data-validation-required-message="This Mobile No. field is required">
                                 </div>
-                                <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Mobile No." required="" value="<?= old('mobile') ?? '' ?>" required data-validation-required-message="This Mobile No. field is required"><span class="form-text text-muted">Please enter Mobile number</span>
+                                <span class="form-text text-muted">Please enter Mobile number</span>
                             </div>
 
                             <div class="col-md-3">

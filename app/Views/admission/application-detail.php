@@ -90,6 +90,12 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
         border-color: blue
     }
 
+    .form-label {
+        font-weight: 700;
+        font-size: 14px;
+        color: #8e9494;
+    }
+
     input:focus {
         border-color: green;
         outline: 1px dotted #000
@@ -104,39 +110,39 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
         margin-right: 10px;
     }
 
-    .form-control:focus {
+    .form-control p-0:focus {
         border-color: transparent;
         box-shadow: none;
     }
 </style>
 <!--4. Personal Details -->
 <div class="details active">
-    <div class="card border-0 mb-4 pb-3">
+    <div class="card border-0 mb-4 pb-3 container-fluid">
         <div class="card-header bg-none p-3 h3 m-0 d-flex align-items-center justify-content-between">
-            <span><span><i class="fa fa-shopping-bag fa-lg me-2 text-gray text-opacity-50"></i>
-                    Your Application under process</span>
-                <div class="panel panel-inverse panel-with-tabs">
-                    <div class="panel-heading p-0">
-                        <ul class="nav nav-tabs nav-tabs-inverse h6">
-                            <li class="nav-item">
-                                <a href="<?= base_url($controller . '/' . 'print/' . $lid . '/' . $sid) ?>" class="nav-link " onclick="printPage()">Print Form </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#nav-tab-1" data-bs-toggle="tab" class="nav-link active">Person Detail</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#nav-tab-2" data-bs-toggle="tab" class="nav-link ">Academics</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#nav-tab-3" data-bs-toggle="tab" class="nav-link ">Documents</a>
-                            </li>
-                        </ul>
-                    </div>
+            <span><i class="fa fa-file-lines fa-lg me-2 text-gray text-opacity-50"></i>
+                Your Application under process</span>
+            <div class="panel panel-inverse panel-with-tabs">
+                <div class="panel-heading p-0">
+                    <ul class="nav nav-tabs nav-tabs-inverse h6">
+                        <li class="nav-item">
+                            <a href="<?= base_url($controller . '/' . 'print/' . $lid . '/' . $sid) ?>" class="nav-link " onclick="printPage()">Print Form </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#nav-tab-1" data-bs-toggle="tab" class="nav-link active">Person Detail</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#nav-tab-2" data-bs-toggle="tab" class="nav-link ">Academics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#nav-tab-3" data-bs-toggle="tab" class="nav-link ">Documents</a>
+                        </li>
+                    </ul>
                 </div>
+            </div>
 
-                <div class="profile float-end">
-                    <img src="<?= base_url('assets/img/user/user-1.jpg') ?>" alt="">
-                </div>
+            <div class="profile float-end">
+                <img src="<?= base_url('assets/img/user/user-1.jpg') ?>" alt="">
+            </div>
 
         </div>
         <div class=" p-3 panel-body  ">
@@ -147,38 +153,37 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
                         <form action="">
                             <div class=" row">
                                 <div class="col-md-3 mb-3">
-
                                     <label class="form-label">Name</label>
-                                    <input class="form-control border-0 border-bottom" type="text" id="name" name="name" readonly value="<?= ucwords(trim(($sidInfo['si_first_name'] ?? '') . ' ' . ($sidInfo['si_middle_name'] ?? '') . ' ' . ($sidInfo['si_last_name'] ?? ''))); ?>" placeholder="Name" required="" />
+                                    <input class="form-control p-0  border-0 border-bottom " type="text" id="name" name="name" readonly value="<?= ucwords(trim(($sidInfo['si_first_name'] ?? '') . ' ' . ($sidInfo['si_middle_name'] ?? '') . ' ' . ($sidInfo['si_last_name'] ?? ''))); ?>" placeholder="Name" required="" />
 
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="" class="form-label">Mobile No.</label>
-                                    <input type="text" class="form-control border-0 border-bottom" readonly value="<?= $contact['sci_country_code'] ?? ''; ?>-<?= $contact['sci_mobile'] ?? ''; ?>" placeholder="Mobile No." required="" />
+                                    <input type="text" class="form-control p-0 border-0 border-bottom " readonly value="<?= $contact['sci_country_code'] ?? ''; ?>-<?= $contact['sci_mobile'] ?? ''; ?>" placeholder="Mobile No." required="" />
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">Email:</label>
-                                    <input class="form-control border-0 border-bottom" type="email" readonly id="email" name="email" value="<?= $contact['sci_email'] ?? ''; ?>" placeholder="Email" required="" />
+                                    <input class="form-control p-0 border-0 border-bottom" type="email" readonly id="email" name="email" value="<?= $contact['sci_email'] ?? ''; ?>" placeholder="Email" required="" />
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">Gender:</label>
-                                    <input class="form-control border-0 border-bottom" type="type" readonly id="gender" name="gender" class="form-control form-control-solid" value="<?php if (($other['gender'] ?? '') == 0) echo 'Male'; ?><?php if (($other['gender'] ?? '') == 1) echo 'Female'; ?><?php if (($other['gender'] ?? '') == 2) echo 'Other'; ?>" placeholder="Gender" required="" />
+                                    <input class="form-control p-0 border-0 border-bottom" type="type" readonly id="gender" name="gender" class="form-control p-0 form-control p-0-solid" value="<?php if (($other['gender'] ?? '') == 0) echo 'Male'; ?><?php if (($other['gender'] ?? '') == 1) echo 'Female'; ?><?php if (($other['gender'] ?? '') == 2) echo 'Other'; ?>" placeholder="Gender" required="" />
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="" class="form-label">DOB</label>
-                                    <input type="text" class="form-control border-0 border-bottom" readonly id="dob" name="dob" value="<?= $other['dob'] ?? ''; ?>" required="" />
+                                    <input type="text" class="form-control p-0 border-0 border-bottom" readonly id="dob" name="dob" value="<?= $other['dob'] ?? ''; ?>" required="" />
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">Category:</label>
-                                    <input class="form-control border-0 border-bottom" id="cat" name="cat" type="type" readonly placeholder="Category" value="<?= $studentCategory ?>" required="" />
+                                    <input class="form-control p-0 border-0 border-bottom" id="cat" name="cat" type="type" readonly placeholder="Category" value="<?= $studentCategory ?>" required="" />
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">Religion:</label>
-                                    <input class="form-control border-0 border-bottom" type="type" id="religion" name="religion" readonly value="<?= $studentReligion; ?>" required="" />
+                                    <input class="form-control p-0 border-0 border-bottom" type="type" id="religion" name="religion" readonly value="<?= $studentReligion; ?>" required="" />
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label"><?= $other['id_name'] ?? '' ?>:</label>
-                                    <input class="form-control border-0 border-bottom" type="text" readonly id="aadhar" name="aadhar" value="<?= $other['sip_no'] ?? ''; ?>" required="" />
+                                    <input class="form-control p-0 border-0 border-bottom" type="text" readonly id="aadhar" name="aadhar" value="<?= $other['sip_no'] ?? ''; ?>" required="" />
                                 </div>
                             </div>
                         </form>
@@ -189,35 +194,35 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
                             <div class="row">
                                 <div class="col-md-3 mb-3 form-group">
                                     <label class="form-label">Sid</label>
-                                    <input class="form-control border-0 border-bottom" type="text" id="sid" name="sid" readonly value="<?php echo $sid; ?>" placeholder="SID" required="" />
+                                    <input class="form-control p-0 border-0 border-bottom" type="text" id="sid" name="sid" readonly value="<?php echo $sid; ?>" placeholder="SID" required="" />
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">Enrollment No.</label>
-                                    <input class="form-control border-0 border-bottom" id="name" name="name" type="text" readonly value="<?php if (!empty($enrollment)) {
-                                                                                                                                                if ($enrollment['sen_status'] == 2) {
-                                                                                                                                                    echo 'PRO';
+                                    <input class="form-control p-0 border-0 border-bottom" id="name" name="name" type="text" readonly value="<?php if (!empty($enrollment)) {
+                                                                                                                                                    if ($enrollment['sen_status'] == 2) {
+                                                                                                                                                        echo 'PRO';
+                                                                                                                                                    }
+                                                                                                                                                    echo $enrollment['enrollment_no'] ?? '';
+                                                                                                                                                } else {
+                                                                                                                                                    echo 'Pending';
                                                                                                                                                 }
-                                                                                                                                                echo $enrollment['enrollment_no'] ?? '';
-                                                                                                                                            } else {
-                                                                                                                                                echo 'Pending';
-                                                                                                                                            }
-                                                                                                                                            ?>" required="" />
+                                                                                                                                                ?>" required="" />
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">Program</label>
-                                    <input class="form-control border-0 border-bottom" id="program" name="program" type="text" readonly placeholder="Program name" value="<?= $studentProgram; ?>" required="" />
+                                    <input class="form-control p-0 border-0 border-bottom" id="program" name="program" type="text" readonly placeholder="Program name" value="<?= $studentProgram; ?>" required="" />
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label" for="course_type"><?php if ($sidInfo['si_course_nature'] == 1) echo 'Stream';
                                                                                 elseif ($sidInfo['si_course_nature'] == 2) echo 'Subjects';
                                                                                 elseif ($sidInfo['si_course_nature'] == 3) echo 'Specialization';
                                                                                 else echo "Stream/Group/Specailization"; ?></label>
-                                    <input type="text" class="form-control border-0 border-bottom" value="<?php if ($sidInfo['si_course_nature'] == 1) : echo getGroup($sidInfo['si_stream_group']);
-                                                                                                            elseif ($sidInfo['si_course_nature'] == 2) : $stream = getStream($sidInfo['si_stream_group']);
-                                                                                                                echo !empty($stream) ? implode(',', array_column($stream, 'cs_name')) : 'Stream Not Selected Yet';
-                                                                                                            elseif ($sidInfo['si_course_nature'] == 3) : echo getSpecialization($sidInfo['si_stream_group']);
-                                                                                                            else : echo "Not Selected Yet";
-                                                                                                            endif; ?>" />
+                                    <input type="text" class="form-control p-0 border-0 border-bottom" value="<?php if ($sidInfo['si_course_nature'] == 1) : echo getGroup($sidInfo['si_stream_group']);
+                                                                                                                elseif ($sidInfo['si_course_nature'] == 2) : $stream = getStream($sidInfo['si_stream_group']);
+                                                                                                                    echo !empty($stream) ? implode(',', array_column($stream, 'cs_name')) : 'Stream Not Selected Yet';
+                                                                                                                elseif ($sidInfo['si_course_nature'] == 3) : echo getSpecialization($sidInfo['si_stream_group']);
+                                                                                                                else : echo "Not Selected Yet";
+                                                                                                                endif; ?>" />
                                 </div>
                             </div>
                         </form>
@@ -228,31 +233,31 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
                             <div class="row">
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">Father's Name</label>
-                                    <input class="form-control border-0 border-bottom" type="text" readonly id="father_name" name="father_name" value="<?= $parentDetail['father_name'] ?? ''; ?>" placeholder="Father Name" />
+                                    <input class="form-control p-0 border-0 border-bottom" type="text" readonly id="father_name" name="father_name" value="<?= $parentDetail['father_name'] ?? ''; ?>" placeholder="Father Name" />
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">Mother's Name</label>
-                                    <input class="form-control border-0 border-bottom" type="text" id="mother_name" name="mother_name" readonly value="<?= $parentDetail['mother_name'] ?? ''; ?>" placeholder="Father Name" />
+                                    <input class="form-control p-0 border-0 border-bottom" type="text" id="mother_name" name="mother_name" readonly value="<?= $parentDetail['mother_name'] ?? ''; ?>" placeholder="Father Name" />
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">Parent's Email:</label>
-                                    <input class="form-control border-0 border-bottom" type="text" id="parent_email" name="parent_email" readonly value="<?= $parentDetail['parent_email'] ?? ''; ?>" placeholder="Parent's Mobile" />
+                                    <input class="form-control p-0 border-0 border-bottom" type="text" id="parent_email" name="parent_email" readonly value="<?= $parentDetail['parent_email'] ?? ''; ?>" placeholder="Parent's Mobile" />
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="" class="form-label">Parent's Mobile No.</label>
-                                    <input type="text" id="parent_mobile" name="parent_mobile" class="form-control border-0 border-bottom" readonly value="<?= $parentDetail['parent_mobile'] ?? ''; ?>" placeholder="Parent's Mobile" />
+                                    <input type="text" id="parent_mobile" name="parent_mobile" class="form-control p-0 border-0 border-bottom" readonly value="<?= $parentDetail['parent_mobile'] ?? ''; ?>" placeholder="Parent's Mobile" />
                                 </div>
                                 <div class=" col-md-3 mb-3">
                                     <label class="form-label">Father's Annual Income</label>
-                                    <input class="form-control border-0 border-bottom" type="text" id="father_income" name="father_income" readonly value="<?= $parentDetail['father_income'] ?? ''; ?>" placeholder="Father's Annual Income" />
+                                    <input class="form-control p-0 border-0 border-bottom" type="text" id="father_income" name="father_income" readonly value="<?= $parentDetail['father_income'] ?? ''; ?>" placeholder="Father's Annual Income" />
                                 </div>
                                 <div class=" col-md-3 mb-3">
                                     <label class="form-label">mother's Annual Income</label>
-                                    <input class="form-control border-0 border-bottom" type="text" id="mother_income" name="mother_income" readonly value="<?= $parentDetail['mother_income'] ?? ''; ?>" placeholder="Mother's Annual Income" />
+                                    <input class="form-control p-0 border-0 border-bottom" type="text" id="mother_income" name="mother_income" readonly value="<?= $parentDetail['mother_income'] ?? ''; ?>" placeholder="Mother's Annual Income" />
                                 </div>
                                 <div class=" col-md-3 mb-3">
                                     <label class="form-label">Landline No.:</label>
-                                    <input class="form-control border-0 border-bottom" id="landline" name="landline" value="<?= $other['landline'] ?? ''; ?>" placeholder="Landline No." />
+                                    <input class="form-control p-0 border-0 border-bottom" id="landline" name="landline" value="<?= $other['landline'] ?? ''; ?>" placeholder="Landline No." />
                                 </div>
                             </div>
                         </form>
@@ -270,23 +275,23 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
                                         <label class="form-label">Street Name: </label>
-                                        <input class="form-control border-0 border-bottom" type="text" readonly name="street_address" value="<?= $row['street_address'] ?? ''; ?>" placeholder="House or Flat No, Street Name/Village Name" />
+                                        <input class="form-control p-0 border-0 border-bottom" type="text" readonly name="street_address" value="<?= $row['street_address'] ?? ''; ?>" placeholder="House or Flat No, Street Name/Village Name" />
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label class="form-label">Country</label>
-                                        <input class="form-control border-0 border-bottom" type="text" readonly name="country" value="<?= $row['country'] ?? ''; ?>" placeholder="Country" />
+                                        <input class="form-control p-0 border-0 border-bottom" type="text" readonly name="country" value="<?= $row['country'] ?? ''; ?>" placeholder="Country" />
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">State</label>
-                                        <input class="form-control border-0 border-bottom" type="text" readonly id="state" name="state" value="<?= $row['state'] ?? ''; ?>" />
+                                        <input class="form-control p-0 border-0 border-bottom" type="text" readonly id="state" name="state" value="<?= $row['state'] ?? ''; ?>" />
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label for="" class="form-label">District</label>
-                                        <input type="text" class="form-control border-0 border-bottom" readonly id="district" name="district" value="<?= $row['district'] ?? ''; ?>" />
+                                        <input type="text" class="form-control p-0 border-0 border-bottom" readonly id="district" name="district" value="<?= $row['district'] ?? ''; ?>" />
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="form-label">Pincode</label>
-                                        <input class="form-control border-0 border-bottom" type="text" readonly name="zipcode" value="<?= $row['zipcode'] ?? ''; ?>" />
+                                        <input class="form-control p-0 border-0 border-bottom" type="text" readonly name="zipcode" value="<?= $row['zipcode'] ?? ''; ?>" />
                                     </div>
                                 </div>
                             <?php $i++;

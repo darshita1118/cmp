@@ -24565,9 +24565,9 @@ a:focus {
 .widget.widget-stats .stats-title {
     position: relative;
     margin: 0 0 2px;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 600;
-    color: rgba(255, 255, 255, .7)
+    color: vs(--bs-light);
 }
 
 .widget-stats .stats-desc,
@@ -32464,15 +32464,15 @@ html .nvd3.nv-pie path {
     }
 } */
 
-/* .pace-top .pace .pace-progress {
+.pace-top .pace .pace-progress {
     top: 0 !important
-} */
+}
 
-/* .pace-top .pace .pace-activity {
+.pace-top .pace .pace-activity {
     top: 15px !important
-} */
+}
 
-/* .pace {
+.pace {
     background: 0 0;
     position: fixed;
     top: 0;
@@ -32488,17 +32488,17 @@ html .nvd3.nv-pie path {
     height: 3px;
     background: var(--bs-app-theme);
     transition: all .2s linear
-} */
+}
 
-/* @media (max-width:767.98px) {
+@media (max-width:767.98px) {
     .pace .pace-progress {
         top: 101px
     }
-} */
+}
 
-/* .pace .pace-progress .pace-progress-inner {
+.pace .pace-progress .pace-progress-inner {
     display: none
-} */
+}
 
 /* .pace .pace-activity {
     display: block;
@@ -32515,20 +32515,20 @@ html .nvd3.nv-pie path {
     border-radius: 40px
 } */
 
-/* @media (max-width:575.98px) {
+@media (max-width:575.98px) {
     .pace .pace-activity {
         top: 113px
     }
-} */
+}
 
-/* .pace.pace-inactive {
+.pace.pace-inactive {
     display: block;
     opacity: 0
 }
 
 .pace-done .pace.pace-inactive {
     display: block
-} */
+}
 
 .parsley-error {
     background-color: transparent !important;
