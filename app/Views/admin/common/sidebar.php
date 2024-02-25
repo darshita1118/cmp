@@ -90,20 +90,6 @@
 								<div class="menu-text">Self Assign Leads</div>
 							</a>
 						</div>
-						<div class="menu-item has-sub">
-							<a href="javascript:;" class="menu-link">
-								<div class="menu-text">Transfer Lead</div>
-								<div class="menu-caret"></div>
-							</a>
-							<div class="menu-submenu">
-								<div class="menu-item"><a href="<?= base_url('admin/under-construction') ?>" class="menu-link">
-										<div class="menu-text">To</div>
-									</a></div>
-								<div class="menu-item"><a href="<?= base_url('admin/under-construction') ?>" class="menu-link">
-										<div class="menu-text">Form</div>
-									</a></div>
-							</div>
-						</div>
 					</div>
 				</div>
 				<div class="menu-item has-sub">

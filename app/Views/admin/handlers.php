@@ -12,27 +12,180 @@ function getTLName($handler)
 	return $detail ? $detail['user_name'] . "<br><small>" . $detail['user_email'] . "</small>" : 'Individual';
 }
 ?>
-<!-- Include jQuery -->
-<script src="<?= base_url('assets/js/jquery-3.6.4.min.js') ?>"></script>
 
-<!-- required files -->
-<link href="<?= base_url('assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css') ?>" rel="stylesheet" />
-<link href="<?= base_url('assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') ?>" rel="stylesheet" />
+<!-- DataTables CSS -->
+<link href="<?= base_url() ?>assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+<link href="<?= base_url() ?>assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
+<link href="<?= base_url() ?>assets/plugins/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet" />
 <link href="<?= base_url('assets/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') ?>" rel="stylesheet" />
-<link href="<?= base_url('assets/plugins/datatables.net-colreorder-bs5/css/colReorder.bootstrap5.min.css') ?>" rel="stylesheet" />
-<link href="<?= base_url('assets/plugins/datatables.net-keytable-bs5/css/keyTable.bootstrap5.min.css') ?>" rel="stylesheet" />
-<link href="<?= base_url('assets/plugins/datatables.net-rowreorder-bs5/css/rowReorder.bootstrap5.min.css') ?>" rel="stylesheet" />
+<!-- daterange css -->
+<link href="<?= base_url() ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+<!-- End CSS -->
 
-<script src="<?= base_url('assets/plugins/datatables.net/js/jquery.dataTables.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-colreorder/js/dataTables.colReorder.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-colreorder-bs5/js/colReorder.bootstrap5.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-keytable/js/dataTables.keyTable.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-keytable-bs5/js/keyTable.bootstrap5.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-rowreorder/js/dataTables.rowReorder.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-rowreorder-bs5/js/rowReorder.bootstrap5.min.js') ?>"></script>
+
+<!-- content -->
+
+<div class="panel panel-inverse">
+
+	<div class="panel-heading">
+		<ol class="breadcrumb panel-title">
+			<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+			<li class="breadcrumb-item"><a href="javascript:;">Counselors</a></li>
+			<li class="breadcrumb-item active">All Counselors</li>
+			<div class="p-2">
+				<span class="badge bg-warning text-white rounded-pill fs-6"><?= $total_handlers ?? 0 ?></span>
+			</div>
+		</ol>
+
+		<div class="panel-heading-btn">
+			<a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
+			<a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" title="Filter" aria-controls="offcanvasTop">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-right" viewBox="0 0 16 16">
+					<path d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5m0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5m0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5"></path>
+				</svg>
+			</a>
+
+			<div class="offcanvas offcanvas-top ps-5 pe-5" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+				<div class="offcanvas-header border-bottom">
+					<h5 id="offcanvasTopLabel">Filters</h5>
+					<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+				</div>
+				<div class="offcanvas-body mt-md-3">
+					<form action="" class="row">
+						<div class="col-md-3">
+							<div class="mb-3">
+								<label class="form-label" for="mobile">Mobile No.</label>
+								<input name="mobile" class="form-control" type="tel" placeholder="Search mobile no.." minlength="8" value="<?= isset($_GET['mobile']) ? $_GET['mobile'] : null ?>" maxlength="12" />
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="mb-3"><label class="form-label">Date</label>
+								<div class="input-group" id="default-daterange">
+
+									<input type="text" name="default-daterange" class="form-control" value="" placeholder="click to select the date range">
+									<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="mb-3">
+								<label class="form-label">Status</label>
+								<select class="form-select">...
+									<option selected>--Select -- </option>
+									<option value="1">Admin</option>
+									<option value="2">Handler</option>
+
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="mb-3">
+								<label class="form-label">Source</label>
+								<select class="form-select">...
+									<option selected>--Select-- </option>
+									<option value="1">Suspended</option>
+									<option value="2">Active</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="mb-3">
+								<label class="form-label">Department</label>
+								<select class="form-select">...
+									<option selected>--Department-- </option>
+									<option value="1">Admin</option>
+									<option value="2">Handler</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="mb-3">
+								<label class="form-label">Program</label>
+								<select class="form-select">...
+									<option selected>--Chooes Program-- </option>
+									<option value="1">Suspended</option>
+									<option value="2">Active</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="mb-3">
+								<label class="form-label">Lead Nationality</label>
+								<select class="form-select">...
+									<option selected>--Select-- </option>
+									<option value="1">Suspended</option>
+									<option value="2">Active</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3 mt-md-4">
+							<button type="submit" class="btn btn-primary w-100px me-5px">Apply Filter</button>
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+
+
+
+	<div class="panel-body">
+		<table id="data-table-fixed-header" class="table table-striped table-bordered align-middle w-100 text-wrap ">
+			<thead>
+				<tr>
+					<th width="1%">ID</th>
+					<th class="text-nowrap">Name</th>
+					<th class="text-nowrap">Email</th>
+					<th class="text-nowrap">Mobile</th>
+					<th class="text-nowrap">Role</th>
+					<th>Team Leader</th>
+					<th>Status</th>
+					<th class="text-nowrap">Created At</th>
+					<th class="text-nowrap">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php $count = 1;
+				foreach ($handlers as $handler) : ?>
+					<tr class="odd gradeX">
+						<td width="1%" class="fw-bold"><?= $count ?></td>
+						<td><?= $handler['user_name'] ?></td>
+						<td><?= $handler['user_email'] ?></td>
+						<td><?= $handler['user_mobile'] ?></td>
+						<td><?= $handler['user_role'] == 1 ? 'Team Leader' : 'Handler' ?></td>
+						<td><?= getTLName($handler['lu_id']); ?></td>
+						<td><?= $handler['user_status'] == 1 ? 'Active' : 'Suspend' ?></td>
+						<td><?= date('l d M Y', strtotime($handler['user_created_at'])) ?></td>
+						<td nowrap="">
+							<a href="<?= base_url('admin/edit-handler/' . $handler['lu_id']) ?>" class="btn btn-icon btn-sm btn-primary me-1" data-bs-toggle="tooltip" title="Edit"><i class="fa fa-file-pen"></i></a>
+							<?php if ($handler['user_role'] == 1) : ?>
+								<a href="<?= base_url('admin/team-members/' . $handler['lu_id']) ?>" class="btn btn-icon btn-sm btn-warning" data-bs-toggle="tooltip" title="Team"><i class="fa fa-users"></i></a><?php endif; ?>
+							<a href="<?= base_url('admin/delete/handler/' . $handler['lu_id']) ?>" class="btn btn-icon btn-sm btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash-can"></i></a>
+
+						</td>
+					</tr>
+				<?php $count++;
+				endforeach; ?>
+			</tbody>
+		</table>
+	</div>
+
+</div>
+
+
+<!-- End Content -->
+
+<!-- DataTables JS -->
+<script src="<?= base_url() ?>assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net-fixedheader-bs5/js/fixedHeader.bootstrap5.min.js"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js') ?>"></script>
@@ -43,221 +196,92 @@ function getTLName($handler)
 <script src="<?= base_url('assets/plugins/pdfmake/build/vfs_fonts.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/jszip/dist/jszip.min.js') ?>"></script>
 
+<!-- Form Plugins Scripts -->
+<script src="<?= base_url() ?>assets/plugins/moment/min/moment.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- Select2 JS -->
+<script src="<?= base_url('assets/plugins/select2/dist/js/select2.min.js') ?>"></script>
+<script src="<?= base_url() ?>assets/plugins/select-picker/dist/picker.min.js"></script>
 
-<div class="row">
+<script>
+	// Other Select-Picker initialization
+	$('#department, #program, #status, #source, #nationality, #handler').picker({
+		search: true
+	});
+	$('#offcanvasTop .selectpicker').picker();
 
-	<div class="col-xl-12">
+	$(".default-select2").select2({
+		dropdownParent: $('#offcanvasTop')
+	});
 
-		<div class="panel panel-inverse">
+	// Datepicker JS
 
-			<div class="panel-heading">
-				<ol class="breadcrumb panel-title">
-					<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-					<li class="breadcrumb-item"><a href="javascript:;">Counselors</a></li>
-					<li class="breadcrumb-item active">All Counselors</li>
-				</ol>
+	var handleRenderDateRangePicker = function() {
+		$("#default-daterange").daterangepicker({
+			opens: "right",
+			format: "MM/DD/YYYY",
+			separator: " to ",
+			startDate: moment(),
+			endDate: moment(),
+			showDropdowns: true,
+			ranges: {
+				'Today': [moment(), moment()],
+				'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+				'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+				'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+				'This Month': [moment().startOf('month'), moment().endOf('month')],
+				'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+			},
+			locale: {
+				applyLabel: 'Apply',
+				cancelLabel: 'Cancel',
+				fromLabel: 'From',
+				toLabel: 'To',
+				customRangeLabel: 'Custom Range',
+				weekLabel: 'W',
+				daysOfWeek: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+				monthNames: [
+					"January", "February", "March", "April", "May", "June",
+					"July", "August", "September", "October", "November", "December"
+				],
+				firstDay: 1
+			}
+		}, function(start, end) {
+			$("#default-daterange input").val(
+				start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY")
+			);
+			// Check if start and end are valid dates
 
-				<div class="mb-1 me-2">
-					<span class="badge bg-green text-white">Total Counselors: <?= $total_handlers ?? 0 ?></span>
-				</div>
+			//date formate 2024-01-28
+			if (start.isValid() && end.isValid()) {
+				// Set the values in the HTML input fields
+				$("#to").val(start.format("YYYY-MM-D"));
+				$("#from").val(end.format("YYYY-MM-D"));
+			} else {
+				// Clear the input fields if dates are not valid
+				$("#from").val("");
+				$("#to").val("");
+			}
 
-				<div class="panel-heading-btn">
-					<a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
-					<a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="fa fa-lg fa-fw fa-sliders"></i></a>
+		});
+	};
 
-					<div class="offcanvas offcanvas-top ps-5 pe-5" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-						<div class="offcanvas-header border-bottom">
-							<h5 id="offcanvasTopLabel">Filters</h5>
-							<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-						</div>
-						<div class="offcanvas-body mt-md-3">
-							<form action="" class="row">
-								<div class="col-md-3">
-									<div class="mb-3">
-										<label class="form-label" for="mobile">Mobile No.</label>
-										<input name="mobile" class="form-control" type="tel" placeholder="Search mobile no.." minlength="8" value="<?= isset($_GET['mobile']) ? $_GET['mobile'] : null ?>" maxlength="12" />
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="mb-3"><label class="form-label">Date</label>
-										<div class="input-group" id="default-daterange">
+	var FormPlugins = (function() {
+		"use strict";
+		return {
+			init: function() {
+				handleRenderDateRangePicker();
+			},
+		};
+	})();
 
-											<input type="text" name="default-daterange" class="form-control" value="" placeholder="click to select the date range">
-											<div class="input-group-text"><i class="fa fa-calendar"></i></div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="mb-3">
-										<label class="form-label">Status</label>
-										<select class="form-select">...
-											<option selected>--Select -- </option>
-											<option value="1">Admin</option>
-											<option value="2">Handler</option>
-
-										</select>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="mb-3">
-										<label class="form-label">Source</label>
-										<select class="form-select">...
-											<option selected>--Select-- </option>
-											<option value="1">Suspended</option>
-											<option value="2">Active</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="mb-3">
-										<label class="form-label">Department</label>
-										<select class="form-select">...
-											<option selected>--Department-- </option>
-											<option value="1">Admin</option>
-											<option value="2">Handler</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="mb-3">
-										<label class="form-label">Program</label>
-										<select class="form-select">...
-											<option selected>--Chooes Program-- </option>
-											<option value="1">Suspended</option>
-											<option value="2">Active</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="mb-3">
-										<label class="form-label">Lead Nationality</label>
-										<select class="form-select">...
-											<option selected>--Select-- </option>
-											<option value="1">Suspended</option>
-											<option value="2">Active</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-3 mt-md-4">
-									<button type="submit" class="btn btn-primary w-100px me-5px">Apply Filter</button>
-								</div>
-							</form>
-
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="panel-body">
-				<div class="col-md-6 mb-2">
-					<div class="form-group hide d-flex flex-row align-items-center" data-email-action="">
-						<div class="d-flex align-items-center me-3">
-							<label for="" class="h5 me-3">Action</label>
-							<select class="form-select " required="">
-								<option selected>--Select--</option>
-								<option value="4">Active</option>
-								<option value="">Suspend</option>
-								<option value="">Change Password</option>
-							</select>
-						</div>
-						<!-- <div class="d-flex align-items-center me-3">
-					<label for="" class="h5 me-3">Password</label>
-					<input type="password" class="form-control" name="" placeholder="Password">
-				</div> -->
-						<a href="" class="btn btn-info ms-3">Submit</a>
-					</div>
-				</div>
-				<table id="data-table-combine" class="table table-striped table-bordered align-middle w-100 text-nowrap cmp-table">
-					<thead>
-						<tr>
-							<th><input type="checkbox" class="form-check-input" id="emailSelectAll" onclick="toggleAllCheckboxes(this)"></th>
-							<th width="1%">ID</th>
-							<th class="text-nowrap">Name</th>
-							<th class="text-nowrap">Email</th>
-							<th class="text-nowrap">Mobile</th>
-							<th class="text-nowrap">Role</th>
-							<th>Team Leader</th>
-							<th>Status</th>
-							<th class="text-nowrap">Created At</th>
-							<th class="text-nowrap">Actions</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php $count = 1;
-						foreach ($handlers as $handler) : ?>
-							<tr class="odd gradeX">
-								<td><input type="checkbox" class="form-check-input email-checkbox" onclick="toggleRow(this)"></td>
-								<td width="1%" class="fw-bold"><?= $count ?></td>
-								<td><?= $handler['user_name'] ?></td>
-								<td><a href="mailto:<?= $handler['user_email'] ?>"><?= $handler['user_email'] ?></a></td>
-								<td><a href="tel:<?= $handler['user_mobile'] ?>"><?= $handler['user_mobile'] ?></a></td>
-								<td><?= $handler['user_role'] == 1 ? 'Team Leader' : 'Handler' ?></td>
-								<td><?= getTLName($handler['lu_id']); ?></td>
-								<td><?= $handler['user_status'] == 1 ? 'Active' : 'Suspend' ?></td>
-								<td><?= date('l d M Y', strtotime($handler['user_created_at'])) ?></td>
-								<td nowrap="">
-									<a href="<?= base_url('admin/edit-handler/' . $handler['lu_id']) ?>" class="btn btn-sm btn-primary me-1">Edit</a>
-									<?php if ($handler['user_role'] == 1) : ?>
-										<a href="<?= base_url('admin/team-members/' . $handler['lu_id']) ?>" class="btn btn-sm btn-warning">Team</a><?php endif; ?>
-									<a href="<?= base_url('admin/delete/handler/' . $handler['lu_id']) ?>" class="btn btn-sm btn-danger">Delete</a>
-
-								</td>
-							</tr>
-						<?php $count++;
-						endforeach; ?>
-					</tbody>
-				</table>
-
-				<!-- script -->
-				<script>
-					var options = {
-						dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-lg-8 d-lg-block"<"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 me-0 me-md-3"l><"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 "B>><"col-lg-4 d-flex d-lg-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
-						buttons: [{
-								extend: 'copy',
-								className: 'btn-sm'
-							},
-							{
-								extend: 'csv',
-								className: 'btn-sm'
-							},
-							{
-								extend: 'excel',
-								className: 'btn-sm'
-							},
-							{
-								extend: 'pdf',
-								className: 'btn-sm'
-							},
-							{
-								extend: 'print',
-								className: 'btn-sm'
-							}
-						],
-						responsive: true,
-						colReorder: true,
-						keys: true,
-						rowReorder: true,
-						select: true
-					};
-
-					if ($(window).width() <= 767) {
-						options.rowReorder = false;
-						options.colReorder = false;
-					}
-					$('#data-table-combine').DataTable(options);
-				</script>
-			</div>
-
-
-			<div class="hljs-wrapper">
-				<pre><code class="html" data-url="../assets/data/table-manage/buttons.json"></code></pre>
-			</div>
-
-		</div>
-
-	</div>
-
-</div>
-
+	$(document).ready(function() {
+		FormPlugins.init();
+		$(document).on("theme-reload", function() {
+			handleRenderColorpicker();
+		});
+	});
+</script>
 <script>
 	$('.checkable').change(function() {
 		var set = $(this).closest('table').find('td:first-child .checkable');
@@ -342,25 +366,5 @@ function getTLName($handler)
 		} else {
 			$('#actionOption').html('');
 		}
-	}
-</script>
-<!-- checkbox -->
-<script>
-	function toggleAllCheckboxes(checkbox) {
-		var emailCheckboxes = $(".email-checkbox");
-		emailCheckboxes.prop("checked", checkbox.checked);
-		toggleRow(checkbox);
-		toggleDropdown();
-	}
-
-	function toggleRow(row) {
-		var checkbox = $(row).find('.email-checkbox');
-		checkbox.prop('checked', !checkbox.prop('checked'));
-		toggleDropdown();
-	}
-
-	function toggleDropdown() {
-		var dropdown = $('[data-email-action=""]');
-		dropdown.toggleClass('hide', $(".email-checkbox:checked").length === 0);
 	}
 </script>

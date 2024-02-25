@@ -16,19 +16,16 @@ function getStatusTime($leadId)
 
 
 <!-- DataTables CSS -->
-<link href="<?= base_url('assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css') ?>" rel="stylesheet" />
-<link href="<?= base_url('assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') ?>" rel="stylesheet" />
+<link href="<?= base_url() ?>assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+<link href="<?= base_url() ?>assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
+<link href="<?= base_url() ?>assets/plugins/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet" />
 <link href="<?= base_url('assets/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') ?>" rel="stylesheet" />
-<link href="<?= base_url('assets/plugins/datatables.net-select-bs5/css/select.bootstrap5.min.css') ?>" rel="stylesheet" />
-
+<!-- daterange css -->
 <link href="<?= base_url() ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
-
-<link href="<?= base_url() ?>assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
-
-<link href="<?= base_url() ?>assets/plugins/select-picker/dist/picker.min.css" rel="stylesheet" />
+<!-- End CSS -->
 
 
-
+<!-- Content -->
 <div class="panel panel-inverse">
 
     <div class="panel-heading">
@@ -36,16 +33,19 @@ function getStatusTime($leadId)
             <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
             <li class="breadcrumb-item"><a href="javascript:;">Leads</a></li>
             <li class="breadcrumb-item active">Unallocated Leads</li>
+            <div class="p-2">
+                <span class="badge bg-warning text-white rounded-pill fs-6"><?= $total_leads ?? 0 ?></span>
+            </div>
         </ol>
 
-        <div class="mb-1 me-2">
-            <span class="text-white">Total Leads: <?= $total_leads ?? 0 ?></span>
-        </div>
 
         <div class="panel-heading-btn">
             <a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
-            <a href="javascript:;" class="btn btn-sm btn-icon btn-warning" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="fa fa-lg fa-fw fa-sliders"></i></a>
-
+            <a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" title="Filter" aria-controls="offcanvasTop">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-right" viewBox="0 0 16 16">
+                    <path d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5m0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5m0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5"></path>
+                </svg>
+            </a>
 
             <div class="offcanvas offcanvas-top ps-5 pe-5" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
                 <div class="offcanvas-header border-bottom">
@@ -131,7 +131,7 @@ function getStatusTime($leadId)
     </div>
 
     <div class="panel-body">
-        <table id="data-table-combine" class="table table-striped table-bordered align-middle w-100 text-wrap cmp-table">
+        <table id="data-table-fixed-header" class="table table-striped table-bordered align-middle w-100 text-wrap ">
             <thead>
                 <tr>
                     <th width="1%">ID</th>
@@ -170,58 +170,20 @@ function getStatusTime($leadId)
                 endforeach; ?>
             </tbody>
         </table>
-
-        <!-- script -->
-        <script>
-            var options = {
-                dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-lg-8 d-lg-block"<"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 me-0 me-md-3"l><"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 "B>><"col-lg-4 d-flex d-lg-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
-                buttons: [{
-                        extend: 'copy',
-                        className: 'btn-sm'
-                    },
-                    {
-                        extend: 'csv',
-                        className: 'btn-sm'
-                    },
-                    {
-                        extend: 'excel',
-                        className: 'btn-sm'
-                    },
-                    {
-                        extend: 'pdf',
-                        className: 'btn-sm'
-                    },
-                    {
-                        extend: 'print',
-                        className: 'btn-sm'
-                    }
-                ],
-                responsive: true,
-                colReorder: true,
-                keys: true,
-                rowReorder: true,
-                select: true
-            };
-
-            if ($(window).width() <= 767) {
-                options.rowReorder = false;
-                options.colReorder = false;
-            }
-            $('#data-table-combine').DataTable(options);
-        </script>
     </div>
 
 </div>
 
 
+<!-- End Content -->
 
 <!-- DataTables JS -->
-<script src="<?= base_url('assets/plugins/datatables.net/js/jquery.dataTables.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-select/js/dataTables.select.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-select-bs5/js/select.bootstrap5.min.js') ?>"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/datatables.net-fixedheader-bs5/js/fixedHeader.bootstrap5.min.js"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js') ?>"></script>
@@ -232,59 +194,19 @@ function getStatusTime($leadId)
 <script src="<?= base_url('assets/plugins/pdfmake/build/vfs_fonts.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/jszip/dist/jszip.min.js') ?>"></script>
 
+<!-- Form Plugins Scripts -->
+<script src="<?= base_url() ?>assets/plugins/moment/min/moment.min.js"></script>
+<script src="<?= base_url() ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
 <!-- Select2 JS -->
 <script src="<?= base_url('assets/plugins/select2/dist/js/select2.min.js') ?>"></script>
 <script src="<?= base_url() ?>assets/plugins/select-picker/dist/picker.min.js"></script>
 
-<!-- Form Plugins Scripts -->
-<script src="<?= base_url() ?>assets/plugins/moment/min/moment.min.js"></script>
-<script src="<?= base_url() ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-<!--Code Script -->
 <script>
-    var options = {
-        dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-lg-8 d-lg-block"<"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 me-0 me-md-3"l><"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 "B>><"col-lg-4 d-flex d-lg-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
-        buttons: [{
-                extend: 'copy',
-                className: 'btn-sm'
-            },
-            {
-                extend: 'csv',
-                className: 'btn-sm'
-            },
-            {
-                extend: 'excel',
-                className: 'btn-sm'
-            },
-            {
-                extend: 'pdf',
-                className: 'btn-sm'
-            },
-            {
-                extend: 'print',
-                className: 'btn-sm'
-            }
-        ],
-        responsive: true,
-        keys: true,
-        select: true,
-        fixedColumns: true,
-        paging: true,
-        scrollCollapse: true,
-        scrollY: '300px'
-    };
-
-    if ($(window).width() <= 767) {
-        options.rowReorder = false;
-        options.colReorder = false;
-    }
-
-    $('#data-table-combine').DataTable(options);
-</script>
-<script>
-    $('#program,#status,#department,#source,#nationality').picker({
+    // Other Select-Picker initialization
+    $('#department, #program, #status, #source, #nationality, #handler').picker({
         search: true
     });
+    $('#offcanvasTop .selectpicker').picker();
 
     $(".default-select2").select2({
         dropdownParent: $('#offcanvasTop')
@@ -326,6 +248,19 @@ function getStatusTime($leadId)
             $("#default-daterange input").val(
                 start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY")
             );
+            // Check if start and end are valid dates
+
+            //date formate 2024-01-28
+            if (start.isValid() && end.isValid()) {
+                // Set the values in the HTML input fields
+                $("#to").val(start.format("YYYY-MM-D"));
+                $("#from").val(end.format("YYYY-MM-D"));
+            } else {
+                // Clear the input fields if dates are not valid
+                $("#from").val("");
+                $("#to").val("");
+            }
+
         });
     };
 
@@ -345,9 +280,3 @@ function getStatusTime($leadId)
         });
     });
 </script>
-
-<style>
-    .daterangepicker {
-        z-index: 9999 !important;
-    }
-</style>
