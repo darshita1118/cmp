@@ -219,44 +219,7 @@ $query = $uri->getQuery();
 <script src="<?= base_url('assets/plugins/select2/dist/js/select2.min.js') ?>"></script>
 <script src="<?= base_url() ?>assets/plugins/select-picker/dist/picker.min.js"></script>
 
-<!--Code Script -->
-<script>
-    var options = {
-        dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-lg-8 d-lg-block"<"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 me-0 me-md-3"l><"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 "B>><"col-lg-4 d-flex d-lg-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
-        buttons: [{
-                extend: 'copy',
-                className: 'btn-sm'
-            },
-            {
-                extend: 'csv',
-                className: 'btn-sm'
-            },
-            {
-                extend: 'excel',
-                className: 'btn-sm'
-            },
-            {
-                extend: 'pdf',
-                className: 'btn-sm'
-            },
-            {
-                extend: 'print',
-                className: 'btn-sm'
-            }
-        ],
-        keys: true,
-        select: true,
-        paging: true,
-        lengthMenu: [20, 40, 60],
-        fixedHeader: {
-            header: true,
-            headerOffset: $('#header').height()
-        },
-        responsive: true
-    };
 
-    $('#data-table-fixed-header').DataTable(options);
-</script>
 <script>
     // Select-Picker
     $('#program,#status,#handlers,#source,#nationality').picker({
@@ -323,9 +286,3 @@ $query = $uri->getQuery();
         });
     });
 </script>
-
-<style>
-    .daterangepicker {
-        z-index: 9999 !important;
-    }
-</style>
