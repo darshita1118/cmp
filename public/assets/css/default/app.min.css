@@ -1,15 +1,8 @@
 @charset "UTF-8";
-/*!
- * Color Admin v5.3.2 (https://seantheme.com/color-admin/)
- * Copyright 2023 SeanTheme
- */
+
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);
 
-/*!
- * Bootstrap  v5.3.2 (https://getbootstrap.com/)
- * Copyright 2011-2023 The Bootstrap Authors
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
+
 :root,
 [data-bs-theme=light] {
     --bs-default: #e9ecef;
@@ -24473,6 +24466,7 @@ a:focus {
     position: relative;
     color: #fff;
     padding: .9375rem;
+    height: 90%;
     border-radius: 4px
 }
 
@@ -42349,7 +42343,7 @@ a.editable-click:hover {
 .offcanvas.show,
 .offcanvas.showing {
     visibility: visible;
-    height: 350px;
+    height: 80%;
 }
 
 @media screen and (max-width:786px) {
