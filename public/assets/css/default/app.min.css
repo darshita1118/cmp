@@ -42343,7 +42343,7 @@ a.editable-click:hover {
 .offcanvas.show,
 .offcanvas.showing {
     visibility: visible;
-    height: 80%;
+    height: fit-content;
 }
 
 @media screen and (max-width:786px) {
