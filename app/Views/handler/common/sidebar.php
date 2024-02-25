@@ -6,7 +6,7 @@ use function App\Helpers\handlerStatusReport;
 $sideMenuStatusReports = handlerReportStatusWise(session('year'), session('db_priffix') . '_', session('suffix'), session('id'));
 
 $svgs = [
-	'<span class="svg-icon svg-icon-warning mr-5">
+    '<span class="svg-icon svg-icon-warning mr-5">
 		<span class="svg-icon svg-icon-lg">
 			<!--begin::Svg Icon | path:assets/media/svg/icons/Home/Library.svg-->
 			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -24,7 +24,7 @@ $svgs = [
 			<!--end::Svg Icon-->
 		</span>
 	</span>',
-	'<span class="svg-icon svg-icon-success mr-5">
+    '<span class="svg-icon svg-icon-success mr-5">
 		<span class="svg-icon svg-icon-lg">
 			<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Write.svg-->
 			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -44,7 +44,7 @@ $svgs = [
 			<!--end::Svg Icon-->
 		</span>
 	</span>',
-	'<span class="svg-icon svg-icon-danger mr-5">
+    '<span class="svg-icon svg-icon-danger mr-5">
 		<span class="svg-icon svg-icon-lg">
 			<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group-chat.svg-->
 			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -62,7 +62,7 @@ $svgs = [
 			<!--end::Svg Icon-->
 		</span>
 	</span>',
-	'<span class="svg-icon svg-icon-info mr-5">
+    '<span class="svg-icon svg-icon-info mr-5">
 		<span class="svg-icon svg-icon-lg">
 			<!--begin::Svg Icon | path:assets/media/svg/icons/General/Attachment2.svg-->
 			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -97,279 +97,311 @@ $svgs = [
 ];
 
 $svgClass = [
-	'info',
-	'primary',
-	'indigo',
-	'secondary',
+    'info',
+    'primary',
+    'indigo',
+    'secondary',
+    'dark',
+    'info',
+    'primary',
+    'indigo',
+    'secondary',
+    'dark',
+    'info',
+    'primary',
+    'indigo',
+    'secondary',
+    'dark',
+    'info',
+    'primary',
+    'indigo',
+    'secondary',
+    'dark',
 ];
 
 $svgiconClass = [
-	'globe',
-	'blender-phone',
-	'deezer',
-	'renren',
+    'globe',
+    'blender-phone',
+    'deezer',
+    'renren',
+    'globe',
+    'globe',
+    'blender-phone',
+    'deezer',
+    'renren',
+    'globe',
+    'globe',
+    'blender-phone',
+    'deezer',
+    'renren',
+    'globe',
+    'globe',
+    'blender-phone',
+    'deezer',
+    'renren',
+    'globe',
 ];
 
 ?>
 <!-- App Body Start -->
 <div id="app" class="app app-header-fixed app-sidebar-fixed app-without-sidebar app-with-top-menu">
-	<!-- header -->
-	<div id="header" class="app-header">
-		<div class="navbar-header">
-			<a href="<?= base_url('handler/welcome') ?>" class="navbar-brand"><span class="navbar-logo"></span> <b class="me-3px">LDM</b>
-				Admin</a>
-			<button type="button" class="navbar-mobile-toggler" data-toggle="app-top-menu-mobile">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
+    <!-- header -->
+    <div id="header" class="app-header">
+        <div class="navbar-header">
+            <a href="<?= base_url('handler/welcome') ?>" class="navbar-brand"><span class="navbar-logo"></span> <b class="me-3px">LDM</b>
+                Admin</a>
+            <button type="button" class="navbar-mobile-toggler" data-toggle="app-top-menu-mobile">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
-		</div>
+        </div>
 
-		<div class="navbar-nav">
+        <div class="navbar-nav">
 
-			<div class="navbar-item navbar-user dropdown">
-				<a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
-					<span>&nbsp;&nbsp; Session: <?= session('year') . '-' . (session('year') + 1) ?> &nbsp;&nbsp;</span>
-					<span>
-						<span class="d-none d-md-inline"><?= substr(session('name'), 0, 1) ?></span>
-						<b class="caret"></b>
-					</span>
-				</a>
-				<div class="dropdown-menu dropdown-menu-end me-1">
-					<a href="javascript:void();" class="dropdown-item"><?= session('name') ?></a>
-					<div class="dropdown-divider"></div>
-					<a href="<?= base_url('/handler/logout'); ?>" class="dropdown-item">Log Out</a>
-				</div>
-			</div>
-			<a href="javascript:;" class="btn btn-sm me-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTopst" title="Our Stacks" aria-controls="offcanvasTop"><i class="fa fa-xl fa-th-large"></i></a>
-			<div class="offcanvas offcanvas-top ps-5 pe-5" tabindex="-1" id="offcanvasTopst" aria-labelledby="offcanvasTopLabel">
-				<div class="offcanvas-header border-bottom">
-					<h5 id="offcanvasTopLabel">Our Stacks</h5>
-					<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-				</div>
-				<div class="offcanvas-body mt-md-3">
-					<div class="row">
-						<?php $i = 0;
-						$totalLeads = 0;
-						foreach ($sideMenuStatusReports as $reportStatus) : $totalLeads += $reportStatus['total_leads']; ?>
-							<!--begin::Item-->
+            <div class="navbar-item navbar-user dropdown">
+                <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+                    <span>&nbsp;&nbsp; Session: <?= session('year') . '-' . (session('year') + 1) ?> &nbsp;&nbsp;</span>
+                    <span>
+                        <span class="d-none d-md-inline"><?= substr(session('name'), 0, 1) ?></span>
+                        <b class="caret"></b>
+                    </span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end me-1">
+                    <a href="javascript:void();" class="dropdown-item"><?= session('name') ?></a>
+                    <div class="dropdown-divider"></div>
+                    <a href="<?= base_url('/handler/logout'); ?>" class="dropdown-item">Log Out</a>
+                </div>
+            </div>
+            <a href="javascript:;" class="btn btn-sm me-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTopst" title="Our Stacks" aria-controls="offcanvasTop"><i class="fa fa-xl fa-th-large"></i></a>
+            <div class="offcanvas offcanvas-top ps-5 pe-5" tabindex="-1" id="offcanvasTopst" aria-labelledby="offcanvasTopLabel">
+                <div class="offcanvas-header border-bottom">
+                    <h5 id="offcanvasTopLabel">Our Stacks</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body mt-md-3">
+                    <div class="row">
+                        <?php $i = 0;
+                        $totalLeads = 0;
+                        foreach ($sideMenuStatusReports as $reportStatus) : $totalLeads += $reportStatus['total_leads']; ?>
+                            <!--begin::Item-->
 
-							<div class="col-md-2">
-								<a href="<?= base_url('handler/lead-status-report/' . $reportStatus['id']) ?>" class="text-decoration-none">
-									<!-- begin widget-stats -->
-									<div class="widget widget-stats bg-<?= $svgClass[$i++] ?> mb-10px">
-										<div class="stats-icon stats-icon-lg"><i class="fa fa-<?= $svgiconClass[$i++] ?> fa-fw"></i></div>
-										<div class="stats-content">
-											<div class="stats-title"><?= $reportStatus['name'] ?? 'New Opportunity' ?></div>
-											<div class="stats-number"><?= $reportStatus['total_leads'] ?? '0' ?></div>
-										</div>
-									</div>
-									<!-- end widget-stats -->
-								</a>
-							</div>
+                            <div class="col-md-2">
+                                <a href="<?= base_url('handler/lead-status-report/' . $reportStatus['id']) ?>" class="text-decoration-none">
+                                    <!-- begin widget-stats -->
+                                    <div class="widget widget-stats bg-<?= $svgClass[$i++] ?> mb-10px">
+                                        <div class="stats-icon stats-icon-lg"><i class="fa fa-<?= $svgiconClass[$i++] ?> fa-fw"></i></div>
+                                        <div class="stats-content">
+                                            <div class="stats-title"><?= $reportStatus['name'] ?? 'New Opportunity' ?></div>
+                                            <div class="stats-number"><?= $reportStatus['total_leads'] ?? '0' ?></div>
+                                        </div>
+                                    </div>
+                                    <!-- end widget-stats -->
+                                </a>
+                            </div>
 
-							<!--end::Item-->
-							<?php if ($reportStatus['type'] == 2) : $i = $i == 3 ? 0 : $i;
-								$extra = handlerStatusReport(session('year'), session('db_priffix') . '_', session('suffix'), session('id'), $reportStatus['id']);  ?>
+                            <!--end::Item-->
+                            <?php if ($reportStatus['type'] == 2) : $i = $i == 3 ? 0 : $i;
+                                $extra = handlerStatusReport(session('year'), session('db_priffix') . '_', session('suffix'), session('id'), $reportStatus['id']);  ?>
 
-								<div class="col-md-2">
-									<a href="<?= base_url('handler/lead-status-report/' . $reportStatus['id'] . '/today') ?>" class="text-decoration-none">
-										<!-- begin widget-stats -->
-										<div class="widget widget-stats bg-<?= $svgClass[$i++] ?> mb-10px">
-											<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
-											<div class="stats-content">
-												<div class="stats-title">Today <?= $reportStatus['name'] ?? 'New Opportunity' ?></div>
-												<div class="stats-number"><?= $extra['today'] ?? '0' ?></div>
-											</div>
-										</div>
-									</a>
-									<!-- end widget-stats -->
-								</div>
-
-
-								<?php $i = $i == 3 ? 0 : $i; ?>
-
-								<div class="col-md-2">
-									<a href="<?= base_url('handler/lead-status-report/' . $reportStatus['id'] . '/overdue') ?>" class="text-decoration-none">
-										<!-- begin widget-stats -->
-										<div class="widget widget-stats bg-<?= $svgClass[$i++] ?> mb-10px">
-											<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
-											<div class="stats-content">
-												<div class="stats-title">Overdue <?= $reportStatus['name'] ?? 'New Opportunity' ?></div>
-												<div class="stats-number"><?= $extra['overdue'] ?? '0' ?></div>
-											</div>
-										</div>
-										<!-- end widget-stats -->
-									</a>
-								</div>
-
-							<?php endif ?>
-						<?php $i = $i == 3 ? 0 : $i;
-						endforeach; ?>
-
-						<div class="col-md-2">
-							<a href="<?= base_url('handler') ?>" class="text-decoration-none">
-								<!-- begin widget-stats -->
-								<div class="widget widget-stats bg-teal mb-10px">
-									<div class="stats-icon stats-icon-lg"><i class="fa fa-<?= $svgiconClass[$i++] ?> fa-fw"></i></div>
-									<div class="stats-content">
-										<div class="stats-title"><?= 'Total Leads' ?></div>
-										<div class="stats-number"><?= $totalLeads ?? '0' ?></div>
-									</div>
-								</div>
-								<!-- end widget-stats -->
-							</a>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
+                                <div class="col-md-2">
+                                    <a href="<?= base_url('handler/lead-status-report/' . $reportStatus['id'] . '/today') ?>" class="text-decoration-none">
+                                        <!-- begin widget-stats -->
+                                        <div class="widget widget-stats bg-<?= $svgClass[$i++] ?> mb-10px">
+                                            <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                                            <div class="stats-content">
+                                                <div class="stats-title">Today <?= $reportStatus['name'] ?? 'New Opportunity' ?></div>
+                                                <div class="stats-number"><?= $extra['today'] ?? '0' ?></div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <!-- end widget-stats -->
+                                </div>
 
 
-	</div>
-	<!-- top-menu -->
-	<div id="top-menu" class="app-top-menu" data-bs-theme="dark">
-		<div class="menu">
-			<div class="menu-item ">
-				<a href="<?= base_url('handler/welcome') ?>" class="menu-link">
+                                <?php $i = $i == 3 ? 0 : $i; ?>
 
-					<div class="menu-icon">
-						<i class="fa fa-gauge-high"></i>
-					</div>
+                                <div class="col-md-2">
+                                    <a href="<?= base_url('handler/lead-status-report/' . $reportStatus['id'] . '/overdue') ?>" class="text-decoration-none">
+                                        <!-- begin widget-stats -->
+                                        <div class="widget widget-stats bg-<?= $svgClass[$i++] ?> mb-10px">
+                                            <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                                            <div class="stats-content">
+                                                <div class="stats-title">Overdue <?= $reportStatus['name'] ?? 'New Opportunity' ?></div>
+                                                <div class="stats-number"><?= $extra['overdue'] ?? '0' ?></div>
+                                            </div>
+                                        </div>
+                                        <!-- end widget-stats -->
+                                    </a>
+                                </div>
 
-					<div class="menu-text">Dashboard </div>
-				</a>
-			</div>
+                            <?php endif ?>
+                        <?php $i = $i == 3 ? 0 : $i;
+                        endforeach; ?>
 
-			<div class="menu-item has-sub">
-				<a href="javascript:;" class="menu-link">
-					<div class="menu-icon">
-						<i class="fa fa-sitemap"></i>
-					</div>
-					<div class="menu-text">Leads</div>
-					<div class="menu-caret"></div>
-				</a>
+                        <div class="col-md-2">
+                            <a href="<?= base_url('handler') ?>" class="text-decoration-none">
+                                <!-- begin widget-stats -->
+                                <div class="widget widget-stats bg-teal mb-10px">
+                                    <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                                    <div class="stats-content">
+                                        <div class="stats-title"><?= 'Total Leads' ?></div>
+                                        <div class="stats-number"><?= $totalLeads ?? '0' ?></div>
+                                    </div>
+                                </div>
+                                <!-- end widget-stats -->
+                            </a>
+                        </div>
 
-				<div class="menu-submenu">
-					<?php if (session('role') == 1) : ?>
-						<div class="menu-item">
-							<a href="<?= base_url('handler/leads') ?>" class="menu-link">
-								<div class="menu-text">All Leads</div>
-							</a>
-						</div>
-					<?php endif; ?>
-					<div class="menu-item">
-						<a href="<?= base_url('handler/add-lead') ?>" class="menu-link ">
-							<div class="menu-text">Create Lead</div>
-						</a>
-					</div>
-					<div class="menu-item">
-						<a href="<?= base_url('handler') ?>" class="menu-link">
-							<div class="menu-text"> Assign Leads</div>
-						</a>
-					</div>
-				</div>
-			</div>
-
-			<div class="menu-item has-sub">
-				<a href="javascript:;" class="menu-link">
-					<div class="menu-icon">
-						<i class="fa fa-chart-pie"></i>
-					</div>
-					<div class="menu-text">Reports</div>
-					<div class="menu-caret"></div>
-				</a>
-				<div class="menu-submenu">
-					<div class="menu-item">
-						<a href="<?= base_url('handler/reports') ?>" class="menu-link">
-							<div class="menu-text">Report Stats</div>
-						</a>
-					</div>
-					<div class="menu-item">
-						<a href="<?= base_url('handler/report/created-sid') ?>" class="menu-link">
-							<div class="menu-text">Created Sid List</div>
-						</a>
-					</div>
-					<div class="menu-item">
-						<a href="<?= base_url('handler/report/registration') ?>" class="menu-link">
-							<div class="menu-text">Registration List</div>
-						</a>
-					</div>
-					<div class="menu-item">
-						<a href="<?= base_url('handler/report/admission-done') ?>" class="menu-link">
-							<div class="menu-text">Admission Done List</div>
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class="menu-item ">
-				<a href="<?= base_url('handler/tickets') ?>" class="menu-link">
-
-					<div class="menu-icon">
-						<i class="fa fa-ticket"></i>
-					</div>
-
-					<div class="menu-text">Tickets </div>
-				</a>
-			</div>
-			<div class="menu-item has-sub">
-				<a href="javascript:;" class="menu-link">
-					<div class="menu-icon">
-						<i class="fa-solid fa-file-lines"></i>
-					</div>
-					<div class="menu-text">Application Form</div>
-					<div class="menu-caret"></div>
-				</a>
-				<div class="menu-submenu">
-					<div class="menu-item">
-						<a href="<?= base_url('handler/applicant-list') ?>" class="menu-link">
-							<div class="menu-text">Process Application</div>
-						</a>
-					</div>
-					<div class="menu-item">
-						<a href="<?= base_url('handler/application-form-reopen') ?>" class="menu-link">
-							<div class="menu-text">Reopened Application</div>
-						</a>
-					</div>
-				</div>
-			</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-			<?php if (session('role') == 1) : ?>
-				<div class="menu-item has-sub">
-					<a href="javascript:;" class="menu-link">
-						<div class="menu-icon">
-							<i class="fa fa-database"></i>
-						</div>
-						<div class="menu-text">Counselor</div>
-						<div class="menu-caret"></div>
-					</a>
-					<div class="menu-submenu">
-						<div class="menu-item">
-							<a href="<?= base_url('handler/members') ?>" class="menu-link">
-								<div class="menu-text">All Counselor</div>
-							</a>
-						</div>
-						<div class="menu-item">
-							<a href="<?= base_url('handler/create-member') ?>" class="menu-link">
-								<div class="menu-text">Create Counselor</div>
-							</a>
-						</div>
-					</div>
-				</div>
+    </div>
+    <!-- top-menu -->
+    <div id="top-menu" class="app-top-menu" data-bs-theme="dark">
+        <div class="menu">
+            <div class="menu-item ">
+                <a href="<?= base_url('handler/welcome') ?>" class="menu-link">
 
-			<?php endif; ?>
+                    <div class="menu-icon">
+                        <i class="fa fa-gauge-high"></i>
+                    </div>
+
+                    <div class="menu-text">Dashboard </div>
+                </a>
+            </div>
+
+            <div class="menu-item has-sub">
+                <a href="javascript:;" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa fa-sitemap"></i>
+                    </div>
+                    <div class="menu-text">Leads</div>
+                    <div class="menu-caret"></div>
+                </a>
+
+                <div class="menu-submenu">
+                    <?php if (session('role') == 1) : ?>
+                        <div class="menu-item">
+                            <a href="<?= base_url('handler/leads') ?>" class="menu-link">
+                                <div class="menu-text">All Leads</div>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+                    <div class="menu-item">
+                        <a href="<?= base_url('handler/add-lead') ?>" class="menu-link ">
+                            <div class="menu-text">Create Lead</div>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="<?= base_url('handler') ?>" class="menu-link">
+                            <div class="menu-text"> Assign Leads</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item has-sub">
+                <a href="javascript:;" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa fa-chart-pie"></i>
+                    </div>
+                    <div class="menu-text">Reports</div>
+                    <div class="menu-caret"></div>
+                </a>
+                <div class="menu-submenu">
+                    <div class="menu-item">
+                        <a href="<?= base_url('handler/reports') ?>" class="menu-link">
+                            <div class="menu-text">Report Stats</div>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="<?= base_url('handler/report/created-sid') ?>" class="menu-link">
+                            <div class="menu-text">Created Sid List</div>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="<?= base_url('handler/report/registration') ?>" class="menu-link">
+                            <div class="menu-text">Registration List</div>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="<?= base_url('handler/report/admission-done') ?>" class="menu-link">
+                            <div class="menu-text">Admission Done List</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item ">
+                <a href="<?= base_url('handler/tickets') ?>" class="menu-link">
+
+                    <div class="menu-icon">
+                        <i class="fa fa-ticket"></i>
+                    </div>
+
+                    <div class="menu-text">Tickets </div>
+                </a>
+            </div>
+            <div class="menu-item has-sub">
+                <a href="javascript:;" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa-solid fa-file-lines"></i>
+                    </div>
+                    <div class="menu-text">Application Form</div>
+                    <div class="menu-caret"></div>
+                </a>
+                <div class="menu-submenu">
+                    <div class="menu-item">
+                        <a href="<?= base_url('handler/applicant-list') ?>" class="menu-link">
+                            <div class="menu-text">Process Application</div>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="<?= base_url('handler/application-form-reopen') ?>" class="menu-link">
+                            <div class="menu-text">Reopened Application</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
 
-			<div class="menu-item menu-control menu-control-start">
-				<a href="javascript:;" class="menu-link" data-toggle="app-top-menu-prev"><i class="fa fa-angle-left"></i></a>
-			</div>
-			<div class="menu-item menu-control menu-control-end">
-				<a href="javascript:;" class="menu-link" data-toggle="app-top-menu-next"><i class="fa fa-angle-right"></i></a>
-			</div>
-		</div>
-	</div>
-	<!-- Content Starts -->
-	<div id="content" class="app-content">
+            <?php if (session('role') == 1) : ?>
+                <div class="menu-item has-sub">
+                    <a href="javascript:;" class="menu-link">
+                        <div class="menu-icon">
+                            <i class="fa fa-database"></i>
+                        </div>
+                        <div class="menu-text">Counselor</div>
+                        <div class="menu-caret"></div>
+                    </a>
+                    <div class="menu-submenu">
+                        <div class="menu-item">
+                            <a href="<?= base_url('handler/members') ?>" class="menu-link">
+                                <div class="menu-text">All Counselor</div>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a href="<?= base_url('handler/create-member') ?>" class="menu-link">
+                                <div class="menu-text">Create Counselor</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            <?php endif; ?>
+
+
+            <div class="menu-item menu-control menu-control-start">
+                <a href="javascript:;" class="menu-link" data-toggle="app-top-menu-prev"><i class="fa fa-angle-left"></i></a>
+            </div>
+            <div class="menu-item menu-control menu-control-end">
+                <a href="javascript:;" class="menu-link" data-toggle="app-top-menu-next"><i class="fa fa-angle-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- Content Starts -->
+    <div id="content" class="app-content">
