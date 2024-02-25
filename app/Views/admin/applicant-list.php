@@ -183,7 +183,7 @@ $query = $uri->getQuery();
                         <td><?= date('d/m/Y H:i:s', strtotime($lead['sl_created_at'])) ?></td>
                         <td nowrap="">
                             <a href="<?= base_url('admin/process-application/' . $lead['lead_id'] . '/' . $lead['sid']) ?>" class="btn btn-warning btn-icon btn-sm" title="Proceed Application">
-                                <i class="fa fa-trash-can"></i>
+                                <i class="fa fa-file-pen"></i>
                             </a>
                         </td>
                     </tr>
