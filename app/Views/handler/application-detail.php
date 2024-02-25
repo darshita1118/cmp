@@ -140,6 +140,7 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
                     <!--Begin::Header-->
                     <div class="card-header card-header-tabs-line px-2">
                         <div class="card-title">
+
                             <h1>Your Application under process</h1>
                         </div>
                         <div class="card-toolbar">
@@ -264,8 +265,6 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
                                             <div class="form-group col-lg-4">
                                                 <label for="email">Email
                                                 </label>
-
-
                                                 <input readonly type="text" class="form-control form-control-lg form-control-solid px-2" id="email" name="email" value="<?= $contact['sci_email']; ?>" placeholder="Email" required="">
 
 

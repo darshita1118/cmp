@@ -49,7 +49,7 @@ function getStatusTime($leadId)
                 </svg>
             </a>
 
-            <div class="offcanvas offcanvas-top ps-5 pe-5" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+            <div class="offcanvas offcanvas-top ps-md-5 pe-md-5" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
                 <div class="offcanvas-header border-bottom">
                     <h5 id="offcanvasTopLabel">Filters</h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>

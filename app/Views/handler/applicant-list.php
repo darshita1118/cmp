@@ -354,23 +354,4 @@ $admissionStatus = [
     .daterangepicker {
         z-index: 9999 !important;
     }
-
-    .offcanvas-body {
-        overflow: visible !important;
-
-
-    }
-
-    @media (max-width: 767px) {
-        /* .offcanvas-top {
-            height: 200vh;
-            overflow-y: auto;
-        } */
-
-        .offcanvas-body {
-            overflow: visible !important;
-            height: 300vh;
-            overflow-y: scroll;
-        }
-    }
 </style>

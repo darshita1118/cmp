@@ -113,30 +113,30 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
 <div class="details active">
     <div class="card border-0 mb-4 pb-3">
         <div class="card-header bg-none p-3 h3 m-0 d-flex align-items-center justify-content-between">
-            <span><i class="fa fa-shopping-bag fa-lg me-2 text-gray text-opacity-50"></i>
-                Your Application under process</span>
-            <div class="panel panel-inverse panel-with-tabs">
-                <div class="panel-heading p-0">
-                    <ul class="nav nav-tabs nav-tabs-inverse h6">
-                        <li class="nav-item">
-                            <a href="<?= base_url($controller . '/' . 'print/' . $lid . '/' . $sid) ?>" class="nav-link " onclick="printPage()">Print Form </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#nav-tab-1" data-bs-toggle="tab" class="nav-link active">Person Detail</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#nav-tab-2" data-bs-toggle="tab" class="nav-link ">Academics</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#nav-tab-3" data-bs-toggle="tab" class="nav-link ">Documents</a>
-                        </li>
-                    </ul>
+            <span><span><i class="fa fa-shopping-bag fa-lg me-2 text-gray text-opacity-50"></i>
+                    Your Application under process</span>
+                <div class="panel panel-inverse panel-with-tabs">
+                    <div class="panel-heading p-0">
+                        <ul class="nav nav-tabs nav-tabs-inverse h6">
+                            <li class="nav-item">
+                                <a href="<?= base_url($controller . '/' . 'print/' . $lid . '/' . $sid) ?>" class="nav-link " onclick="printPage()">Print Form </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#nav-tab-1" data-bs-toggle="tab" class="nav-link active">Person Detail</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#nav-tab-2" data-bs-toggle="tab" class="nav-link ">Academics</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#nav-tab-3" data-bs-toggle="tab" class="nav-link ">Documents</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
 
-            <div class="profile float-end">
-                <img src="<?= base_url('assets/img/user/user-1.jpg') ?>" alt="">
-            </div>
+                <div class="profile float-end">
+                    <img src="<?= base_url('assets/img/user/user-1.jpg') ?>" alt="">
+                </div>
 
         </div>
         <div class=" p-3 panel-body  ">

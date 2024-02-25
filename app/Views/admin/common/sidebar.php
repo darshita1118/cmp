@@ -16,7 +16,6 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-
 			</div>
 
 			<div class="navbar-nav">
@@ -54,86 +53,12 @@
 					<a href="<?= base_url('/') ?>" class="menu-link">
 
 						<div class="menu-icon">
-							<i class="fa fa-cubes"></i>
+							<i class="fa fa-gauge-high"></i>
 						</div>
 
 						<div class="menu-text">Dashboard </div>
 					</a>
 				</div>
-				<div class="menu-item ">
-					<a href="<?= base_url('admin/tickets') ?>" class="menu-link">
-
-						<div class="menu-icon">
-							<i class="fa fa-ticket"></i>
-						</div>
-
-						<div class="menu-text">Tickets </div>
-					</a>
-				</div>
-
-				<div class="menu-item has-sub">
-					<a href="javascript:;" class="menu-link">
-						<div class="menu-icon">
-							<i class="fa fa-database"></i>
-						</div>
-						<div class="menu-text">By Self</div>
-						<div class="menu-caret"></div>
-					</a>
-					<div class="menu-submenu">
-						<div class="menu-item">
-							<a href="<?= base_url('admin/applicant-list') ?>" class="menu-link">
-								<div class="menu-text">Process Application</div>
-							</a>
-						</div>
-						<div class="menu-item">
-							<a href="<?= base_url('admin/application-form-reopen') ?>" class="menu-link">
-								<div class="menu-text">Reopened Application</div>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="menu-item has-sub">
-					<a href="javascript:;" class="menu-link">
-						<div class="menu-icon">
-							<i class="fa fa-chart-pie"></i>
-						</div>
-						<div class="menu-text">Reports</div>
-						<div class="menu-caret"></div>
-					</a>
-					<div class="menu-submenu">
-						<div class="menu-item">
-							<a href="<?= base_url('admin/reports') ?>" class="menu-link">
-								<div class="menu-text">Report Stats</div>
-							</a>
-						</div>
-						<div class="menu-item">
-							<a href="<?= base_url('admin/report/created-sid') ?>" class="menu-link">
-								<div class="menu-text">Created Sid List</div>
-							</a>
-						</div>
-						<div class="menu-item">
-							<a href="<?= base_url('admin/report/registration') ?>" class="menu-link">
-								<div class="menu-text">Registration List</div>
-							</a>
-						</div>
-						<div class="menu-item">
-							<a href="<?= base_url('admin/report/admission-done') ?>" class="menu-link">
-								<div class="menu-text">Admission Done List</div>
-							</a>
-						</div>
-						<div class="menu-item">
-							<a href="<?= base_url('admin/student-learning-report') ?>" class="menu-link">
-								<div class="menu-text">Student Learning</div>
-							</a>
-						</div>
-						<div class="menu-item">
-							<a href="<?= base_url('admin/reportall') ?>" class="menu-link">
-								<div class="menu-text">Counselor Work Report</div>
-							</a>
-						</div>
-					</div>
-				</div>
-
 				<div class="menu-item has-sub">
 					<a href="javascript:;" class="menu-link">
 						<div class="menu-icon">
@@ -223,7 +148,69 @@
 				<div class="menu-item has-sub">
 					<a href="javascript:;" class="menu-link">
 						<div class="menu-icon">
-							<i class="fas fa-check-to-slot"></i>
+							<i class="fa fa-file-lines"></i>
+						</div>
+						<div class="menu-text">Application Form</div>
+						<div class="menu-caret"></div>
+					</a>
+					<div class="menu-submenu">
+						<div class="menu-item">
+							<a href="<?= base_url('admin/applicant-list') ?>" class="menu-link">
+								<div class="menu-text">Process Application</div>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="<?= base_url('admin/application-form-reopen') ?>" class="menu-link">
+								<div class="menu-text">Reopened Application</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="menu-item has-sub">
+					<a href="javascript:;" class="menu-link">
+						<div class="menu-icon">
+							<i class="fa fa-chart-pie"></i>
+						</div>
+						<div class="menu-text">Reports</div>
+						<div class="menu-caret"></div>
+					</a>
+					<div class="menu-submenu">
+						<div class="menu-item">
+							<a href="<?= base_url('admin/reports') ?>" class="menu-link">
+								<div class="menu-text">Report Stats</div>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="<?= base_url('admin/report/created-sid') ?>" class="menu-link">
+								<div class="menu-text">Created Sid List</div>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="<?= base_url('admin/report/registration') ?>" class="menu-link">
+								<div class="menu-text">Registration List</div>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="<?= base_url('admin/report/admission-done') ?>" class="menu-link">
+								<div class="menu-text">Admission Done List</div>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="<?= base_url('admin/student-learning-report') ?>" class="menu-link">
+								<div class="menu-text">Student Learning</div>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="<?= base_url('admin/reportall') ?>" class="menu-link">
+								<div class="menu-text">Counselor Work Report</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="menu-item has-sub">
+					<a href="javascript:;" class="menu-link">
+						<div class="menu-icon">
+							<i class="fa fa-chart-column"></i>
 						</div>
 						<div class="menu-text">Lead Status</div>
 						<div class="menu-caret"></div>
@@ -249,7 +236,7 @@
 				<div class="menu-item has-sub">
 					<a href="javascript:;" class="menu-link">
 						<div class="menu-icon">
-							<i class="fas fa-cloud-arrow-up"></i>
+							<i class="fas fa-cloud-arrow-down"></i>
 						</div>
 						<div class="menu-text">Lead Source</div>
 						<div class="menu-caret"></div>
@@ -271,6 +258,16 @@
 							</a>
 						</div>
 					</div>
+				</div>
+				<div class="menu-item ">
+					<a href="<?= base_url('admin/tickets') ?>" class="menu-link">
+
+						<div class="menu-icon">
+							<i class="fa fa-ticket"></i>
+						</div>
+
+						<div class="menu-text">Tickets </div>
+					</a>
 				</div>
 				<div class="menu-item has-sub">
 					<a href="javascript:;" class="menu-link">

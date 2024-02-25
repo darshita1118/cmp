@@ -13,7 +13,8 @@ function getStatusTime($leadId)
 }
 
 ?>
-
+<!-- Include jQuery -->
+<script src="<?= base_url('assets/js/jquery-3.6.4.min.js') ?>"></script>
 
 <!-- DataTables CSS -->
 <link href="<?= base_url() ?>assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
@@ -22,7 +23,6 @@ function getStatusTime($leadId)
 
 
 <link href="<?= base_url('assets/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') ?>" rel="stylesheet" />
-<link href="<?= base_url('assets/plugins/datatables.net-select-bs5/css/select.bootstrap5.min.css') ?>" rel="stylesheet" />
 
 <link href="<?= base_url() ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
 
@@ -43,7 +43,9 @@ function getStatusTime($leadId)
 		</div>
 		<div class="panel-heading-btn">
 			<a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
-			<a href="javascript:;" class="btn btn-sm btn-icon btn-warning" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><i class="fa fa-lg fa-fw fa-sliders"></i></a>
+			<a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-right" viewBox="0 0 16 16">
+					<path d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5m0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5m0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5"></path>
+				</svg></a>
 			<div class="offcanvas offcanvas-top ps-5 pe-5" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
 				<div class="offcanvas-header border-bottom">
 					<h5 id="offcanvasTopLabel">Filters</h5>
@@ -135,10 +137,30 @@ function getStatusTime($leadId)
 	</div>
 
 	<div class="panel-body">
+		<div class="col-md-6 mb-2">
+			<div class="form-group hide d-flex flex-row align-items-center" data-email-action="">
+				<div class="d-flex align-items-center me-3">
+					<label for="" class="h5 me-3">Action</label>
+					<select class="form-select " required="">
+						<option selected>--Select--</option>
+						<option value="4">Active</option>
+						<option value="">Suspend</option>
+						<option value="">Change Password</option>
+					</select>
+				</div>
+				<!-- <div class="d-flex align-items-center me-3">
+					<label for="" class="h5 me-3">Password</label>
+					<input type="password" class="form-control" name="" placeholder="Password">
+				</div> -->
+				<a href="" class="btn btn-info ms-3">Submit</a>
+			</div>
+		</div>
+
 		<!-- html -->
 		<table id="data-table-fixed-header" class="table table-striped table-bordered align-middle w-100 text-wrap ">
 			<thead>
 				<tr>
+					<th><input type="checkbox" class="form-check-input" id="emailSelectAll" onclick="toggleAllCheckboxes()"></th>
 					<th width="1%">ID</th>
 					<th>Name</th>
 					<th>Email</th>
@@ -156,6 +178,7 @@ function getStatusTime($leadId)
 				$count = 1;
 				foreach ($leads as $lead) : ?>
 					<tr class="odd gradeX">
+						<td><input type="checkbox" class="form-check-input email-checkbox" onclick="toggleRow(this)"></td>
 						<td width="1%" class="fw-bold"><?= $count ?></td>
 						<td><?= trim(ucwords($lead['lead_first_name'] . ' ' . $lead['lead_middle_name'] . ' ' . $lead['lead_last_name'])) ?></td>
 						<td><?= $lead['lead_email'] ?></td>
@@ -257,8 +280,6 @@ function getStatusTime($leadId)
 <script src="<?= base_url() ?>assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
 <script src="<?= base_url() ?>assets/plugins/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
 <script src="<?= base_url() ?>assets/plugins/datatables.net-fixedheader-bs5/js/fixedHeader.bootstrap5.min.js"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-select/js/dataTables.select.min.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/datatables.net-select-bs5/js/select.bootstrap5.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js') ?>"></script>
@@ -381,3 +402,23 @@ function getStatusTime($leadId)
 		z-index: 9999 !important;
 	}
 </style>
+<!-- checkbox -->
+<script>
+	function toggleAllCheckboxes() {
+		var emailCheckboxes = $(".email-checkbox");
+		emailCheckboxes.prop("checked", $("#emailSelectAll").prop("checked"));
+		toggleRow(emailCheckboxes);
+		toggleDropdown();
+	}
+
+	function toggleRow(row) {
+		var checkbox = $(row).find('.email-checkbox');
+		checkbox.prop('checked', !checkbox.prop('checked'));
+		toggleDropdown();
+	}
+
+	function toggleDropdown() {
+		var dropdown = $('[data-email-action=""]');
+		dropdown.toggleClass('hide', $(".email-checkbox:checked").length === 0);
+	}
+</script>
