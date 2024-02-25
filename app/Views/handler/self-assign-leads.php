@@ -35,7 +35,7 @@ function getStatusTime($leadId)
         <ol class="breadcrumb panel-title">
             <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
             <li class="breadcrumb-item"><a href="javascript:;">Leads</a></li>
-            <li class="breadcrumb-item active">Self Assign Leads</li>
+            <li class="breadcrumb-item active">Assign Leads</li>
             <div class="p-2">
                 <span class="badge bg-warning text-white rounded-pill fs-6"><?= $total_records ?? 0 ?></span>
             </div>

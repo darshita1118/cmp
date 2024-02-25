@@ -32,7 +32,7 @@
 				<a href="javascript:;" class="btn btn-sm me-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTopst" title="Our Stacks" aria-controls="offcanvasTop"><i class="fa fa-xl fa-th-large"></i></a>
 				<div class="offcanvas offcanvas-top ps-5 pe-5" tabindex="-1" id="offcanvasTopst" aria-labelledby="offcanvasTopLabel">
 					<div class="offcanvas-header border-bottom">
-						<h5 id="offcanvasTopLabel">Our Stacks</h5>
+						<h5 id="offcanvasTopLabel">Stacks</h5>
 						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 					</div>
 					<div class="offcanvas-body mt-md-3">
@@ -212,7 +212,7 @@
 						</div>
 						<div class="menu-item">
 							<a href="<?= base_url('handler') ?>" class="menu-link">
-								<div class="menu-text">Self Allocated Leads</div>
+								<div class="menu-text"> Assign Leads</div>
 							</a>
 						</div>
 					</div>

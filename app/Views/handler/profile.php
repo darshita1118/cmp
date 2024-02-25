@@ -15,7 +15,7 @@ $formStep = [
     '10' => 'Verify Desk cleared status then go to Enrollment Desk.',
     '11' => 'Enrollment Desk cleared then your Admission done.',
 ];
-
+$lmsDb = session('db_priffix') . '_' . session('suffix');
 function checkSidCreated($lead_id)
 {
     $referModel = new ApplicationModel('lms_db_reference_' . session('year'), 'lr_id', 'sso_' . session('suffix'));
@@ -146,9 +146,6 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
             <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
             <li class="breadcrumb-item"><a href="javascript:;">Leads</a></li>
             <li class="breadcrumb-item active">Lead</li>
-            <div class="p-2">
-                <span class="badge bg-warning text-white rounded-pill fs-6">34567</span>
-            </div>
         </ol>
 
 
@@ -231,7 +228,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                                                     </div>
                                                                 </td>
                                                                 <td>
-                                                                    <a href="<?= base_url('admin/process-application/' . $profileDetail['lid'] . '/' . $sidData['sid']) ?>" class="btn btn-sm btn-warning me-1 btn-icon" title="Next Step"> <i class="fa fa-file-pen"></i> Proceed Application</a>
+                                                                    <a href="<?= base_url('handler/process-application/' . $profileDetail['lid'] . '/' . $sidData['sid']) ?>" class="btn btn-sm btn-warning me-1 btn-icon" title="Proceed Application"> <i class="fa fa-file-pen"></i> Proceed Application</a>
                                                                 </td>
                                                             <?php else : ?>
                                                                 <td>
@@ -240,17 +237,18 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                                                     </div>
                                                                 </td>
                                                                 <td>
-                                                                    <a href="<?= base_url('admin/process-application/' . $profileDetail['lid'] . '/' . $sidData['sid']) ?>" class="btn btn-sm btn-warning me-1 btn-icon" title="Next Step"> <i class="fa fa-file-pen"></i> Application Under Process</a>
+                                                                    <a href="<?= base_url('handler/process-application/' . $profileDetail['lid'] . '/' . $sidData['sid']) ?>" class="btn btn-sm btn-warning me-1 btn-icon" title="Application Under Process"> <i class="fa fa-file-pen"></i> Application Under Process</a>
                                                                 </td>
                                                             <?php endif; ?>
                                                         <?php else : ?>
+                                                            <td class="field">Form Step</td>
                                                             <td>
-                                                                <div class="text-body text-opacity-60"> <?= $formStep[$sidData['form_step']] ?? '' ?>
+                                                                <div class="text-body text-opacity-60">Generate Sid
 
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <a href="<?= base_url('admin/apply-now/' . $profileDetail['lid']) ?>" class="btn btn-sm btn-warning me-1 btn-icon" title="Next Step"> <i class="fa fa-file-pen"></i>Generate Sid</a>
+                                                                <a href="<?= base_url('handler/apply-now/' . $profileDetail['lid']) ?>" class="btn btn-sm btn-warning me-1 btn-icon" title="Generate Sid"> <i class="fa fa-file-pen"></i>Generate Sid</a>
                                                             </td>
                                                         <?php endif; ?>
 
@@ -435,8 +433,55 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
 
                                                         <!-- note Body -->
                                                         <div class="modal-body">
-                                                            <div class="container-fluid chat-container">
-                                                                <div id="messageContainer" class="message-container"></div>
+                                                            <div class="chat-container">
+
+                                                                <!--begin::Messages-->
+                                                                <div id="messageContainer" class="message-container">
+                                                                    <?php foreach ($remarks as $remark) : ?>
+                                                                        <?php if ($remark['handler_id'] == session('id')) : ?>
+                                                                            <!--begin::Message Out-->
+                                                                            <div class="d-flex flex-column mb-3">
+                                                                                <div class="">
+                                                                                    <div>
+                                                                                        <span class="text-muted font-size-sm"><?= time_elapsed_string($remark['lr_created_at']) ?></span>
+                                                                                        <span class="fw-bolder">You</span>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <span class="me-4 bg-green-100 rounded p-2">
+                                                                                    <div class="">
+                                                                                        <?= $remark['lr_remark'] ?></div>
+                                                                                </span>
+                                                                                <div class="fst-normal"><small><?= date('l d M Y h:i A', strtotime($remark['lr_created_at'])) ?></small></div>
+
+
+                                                                            </div>
+                                                                            <!--end::Message Out-->
+                                                                        <?php else :
+
+                                                                            $handlername = getSinglehandler($remark['handler_id']);
+
+                                                                        ?>
+                                                                            <!--begin::Message In-->
+                                                                            <div class="d-flex flex-column mb-3 align-items-start">
+                                                                                <div class="d-flex align-items-center">
+
+                                                                                    <div>
+                                                                                        <a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">
+                                                                                            <?= $handlername ?>
+                                                                                        </a>
+                                                                                        <span class="text-muted font-size-sm"><?= time_elapsed_string($remark['lr_created_at']) ?></span>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">
+                                                                                    <?= $remark['lr_remark'] ?></div>
+                                                                                <div class="mnt-1 rounded pt-0 text-dark-50 font-weight-bold font-size-lg text-left max-w-400px"><?= date('l d M Y h:i A', strtotime($remark['lr_created_at'])) ?></div>
+                                                                            </div>
+                                                                            <!--end::Message In-->
+                                                                        <?php endif; ?>
+                                                                    <?php endforeach; ?>
+                                                                </div>
+                                                                <!--end::Messages-->
                                                             </div>
 
                                                             <!-- Chat-like Input and "Send" Button -->
@@ -448,7 +493,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                                                             <input type="text" name='remarkMessage' id="messageInput" class="form-control chat-input" placeholder="Type your message...">
                                                                         </div>
                                                                         <div class="widget-input-icon">
-                                                                            <button type="submit" name="btn" value="remark" class="send-button text-success text-opacity-50" id="sendButton">
+                                                                            <button type="submit" name="btn" value="remark" class="send-button text-success text-opacity-50">
                                                                                 <img src="<?= base_url() ?>assets/img/svg/send-plus-fill.svg" alt="">
 
                                                                             </button>
@@ -495,9 +540,6 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                                         });
                                                     });
                                                 </script>
-
-
-
                                             </div>
                                         </div>
                                         <hr>
@@ -803,7 +845,6 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
             <form class="form" method="post" action="">
                 <?= csrf_field() ?>
                 <div class="modal-body">
-
 
                     <div class="row">
                         <div class="flex-fill col-md-4">
