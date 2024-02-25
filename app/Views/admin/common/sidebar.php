@@ -19,14 +19,6 @@
 			</div>
 
 			<div class="navbar-nav">
-				<div class="navbar-item navbar-form">
-					<form action="" method="POST" name="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Enter keyword">
-							<button type="submit" class="btn btn-search"><i class="fas fa-search"></i></button>
-						</div>
-					</form>
-				</div>
 				<div class="navbar-item navbar-user dropdown">
 					<a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
 						<span>&nbsp;&nbsp; Session: <?= session('year') . '-' . (session('year') + 1) ?> &nbsp;&nbsp;</span>
@@ -293,10 +285,10 @@
 
 
 
-				<div class="menu-item menu-control menu-control-start">
+				<div class="menu-item menu-control menu-control-start d-none">
 					<a href="javascript:;" class="menu-link" data-toggle="app-top-menu-prev"><i class="fa fa-angle-left"></i></a>
 				</div>
-				<div class="menu-item menu-control menu-control-end">
+				<div class="menu-item menu-control menu-control-end d-none">
 					<a href="javascript:;" class="menu-link" data-toggle="app-top-menu-next"><i class="fa fa-angle-right"></i></a>
 				</div>
 			</div>

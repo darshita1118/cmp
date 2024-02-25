@@ -34,11 +34,11 @@ function getStatusTime($leadId)
 				<li class="breadcrumb-item">Home</a></li>
 				<li class="breadcrumb-item">Leads</a></li>
 				<li class="breadcrumb-item">All Leads</li>
+				<div class="p-2">
+					<span class="badge bg-warning text-white rounded-pill fs-6"><?= $total_leads ?? 0 ?></span>
+				</div>
 			</ol>
 		</h4>
-		<div class="mb-1 me-2">
-			<span>Total Leads: <?= $total_leads ?? 0 ?></span>
-		</div>
 		<div class="panel-heading-btn">
 			<a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
 			<a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-right" viewBox="0 0 16 16">
@@ -161,7 +161,6 @@ function getStatusTime($leadId)
 		<table id="data-table-fixed-header" class="table table-striped table-bordered align-middle w-100 text-wrap ">
 			<thead>
 				<tr>
-					<th><input type="checkbox" class="form-check-input" id="emailSelectAll" onclick="toggleAllCheckboxes(this)"></th>
 					<th width="1%">ID</th>
 					<th>Name</th>
 					<th>Email</th>
@@ -179,7 +178,7 @@ function getStatusTime($leadId)
 				$count = 1;
 				foreach ($leads as $lead) : ?>
 					<tr class="odd gradeX">
-						<td><input type="checkbox" class="form-check-input email-checkbox" onclick="toggleRow(this)"></td>
+
 						<td width="1%" class="fw-bold"><?= $count ?></td>
 						<td><?= trim(ucwords($lead['lead_first_name'] . ' ' . $lead['lead_middle_name'] . ' ' . $lead['lead_last_name'])) ?></td>
 						<td><?= $lead['lead_email'] ?></td>
@@ -198,73 +197,9 @@ function getStatusTime($leadId)
 				endforeach; ?>
 			</tbody>
 		</table>
-		<style>
-			.pagination-nav nav ul>.active>a {
-				margin-left: .4rem;
-				margin-right: .4rem;
-				outline: 0 !important;
-				cursor: pointer;
-				display: -webkit-box;
-				display: -ms-flexbox;
-				display: flex;
-				-webkit-box-pack: center;
-				-ms-flex-pack: center;
-				justify-content: center;
-				-webkit-box-align: center;
-				-ms-flex-align: center;
-				align-items: center;
-				height: 2.25rem;
-				min-width: 2.25rem;
-				padding: .5rem;
-				text-align: center;
-				position: relative;
-				font-size: 1rem;
-				line-height: 1rem;
-				font-weight: 500;
-				border-radius: .42rem;
-				border: 0;
-				-webkit-transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
-				transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
-				transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
-				transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease, -webkit-box-shadow .15s ease;
-				background-color: #3699ff;
-				color: #fff;
-			}
 
-			.pagination-nav nav ul li a {
-				margin-left: .4rem !important;
-				margin-right: .4rem !important;
-				outline: 0 !important;
-				cursor: pointer;
-				display: -webkit-box;
-				display: -ms-flexbox;
-				display: flex;
-				-webkit-box-pack: center;
-				-ms-flex-pack: center;
-				justify-content: center;
-				-webkit-box-align: center;
-				-ms-flex-align: center;
-				align-items: center;
-				height: 2.25rem !important;
-				min-width: 2.25rem !important;
-				padding: .5rem;
-				text-align: center;
-				position: relative;
-				font-size: 1rem;
-				line-height: 1rem;
-				font-weight: 500;
-				border-radius: .42rem;
-				border: 0;
-				-webkit-transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
-				transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
-				transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
-				transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease, -webkit-box-shadow .15s ease;
-				color: #7e8299;
-				background-color: transparent;
-			}
-		</style>
 		<hr>
-		<div class="row mt-4">
+		<div class="pagin">
 			<div class="col-lg-12 text-center">
 				<div id='pagination' class='pagination-nav'>
 					<?= $pager->links() ?>
@@ -298,45 +233,7 @@ function getStatusTime($leadId)
 <script src="<?= base_url() ?>assets/plugins/moment/min/moment.min.js"></script>
 <script src="<?= base_url() ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
 
-<!--Code Script -->
-<script>
-	var options = {
-		dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-lg-8 d-lg-block"<"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 me-0 me-md-3"l><"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 "B>><"col-lg-4 d-flex d-lg-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
-		buttons: [{
-				extend: 'copy',
-				className: 'btn-sm'
-			},
-			{
-				extend: 'csv',
-				className: 'btn-sm'
-			},
-			{
-				extend: 'excel',
-				className: 'btn-sm'
-			},
-			{
-				extend: 'pdf',
-				className: 'btn-sm'
-			},
-			{
-				extend: 'print',
-				className: 'btn-sm'
-			}
-		],
-		keys: true,
-		select: true,
-		paging: true,
-		// lengthMenu: [20, 40, 60, 100, 120, 200, 300, 400, 500, 1000],
-		fixedHeader: {
-			header: true,
-			headerOffset: $('#header').height()
-		},
-		responsive: true,
-		pageLength: 50,
-	};
 
-	$('#data-table-fixed-header').DataTable(options);
-</script>
 <script>
 	$(".default-select2").select2({
 		dropdownParent: $('#offcanvasTop')
@@ -396,33 +293,4 @@ function getStatusTime($leadId)
 			handleRenderColorpicker();
 		});
 	});
-</script>
-
-<style>
-	.daterangepicker {
-		z-index: 9999 !important;
-	}
-</style>
-<script>
-	function toggleAllCheckboxes(checkbox) {
-		var emailCheckboxes = $(".email-checkbox");
-		emailCheckboxes.prop("checked", checkbox.checked);
-		toggleRow(checkbox);
-		toggleDropdown();
-	}
-
-	function toggleRow(row) {
-		var checkbox = $(row).find('.email-checkbox');
-		checkbox.prop('checked', !checkbox.prop('checked'));
-		toggleDropdown();
-	}
-
-	function toggleDropdown() {
-		var dropdown = $('[data-email-action=""]');
-		dropdown.toggleClass('hide', $(".email-checkbox:checked").length === 0);
-	}
-
-	function submitForm() {
-		// Implement your form submission logic here
-	}
 </script>
