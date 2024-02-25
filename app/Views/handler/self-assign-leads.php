@@ -49,7 +49,6 @@ function getStatusTime($leadId)
                 </svg>
             </a>
 
-
             <div class="offcanvas offcanvas-top ps-5 pe-5" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
                 <div class="offcanvas-header border-bottom">
                     <h5 id="offcanvasTopLabel">Filters</h5>
@@ -93,7 +92,6 @@ function getStatusTime($leadId)
                                     <?php foreach ($sources as $source) : ?>
                                         <option value="<?= $source['source_id'] ?>" <?= (in_array($source['source_id'], $_GET['source'] ?? [])) ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
                                     <?php endforeach; ?>
-
                                 </select>
                             </div>
                         </div>
@@ -105,7 +103,6 @@ function getStatusTime($leadId)
                                     <?php foreach ($departments as $dept) : ?>
                                         <option value="<?= $dept['dept_id'] ?>" <?= (in_array($dept['dept_id'], $_GET['department'] ?? [])) ? 'selected' : null ?>><?= $dept['dept_name'] ?> </option>
                                     <?php endforeach; ?>
-
                                 </select>
                             </div>
                         </div>
@@ -117,7 +114,6 @@ function getStatusTime($leadId)
                                     <?php foreach ($courses as $program) : ?>
                                         <option data-dept="<?= $program['dept_id'] ?>" data-level="<?= $program['level_id']  ?>" value="<?= $program['coi_id'] ?>" <?= (in_array($program['coi_id'], $_GET['program'] ?? [])) ? 'selected' : null ?>><?= $program['course_name'] ?> </option>
                                     <?php endforeach; ?>
-
                                 </select>
                             </div>
                         </div>
@@ -131,11 +127,12 @@ function getStatusTime($leadId)
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3 mt-md-4">
-                            <button type="submit" class="btn btn-primary w-100px me-5px">Apply Filter</button>
+                        <div class="offcanvas-footer border-top mt-3">
+                            <div class="col-md-12 mt-md-4 text-center">
+                                <button type="submit" class="btn btn-primary w-100px mt-3">Apply Filter</button>
+                            </div>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
