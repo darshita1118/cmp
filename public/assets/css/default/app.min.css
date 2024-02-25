@@ -20606,7 +20606,8 @@ a:focus {
     background: var(--bs-app-top-menu-menu-submenu-bg);
     list-style-type: none;
     margin: 0;
-    padding: 10px 0
+    padding: 10px 0;
+    z-index: 11;
 }
 
 @media (min-width:768px) {
