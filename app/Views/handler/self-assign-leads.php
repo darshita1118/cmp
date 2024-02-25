@@ -301,15 +301,3 @@ function getStatusTime($leadId)
         });
     });
 </script>
-
-<style>
-    .daterangepicker {
-        z-index: 9999 !important;
-    }
-
-    .offcanvas-body {
-        overflow: visible !important;
-
-
-    }
-</style>
