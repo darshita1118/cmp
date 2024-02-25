@@ -395,10 +395,10 @@ $svgiconClass = [
             <?php endif; ?>
 
 
-            <div class="menu-item menu-control menu-control-start">
+            <div class="menu-item menu-control menu-control-start d-none">
                 <a href="javascript:;" class="menu-link" data-toggle="app-top-menu-prev"><i class="fa fa-angle-left"></i></a>
             </div>
-            <div class="menu-item menu-control menu-control-end">
+            <div class="menu-item menu-control menu-control-end d-none">
                 <a href="javascript:;" class="menu-link" data-toggle="app-top-menu-next"><i class="fa fa-angle-right"></i></a>
             </div>
         </div>
