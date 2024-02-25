@@ -103,6 +103,13 @@ $svgClass = [
 	'secondary',
 ];
 
+$svgiconClass = [
+	'globe',
+	'blender-phone',
+	'deezer',
+	'renren',
+];
+
 ?>
 <!-- App Body Start -->
 <div id="app" class="app app-header-fixed app-sidebar-fixed app-without-sidebar app-with-top-menu">
@@ -152,7 +159,7 @@ $svgClass = [
 								<a href="<?= base_url('handler/lead-status-report/' . $reportStatus['id']) ?>" class="text-decoration-none">
 									<!-- begin widget-stats -->
 									<div class="widget widget-stats bg-<?= $svgClass[$i++] ?> mb-10px">
-										<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+										<div class="stats-icon stats-icon-lg"><i class="fa fa-<?= $svgiconClass[$i++] ?> fa-fw"></i></div>
 										<div class="stats-content">
 											<div class="stats-title"><?= $reportStatus['name'] ?? 'New Opportunity' ?></div>
 											<div class="stats-number"><?= $reportStatus['total_leads'] ?? '0' ?></div>
@@ -205,7 +212,7 @@ $svgClass = [
 							<a href="<?= base_url('handler') ?>" class="text-decoration-none">
 								<!-- begin widget-stats -->
 								<div class="widget widget-stats bg-teal mb-10px">
-									<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+									<div class="stats-icon stats-icon-lg"><i class="fa fa-<?= $svgiconClass[$i++] ?> fa-fw"></i></div>
 									<div class="stats-content">
 										<div class="stats-title"><?= 'Total Leads' ?></div>
 										<div class="stats-number"><?= $totalLeads ?? '0' ?></div>
