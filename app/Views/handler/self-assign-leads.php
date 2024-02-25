@@ -181,73 +181,9 @@ function getStatusTime($leadId)
                 endforeach; ?>
             </tbody>
         </table>
-        <style>
-            .pagination-nav nav ul>.active>a {
-                margin-left: .4rem;
-                margin-right: .4rem;
-                outline: 0 !important;
-                cursor: pointer;
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: flex;
-                -webkit-box-pack: center;
-                -ms-flex-pack: center;
-                justify-content: center;
-                -webkit-box-align: center;
-                -ms-flex-align: center;
-                align-items: center;
-                height: 2.25rem;
-                min-width: 2.25rem;
-                padding: .5rem;
-                text-align: center;
-                position: relative;
-                font-size: 1rem;
-                line-height: 1rem;
-                font-weight: 500;
-                border-radius: .42rem;
-                border: 0;
-                -webkit-transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
-                transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
-                transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
-                transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease, -webkit-box-shadow .15s ease;
-                background-color: #3699ff;
-                color: #fff;
-            }
-
-            .pagination-nav nav ul li a {
-                margin-left: .4rem !important;
-                margin-right: .4rem !important;
-                outline: 0 !important;
-                cursor: pointer;
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: flex;
-                -webkit-box-pack: center;
-                -ms-flex-pack: center;
-                justify-content: center;
-                -webkit-box-align: center;
-                -ms-flex-align: center;
-                align-items: center;
-                height: 2.25rem !important;
-                min-width: 2.25rem !important;
-                padding: .5rem;
-                text-align: center;
-                position: relative;
-                font-size: 1rem;
-                line-height: 1rem;
-                font-weight: 500;
-                border-radius: .42rem;
-                border: 0;
-                -webkit-transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
-                transition: color .15s ease, background-color .15s ease, border-color .15s ease, -webkit-box-shadow .15s ease;
-                transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
-                transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease, -webkit-box-shadow .15s ease;
-                color: #7e8299;
-                background-color: transparent;
-            }
-        </style>
+ 
         <hr>
-        <div class="row mt-4">
+        <div class="pagin">
             <div class="col-lg-12 text-center">
                 <div id='pagination' class='pagination-nav'>
                     <?= $pager->links() ?>
@@ -286,45 +222,6 @@ function getStatusTime($leadId)
 <script src="<?= base_url('assets/plugins/select2/dist/js/select2.min.js') ?>"></script>
 <script src="<?= base_url() ?>assets/plugins/select-picker/dist/picker.min.js"></script>
 
-<!--Code Script -->
-<script>
-    var options = {
-        dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-lg-8 d-lg-block"<"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 me-0 me-md-3"l><"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 "B>><"col-lg-4 d-flex d-lg-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
-        buttons: [{
-                extend: 'copy',
-                className: 'btn-sm'
-            },
-            {
-                extend: 'csv',
-                className: 'btn-sm'
-            },
-            {
-                extend: 'excel',
-                className: 'btn-sm'
-            },
-            {
-                extend: 'pdf',
-                className: 'btn-sm'
-            },
-            {
-                extend: 'print',
-                className: 'btn-sm'
-            }
-        ],
-        keys: true,
-        select: true,
-        paging: true,
-        //lengthMenu: [20, 40, 60],
-        fixedHeader: {
-            header: true,
-            headerOffset: $('#header').height()
-        },
-        responsive: true,
-        pageLength: 50,
-    };
-
-    $('#data-table-fixed-header').DataTable(options);
-</script>
 <script>
     // Select-Picker
     $('#program,#status,#department,#source,#nationality').picker({
