@@ -1,7 +1,8 @@
 <?= $this->extend('login_index') ?>
 <?= $this->section('content') ?>
+<script src="<?= base_url('assets/js/vendor.min.js') ?>" type="text/javascript"></script>
 <?php $uri = service('uri'); ?>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <div class="login login-with-news-feed">
 	<div class="news-feed">
 		<div class="news-image" style="background-image: url(<?= base_url('assets/img/login-bg/login-bg-11.jpg') ?>)"></div>
@@ -51,7 +52,7 @@
 				<div class="form-floating mb-20px position-relative">
 					<input type="password" class="form-control h-45px fs-13px" placeholder="Password" id="password" name="password" required value="<?= set_value('password') ?>" autocomplete="on">
 					<label for="password" class="d-flex align-items-center hide-pass-icon fs-13px text-gray-600">Password</label>
-					<div class="toggle-password" id="togglePassword" style="position: absolute; top: 20px;color: #C7C8CA;;right: 20px;font-size:16px;">
+					<div class="toggle-password" id="togglePassword" style="position: absolute; top: 15%;color: #C7C8CA;;right: 20px;font-size:1.5rem;">
 						<i class="fas fa-eye" id="showPasswordIcon"></i>
 						<i class="fas fa-eye-slash" id="hidePasswordIcon" style="display:none;"></i>
 					</div>
