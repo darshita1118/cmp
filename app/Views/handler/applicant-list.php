@@ -43,7 +43,7 @@ $admissionStatus = [
     <div class="panel-heading">
         <ol class="breadcrumb panel-title">
             <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-            <li class="breadcrumb-item"><a href="javascript:;">By Self</a></li>
+            <li class="breadcrumb-item"><a href="javascript:;">Application Form</a></li>
             <li class="breadcrumb-item active">Process Application</li>
             <div class="p-2">
                 <span class="badge bg-warning text-white rounded-pill fs-6"><?= $total_records ?? 0 ?></span>
@@ -174,44 +174,6 @@ $admissionStatus = [
             </tbody>
         </table>
 
-        <!-- script -->
-        <script>
-            var options = {
-                dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-lg-8 d-lg-block"<"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 me-0 me-md-3"l><"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 "B>><"col-lg-4 d-flex d-lg-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
-                buttons: [{
-                        extend: 'copy',
-                        className: 'btn-sm'
-                    },
-                    {
-                        extend: 'csv',
-                        className: 'btn-sm'
-                    },
-                    {
-                        extend: 'excel',
-                        className: 'btn-sm'
-                    },
-                    {
-                        extend: 'pdf',
-                        className: 'btn-sm'
-                    },
-                    {
-                        extend: 'print',
-                        className: 'btn-sm'
-                    }
-                ],
-                responsive: true,
-                colReorder: true,
-                keys: true,
-                rowReorder: true,
-                select: true
-            };
-
-            if ($(window).width() <= 767) {
-                options.rowReorder = false;
-                options.colReorder = false;
-            }
-            $('#data-table-combine').DataTable(options);
-        </script>
     </div>
 
 </div>
@@ -245,44 +207,7 @@ $admissionStatus = [
 <script src="<?= base_url('assets/plugins/select2/dist/js/select2.min.js') ?>"></script>
 <script src="<?= base_url() ?>assets/plugins/select-picker/dist/picker.min.js"></script>
 
-<!--Code Script -->
-<script>
-    var options = {
-        dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-lg-8 d-lg-block"<"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 me-0 me-md-3"l><"d-flex d-lg-inline-flex justify-content-center mb-md-2 mb-lg-0 "B>><"col-lg-4 d-flex d-lg-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
-        buttons: [{
-                extend: 'copy',
-                className: 'btn-sm'
-            },
-            {
-                extend: 'csv',
-                className: 'btn-sm'
-            },
-            {
-                extend: 'excel',
-                className: 'btn-sm'
-            },
-            {
-                extend: 'pdf',
-                className: 'btn-sm'
-            },
-            {
-                extend: 'print',
-                className: 'btn-sm'
-            }
-        ],
-        keys: true,
-        select: true,
-        paging: true,
-        lengthMenu: [20, 40, 60],
-        fixedHeader: {
-            header: true,
-            headerOffset: $('#header').height()
-        },
-        responsive: true
-    };
 
-    $('#data-table-fixed-header').DataTable(options);
-</script>
 <script>
     // Select-Picker
     $('#program,#status,#department,#source,#nationality').picker({
@@ -350,8 +275,3 @@ $admissionStatus = [
     });
 </script>
 
-<style>
-    .daterangepicker {
-        z-index: 9999 !important;
-    }
-</style>
