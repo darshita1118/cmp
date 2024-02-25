@@ -150,17 +150,30 @@ function getTLName($handler)
 						</div>
 					</div>
 				</div>
-
 			</div>
-
-
-
-
-
 			<div class="panel-body">
+				<div class="col-md-6 mb-2">
+					<div class="form-group hide d-flex flex-row align-items-center" data-email-action="">
+						<div class="d-flex align-items-center me-3">
+							<label for="" class="h5 me-3">Action</label>
+							<select class="form-select " required="">
+								<option selected>--Select--</option>
+								<option value="4">Active</option>
+								<option value="">Suspend</option>
+								<option value="">Change Password</option>
+							</select>
+						</div>
+						<!-- <div class="d-flex align-items-center me-3">
+					<label for="" class="h5 me-3">Password</label>
+					<input type="password" class="form-control" name="" placeholder="Password">
+				</div> -->
+						<a href="" class="btn btn-info ms-3">Submit</a>
+					</div>
+				</div>
 				<table id="data-table-combine" class="table table-striped table-bordered align-middle w-100 text-nowrap cmp-table">
 					<thead>
 						<tr>
+							<th><input type="checkbox" class="form-check-input" id="emailSelectAll" onclick="toggleAllCheckboxes()"></th>
 							<th width="1%">ID</th>
 							<th class="text-nowrap">Name</th>
 							<th class="text-nowrap">Email</th>
@@ -176,6 +189,7 @@ function getTLName($handler)
 						<?php $count = 1;
 						foreach ($handlers as $handler) : ?>
 							<tr class="odd gradeX">
+								<td><input type="checkbox" class="form-check-input email-checkbox" onclick="toggleRow(this)"></td>
 								<td width="1%" class="fw-bold"><?= $count ?></td>
 								<td><?= $handler['user_name'] ?></td>
 								<td><a href="mailto:<?= $handler['user_email'] ?>"><?= $handler['user_email'] ?></a></td>
@@ -332,5 +346,25 @@ function getTLName($handler)
 		} else {
 			$('#actionOption').html('');
 		}
+	}
+</script>
+<!-- checkbox -->
+<script>
+	function toggleAllCheckboxes() {
+		var emailCheckboxes = $(".email-checkbox");
+		emailCheckboxes.prop("checked", $("#emailSelectAll").prop("checked"));
+		toggleRow(emailCheckboxes);
+		toggleDropdown();
+	}
+
+	function toggleRow(row) {
+		var checkbox = $(row).find('.email-checkbox');
+		checkbox.prop('checked', !checkbox.prop('checked'));
+		toggleDropdown();
+	}
+
+	function toggleDropdown() {
+		var dropdown = $('[data-email-action=""]');
+		dropdown.toggleClass('hide', $(".email-checkbox:checked").length === 0);
 	}
 </script>
