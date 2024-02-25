@@ -44,13 +44,12 @@ $query = $uri->getQuery();
     <div class="panel-heading">
         <ol class="breadcrumb panel-title">
             <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-            <li class="breadcrumb-item"><a href="javascript:;">By Self</a></li>
-            <li class="breadcrumb-item active">Edit Application Form</li>
+            <li class="breadcrumb-item"><a href="javascript:;">Reports</a></li>
+            <li class="breadcrumb-item active"> <?= $pageInfo['title'] ?></li>
+            <div class="p-2">
+                <span class="badge bg-warning text-white rounded-pill fs-6"> <?= $total_records ?? 0 ?></span>
+            </div>
         </ol>
-
-        <div class="mb-1 me-2">
-            <span class="text-white"><?= $pageInfo['title'] ?>: <?= $total_records ?? 0 ?></span>
-        </div>
 
         <div class="panel-heading-btn">
             <a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
@@ -179,8 +178,8 @@ $query = $uri->getQuery();
                         <td><?= $lead['source_name'] ?></td>
                         <td><?= date('d/m/Y H:i:s', strtotime($lead['dated'])) ?></td>
 
-                        <td class="">
-                            <a href="<?= base_url('handler/process-application/' . $lead['lead_id'] . '/' . $lead['sid']) ?>" class="btn btn-warning btn-icon btn-lg" title="Proceed Applcation">
+                        <td class="text-center">
+                            <a href="<?= base_url('handler/process-application/' . $lead['lead_id'] . '/' . $lead['sid']) ?>" class="btn btn-warning btn-icon btn-sm" title="Proceed Applcation">
                                 <i class="fa fa-file-pen"></i>
                             </a>
                         </td>
