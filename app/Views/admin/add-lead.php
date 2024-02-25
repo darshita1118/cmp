@@ -1,6 +1,3 @@
-<div class="row">
-
-    <div class="col-xl-12">
 
         <div class="panel panel-inverse">
 
@@ -147,9 +144,6 @@
 
         </div>
 
-    </div>
-
-</div>
 <script>
     function getProgramByDept(dept = '', prog = '') {
         if (dept !== '') {
