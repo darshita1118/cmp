@@ -56,10 +56,10 @@ const programs = <?= $programsJson ?>;
 
     <div class="panel-body">
 
+        <!-- Counselor Panel -->
         <div class="mb-10px mt-10px fs-10px">
             <h3 class="text-body">Counselor Panel</h3>
         </div>
-
         <div class="row gx-2 mb-20px">
 
             <div class="col-lg-2" onclick="window.location.href='<?= base_url('handler/report/created-sid') ?>'">
@@ -131,10 +131,8 @@ const programs = <?= $programsJson ?>;
             </div>
 
         </div>
-
-
-        <div class="row gx-2 mb-20px">
-            <div class="col-lg-12">
+        <div class="col-lg-12">
+            <div class=" card">
                 <div class="card-body">
                     <!-- Bar -->
                     <script>
@@ -258,13 +256,11 @@ const programs = <?= $programsJson ?>;
                 </div>
             </div>
         </div>
-
         <br>
-
+        <!-- Applied Application Form -->
         <div class="mb-10px mt-10px fs-10px">
             <h3 class="text-body">Applied Application Form</h3>
         </div>
-
         <div class="row gx-2 mb-20px">
             <?php $chartData = [];
             foreach ($dataAdmissionStatus as $admssion) : ?>
@@ -282,12 +278,8 @@ const programs = <?= $programsJson ?>;
                 </div>
             <?php endforeach; ?>
         </div>
-
         <div class="col-lg-12">
             <div class="card-body px-2">
-
-
-
                 <!--begin::Entry-->
                 <div class="row mx-0">
                     <!-- Bar -->
@@ -504,8 +496,6 @@ const programs = <?= $programsJson ?>;
                         </div>
                     </div>
 
-
-
                     <!-- Bar -->
                     <script>
                         am5.ready(function() {
@@ -629,1059 +619,1056 @@ const programs = <?= $programsJson ?>;
                         }); // end am5.ready()
                     </script>
                     <!--end Bar -->
-
-
-
-
-                    <div class="col-lg-12 mb-3">
-                        <div class="card gutter-b card-custom">
-                            <div class="card-header px-2">
-                                <div class="card-title">
-                                    <h3 class="card-label">Application Form Step Chart(<?= array_sum(array_column($formStep ?? [], 'value')) ?>)</h3>
-                                </div>
-                            </div>
-                            <div class="chartdiv" id="formStepchart"></div>
-                        </div>
-                    </div>
-
-                    <!-- Lead Status chart Start -->
-
-                    <div class="mb-10px mt-10px fs-10px">
-                        <h3 class="text-body">Lead Status Wise</h3>
-                    </div>
-
-                    <div class="row gx-2 mb-20px">
-                        <?php $count = 0;
-                        foreach ($leadStatusWise as $status) :
-                            if ($count == count($color))
-                                $count = 0;
-                        ?>
-
-                            <div class="col-lg-2">
-                                <div class="widget widget-stats  mb-7px" style="background-color: <?= $color[$count++] ?>">
-                                    <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
-                                    <div class="stats-content">
-                                        <div class="stats-title"><?= $status['category'] ?></div>
-                                        <div class="stats-number"><?= $status['value'] ?? '0'; ?></div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-
-
-                    <!-- Pie Chart -->
-                    <script>
-                        am5.ready(function() {
-
-                            // Create root element
-                            // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-                            var root = am5.Root.new("leadStatusWise");
-
-
-                            // Set themes
-                            // https://www.amcharts.com/docs/v5/concepts/themes/
-                            root.setThemes([
-                                am5themes_Animated.new(root)
-                            ]);
-
-
-                            // Create chart
-                            // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
-                            var chart = root.container.children.push(am5percent.PieChart.new(root, {
-                                layout: root.verticalLayout
-                            }));
-
-
-                            // Create series
-                            // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
-                            var series = chart.series.push(am5percent.PieSeries.new(root, {
-                                alignLabels: true,
-                                calculateAggregates: true,
-                                valueField: "value",
-                                categoryField: "category"
-                            }));
-
-                            series.slices.template.setAll({
-                                strokeWidth: 3,
-                                stroke: am5.color(0xffffff)
-                            });
-
-                            series.labelsContainer.set("paddingTop", 30)
-
-
-                            // Set up adapters for variable slice radius
-                            // https://www.amcharts.com/docs/v5/concepts/settings/adapters/
-                            series.slices.template.adapters.add("radius", function(radius, target) {
-                                var dataItem = target.dataItem;
-                                var high = series.getPrivate("valueHigh");
-
-                                if (dataItem) {
-                                    var value = target.dataItem.get("valueWorking", 0);
-                                    return radius * value / high
-                                }
-                                return radius;
-                            });
-
-
-                            // Set data
-                            // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
-                            var data = <?= json_encode($leadStatusWise) ?>;
-                            data = data.map(obj => {
-                                // Map over all the keys in your object
-                                Object.keys(obj).map(key => {
-                                    // Check if the key is numeric
-                                    if (!isNaN(obj[key])) {
-                                        obj[key] = +obj[key];
-                                    }
-                                })
-                                return obj;
-                            });
-                            series.data.setAll(data);
-
-
-                            // Create legend
-                            // https://www.amcharts.com/docs/v5/charts/percent-charts/legend-percent-series/
-                            var legend = chart.children.push(am5.Legend.new(root, {
-                                centerX: am5.p50,
-                                x: am5.p50,
-                                marginTop: 15,
-                                marginBottom: 15
-                            }));
-
-                            legend.data.setAll(series.dataItems);
-
-
-                            // Play initial series animation
-                            // https://www.amcharts.com/docs/v5/concepts/animations/#Animation_of_series
-                            series.appear(1000, 100);
-
-                            var exporting = am5plugins_exporting.Exporting.new(root, {
-                                menu: am5plugins_exporting.ExportingMenu.new(root, {}),
-                                dataSource: data
-                            });
-
-                            exporting.events.on("dataprocessed", function(ev) {
-                                for (var i = 0; i < ev.data.length; i++) {
-                                    ev.data[i].sum = ev.data[i].value + ev.data[i].value2;
-                                }
-                            });
-
-                        }); // end am5.ready()
-                    </script>
-                    <div class="col-lg-6 mb-3">
-                        <div class="card gutter-b">
-                            <div class="chartdiv" id="leadStatusWise"></div>
-                        </div>
-                    </div>
-                    <!-- Bar Chart -->
-                    <script>
-                        am5.ready(function() {
-
-                            // Create root element
-                            // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-                            var root = am5.Root.new("leadStatusWiseBar");
-
-
-                            // Set themes
-                            // https://www.amcharts.com/docs/v5/concepts/themes/
-                            root.setThemes([
-                                am5themes_Animated.new(root)
-                            ]);
-
-
-                            // Create chart
-                            // https://www.amcharts.com/docs/v5/charts/xy-chart/
-                            var chart = root.container.children.push(am5xy.XYChart.new(root, {
-                                panX: true,
-                                panY: true,
-                                wheelX: "panX",
-                                wheelY: "zoomX"
-                            }));
-
-                            // Add cursor
-                            // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
-                            var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
-                            cursor.lineY.set("visible", false);
-
-
-                            // Create axes
-                            // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
-                            var xRenderer = am5xy.AxisRendererX.new(root, {
-                                minGridDistance: 30
-                            });
-                            xRenderer.labels.template.setAll({
-                                rotation: -90,
-                                centerY: am5.p50,
-                                centerX: am5.p100,
-                                paddingRight: 15
-                            });
-
-                            var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
-                                maxDeviation: 0.3,
-                                categoryField: "category",
-                                renderer: xRenderer,
-                                tooltip: am5.Tooltip.new(root, {})
-                            }));
-
-                            var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-                                maxDeviation: 0.3,
-                                renderer: am5xy.AxisRendererY.new(root, {})
-                            }));
-
-
-                            // Create series
-                            // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
-                            var series = chart.series.push(am5xy.ColumnSeries.new(root, {
-                                name: "Series 1",
-                                xAxis: xAxis,
-                                stacked: true,
-                                yAxis: yAxis,
-                                valueYField: "value",
-                                sequencedInterpolation: true,
-                                categoryXField: "category",
-                                tooltip: am5.Tooltip.new(root, {
-                                    labelText: "{valueY}"
-                                })
-                            }));
-
-                            series.columns.template.setAll({
-                                cornerRadiusTL: 5,
-                                cornerRadiusTR: 5
-                            });
-                            series.columns.template.adapters.add("fill", (fill, target) => {
-                                return chart.get("colors").getIndex(series.columns.indexOf(
-                                    target));
-                            });
-
-                            series.columns.template.adapters.add("stroke", (stroke, target) => {
-                                return chart.get("colors").getIndex(series.columns.indexOf(
-                                    target));
-                            });
-
-
-                            // Set data
-                            var data = <?= json_encode($leadStatusWise) ?>;
-                            data = data.map(obj => {
-                                // Map over all the keys in your object
-                                Object.keys(obj).map(key => {
-                                    // Check if the key is numeric
-                                    if (!isNaN(obj[key])) {
-                                        obj[key] = +obj[key];
-                                    }
-                                })
-                                return obj;
-                            });
-
-
-                            xAxis.data.setAll(data);
-                            series.data.setAll(data);
-
-
-                            // Make stuff animate on load
-                            // https://www.amcharts.com/docs/v5/concepts/animations/
-                            series.appear(1000);
-                            chart.appear(1000, 100);
-
-                            var exporting = am5plugins_exporting.Exporting.new(root, {
-                                menu: am5plugins_exporting.ExportingMenu.new(root, {}),
-                                dataSource: data
-                            });
-
-                            exporting.events.on("dataprocessed", function(ev) {
-                                for (var i = 0; i < ev.data.length; i++) {
-                                    ev.data[i].sum = ev.data[i].value + ev.data[i].value2;
-                                }
-                            });
-
-                        }); // end am5.ready()
-                    </script>
-                    <div class="col-lg-6 mb-3">
-                        <div class="card gutter-b">
-                            <div class="chartdiv" id="leadStatusWiseBar"></div>
-                        </div>
-                    </div>
-                    <!-- Lead Status chart End -->
-
-                    <!-- Lead Source chart Start -->
-                    <div class="mb-10px mt-10px fs-10px">
-                        <h3 class="text-body">Lead Source Wise</h3>
-                    </div>
-
-                    <div class="row gx-2 mb-20px">
-                        <?php $count = 0;
-                        foreach ($leadSourceWise as $source) :
-                            if ($count == count($color))
-                                $count = 0;
-                        ?>
-                            <div class="col-lg-2">
-                                <div class="widget widget-stats  mb-7px" style="background-color:<?= $color[$count++] ?>">
-                                    <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
-                                    <div class="stats-content">
-                                        <div class="stats-title"><?= $source['category'] ?></div>
-                                        <div class="stats-number"><?= $source['value'] ?? '0'; ?></div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-
-                    <!-- Pie Chart -->
-                    <script>
-                        am5.ready(function() {
-
-                            // Create root element
-                            // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-                            var root = am5.Root.new("leadSourceWise");
-
-
-                            // Set themes
-                            // https://www.amcharts.com/docs/v5/concepts/themes/
-                            root.setThemes([
-                                am5themes_Animated.new(root)
-                            ]);
-
-
-                            // Create chart
-                            // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
-                            var chart = root.container.children.push(am5percent.PieChart.new(root, {
-                                layout: root.verticalLayout
-                            }));
-
-
-                            // Create series
-                            // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
-                            var series = chart.series.push(am5percent.PieSeries.new(root, {
-                                alignLabels: true,
-                                calculateAggregates: true,
-                                valueField: "value",
-                                categoryField: "category"
-                            }));
-
-                            series.slices.template.setAll({
-                                strokeWidth: 3,
-                                stroke: am5.color(0xffffff)
-                            });
-
-                            series.labelsContainer.set("paddingTop", 30)
-
-
-                            // Set up adapters for variable slice radius
-                            // https://www.amcharts.com/docs/v5/concepts/settings/adapters/
-                            series.slices.template.adapters.add("radius", function(radius, target) {
-                                var dataItem = target.dataItem;
-                                var high = series.getPrivate("valueHigh");
-
-                                if (dataItem) {
-                                    var value = target.dataItem.get("valueWorking", 0);
-                                    return radius * value / high
-                                }
-                                return radius;
-                            });
-
-
-                            // Set data
-                            // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
-                            var data = <?= json_encode($leadSourceWise) ?>;
-                            data = data.map(obj => {
-                                // Map over all the keys in your object
-                                Object.keys(obj).map(key => {
-                                    // Check if the key is numeric
-                                    if (!isNaN(obj[key])) {
-                                        obj[key] = +obj[key];
-                                    }
-                                })
-                                return obj;
-                            });
-                            series.data.setAll(data);
-
-
-                            // Create legend
-                            // https://www.amcharts.com/docs/v5/charts/percent-charts/legend-percent-series/
-                            var legend = chart.children.push(am5.Legend.new(root, {
-                                centerX: am5.p50,
-                                x: am5.p50,
-                                marginTop: 15,
-                                marginBottom: 15
-                            }));
-
-                            legend.data.setAll(series.dataItems);
-
-
-                            // Play initial series animation
-                            // https://www.amcharts.com/docs/v5/concepts/animations/#Animation_of_series
-                            series.appear(1000, 100);
-
-                            var exporting = am5plugins_exporting.Exporting.new(root, {
-                                menu: am5plugins_exporting.ExportingMenu.new(root, {}),
-                                dataSource: data
-                            });
-
-                            exporting.events.on("dataprocessed", function(ev) {
-                                for (var i = 0; i < ev.data.length; i++) {
-                                    ev.data[i].sum = ev.data[i].value + ev.data[i].value2;
-                                }
-                            });
-
-                        }); // end am5.ready()
-                    </script>
-                    <div class="col-lg-6 mb-3">
-                        <div class="card gutter-b">
-                            <div class="chartdiv" id="leadSourceWise"></div>
-                        </div>
-                    </div>
-                    <!-- Bar Chart -->
-                    <script>
-                        am5.ready(function() {
-
-                            // Create root element
-                            // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-                            var root = am5.Root.new("leadSourceWiseBar");
-
-
-                            // Set themes
-                            // https://www.amcharts.com/docs/v5/concepts/themes/
-                            root.setThemes([
-                                am5themes_Animated.new(root)
-                            ]);
-
-
-                            // Create chart
-                            // https://www.amcharts.com/docs/v5/charts/xy-chart/
-                            var chart = root.container.children.push(am5xy.XYChart.new(root, {
-                                panX: true,
-                                panY: true,
-                                wheelX: "panX",
-                                wheelY: "zoomX"
-                            }));
-
-                            // Add cursor
-                            // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
-                            var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
-                            cursor.lineY.set("visible", false);
-
-
-                            // Create axes
-                            // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
-                            var xRenderer = am5xy.AxisRendererX.new(root, {
-                                minGridDistance: 30
-                            });
-                            xRenderer.labels.template.setAll({
-                                rotation: -90,
-                                centerY: am5.p50,
-                                centerX: am5.p100,
-                                paddingRight: 15
-                            });
-
-                            var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
-                                maxDeviation: 0.3,
-                                categoryField: "category",
-                                renderer: xRenderer,
-                                tooltip: am5.Tooltip.new(root, {})
-                            }));
-
-                            var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-                                maxDeviation: 0.3,
-                                renderer: am5xy.AxisRendererY.new(root, {})
-                            }));
-
-
-                            // Create series
-                            // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
-                            var series = chart.series.push(am5xy.ColumnSeries.new(root, {
-                                name: "Series 1",
-                                xAxis: xAxis,
-                                stacked: true,
-                                yAxis: yAxis,
-                                valueYField: "value",
-                                sequencedInterpolation: true,
-                                categoryXField: "category",
-                                tooltip: am5.Tooltip.new(root, {
-                                    labelText: "{valueY}"
-                                })
-                            }));
-
-                            series.columns.template.setAll({
-                                cornerRadiusTL: 5,
-                                cornerRadiusTR: 5
-                            });
-                            series.columns.template.adapters.add("fill", (fill, target) => {
-                                return chart.get("colors").getIndex(series.columns.indexOf(
-                                    target));
-                            });
-
-                            series.columns.template.adapters.add("stroke", (stroke, target) => {
-                                return chart.get("colors").getIndex(series.columns.indexOf(
-                                    target));
-                            });
-
-
-                            // Set data
-                            var data = <?= json_encode($leadSourceWise) ?>;
-                            data = data.map(obj => {
-                                // Map over all the keys in your object
-                                Object.keys(obj).map(key => {
-                                    // Check if the key is numeric
-                                    if (!isNaN(obj[key])) {
-                                        obj[key] = +obj[key];
-                                    }
-                                })
-                                return obj;
-                            });
-
-
-                            xAxis.data.setAll(data);
-                            series.data.setAll(data);
-
-
-                            // Make stuff animate on load
-                            // https://www.amcharts.com/docs/v5/concepts/animations/
-                            series.appear(1000);
-                            chart.appear(1000, 100);
-
-                            var exporting = am5plugins_exporting.Exporting.new(root, {
-                                menu: am5plugins_exporting.ExportingMenu.new(root, {}),
-                                dataSource: data
-                            });
-
-                            exporting.events.on("dataprocessed", function(ev) {
-                                for (var i = 0; i < ev.data.length; i++) {
-                                    ev.data[i].sum = ev.data[i].value + ev.data[i].value2;
-                                }
-                            });
-
-                        }); // end am5.ready()
-                    </script>
-                    <div class="col-lg-6 mb-3">
-                        <div class="card gutter-b">
-                            <div class="chartdiv" id="leadSourceWiseBar"></div>
-                        </div>
-                    </div>
-                    <!-- Lead Source chart End -->
-
-                    <!-- Lead Department chart Start -->
-                    <div class="mb-10px mt-10px fs-10px">
-                        <h3 class="text-body">Lead Department Wise</h3>
-                    </div>
-
-                    <div class="row gx-2 mb-20px">
-                        <?php $count = 0;
-                        foreach ($departmentWise as $dept) :
-                            if ($count == count($color))
-                                $count = 0;
-                        ?>
-                            <div class="col-lg-3">
-                                <div class="widget widget-stats  mb-7px" style="background-color:<?= $color[$count++] ?>">
-                                    <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
-                                    <div class="stats-content">
-                                        <div class="stats-title"><?= $dept['category'] ?></div>
-                                        <div class="stats-number"><?= $dept['value'] ?? '0'; ?></div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-
-
-                    <!-- Pie Chart -->
-                    <script>
-                        am5.ready(function() {
-
-                            // Create root element
-                            // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-                            var root = am5.Root.new("departmentWise");
-
-
-                            // Set themes
-                            // https://www.amcharts.com/docs/v5/concepts/themes/
-                            root.setThemes([
-                                am5themes_Animated.new(root)
-                            ]);
-
-
-                            // Create chart
-                            // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
-                            var chart = root.container.children.push(am5percent.PieChart.new(root, {
-                                layout: root.verticalLayout
-                            }));
-
-
-                            // Create series
-                            // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
-                            var series = chart.series.push(am5percent.PieSeries.new(root, {
-                                alignLabels: true,
-                                calculateAggregates: true,
-                                valueField: "value",
-                                categoryField: "category"
-                            }));
-
-                            series.slices.template.setAll({
-                                strokeWidth: 3,
-                                stroke: am5.color(0xffffff)
-                            });
-
-                            series.labelsContainer.set("paddingTop", 30)
-
-
-                            // Set up adapters for variable slice radius
-                            // https://www.amcharts.com/docs/v5/concepts/settings/adapters/
-                            series.slices.template.adapters.add("radius", function(radius, target) {
-                                var dataItem = target.dataItem;
-                                var high = series.getPrivate("valueHigh");
-
-                                if (dataItem) {
-                                    var value = target.dataItem.get("valueWorking", 0);
-                                    return radius * value / high
-                                }
-                                return radius;
-                            });
-
-
-                            // Set data
-                            // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
-                            var data = <?= json_encode($departmentWise) ?>;
-                            data = data.map(obj => {
-                                // Map over all the keys in your object
-                                Object.keys(obj).map(key => {
-                                    // Check if the key is numeric
-                                    if (!isNaN(obj[key])) {
-                                        obj[key] = +obj[key];
-                                    }
-                                })
-                                return obj;
-                            });
-                            series.data.setAll(data);
-
-
-                            // Create legend
-                            // https://www.amcharts.com/docs/v5/charts/percent-charts/legend-percent-series/
-                            var legend = chart.children.push(am5.Legend.new(root, {
-                                centerX: am5.p50,
-                                x: am5.p50,
-                                marginTop: 15,
-                                marginBottom: 15
-                            }));
-
-                            legend.data.setAll(series.dataItems);
-
-
-                            // Play initial series animation
-                            // https://www.amcharts.com/docs/v5/concepts/animations/#Animation_of_series
-                            series.appear(1000, 100);
-
-                            var exporting = am5plugins_exporting.Exporting.new(root, {
-                                menu: am5plugins_exporting.ExportingMenu.new(root, {}),
-                                dataSource: data
-                            });
-
-                            exporting.events.on("dataprocessed", function(ev) {
-                                for (var i = 0; i < ev.data.length; i++) {
-                                    ev.data[i].sum = ev.data[i].value + ev.data[i].value2;
-                                }
-                            });
-
-                        }); // end am5.ready()
-                    </script>
-                    <div class="col-lg-12 mb-3">
-                        <div class="card gutter-b">
-                            <div style=" width: 100%;height: 600px; margin-left: auto; margin-right: auto;" id="departmentWise"></div>
-                        </div>
-                    </div>
-                    <!-- Bar Chart -->
-                    <script>
-                        am5.ready(function() {
-
-                            // Create root element
-                            // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-                            var root = am5.Root.new("departmentWiseBar");
-
-
-                            // Set themes
-                            // https://www.amcharts.com/docs/v5/concepts/themes/
-                            root.setThemes([
-                                am5themes_Animated.new(root)
-                            ]);
-
-
-                            // Create chart
-                            // https://www.amcharts.com/docs/v5/charts/xy-chart/
-                            var chart = root.container.children.push(am5xy.XYChart.new(root, {
-                                panX: true,
-                                panY: true,
-                                wheelX: "panX",
-                                wheelY: "zoomX"
-                            }));
-
-                            // Add cursor
-                            // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
-                            var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
-                            cursor.lineY.set("visible", false);
-
-
-                            // Create axes
-                            // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
-                            var xRenderer = am5xy.AxisRendererX.new(root, {
-                                minGridDistance: 30
-                            });
-                            xRenderer.labels.template.setAll({
-                                rotation: -90,
-                                centerY: am5.p50,
-                                centerX: am5.p100,
-                                paddingRight: 15
-                            });
-
-                            var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
-                                maxDeviation: 0.3,
-                                categoryField: "category",
-                                renderer: xRenderer,
-                                tooltip: am5.Tooltip.new(root, {})
-                            }));
-
-                            var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-                                maxDeviation: 0.3,
-                                renderer: am5xy.AxisRendererY.new(root, {})
-                            }));
-
-
-                            // Create series
-                            // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
-                            var series = chart.series.push(am5xy.ColumnSeries.new(root, {
-                                name: "Series 1",
-                                xAxis: xAxis,
-                                stacked: true,
-                                yAxis: yAxis,
-                                valueYField: "value",
-                                sequencedInterpolation: true,
-                                categoryXField: "category",
-                                tooltip: am5.Tooltip.new(root, {
-                                    labelText: "{valueY}"
-                                })
-                            }));
-
-                            series.columns.template.setAll({
-                                cornerRadiusTL: 5,
-                                cornerRadiusTR: 5
-                            });
-                            series.columns.template.adapters.add("fill", (fill, target) => {
-                                return chart.get("colors").getIndex(series.columns.indexOf(
-                                    target));
-                            });
-
-                            series.columns.template.adapters.add("stroke", (stroke, target) => {
-                                return chart.get("colors").getIndex(series.columns.indexOf(
-                                    target));
-                            });
-
-
-                            // Set data
-                            var data = <?= json_encode($departmentWise) ?>;
-                            data = data.map(obj => {
-                                // Map over all the keys in your object
-                                Object.keys(obj).map(key => {
-                                    // Check if the key is numeric
-                                    if (!isNaN(obj[key])) {
-                                        obj[key] = +obj[key];
-                                    }
-                                })
-                                return obj;
-                            });
-
-
-                            xAxis.data.setAll(data);
-                            series.data.setAll(data);
-
-
-                            // Make stuff animate on load
-                            // https://www.amcharts.com/docs/v5/concepts/animations/
-                            series.appear(1000);
-                            chart.appear(1000, 100);
-
-                            var exporting = am5plugins_exporting.Exporting.new(root, {
-                                menu: am5plugins_exporting.ExportingMenu.new(root, {}),
-                                dataSource: data
-                            });
-
-                            exporting.events.on("dataprocessed", function(ev) {
-                                for (var i = 0; i < ev.data.length; i++) {
-                                    ev.data[i].sum = ev.data[i].value + ev.data[i].value2;
-                                }
-                            });
-
-                        }); // end am5.ready()
-                    </script>
-                    <div class="col-lg-12 mb-3">
-                        <div class="card gutter-b">
-                            <div style=" width: 100%;height: 600px; margin-left: auto; margin-right: auto;" id="departmentWiseBar"></div>
-                        </div>
-                    </div>
-                    <!-- Lead Department chart End -->
-
-                    <!-- Lead Program chart Start -->
-                    <div class="mb-10px mt-10px fs-10px">
-                        <h3 class="text-body">Lead Program Wise</h3>
-                    </div>
-
-                    <div class="row gx-2 mb-20px">
-                        <?php $count = 0;
-                        foreach ($programWise as $program) :
-                            if ($count == count($color))
-                                $count = 0;
-                        ?>
-                            <div class="col-lg-2">
-                                <div class="widget widget-stats mb-7px" style="background-color:<?= $color[$count++] ?>">
-                                    <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
-                                    <div class="stats-content">
-                                        <div class="stats-title"><?= $program['category'] ?></div>
-                                        <div class="stats-number"><?= $program['value'] ?? '0'; ?></div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-
-                    <!-- Pie Chart -->
-                    <script>
-                        am5.ready(function() {
-
-                            // Create root element
-                            // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-                            var root = am5.Root.new("programWise");
-
-
-                            // Set themes
-                            // https://www.amcharts.com/docs/v5/concepts/themes/
-                            root.setThemes([
-                                am5themes_Animated.new(root)
-                            ]);
-
-
-                            // Create chart
-                            // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
-                            var chart = root.container.children.push(am5percent.PieChart.new(root, {
-                                layout: root.verticalLayout
-                            }));
-
-
-                            // Create series
-                            // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
-                            var series = chart.series.push(am5percent.PieSeries.new(root, {
-                                alignLabels: true,
-                                calculateAggregates: true,
-                                valueField: "value",
-                                categoryField: "category"
-                            }));
-
-                            series.slices.template.setAll({
-                                strokeWidth: 3,
-                                stroke: am5.color(0xffffff)
-                            });
-
-                            series.labelsContainer.set("paddingTop", 30)
-
-
-                            // Set up adapters for variable slice radius
-                            // https://www.amcharts.com/docs/v5/concepts/settings/adapters/
-                            series.slices.template.adapters.add("radius", function(radius, target) {
-                                var dataItem = target.dataItem;
-                                var high = series.getPrivate("valueHigh");
-
-                                if (dataItem) {
-                                    var value = target.dataItem.get("valueWorking", 0);
-                                    return radius * value / high
-                                }
-                                return radius;
-                            });
-
-
-                            // Set data
-                            // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
-                            var data = <?= json_encode($programWise) ?>;
-                            data = data.map(obj => {
-                                // Map over all the keys in your object
-                                Object.keys(obj).map(key => {
-                                    // Check if the key is numeric
-                                    if (!isNaN(obj[key])) {
-                                        obj[key] = +obj[key];
-                                    }
-                                })
-                                return obj;
-                            });
-                            series.data.setAll(data);
-
-
-                            // Create legend
-                            // https://www.amcharts.com/docs/v5/charts/percent-charts/legend-percent-series/
-                            var legend = chart.children.push(am5.Legend.new(root, {
-                                centerX: am5.p50,
-                                x: am5.p50,
-                                marginTop: 15,
-                                marginBottom: 15
-                            }));
-
-                            legend.data.setAll(series.dataItems);
-
-
-                            // Play initial series animation
-                            // https://www.amcharts.com/docs/v5/concepts/animations/#Animation_of_series
-                            series.appear(1000, 100);
-
-                            var exporting = am5plugins_exporting.Exporting.new(root, {
-                                menu: am5plugins_exporting.ExportingMenu.new(root, {}),
-                                dataSource: data
-                            });
-
-                            exporting.events.on("dataprocessed", function(ev) {
-                                for (var i = 0; i < ev.data.length; i++) {
-                                    ev.data[i].sum = ev.data[i].value + ev.data[i].value2;
-                                }
-                            });
-
-                        }); // end am5.ready()
-                    </script>
-                    <div class="col-lg-12 mb-3">
-                        <div class="card gutter-b">
-                            <div style=" width: 100%;height: 600px; margin-left: auto; margin-right: auto;" id="programWise"></div>
-                        </div>
-                    </div>
-                    <!-- Bar Chart -->
-                    <script>
-                        am5.ready(function() {
-
-                            // Create root element
-                            // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-                            var root = am5.Root.new("programWiseBar");
-
-
-                            // Set themes
-                            // https://www.amcharts.com/docs/v5/concepts/themes/
-                            root.setThemes([
-                                am5themes_Animated.new(root)
-                            ]);
-
-
-                            // Create chart
-                            // https://www.amcharts.com/docs/v5/charts/xy-chart/
-                            var chart = root.container.children.push(am5xy.XYChart.new(root, {
-                                panX: true,
-                                panY: true,
-                                wheelX: "panX",
-                                wheelY: "zoomX"
-                            }));
-
-                            // Add cursor
-                            // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
-                            var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
-                            cursor.lineY.set("visible", false);
-
-
-                            // Create axes
-                            // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
-                            var xRenderer = am5xy.AxisRendererX.new(root, {
-                                minGridDistance: 30
-                            });
-                            xRenderer.labels.template.setAll({
-                                rotation: -90,
-                                centerY: am5.p50,
-                                centerX: am5.p100,
-                                paddingRight: 15
-                            });
-
-                            var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
-                                maxDeviation: 0.3,
-                                categoryField: "category",
-                                renderer: xRenderer,
-                                tooltip: am5.Tooltip.new(root, {})
-                            }));
-
-                            var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-                                maxDeviation: 0.3,
-                                renderer: am5xy.AxisRendererY.new(root, {})
-                            }));
-
-
-                            // Create series
-                            // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
-                            var series = chart.series.push(am5xy.ColumnSeries.new(root, {
-                                name: "Series 1",
-                                xAxis: xAxis,
-                                stacked: true,
-                                yAxis: yAxis,
-                                valueYField: "value",
-                                sequencedInterpolation: true,
-                                categoryXField: "category",
-                                tooltip: am5.Tooltip.new(root, {
-                                    labelText: "{valueY}"
-                                })
-                            }));
-
-                            series.columns.template.setAll({
-                                cornerRadiusTL: 5,
-                                cornerRadiusTR: 5
-                            });
-                            series.columns.template.adapters.add("fill", (fill, target) => {
-                                return chart.get("colors").getIndex(series.columns.indexOf(
-                                    target));
-                            });
-
-                            series.columns.template.adapters.add("stroke", (stroke, target) => {
-                                return chart.get("colors").getIndex(series.columns.indexOf(
-                                    target));
-                            });
-
-
-                            // Set data
-                            var data = <?= json_encode($programWise) ?>;
-                            data = data.map(obj => {
-                                // Map over all the keys in your object
-                                Object.keys(obj).map(key => {
-                                    // Check if the key is numeric
-                                    if (!isNaN(obj[key])) {
-                                        obj[key] = +obj[key];
-                                    }
-                                })
-                                return obj;
-                            });
-
-
-                            xAxis.data.setAll(data);
-                            series.data.setAll(data);
-
-
-                            // Make stuff animate on load
-                            // https://www.amcharts.com/docs/v5/concepts/animations/
-                            series.appear(1000);
-                            chart.appear(1000, 100);
-
-                            var exporting = am5plugins_exporting.Exporting.new(root, {
-                                menu: am5plugins_exporting.ExportingMenu.new(root, {}),
-                                dataSource: data
-                            });
-
-                            exporting.events.on("dataprocessed", function(ev) {
-                                for (var i = 0; i < ev.data.length; i++) {
-                                    ev.data[i].sum = ev.data[i].value + ev.data[i].value2;
-                                }
-                            });
-
-                        }); // end am5.ready()
-                    </script>
-                    <div class="col-lg-12 mb-3">
-                        <div class="card gutter-b">
-                            <div style=" width: 100%;height: 600px; margin-left: auto; margin-right: auto;" id="programWiseBar"></div>
-                        </div>
-                    </div>
-                    <!-- Lead Program chart End -->
-
-
                 </div>
             </div>
 
         </div>
 
+        <div class="mb-10px mt-10px fs-10px">
+            <h3 class="text-body">Application Form Step Chart(<?= array_sum(array_column($formStep ?? [], 'value')) ?>)</h3>
+        </div>
+
+        <div class="col-lg-12 mb-3">
+            <div class="card">
+                <div class="chartdiv" id="formStepchart"></div>
+            </div>
+        </div>
+        <!-- Applied Application Form End-->
+
+        <!-- Lead Status chart Start -->
+
+        <div class="mb-10px mt-10px fs-10px">
+            <h3 class="text-body">Lead Status Wise</h3>
+        </div>
+
+        <div class="row gx-2 mb-20px">
+            <?php $count = 0;
+            foreach ($leadStatusWise as $status) :
+                if ($count == count($color))
+                    $count = 0;
+            ?>
+
+                <div class="col-lg-2">
+                    <div class="widget widget-stats  mb-7px" style="background-color: <?= $color[$count++] ?>">
+                        <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                        <div class="stats-content">
+                            <div class="stats-title"><?= $status['category'] ?></div>
+                            <div class="stats-number"><?= $status['value'] ?? '0'; ?></div>
+
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <div class="row">
+            <!-- Pie Chart -->
+            <script>
+                am5.ready(function() {
+
+                    // Create root element
+                    // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+                    var root = am5.Root.new("leadStatusWise");
+
+
+                    // Set themes
+                    // https://www.amcharts.com/docs/v5/concepts/themes/
+                    root.setThemes([
+                        am5themes_Animated.new(root)
+                    ]);
+
+
+                    // Create chart
+                    // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
+                    var chart = root.container.children.push(am5percent.PieChart.new(root, {
+                        layout: root.verticalLayout
+                    }));
+
+
+                    // Create series
+                    // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
+                    var series = chart.series.push(am5percent.PieSeries.new(root, {
+                        alignLabels: true,
+                        calculateAggregates: true,
+                        valueField: "value",
+                        categoryField: "category"
+                    }));
+
+                    series.slices.template.setAll({
+                        strokeWidth: 3,
+                        stroke: am5.color(0xffffff)
+                    });
+
+                    series.labelsContainer.set("paddingTop", 30)
+
+
+                    // Set up adapters for variable slice radius
+                    // https://www.amcharts.com/docs/v5/concepts/settings/adapters/
+                    series.slices.template.adapters.add("radius", function(radius, target) {
+                        var dataItem = target.dataItem;
+                        var high = series.getPrivate("valueHigh");
+
+                        if (dataItem) {
+                            var value = target.dataItem.get("valueWorking", 0);
+                            return radius * value / high
+                        }
+                        return radius;
+                    });
+
+
+                    // Set data
+                    // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
+                    var data = <?= json_encode($leadStatusWise) ?>;
+                    data = data.map(obj => {
+                        // Map over all the keys in your object
+                        Object.keys(obj).map(key => {
+                            // Check if the key is numeric
+                            if (!isNaN(obj[key])) {
+                                obj[key] = +obj[key];
+                            }
+                        })
+                        return obj;
+                    });
+                    series.data.setAll(data);
+
+
+                    // Create legend
+                    // https://www.amcharts.com/docs/v5/charts/percent-charts/legend-percent-series/
+                    var legend = chart.children.push(am5.Legend.new(root, {
+                        centerX: am5.p50,
+                        x: am5.p50,
+                        marginTop: 15,
+                        marginBottom: 15
+                    }));
+
+                    legend.data.setAll(series.dataItems);
+
+
+                    // Play initial series animation
+                    // https://www.amcharts.com/docs/v5/concepts/animations/#Animation_of_series
+                    series.appear(1000, 100);
+
+                    var exporting = am5plugins_exporting.Exporting.new(root, {
+                        menu: am5plugins_exporting.ExportingMenu.new(root, {}),
+                        dataSource: data
+                    });
+
+                    exporting.events.on("dataprocessed", function(ev) {
+                        for (var i = 0; i < ev.data.length; i++) {
+                            ev.data[i].sum = ev.data[i].value + ev.data[i].value2;
+                        }
+                    });
+
+                }); // end am5.ready()
+            </script>
+            <div class="col-lg-6 mb-3">
+                <div class="card gutter-b">
+                    <div class="chartdiv" id="leadStatusWise"></div>
+                </div>
+            </div>
+            <!-- Bar Chart -->
+            <script>
+                am5.ready(function() {
+
+                    // Create root element
+                    // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+                    var root = am5.Root.new("leadStatusWiseBar");
+
+
+                    // Set themes
+                    // https://www.amcharts.com/docs/v5/concepts/themes/
+                    root.setThemes([
+                        am5themes_Animated.new(root)
+                    ]);
+
+
+                    // Create chart
+                    // https://www.amcharts.com/docs/v5/charts/xy-chart/
+                    var chart = root.container.children.push(am5xy.XYChart.new(root, {
+                        panX: true,
+                        panY: true,
+                        wheelX: "panX",
+                        wheelY: "zoomX"
+                    }));
+
+                    // Add cursor
+                    // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+                    var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+                    cursor.lineY.set("visible", false);
+
+
+                    // Create axes
+                    // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+                    var xRenderer = am5xy.AxisRendererX.new(root, {
+                        minGridDistance: 30
+                    });
+                    xRenderer.labels.template.setAll({
+                        rotation: -90,
+                        centerY: am5.p50,
+                        centerX: am5.p100,
+                        paddingRight: 15
+                    });
+
+                    var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+                        maxDeviation: 0.3,
+                        categoryField: "category",
+                        renderer: xRenderer,
+                        tooltip: am5.Tooltip.new(root, {})
+                    }));
+
+                    var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+                        maxDeviation: 0.3,
+                        renderer: am5xy.AxisRendererY.new(root, {})
+                    }));
+
+
+                    // Create series
+                    // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+                    var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+                        name: "Series 1",
+                        xAxis: xAxis,
+                        stacked: true,
+                        yAxis: yAxis,
+                        valueYField: "value",
+                        sequencedInterpolation: true,
+                        categoryXField: "category",
+                        tooltip: am5.Tooltip.new(root, {
+                            labelText: "{valueY}"
+                        })
+                    }));
+
+                    series.columns.template.setAll({
+                        cornerRadiusTL: 5,
+                        cornerRadiusTR: 5
+                    });
+                    series.columns.template.adapters.add("fill", (fill, target) => {
+                        return chart.get("colors").getIndex(series.columns.indexOf(
+                            target));
+                    });
+
+                    series.columns.template.adapters.add("stroke", (stroke, target) => {
+                        return chart.get("colors").getIndex(series.columns.indexOf(
+                            target));
+                    });
+
+
+                    // Set data
+                    var data = <?= json_encode($leadStatusWise) ?>;
+                    data = data.map(obj => {
+                        // Map over all the keys in your object
+                        Object.keys(obj).map(key => {
+                            // Check if the key is numeric
+                            if (!isNaN(obj[key])) {
+                                obj[key] = +obj[key];
+                            }
+                        })
+                        return obj;
+                    });
+
+
+                    xAxis.data.setAll(data);
+                    series.data.setAll(data);
+
+
+                    // Make stuff animate on load
+                    // https://www.amcharts.com/docs/v5/concepts/animations/
+                    series.appear(1000);
+                    chart.appear(1000, 100);
+
+                    var exporting = am5plugins_exporting.Exporting.new(root, {
+                        menu: am5plugins_exporting.ExportingMenu.new(root, {}),
+                        dataSource: data
+                    });
+
+                    exporting.events.on("dataprocessed", function(ev) {
+                        for (var i = 0; i < ev.data.length; i++) {
+                            ev.data[i].sum = ev.data[i].value + ev.data[i].value2;
+                        }
+                    });
+
+                }); // end am5.ready()
+            </script>
+            <div class="col-lg-6 mb-3">
+                <div class="card gutter-b">
+                    <div class="chartdiv" id="leadStatusWiseBar"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lead Status chart End -->
+
+        <!-- Lead Source chart Start -->
+        <div class="mb-10px mt-10px fs-10px">
+            <h3 class="text-body">Lead Source Wise</h3>
+        </div>
+
+        <div class="row gx-2 mb-20px">
+            <?php $count = 0;
+            foreach ($leadSourceWise as $source) :
+                if ($count == count($color))
+                    $count = 0;
+            ?>
+                <div class="col-lg-2">
+                    <div class="widget widget-stats  mb-7px" style="background-color:<?= $color[$count++] ?>">
+                        <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                        <div class="stats-content">
+                            <div class="stats-title"><?= $source['category'] ?></div>
+                            <div class="stats-number"><?= $source['value'] ?? '0'; ?></div>
+
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <div class="row">
+            <!-- Pie Chart -->
+            <script>
+                am5.ready(function() {
+
+                    // Create root element
+                    // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+                    var root = am5.Root.new("leadSourceWise");
+
+
+                    // Set themes
+                    // https://www.amcharts.com/docs/v5/concepts/themes/
+                    root.setThemes([
+                        am5themes_Animated.new(root)
+                    ]);
+
+
+                    // Create chart
+                    // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
+                    var chart = root.container.children.push(am5percent.PieChart.new(root, {
+                        layout: root.verticalLayout
+                    }));
+
+
+                    // Create series
+                    // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
+                    var series = chart.series.push(am5percent.PieSeries.new(root, {
+                        alignLabels: true,
+                        calculateAggregates: true,
+                        valueField: "value",
+                        categoryField: "category"
+                    }));
+
+                    series.slices.template.setAll({
+                        strokeWidth: 3,
+                        stroke: am5.color(0xffffff)
+                    });
+
+                    series.labelsContainer.set("paddingTop", 30)
+
+
+                    // Set up adapters for variable slice radius
+                    // https://www.amcharts.com/docs/v5/concepts/settings/adapters/
+                    series.slices.template.adapters.add("radius", function(radius, target) {
+                        var dataItem = target.dataItem;
+                        var high = series.getPrivate("valueHigh");
+
+                        if (dataItem) {
+                            var value = target.dataItem.get("valueWorking", 0);
+                            return radius * value / high
+                        }
+                        return radius;
+                    });
+
+
+                    // Set data
+                    // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
+                    var data = <?= json_encode($leadSourceWise) ?>;
+                    data = data.map(obj => {
+                        // Map over all the keys in your object
+                        Object.keys(obj).map(key => {
+                            // Check if the key is numeric
+                            if (!isNaN(obj[key])) {
+                                obj[key] = +obj[key];
+                            }
+                        })
+                        return obj;
+                    });
+                    series.data.setAll(data);
+
+
+                    // Create legend
+                    // https://www.amcharts.com/docs/v5/charts/percent-charts/legend-percent-series/
+                    var legend = chart.children.push(am5.Legend.new(root, {
+                        centerX: am5.p50,
+                        x: am5.p50,
+                        marginTop: 15,
+                        marginBottom: 15
+                    }));
+
+                    legend.data.setAll(series.dataItems);
+
+
+                    // Play initial series animation
+                    // https://www.amcharts.com/docs/v5/concepts/animations/#Animation_of_series
+                    series.appear(1000, 100);
+
+                    var exporting = am5plugins_exporting.Exporting.new(root, {
+                        menu: am5plugins_exporting.ExportingMenu.new(root, {}),
+                        dataSource: data
+                    });
+
+                    exporting.events.on("dataprocessed", function(ev) {
+                        for (var i = 0; i < ev.data.length; i++) {
+                            ev.data[i].sum = ev.data[i].value + ev.data[i].value2;
+                        }
+                    });
+
+                }); // end am5.ready()
+            </script>
+            <div class="col-lg-6 mb-3">
+                <div class="card gutter-b">
+                    <div class="chartdiv" id="leadSourceWise"></div>
+                </div>
+            </div>
+            <!-- Bar Chart -->
+            <script>
+                am5.ready(function() {
+
+                    // Create root element
+                    // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+                    var root = am5.Root.new("leadSourceWiseBar");
+
+
+                    // Set themes
+                    // https://www.amcharts.com/docs/v5/concepts/themes/
+                    root.setThemes([
+                        am5themes_Animated.new(root)
+                    ]);
+
+
+                    // Create chart
+                    // https://www.amcharts.com/docs/v5/charts/xy-chart/
+                    var chart = root.container.children.push(am5xy.XYChart.new(root, {
+                        panX: true,
+                        panY: true,
+                        wheelX: "panX",
+                        wheelY: "zoomX"
+                    }));
+
+                    // Add cursor
+                    // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+                    var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+                    cursor.lineY.set("visible", false);
+
+
+                    // Create axes
+                    // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+                    var xRenderer = am5xy.AxisRendererX.new(root, {
+                        minGridDistance: 30
+                    });
+                    xRenderer.labels.template.setAll({
+                        rotation: -90,
+                        centerY: am5.p50,
+                        centerX: am5.p100,
+                        paddingRight: 15
+                    });
+
+                    var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+                        maxDeviation: 0.3,
+                        categoryField: "category",
+                        renderer: xRenderer,
+                        tooltip: am5.Tooltip.new(root, {})
+                    }));
+
+                    var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+                        maxDeviation: 0.3,
+                        renderer: am5xy.AxisRendererY.new(root, {})
+                    }));
+
+
+                    // Create series
+                    // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+                    var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+                        name: "Series 1",
+                        xAxis: xAxis,
+                        stacked: true,
+                        yAxis: yAxis,
+                        valueYField: "value",
+                        sequencedInterpolation: true,
+                        categoryXField: "category",
+                        tooltip: am5.Tooltip.new(root, {
+                            labelText: "{valueY}"
+                        })
+                    }));
+
+                    series.columns.template.setAll({
+                        cornerRadiusTL: 5,
+                        cornerRadiusTR: 5
+                    });
+                    series.columns.template.adapters.add("fill", (fill, target) => {
+                        return chart.get("colors").getIndex(series.columns.indexOf(
+                            target));
+                    });
+
+                    series.columns.template.adapters.add("stroke", (stroke, target) => {
+                        return chart.get("colors").getIndex(series.columns.indexOf(
+                            target));
+                    });
+
+
+                    // Set data
+                    var data = <?= json_encode($leadSourceWise) ?>;
+                    data = data.map(obj => {
+                        // Map over all the keys in your object
+                        Object.keys(obj).map(key => {
+                            // Check if the key is numeric
+                            if (!isNaN(obj[key])) {
+                                obj[key] = +obj[key];
+                            }
+                        })
+                        return obj;
+                    });
+
+
+                    xAxis.data.setAll(data);
+                    series.data.setAll(data);
+
+
+                    // Make stuff animate on load
+                    // https://www.amcharts.com/docs/v5/concepts/animations/
+                    series.appear(1000);
+                    chart.appear(1000, 100);
+
+                    var exporting = am5plugins_exporting.Exporting.new(root, {
+                        menu: am5plugins_exporting.ExportingMenu.new(root, {}),
+                        dataSource: data
+                    });
+
+                    exporting.events.on("dataprocessed", function(ev) {
+                        for (var i = 0; i < ev.data.length; i++) {
+                            ev.data[i].sum = ev.data[i].value + ev.data[i].value2;
+                        }
+                    });
+
+                }); // end am5.ready()
+            </script>
+            <div class="col-lg-6 mb-3">
+                <div class="card gutter-b">
+                    <div class="chartdiv" id="leadSourceWiseBar"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Lead Source chart End -->
+
+        <!-- Lead Department chart Start -->
+        <div class="mb-10px mt-10px fs-10px">
+            <h3 class="text-body">Lead Department Wise</h3>
+        </div>
+
+        <div class="row gx-2 mb-20px">
+            <?php $count = 0;
+            foreach ($departmentWise as $dept) :
+                if ($count == count($color))
+                    $count = 0;
+            ?>
+                <div class="col-lg-2 ">
+                    <div class="widget widget-stats" style="background-color:<?= $color[$count++] ?>; height: 90%">
+                        <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                        <div class="stats-content">
+                            <div class="stats-title"><?= $dept['category'] ?></div>
+                            <div class="stats-number"><?= $dept['value'] ?? '0'; ?></div>
+
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Pie Chart -->
+        <script>
+            am5.ready(function() {
+
+                // Create root element
+                // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+                var root = am5.Root.new("departmentWise");
+
+
+                // Set themes
+                // https://www.amcharts.com/docs/v5/concepts/themes/
+                root.setThemes([
+                    am5themes_Animated.new(root)
+                ]);
+
+
+                // Create chart
+                // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
+                var chart = root.container.children.push(am5percent.PieChart.new(root, {
+                    layout: root.verticalLayout
+                }));
+
+
+                // Create series
+                // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
+                var series = chart.series.push(am5percent.PieSeries.new(root, {
+                    alignLabels: true,
+                    calculateAggregates: true,
+                    valueField: "value",
+                    categoryField: "category"
+                }));
+
+                series.slices.template.setAll({
+                    strokeWidth: 3,
+                    stroke: am5.color(0xffffff)
+                });
+
+                series.labelsContainer.set("paddingTop", 30)
+
+
+                // Set up adapters for variable slice radius
+                // https://www.amcharts.com/docs/v5/concepts/settings/adapters/
+                series.slices.template.adapters.add("radius", function(radius, target) {
+                    var dataItem = target.dataItem;
+                    var high = series.getPrivate("valueHigh");
+
+                    if (dataItem) {
+                        var value = target.dataItem.get("valueWorking", 0);
+                        return radius * value / high
+                    }
+                    return radius;
+                });
+
+
+                // Set data
+                // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
+                var data = <?= json_encode($departmentWise) ?>;
+                data = data.map(obj => {
+                    // Map over all the keys in your object
+                    Object.keys(obj).map(key => {
+                        // Check if the key is numeric
+                        if (!isNaN(obj[key])) {
+                            obj[key] = +obj[key];
+                        }
+                    })
+                    return obj;
+                });
+                series.data.setAll(data);
+
+
+                // Create legend
+                // https://www.amcharts.com/docs/v5/charts/percent-charts/legend-percent-series/
+                var legend = chart.children.push(am5.Legend.new(root, {
+                    centerX: am5.p50,
+                    x: am5.p50,
+                    marginTop: 15,
+                    marginBottom: 15
+                }));
+
+                legend.data.setAll(series.dataItems);
+
+
+                // Play initial series animation
+                // https://www.amcharts.com/docs/v5/concepts/animations/#Animation_of_series
+                series.appear(1000, 100);
+
+                var exporting = am5plugins_exporting.Exporting.new(root, {
+                    menu: am5plugins_exporting.ExportingMenu.new(root, {}),
+                    dataSource: data
+                });
+
+                exporting.events.on("dataprocessed", function(ev) {
+                    for (var i = 0; i < ev.data.length; i++) {
+                        ev.data[i].sum = ev.data[i].value + ev.data[i].value2;
+                    }
+                });
+
+            }); // end am5.ready()
+        </script>
+        <div class="col-lg-12 mb-3">
+            <div class="card gutter-b">
+                <div style=" width: 100%;height: 600px; margin-left: auto; margin-right: auto;" id="departmentWise"></div>
+            </div>
+        </div>
+        <!-- Bar Chart -->
+        <script>
+            am5.ready(function() {
+
+                // Create root element
+                // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+                var root = am5.Root.new("departmentWiseBar");
+
+
+                // Set themes
+                // https://www.amcharts.com/docs/v5/concepts/themes/
+                root.setThemes([
+                    am5themes_Animated.new(root)
+                ]);
+
+
+                // Create chart
+                // https://www.amcharts.com/docs/v5/charts/xy-chart/
+                var chart = root.container.children.push(am5xy.XYChart.new(root, {
+                    panX: true,
+                    panY: true,
+                    wheelX: "panX",
+                    wheelY: "zoomX"
+                }));
+
+                // Add cursor
+                // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+                var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+                cursor.lineY.set("visible", false);
+
+
+                // Create axes
+                // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+                var xRenderer = am5xy.AxisRendererX.new(root, {
+                    minGridDistance: 30
+                });
+                xRenderer.labels.template.setAll({
+                    rotation: -90,
+                    centerY: am5.p50,
+                    centerX: am5.p100,
+                    paddingRight: 15
+                });
+
+                var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+                    maxDeviation: 0.3,
+                    categoryField: "category",
+                    renderer: xRenderer,
+                    tooltip: am5.Tooltip.new(root, {})
+                }));
+
+                var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+                    maxDeviation: 0.3,
+                    renderer: am5xy.AxisRendererY.new(root, {})
+                }));
+
+
+                // Create series
+                // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+                var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+                    name: "Series 1",
+                    xAxis: xAxis,
+                    stacked: true,
+                    yAxis: yAxis,
+                    valueYField: "value",
+                    sequencedInterpolation: true,
+                    categoryXField: "category",
+                    tooltip: am5.Tooltip.new(root, {
+                        labelText: "{valueY}"
+                    })
+                }));
+
+                series.columns.template.setAll({
+                    cornerRadiusTL: 5,
+                    cornerRadiusTR: 5
+                });
+                series.columns.template.adapters.add("fill", (fill, target) => {
+                    return chart.get("colors").getIndex(series.columns.indexOf(
+                        target));
+                });
+
+                series.columns.template.adapters.add("stroke", (stroke, target) => {
+                    return chart.get("colors").getIndex(series.columns.indexOf(
+                        target));
+                });
+
+
+                // Set data
+                var data = <?= json_encode($departmentWise) ?>;
+                data = data.map(obj => {
+                    // Map over all the keys in your object
+                    Object.keys(obj).map(key => {
+                        // Check if the key is numeric
+                        if (!isNaN(obj[key])) {
+                            obj[key] = +obj[key];
+                        }
+                    })
+                    return obj;
+                });
+
+
+                xAxis.data.setAll(data);
+                series.data.setAll(data);
+
+
+                // Make stuff animate on load
+                // https://www.amcharts.com/docs/v5/concepts/animations/
+                series.appear(1000);
+                chart.appear(1000, 100);
+
+                var exporting = am5plugins_exporting.Exporting.new(root, {
+                    menu: am5plugins_exporting.ExportingMenu.new(root, {}),
+                    dataSource: data
+                });
+
+                exporting.events.on("dataprocessed", function(ev) {
+                    for (var i = 0; i < ev.data.length; i++) {
+                        ev.data[i].sum = ev.data[i].value + ev.data[i].value2;
+                    }
+                });
+
+            }); // end am5.ready()
+        </script>
+        <div class="col-lg-12 mb-3">
+            <div class="card gutter-b">
+                <div style=" width: 100%;height: 600px; margin-left: auto; margin-right: auto;" id="departmentWiseBar"></div>
+            </div>
+        </div>
+        <!-- Lead Department chart End -->
+
+        <!-- Lead Program chart Start -->
+        <div class="mb-10px mt-10px fs-10px">
+            <h3 class="text-body">Lead Program Wise</h3>
+        </div>
+
+        <div class="row gx-2 mb-20px">
+            <?php $count = 0;
+            foreach ($programWise as $program) :
+                if ($count == count($color))
+                    $count = 0;
+            ?>
+                <div class="col-lg-2 mb-2">
+                    <div class="widget widget-stats mb-7px" style="background-color:<?= $color[$count++] ?>; height: 100%">
+                        <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+                        <div class="stats-content">
+                            <div class="stats-title"><?= $program['category'] ?></div>
+                            <div class="stats-number"><?= $program['value'] ?? '0'; ?></div>
+
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Pie Chart -->
+        <script>
+            am5.ready(function() {
+
+                // Create root element
+                // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+                var root = am5.Root.new("programWise");
+
+
+                // Set themes
+                // https://www.amcharts.com/docs/v5/concepts/themes/
+                root.setThemes([
+                    am5themes_Animated.new(root)
+                ]);
+
+
+                // Create chart
+                // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
+                var chart = root.container.children.push(am5percent.PieChart.new(root, {
+                    layout: root.verticalLayout
+                }));
+
+
+                // Create series
+                // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
+                var series = chart.series.push(am5percent.PieSeries.new(root, {
+                    alignLabels: true,
+                    calculateAggregates: true,
+                    valueField: "value",
+                    categoryField: "category"
+                }));
+
+                series.slices.template.setAll({
+                    strokeWidth: 3,
+                    stroke: am5.color(0xffffff)
+                });
+
+                series.labelsContainer.set("paddingTop", 30)
+
+
+                // Set up adapters for variable slice radius
+                // https://www.amcharts.com/docs/v5/concepts/settings/adapters/
+                series.slices.template.adapters.add("radius", function(radius, target) {
+                    var dataItem = target.dataItem;
+                    var high = series.getPrivate("valueHigh");
+
+                    if (dataItem) {
+                        var value = target.dataItem.get("valueWorking", 0);
+                        return radius * value / high
+                    }
+                    return radius;
+                });
+
+
+                // Set data
+                // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
+                var data = <?= json_encode($programWise) ?>;
+                data = data.map(obj => {
+                    // Map over all the keys in your object
+                    Object.keys(obj).map(key => {
+                        // Check if the key is numeric
+                        if (!isNaN(obj[key])) {
+                            obj[key] = +obj[key];
+                        }
+                    })
+                    return obj;
+                });
+                series.data.setAll(data);
+
+
+                // Create legend
+                // https://www.amcharts.com/docs/v5/charts/percent-charts/legend-percent-series/
+                var legend = chart.children.push(am5.Legend.new(root, {
+                    centerX: am5.p50,
+                    x: am5.p50,
+                    marginTop: 15,
+                    marginBottom: 15
+                }));
+
+                legend.data.setAll(series.dataItems);
+
+
+                // Play initial series animation
+                // https://www.amcharts.com/docs/v5/concepts/animations/#Animation_of_series
+                series.appear(1000, 100);
+
+                var exporting = am5plugins_exporting.Exporting.new(root, {
+                    menu: am5plugins_exporting.ExportingMenu.new(root, {}),
+                    dataSource: data
+                });
+
+                exporting.events.on("dataprocessed", function(ev) {
+                    for (var i = 0; i < ev.data.length; i++) {
+                        ev.data[i].sum = ev.data[i].value + ev.data[i].value2;
+                    }
+                });
+
+            }); // end am5.ready()
+        </script>
+        <div class="col-lg-12 mb-3">
+            <div class="card gutter-b">
+                <div style=" width: 100%;height: 600px; margin-left: auto; margin-right: auto;" id="programWise"></div>
+            </div>
+        </div>
+        <!-- Bar Chart -->
+        <script>
+            am5.ready(function() {
+
+                // Create root element
+                // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+                var root = am5.Root.new("programWiseBar");
+
+
+                // Set themes
+                // https://www.amcharts.com/docs/v5/concepts/themes/
+                root.setThemes([
+                    am5themes_Animated.new(root)
+                ]);
+
+
+                // Create chart
+                // https://www.amcharts.com/docs/v5/charts/xy-chart/
+                var chart = root.container.children.push(am5xy.XYChart.new(root, {
+                    panX: true,
+                    panY: true,
+                    wheelX: "panX",
+                    wheelY: "zoomX"
+                }));
+
+                // Add cursor
+                // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+                var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+                cursor.lineY.set("visible", false);
+
+
+                // Create axes
+                // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+                var xRenderer = am5xy.AxisRendererX.new(root, {
+                    minGridDistance: 30
+                });
+                xRenderer.labels.template.setAll({
+                    rotation: -90,
+                    centerY: am5.p50,
+                    centerX: am5.p100,
+                    paddingRight: 15
+                });
+
+                var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+                    maxDeviation: 0.3,
+                    categoryField: "category",
+                    renderer: xRenderer,
+                    tooltip: am5.Tooltip.new(root, {})
+                }));
+
+                var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+                    maxDeviation: 0.3,
+                    renderer: am5xy.AxisRendererY.new(root, {})
+                }));
+
+
+                // Create series
+                // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+                var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+                    name: "Series 1",
+                    xAxis: xAxis,
+                    stacked: true,
+                    yAxis: yAxis,
+                    valueYField: "value",
+                    sequencedInterpolation: true,
+                    categoryXField: "category",
+                    tooltip: am5.Tooltip.new(root, {
+                        labelText: "{valueY}"
+                    })
+                }));
+
+                series.columns.template.setAll({
+                    cornerRadiusTL: 5,
+                    cornerRadiusTR: 5
+                });
+                series.columns.template.adapters.add("fill", (fill, target) => {
+                    return chart.get("colors").getIndex(series.columns.indexOf(
+                        target));
+                });
+
+                series.columns.template.adapters.add("stroke", (stroke, target) => {
+                    return chart.get("colors").getIndex(series.columns.indexOf(
+                        target));
+                });
+
+
+                // Set data
+                var data = <?= json_encode($programWise) ?>;
+                data = data.map(obj => {
+                    // Map over all the keys in your object
+                    Object.keys(obj).map(key => {
+                        // Check if the key is numeric
+                        if (!isNaN(obj[key])) {
+                            obj[key] = +obj[key];
+                        }
+                    })
+                    return obj;
+                });
+
+
+                xAxis.data.setAll(data);
+                series.data.setAll(data);
+
+
+                // Make stuff animate on load
+                // https://www.amcharts.com/docs/v5/concepts/animations/
+                series.appear(1000);
+                chart.appear(1000, 100);
+
+                var exporting = am5plugins_exporting.Exporting.new(root, {
+                    menu: am5plugins_exporting.ExportingMenu.new(root, {}),
+                    dataSource: data
+                });
+
+                exporting.events.on("dataprocessed", function(ev) {
+                    for (var i = 0; i < ev.data.length; i++) {
+                        ev.data[i].sum = ev.data[i].value + ev.data[i].value2;
+                    }
+                });
+
+            }); // end am5.ready()
+        </script>
+        <div class="col-lg-12 mb-3">
+            <div class="card gutter-b">
+                <div style=" width: 100%;height: 600px; margin-left: auto; margin-right: auto;" id="programWiseBar"></div>
+            </div>
+        </div>
+        <!-- Lead Program chart End -->
 
 
     </div>
