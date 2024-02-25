@@ -161,8 +161,8 @@ function getStatusTime($leadId)
                         <td><?= $lead['source_name'] ?></td>
                         <td><?= date('d/m/Y H:i:s', strtotime($lead['lead_created_at'])) ?></td>
                         <td nowrap="">
-                            <a href="<?= base_url('admin/lead-profile/' . $lead['lid']) ?>" class="btn btn-sm btn-primary me-1">Edit</a>
-                            <a href="<?= base_url('admin/delete/lead/' . $lead['lid']) ?>" class="btn btn-sm btn-danger" title="Delete">Delete
+                            <a href="<?= base_url('admin/lead-profile/' . $lead['lid']) ?>" class="btn btn-sm btn-primary me-1" data-bs-toggle="tooltip" title="Edit">Edit</a>
+                            <a href="<?= base_url('admin/delete/lead/' . $lead['lid']) ?>" class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Delete">Delete
                             </a>
                         </td>
                     </tr>

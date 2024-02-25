@@ -177,7 +177,7 @@ $query = $uri->getQuery();
                         <td><?= $lead['source_name'] ?></td>
                         <td><?= date('d/m/Y H:i:s', strtotime($lead['sl_created_at'])) ?></td>
                         <td nowrap="">
-                            <a href="<?= base_url('admin/edit-application-form/' . $lead['lead_id'] . '/' . $lead['sid']) ?>" class="btn btn-sm btn-warning me-1"> <i class="fa fa-file-pen"></i> Edit App. Form</a>
+                            <a href="<?= base_url('admin/edit-application-form/' . $lead['lead_id'] . '/' . $lead['sid']) ?>" class="btn btn-sm btn-warning me-1" data-bs-toggle="tooltip" title="Process Application"> <i class="fa fa-file-pen"></i> Edit App. Form</a>
                         </td>
                     </tr>
                 <?php $count++;

@@ -64,6 +64,7 @@ class BaseController extends Controller
 
     protected function SendMessageApi($mobile = false, $sms_text = false, $template = false, $type = 'text')
     {
+        return true;
         if ($mobile !== false && $sms_text !== false) {
             $api_key = '464A8DB1B3AF15';
             $from = 'SGYNVR';
@@ -71,6 +72,7 @@ class BaseController extends Controller
 
             $temId = $template;
             $contacts = $mobile;
+
             if ($type == 'unicode') {
                 $sms_text = utf8_encode($sms_text);
             }
@@ -93,6 +95,7 @@ class BaseController extends Controller
     }
     protected function sendMailer($data)
     {
+        return true;
 
         $email = \Config\Services::email();
         $config = array(
