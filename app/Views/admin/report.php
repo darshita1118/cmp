@@ -12,20 +12,6 @@ $dataAdmissionStatus = [
 $color = array_column($dataAdmissionStatus, 'color');
 
 $sqlAdmissionStatus = array_column($admissionStatus, 'admisn_status');
-/*
-$handlersJson = json_encode($handlers);
-$statusesJson = json_encode($statuses);
-$sourcesJson = json_encode($sources);
-$programsJson = json_encode($programs);
-
-?>
-<script>
-const handlers = <?= $handlersJson ?>;
-const statuses = <?= $statusesJson ?>;
-const sources = <?= $sourcesJson ?>;
-const programs = <?= $programsJson ?>;
-</script>
-*/
 ?>
 <!--begin::Subheader-->
 <style>
@@ -62,7 +48,7 @@ const programs = <?= $programsJson ?>;
         </div>
         <div class="row gx-2 mb-20px">
 
-            <div class="col-lg-2" onclick="window.location.href='<?= base_url('handler/report/created-sid') ?>'">
+            <div class="col-lg-2" onclick="window.location.href='<?= base_url('admin/report/created-sid') ?>'">
                 <div class="widget widget-stats bg-teal mb-7px">
                     <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
                     <div class="stats-content">
@@ -74,7 +60,7 @@ const programs = <?= $programsJson ?>;
             </div>
 
 
-            <div class="col-lg-2" onclick="window.location.href='<?= base_url('handler/report/registration') ?>'">
+            <div class="col-lg-2" onclick="window.location.href='<?= base_url('admin/report/registration') ?>'">
                 <div class="widget widget-stats bg-blue mb-7px">
                     <div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
                     <div class="stats-content">
@@ -86,7 +72,7 @@ const programs = <?= $programsJson ?>;
             </div>
 
 
-            <div class="col-lg-2" onclick="window.location.href='<?= base_url('handler/report/admission-done') ?>'">
+            <div class="col-lg-2" onclick="window.location.href='<?= base_url('admin/report/admission-done') ?>'">
                 <div class="widget widget-stats bg-purple mb-7px">
                     <div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
                     <div class="stats-content">
@@ -124,7 +110,7 @@ const programs = <?= $programsJson ?>;
                 <div class="widget widget-stats bg-pink mb-7px">
                     <div class="stats-icon stats-icon-lg"><i class="fa fa-exclamation-triangle fa-fw"></i></div>
                     <div class="stats-content">
-                        <div class="stats-title">Unlocated Lead</div>
+                        <div class="stats-title">Unallocated Lead</div>
                         <div class="stats-number"><?= $totalUnallocated ?></div>
                     </div>
                 </div>
