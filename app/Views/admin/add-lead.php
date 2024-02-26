@@ -1,149 +1,155 @@
+<link href="<?= base_url() ?>assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
+<!-- Select2 JS -->
+<script src="<?= base_url('assets/plugins/select2/dist/js/select2.min.js') ?>"></script>
+<div class="panel panel-inverse">
 
-        <div class="panel panel-inverse">
-
-            <div class="panel-heading">
-                <ol class="breadcrumb panel-title">
-                    <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:;">Leads</a></li>
-                    <li class="breadcrumb-item active">Create Lead</li>
-                </ol>
-                <div class="panel-heading-btn">
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
-                </div>
-
-            </div>
-            <div class="panel-body">
-                <form action="<?= base_url('admin/lead-action') ?>" method="post">
-                    <?= csrf_field() ?>
-                    <fieldset>
-                        <!-- <legend class="mb-3">Legend</legend> -->
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="mb-3">
-                                    <label class="form-label" for="firstname">First Name</label>
-                                    <input class="form-control" type="text" name="firstname" id="firstname" required="" value="<?= old('firstname') ?? '' ?>" data-validation-required-message="This First Name field is required" placeholder="First Name" /><span class="form-text text-muted">Please enter Your name</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="mb-3">
-                                    <label class="form-label" for="middlename">Middle Name</label>
-                                    <input class="form-control" type="text" name="middlename" id="middlename" placeholder="Middle Name" value="<?= old('middlename') ?? '' ?>" data-validation-required-message="This Middle Name field is required"><span class="form-text text-muted">Please enter Your name</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="mb-3">
-                                    <label class="form-label" for="lastname">Last Name</label>
-                                    <input class="form-control" type="text" name="lastname" id="lastname" placeholder="Last Name" value="<?= old('lastname') ?? '' ?>" data-validation-required-message="This Last Name field is required" /><span class="form-text text-muted">Please enter Your name</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="mb-3">
-                                    <label class="form-label" for="email">Email:</label>
-                                    <input class="form-control" type="email" placeholder="Enter email" name="email" id="email" value="<?= old('email') ?? '' ?>" required data-validation-required-message="This Email field is required" /><span class="form-text text-muted">if Email is Not Available then use demo@gmail.com</span>
-
-                                </div>
-                            </div>
-
-                            <div class="col-md-3 mb-3">
-
-                                <label class="form-label">Mobile No.</label>
-                                <div class="input-group ">
-                                    <select class="input-group-text" id="country_code" name="country_code" required="">
-                                        <?php foreach ($countries as $country) : ?>
-                                            <option value="<?= $country['code'] ?>" <?= old('country_code') == $country['code'] ? 'selected' : ($country['code'] == '+91' ? 'selected' : null) ?>> (<?= $country['isoCode'] ?> ) <?= $country['code'] ?> </option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Mobile No." required="" value="<?= old('mobile') ?? '' ?>" required data-validation-required-message="This Mobile No. field is required">
-                                </div>
-                                <span class="form-text text-muted">Please enter Mobile number</span>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="mb-3">
-                                    <label class="form-label">Department</label>
-                                    <select class="form-select" id="department" name="department" onchange="getProgramByDept(this.value)" required="">
-                                        <option value="">--Select A Department--</option>
-                                        <?php foreach ($departments as $dept) : ?>
-                                            <option value="<?= $dept['dept_id'] ?>" <?= old('department') == $dept['dept_id'] ? 'selected' : null ?>><?= $dept['dept_name'] ?></option>
-                                        <?php endforeach; ?>
-
-                                    </select><span class="form-text text-muted">Please enter handler role</span>
-
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="mb-3">
-                                    <label class="form-label">Program</label>
-                                    <select id="programnameid" name="programe" class="form-select" required="">
-                                        <option value="">--Select A Programe--</option>
-
-                                    </select><span class="form-text text-muted">Please select program</span>
-
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="mb-3">
-                                    <label class="form-label" for="status">Lead Status</label>
-                                    <select class="form-select" id="status" name="status" required="" onchange="getInfo($(this).find(':selected').attr('data-getinfo')
-                                                ); getScore($(this).find(':selected').attr('data-statusscore')
-                                                , 'status')">
-                                        <option value="">--Select--</option>
-                                        <?php foreach ($statues as $status) : ?>
-                                            <option data-statusscore='<?= $status['score'] ?>' data-getinfo='<?= $status['status_get_more_info'] ?>' value="<?= $status['status_id'] ?>" <?= old('status') == $status['status_id'] ? 'selected' : null ?>><?= $status['status_name'] ?> </option>
-                                        <?php endforeach; ?>
-
-                                    </select><span class="form-text text-muted">Please enter Lead status</span>
-
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="mb-3">
-                                    <label class="form-label" for="source">Lead Source</label>
-                                    <select id='source' onchange="getScore($(this).find(':selected').attr('data-sourcescore')
-                                                , 'source')" class="form-select" name="source" required="">
-                                        <option value="">--Select--</option>
-                                        <?php foreach ($sources as $source) : ?>
-                                            <option data-sourcescore='<?= $source['source_score'] ?>' value="<?= $source['source_id'] ?>" <?= old('source') == $source['source_id'] ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
-                                        <?php endforeach; ?>
-                                    </select><span class="form-text text-muted">Please select lead handler</span>
-
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="mb-3">
-                                    <label class="form-label">Lead Nationality</label>
-                                    <select id='nationality' class="form-select" name="nationality" required="">
-                                        <option value="">--Select--</option>
-                                        <?php foreach ($student_nationalities as $nation) : ?>
-                                            <option value="<?= $nation['id'] ?>" <?= old('nationality') == $nation['id'] ? 'selected' : null ?>><?= $nation['name'] ?> </option>
-                                        <?php endforeach; ?>
-
-                                    </select><span class="form-text text-muted">Please enter handler status</span>
-
-                                </div>
-                            </div>
-                            <?php if (session('formerror')) : ?>
-                                <fieldset>
-                                    <div class="alert alert-danger">
-                                        <?= session('formerror')->listErrors() ?>
-                                    </div>
-                                </fieldset>
-                            <?php endif; ?>
-                            <input type="hidden" id='statusinfo' name="statusinfo" value="<?= old('statusinfo') ?? '0' ?>">
-                            <input type="hidden" id='scorestatus' max name="score[status]" value="<?= old('score')['status'] ?? '0' ?>">
-                            <input type="hidden" id='scoresource' name="score[source]" value="<?= old('score')['source'] ?? '0' ?>">
-                            <div>
-                                <button type="submit" class="btn btn-primary w-100px me-5px">Add Lead</button>
-                            </div>
-                        </div>
-                    </fieldset>
-
-                </form>
-            </div>
-
+    <div class="panel-heading">
+        <ol class="breadcrumb panel-title">
+            <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+            <li class="breadcrumb-item"><a href="javascript:;">Leads</a></li>
+            <li class="breadcrumb-item active">Create Lead</li>
+        </ol>
+        <div class="panel-heading-btn">
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
         </div>
 
+    </div>
+    <div class="panel-body">
+        <form action="<?= base_url('admin/lead-action') ?>" method="post">
+            <?= csrf_field() ?>
+            <fieldset>
+                <!-- <legend class="mb-3">Legend</legend> -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label class="form-label" for="firstname">First Name</label>
+                            <input class="form-control" type="text" name="firstname" id="firstname" required="" value="<?= old('firstname') ?? '' ?>" data-validation-required-message="This First Name field is required" placeholder="First Name" /><span class="form-text text-muted">Please enter Your name</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label class="form-label" for="middlename">Middle Name</label>
+                            <input class="form-control" type="text" name="middlename" id="middlename" placeholder="Middle Name" value="<?= old('middlename') ?? '' ?>" data-validation-required-message="This Middle Name field is required"><span class="form-text text-muted">Please enter Your name</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label class="form-label" for="lastname">Last Name</label>
+                            <input class="form-control" type="text" name="lastname" id="lastname" placeholder="Last Name" value="<?= old('lastname') ?? '' ?>" data-validation-required-message="This Last Name field is required" /><span class="form-text text-muted">Please enter Your name</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label class="form-label" for="email">Email:</label>
+                            <input class="form-control" type="email" placeholder="Enter email" name="email" id="email" value="<?= old('email') ?? '' ?>" required data-validation-required-message="This Email field is required" /><span class="form-text text-muted">if Email is Not Available then use demo@gmail.com</span>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+
+                        <label class="form-label">Mobile No.</label>
+                        <div class="input-group ">
+                            <select class="input-group-text" id="country_code" name="country_code" required="">
+                                <?php foreach ($countries as $country) : ?>
+                                    <option value="<?= $country['code'] ?>" <?= old('country_code') == $country['code'] ? 'selected' : ($country['code'] == '+91' ? 'selected' : null) ?>> (<?= $country['isoCode'] ?> ) <?= $country['code'] ?> </option>
+                                <?php endforeach; ?>
+                            </select>
+                            <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Mobile No." required="" value="<?= old('mobile') ?? '' ?>" required data-validation-required-message="This Mobile No. field is required">
+                        </div>
+                        <span class="form-text text-muted">Please enter Mobile number</span>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label class="form-label">Department</label>
+                            <select class="form-select default-select2" id="department" name="department" onchange="getProgramByDept(this.value)" required="">
+                                <option selected>--Select A Department--</option>
+                                <?php foreach ($departments as $dept) : ?>
+                                    <option value="<?= $dept['dept_id'] ?>" <?= old('department') == $dept['dept_id'] ? 'selected' : null ?>><?= $dept['dept_name'] ?></option>
+                                <?php endforeach; ?>
+
+                            </select><span class="form-text text-muted">Please enter handler role</span>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label class="form-label">Program</label>
+                            <select id="programnameid" name="programe" class="form-select" required="">
+                                <option value="">--Select A Programe--</option>
+
+                            </select><span class="form-text text-muted">Please select program</span>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label class="form-label" for="status">Lead Status</label>
+                            <select class="form-select" id="status" name="status" required="" onchange="getInfo($(this).find(':selected').attr('data-getinfo')
+                                                ); getScore($(this).find(':selected').attr('data-statusscore')
+                                                , 'status')">
+                                <option value="">--Select--</option>
+                                <?php foreach ($statues as $status) : ?>
+                                    <option data-statusscore='<?= $status['score'] ?>' data-getinfo='<?= $status['status_get_more_info'] ?>' value="<?= $status['status_id'] ?>" <?= old('status') == $status['status_id'] ? 'selected' : null ?>><?= $status['status_name'] ?> </option>
+                                <?php endforeach; ?>
+
+                            </select><span class="form-text text-muted">Please enter Lead status</span>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label class="form-label" for="source">Lead Source</label>
+                            <select id='source' onchange="getScore($(this).find(':selected').attr('data-sourcescore')
+                                                , 'source')" class="form-select" name="source" required="">
+                                <option value="">--Select--</option>
+                                <?php foreach ($sources as $source) : ?>
+                                    <option data-sourcescore='<?= $source['source_score'] ?>' value="<?= $source['source_id'] ?>" <?= old('source') == $source['source_id'] ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
+                                <?php endforeach; ?>
+                            </select><span class="form-text text-muted">Please select lead handler</span>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label class="form-label">Lead Nationality</label>
+                            <select id='nationality' class="form-select" name="nationality" required="">
+                                <option value="">--Select--</option>
+                                <?php foreach ($student_nationalities as $nation) : ?>
+                                    <option value="<?= $nation['id'] ?>" <?= old('nationality') == $nation['id'] ? 'selected' : null ?>><?= $nation['name'] ?> </option>
+                                <?php endforeach; ?>
+
+                            </select><span class="form-text text-muted">Please enter handler status</span>
+
+                        </div>
+                    </div>
+                    <?php if (session('formerror')) : ?>
+                        <fieldset>
+                            <div class="alert alert-danger">
+                                <?= session('formerror')->listErrors() ?>
+                            </div>
+                        </fieldset>
+                    <?php endif; ?>
+                    <input type="hidden" id='statusinfo' name="statusinfo" value="<?= old('statusinfo') ?? '0' ?>">
+                    <input type="hidden" id='scorestatus' max name="score[status]" value="<?= old('score')['status'] ?? '0' ?>">
+                    <input type="hidden" id='scoresource' name="score[source]" value="<?= old('score')['source'] ?? '0' ?>">
+                    <div>
+                        <button type="submit" class="btn btn-primary w-100px me-5px">Add Lead</button>
+                    </div>
+                </div>
+            </fieldset>
+
+        </form>
+    </div>
+
+</div>
+<script>
+    $(".default-select2").select2({
+        dropdownParent: $('.panel-body')
+    });
+</script>
 <script>
     function getProgramByDept(dept = '', prog = '') {
         if (dept !== '') {
