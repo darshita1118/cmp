@@ -1031,6 +1031,7 @@ class Admin extends BaseController
 
 		if ($this->request->getMethod() == 'post' && $this->request->getVar('btn') == 'btn-submit') {
 			$postData = $this->request->getPost();
+
 			$rules = [
 				'technique' => 'required|in_list[roastr,one,self]',
 				'leads' => 'required',
@@ -1039,9 +1040,9 @@ class Admin extends BaseController
 				$rules['handler'] = 'required|numeric';
 			} else if ($this->request->getVar('technique') == 'roastr') {
 				$rules['roastrBy'] = 'required|in_list[group,team,specific-persons]';
-				$rules['handler'] = 'required|numeric';
+				//$rules['handler'] = 'required|numeric';
 				if ($this->request->getVar('roastrBy') == 'specific-persons') {
-					$rules['handler.*'] = 'required|numeric';
+					$rules['handler.*'] = 'required';
 				}
 			} else if ($this->request->getVar('technique') == 'self') {
 				$rules['handler'] = 'required|numeric';
@@ -1061,13 +1062,14 @@ class Admin extends BaseController
 				],
 				'handler' => [
 					'required' => 'Handler is Required.',
-					'numeric' => 'Handler is does not exit.',
+					'numeric' => 'Handler does not exist.',
 				],
 				'handler.*' => [
 					'required' => 'Handler is Required.',
-					'numeric' => 'Handler is does not exit.',
+					'numeric' => 'Handler does not exist.',
 				]
 			];
+
 			if (!$this->validate($rules, $errors)) {
 				$err = $this->validator;
 				session()->setFlashdata('toastr', ['error' => 'Something Went Wrong']);
@@ -1079,7 +1081,7 @@ class Admin extends BaseController
 					if ($postData['roastrBy'] == 'team') {
 						// get team 
 						$teamModel = new ApplicationModel('team_leader_' . session('year'), 'tl_id', $this->lmsDb);
-						if ($teamMember = $teamModel->select('handler_id')->join(SETTINGDB . '.lms_users_' . session('year'), SETTINGDB . '.lms_users_' . session('year') . '.lu_id=team_leader_' . session('year') . '.handler_id')->where('team_leader', $postData['handler'])->where(['handler_status' => 1, 'user_deleted_status' => 0])->findAll()) {
+						if ($teamMember = $teamModel->select('handler_id')->join(SETTINGDB . '.lms_users_' . session('year'), SETTINGDB . '.lms_users_' . session('year') . '.lu_id=team_leader_' . session('year') . '.handler_id')->where('team_leader', $postData['handler'])->where(['user_status' => 1, 'user_deleted_status' => 0])->findAll()) {
 							$handlers = array_column($teamMember, 'handler_id');
 							// include team leader here
 							$handlers[] = $postData['handler'];
@@ -1118,7 +1120,7 @@ class Admin extends BaseController
 					// allocated specific persons
 					if ($postData['roastrBy'] == 'specific-persons') {
 						// check handler 
-
+						//dd($postData['handler']);
 						$handlers = $postData['handler'];
 						$hcounter = count($postData['handler']) ?? 0;
 						if ($hcounter == 0) {
@@ -1126,7 +1128,7 @@ class Admin extends BaseController
 							return redirect()->back();
 						}
 						$lidcount = count($postData['leads']);
-
+						//dd($hcounter);
 						if ($lidcount > 500) {
 							session()->setFlashdata('toastr', ['error' => 'leads are not more than 500']);
 							return redirect()->back();
@@ -1145,6 +1147,7 @@ class Admin extends BaseController
 							if ($allocationModel->where('lead_id', $allocate['lead_id'])->first()) {
 								//$data['notadded'] = "lead_$i";
 							} else {
+								//dd($allocate);
 								$allocationModel->save($allocate);
 							}
 							$g++;

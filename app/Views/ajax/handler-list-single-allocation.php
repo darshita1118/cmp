@@ -1,10 +1,10 @@
 <div class="row mx-0">
-    <div class="col-lg-4 col-xl-4">
+    <div class="col-lg-6 col-xl-6">
         <div class="form-group">
-            <label for="handler">Handlers</label>
+            <label for="handler"><b>Handlers</b></label>
             <select name="handler" id="handler" class="form-control" required>
                 <option value="">-- Select Handler --</option>
-                <?php foreach($handlers as $handler): ?>
+                <?php foreach ($handlers as $handler) : ?>
                     <option value="<?= $handler['lu_id'] ?>"><?= $handler['user_name'] ?></option>
                 <?php endforeach; ?>
             </select>

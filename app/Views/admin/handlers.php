@@ -95,8 +95,8 @@ function getTLName($handler)
 			<form id="handlerForm" action="<?= base_url('admin/bulk-action') ?>" method="post">
 				<?= csrf_field() ?>
 				<div class="form-group hide d-flex flex-row align-items-center" data-email-action="">
-					<div class="d-flex align-items-center me-3">
-						<label for="" class="h5 me-3">Action</label>
+					<div class="form-group">
+						<label for="">Action</label>
 						<select class="form-select selectpicker" name="actionType" id="actionType" onchange="showOption(this.value)" required>
 							<option value="4">Active</option>
 							<option value="2">Suspend</option>
@@ -106,11 +106,16 @@ function getTLName($handler)
 							<option value="1">Change Password</option>
 						</select>
 					</div>
-					<div class="d-flex align-items-center me-3" id="actionOption">
+					<div id="actionOption" class="d-flex align-items-center me-3">
+						<!-- <label for="" class="h5 me-3">Password</label>
+                        <input type="password" class="form-control" name="" placeholder="Password"> -->
 					</div>
+					<!-- <a href="" class="btn btn-info ms-3">Submit</a> -->
 				</div>
 			</form>
 		</div>
+
+
 		<table id="data-table-fixed-header" class="table table-striped table-bordered align-middle w-100 text-wrap ">
 			<thead>
 				<tr>
@@ -279,16 +284,17 @@ function getTLName($handler)
 			// change password
 			$('#actionOption').html(`
 			<div class="row">
-				<div class="col-md-3">
+				<div class="col-md-6">
 					<div class="form-group">
-						<label for="password">Password</label>
+						<label for="password" >Password</label>
 						<input type="text" name="password" id="password" class="form-control" required placeholder="Enter Your Password">
 					</div>
 				</div>
 				<div class="col-md-1">
 					<div class="form-group text-center">
 						<label for="">&nbsp;</label>
-						<button name="btn" value="handlerBulk" class="btn btn-primary" type="submit">Submit</button>
+						<label for="">&nbsp;
+						</label><button name="btn" value="btn-submit" class="btn btn-primary" type="submit" style="padding-top: 5px;">Submit</button>
 					</div>
 				</div>
 			</div>
@@ -299,7 +305,8 @@ function getTLName($handler)
 				<div class="col-md-1">
 					<div class="form-group text-center">
 						<label for="">&nbsp;</label>
-						<button name="btn" value="handlerBulk" class="btn btn-primary" type="submit">Submit</button>
+						<label for="">&nbsp;
+						</label><button name="btn" value="btn-submit" class="btn btn-primary" type="submit" style="padding-top: 5px;">Submit</button>
 					</div>
 				</div>
 			`);
@@ -309,7 +316,8 @@ function getTLName($handler)
 				<div class="col-md-1">
 					<div class="form-group text-center">
 						<label for="">&nbsp;</label>
-						<button name="btn" value="handlerBulk" class="btn btn-primary" type="submit">Submit</button>
+						<label for="">&nbsp;
+						</label><button name="btn" value="btn-submit" class="btn btn-primary" type="submit" style="padding-top: 5px;">Submit</button>
 					</div>
 				</div>
 			`);
@@ -384,40 +392,39 @@ function getTLName($handler)
 		} else if (p == 1) {
 			// change password
 			$('#actionOption').html(`
-			<div class="row">
-				<div class="col-md-3">
-					<div class="form-group">
-						<label for="password">Password</label>
+			<div class="col-md-6">
+					<div class="form-group  ms-3">
+						<label for="password">Password
+						</label>
 						<input type="text" name="password" id="password" class="form-control" required placeholder="Enter Your Password">
 					</div>
-				</div>
-				<div class="col-md-1">
-					<div class="form-group text-center">
-						<label for="">&nbsp;</label>
-						<button name="btn" value="handlerBulk" class="btn btn-primary" type="submit">Submit</button>
 					</div>
-				</div>
-			</div>
+					<div class="col-md-1 ms-2">
+					<div class="form-group align-items-center">
+						<label for="">&nbsp;
+						</label><button name="btn" value="btn-submit" class="btn btn-primary" type="submit" style="padding-top: 5px;">Submit</button>
+					</div>
+					</div>
 			`);
 		} else if (p == 2) {
 			// suspend
 			$('#actionOption').html(`
-				<div class="col-md-1">
-					<div class="form-group text-center">
-						<label for="">&nbsp;</label>
-						<button name="btn" value="handlerBulk" class="btn btn-primary" type="submit">Submit</button>
+			<div class="col-md-1 ms-2">
+					<div class="form-group align-items-center">
+						<label for="">&nbsp;
+						</label><button name="btn" value="btn-submit" class="btn btn-primary" type="submit" style="padding-top: 5px;">Submit</button>
 					</div>
-				</div>
+					</div>
 			`);
 		} else if (p == 4) {
 			// active
 			$('#actionOption').html(`
-				<div class="col-md-1">
-					<div class="form-group text-center">
-						<label for="">&nbsp;</label>
-						<button name="btn" value="handlerBulk" class="btn btn-primary" type="submit">Submit</button>
+			<div class="col-md-1 ms-2">
+					<div class="form-group align-items-center">
+						<label for="">&nbsp;
+						</label><button name="btn" value="btn-submit" class="btn btn-primary" type="submit" style="padding-top: 5px;">Submit</button>
 					</div>
-				</div>
+					</div>
 			`);
 		} else if (p == 3) {
 			// team Leads

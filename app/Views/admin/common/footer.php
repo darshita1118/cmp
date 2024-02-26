@@ -54,7 +54,7 @@
 
 </div>
 <div id="footer" class="app-footer">
-	<hr>
+
 	&copy; 2024 LDM - All Rights Reserved
 </div>
 </div>

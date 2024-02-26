@@ -147,8 +147,8 @@ function getStatusTime($leadId)
             <form id="handlerForm" action="" method="post">
                 <?= csrf_field() ?>
                 <div class="form-group hide d-flex flex-row align-items-center" data-email-action="">
-                    <div class="d-flex align-items-center me-3">
-                        <label for="" class="h5 me-3">Action</label>
+                    <div class="form-group">
+                        <label for="">Action</label>
                         <select name="technique" id="actionType" onchange="showOption(this.value)" class="form-select selectpicker" required="">
                             <option value="">--Select--</option>
                             <option value="roastr">Roastr</option>
@@ -185,7 +185,7 @@ function getStatusTime($leadId)
                 $count = 1;
                 foreach ($leads as $lead) : ?>
                     <tr class="odd gradeX">
-                        <td><input type="checkbox" class="form-check-input email-checkbox" onclick="toggleRow(this)"></td>
+                        <td><input type="checkbox" name="leads[]" value="<?= $lead['lid'] ?>" form="handlerForm" class="form-check-input email-checkbox" onclick="toggleRow(this)"></td>
                         <td width="1%" class="fw-bold"><?= $count ?></td>
                         <td><?= trim(ucwords($lead['lead_first_name'] . ' ' . $lead['lead_middle_name'] . ' ' . $lead['lead_last_name'])) ?></td>
                         <td><?= $lead['lead_email'] ?></td>
@@ -240,7 +240,7 @@ function getStatusTime($leadId)
 
 <script>
     // Select-Picker
-    $('#program,#status,#department,#source,#nationality').picker({
+    $('#program,#status,#department,#source,#nationality,#handler').picker({
         search: true
     });
     $('#offcanvasTop .selectpicker').picker();
@@ -351,9 +351,8 @@ function getStatusTime($leadId)
         } else if (p == 'roastr') {
             // change password
             $('#actionOption').html(`
-                <div class="row mx-0">
-                    <div class="col-lg-4 col-xl-4">
-                        <div class="form-group">
+                
+                        <div class="form-group ms-2">
                             <label for="roastrBy">Roastr BY</label>
                             
                             <select name="roastrBy" id="roastrBy" onchange='getRoastrOption(this.value)' class="form-control" required>
@@ -363,9 +362,7 @@ function getStatusTime($leadId)
                                 <option value="specific-persons">Specific Handlers</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="col-lg-8 col-xl-8" id="roastrByfeild"></div>
-                </div>
+                    <div id="roastrByfeild"></div>
 			`);
         } else if (p == 'one') {
 
@@ -391,7 +388,7 @@ function getStatusTime($leadId)
 
 					<div class="form-group text-center">
 						<label for="">&nbsp;</label>
-						<button name="btn" value="btn-submit" class="btn btn-primary" type="submit" style="padding:3px 5px">Submit</button>
+						<button name="btn" value="btn-submit" class="btn btn-primary ms-3" type="submit" style="padding-top: 5px;">Submit</button>
 					</div>
 				</div>
 			`);

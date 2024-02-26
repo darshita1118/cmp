@@ -1,15 +1,15 @@
-<?php if($option == 'group'): ?>
-    Comming Soon
-<?php elseif($option == 'team'): ?>
-    <?php if($teamLeaders):  ?>
+<?php if ($option == 'group') : ?>
+    <div class="pt-3 ms-2"><b>Comming Soon</b></div>
+<?php elseif ($option == 'team') : ?>
+    <?php if ($teamLeaders) :  ?>
         <div class="row mx-0">
-            <div class="col-lg-5 col-xl-5">
+            <div class="col-lg-6 col-xl-6">
                 <div class="form-group">
                     <label for="handler">Team Leader</label>
                     <select name="handler" id="handler" class="form-control" required>
                         <option value="">-- Select Team Leader --</option>
-                        <?php foreach($teamLeaders as $handler): ?>
-                        
+                        <?php foreach ($teamLeaders as $handler) : ?>
+
                             <option value="<?= $handler['lu_id'] ?>"><?= $handler['user_name'] ?></option>
                         <?php endforeach; ?>
                     </select>
@@ -22,17 +22,17 @@
                 </div>
             </div>
         </div>
-    <?php  else: ?>
+    <?php else : ?>
         Their are no Team Leader
     <?php endif; ?>
-<?php elseif($option == 'specific-persons'): ?>
-    <?php if($handlers): ?>
+<?php elseif ($option == 'specific-persons') : ?>
+    <?php if ($handlers) : ?>
         <div class="row mx-0">
             <div class="col-lg-6 col-xl-6">
                 <div class="form-group">
-                    <label for="handler">Handlers</label>
-                    <select name="handler[]" id="handler" class="form-control selectpicker" multiple required>
-                        <?php foreach($handlers as $handler): ?>
+                    <label for="handler"><b>Handlers</b></label>
+                    <select name="handler[]" id="handler" class="form-control selectpicker" required>
+                        <?php foreach ($handlers as $handler) : ?>
                             <option value="<?= $handler['lu_id'] ?>"><?= $handler['user_name'] ?></option>
                         <?php endforeach; ?>
                     </select>
@@ -48,10 +48,10 @@
         <script>
             // Class definition
 
-            var KTBootstrapSelect = function () {
-                
+            var KTBootstrapSelect = function() {
+
                 // Private functions
-                var demos = function () {
+                var demos = function() {
                     // minimum setup
                     $('.selectpicker').selectpicker();
                 }
@@ -59,7 +59,7 @@
                 return {
                     // public functions
                     init: function() {
-                        demos(); 
+                        demos();
                     }
                 };
             }();
@@ -68,9 +68,9 @@
                 KTBootstrapSelect.init();
             });
         </script>
-    <?php  else: ?>
+    <?php else : ?>
         Their are no Handlers
     <?php endif; ?>
-<?php else: ?>
+<?php else : ?>
     Please Select a valid Roastr By
 <?php endif; ?>
