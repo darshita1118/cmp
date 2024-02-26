@@ -144,22 +144,25 @@ function getStatusTime($leadId)
 
     <div class="panel-body">
         <div class="col-md-6 mb-2">
-            <div class="form-group hide d-flex flex-row align-items-center" data-email-action="">
-                <div class="d-flex align-items-center me-3">
-                    <label for="" class="h5 me-3">Action</label>
-                    <select class="form-select selectpicker" required="">
-                        <option selected>--Select--</option>
-                        <option value="4">Active</option>
-                        <option value="">Suspend</option>
-                        <option value="">Change Password</option>
-                    </select>
+            <form id="handlerForm" action="" method="post">
+                <?= csrf_field() ?>
+                <div class="form-group hide d-flex flex-row align-items-center" data-email-action="">
+                    <div class="d-flex align-items-center me-3">
+                        <label for="" class="h5 me-3">Action</label>
+                        <select name="technique" id="actionType" onchange="showOption(this.value)" class="form-select selectpicker" required="">
+                            <option value="">--Select--</option>
+                            <option value="roastr">Roastr</option>
+                            <option value="one">One person</option>
+                            <option value="self">Self Assign</option>
+                        </select>
+                    </div>
+                    <div id="actionOption" class="d-flex align-items-center me-3">
+                        <!-- <label for="" class="h5 me-3">Password</label>
+                        <input type="password" class="form-control" name="" placeholder="Password"> -->
+                    </div>
+                    <!-- <a href="" class="btn btn-info ms-3">Submit</a> -->
                 </div>
-                <div class="d-flex align-items-center me-3">
-                    <label for="" class="h5 me-3">Password</label>
-                    <input type="password" class="form-control" name="" placeholder="Password">
-                </div>
-                <a href="" class="btn btn-info ms-3">Submit</a>
-            </div>
+            </form>
         </div>
         <table id="data-table-fixed-header" class="table table-striped table-bordered align-middle w-100 text-wrap ">
             <thead>
@@ -318,5 +321,103 @@ function getStatusTime($leadId)
     function toggleDropdown() {
         var dropdown = $('[data-email-action=""]');
         dropdown.toggleClass('hide', $(".email-checkbox:checked").length === 0);
+    }
+</script>
+
+<script>
+    $('.checkable').change(function() {
+        var set = $(this).closest('table').find('td:first-child .checkable');
+        var checked = $(this).is(':checked');
+
+        let show = false
+        $(set).each(function() {
+            if (show === false) {
+                if ($(this).is(':checked')) {
+                    show = true
+                }
+            }
+        });
+        if (show) {
+            $('#handlerForm').removeClass('d-none');
+        } else {
+            $('#handlerForm').addClass('d-none');
+        }
+    })
+
+    function showOption(p) {
+
+        if (p === '') {
+            $('#actionOption').html('');
+        } else if (p == 'roastr') {
+            // change password
+            $('#actionOption').html(`
+                <div class="row mx-0">
+                    <div class="col-lg-4 col-xl-4">
+                        <div class="form-group">
+                            <label for="roastrBy">Roastr BY</label>
+                            
+                            <select name="roastrBy" id="roastrBy" onchange='getRoastrOption(this.value)' class="form-control" required>
+                                <option value="">-- Select Roastr --</option>
+                                <option value="group">Group By</option>
+                                <option value="team">Team By</option>
+                                <option value="specific-persons">Specific Handlers</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-xl-8" id="roastrByfeild"></div>
+                </div>
+			`);
+        } else if (p == 'one') {
+
+            $.ajax({
+                url: '<?= base_url('/helper/getHandler') ?>',
+                type: 'get',
+                async: false,
+                success: function(result) {
+                    //console.log(result)
+                    $('#actionOption').html('');
+                    $('#actionOption').html(result);
+                },
+                error: function() {
+                    //console.log(result)
+                    showFire(`error`, `Something Went Wrong on Server Side`);
+                }
+
+            });
+        } else if (p == 'self') {
+            $('#actionOption').html(`
+                <input type="hidden" name="handler" value="<?= session('unique_id') ?>">
+				<div class="col-md-1">
+
+					<div class="form-group text-center">
+						<label for="">&nbsp;</label>
+						<button name="btn" value="btn-submit" class="btn btn-primary" type="submit" style="padding:3px 5px">Submit</button>
+					</div>
+				</div>
+			`);
+        } else {
+            $('#actionOption').html('');
+        }
+    }
+
+    function getRoastrOption(params) {
+        $.ajax({
+            url: '<?= base_url('/helper/roastr') ?>',
+            type: 'post',
+            data: {
+                option: params
+            },
+            async: false,
+            success: function(result) {
+                //console.log(result)
+                $('#roastrByfeild').html('');
+                $('#roastrByfeild').html(result);
+            },
+            error: function() {
+                //console.log(result)
+                showFire(`error`, `Something Went Wrong on Server Side`);
+            }
+
+        });
     }
 </script>
