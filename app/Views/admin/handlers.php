@@ -90,29 +90,26 @@ function getTLName($handler)
 		</div>
 
 	</div>
-
-
-
-
-
 	<div class="panel-body">
 		<div class="col-md-6 mb-2">
-			<div class="form-group hide d-flex flex-row align-items-center" data-email-action="">
-				<div class="d-flex align-items-center me-3">
-					<label for="" class="h5 me-3">Action</label>
-					<select class="form-select selectpicker" required="">
-						<option selected>--Select--</option>
-						<option value="4">Active</option>
-						<option value="">Suspend</option>
-						<option value="">Change Password</option>
-					</select>
+			<form id="handlerForm" action="<?= base_url('admin/bulk-action') ?>" method="post">
+				<?= csrf_field() ?>
+				<div class="form-group hide d-flex flex-row align-items-center" data-email-action="">
+					<div class="d-flex align-items-center me-3">
+						<label for="" class="h5 me-3">Action</label>
+						<select class="form-select selectpicker" name="actionType" id="actionType" onchange="showOption(this.value)" required>
+							<option value="4">Active</option>
+							<option value="2">Suspend</option>
+							<?php if (isset($_GET['type']) && $_GET['type'] == 'handler') : ?>
+								<option value="3">Assign To Team Leaders</option>
+							<?php endif; ?>
+							<option value="1">Change Password</option>
+						</select>
+					</div>
+					<div class="d-flex align-items-center me-3" id="actionOption">
+					</div>
 				</div>
-				<div class="d-flex align-items-center me-3">
-					<label for="" class="h5 me-3">Password</label>
-					<input type="password" class="form-control" name="" placeholder="Password">
-				</div>
-				<a href="" class="btn btn-info ms-3">Submit</a>
-			</div>
+			</form>
 		</div>
 		<table id="data-table-fixed-header" class="table table-striped table-bordered align-middle w-100 text-wrap ">
 			<thead>
@@ -357,5 +354,92 @@ function getTLName($handler)
 	function toggleDropdown() {
 		var dropdown = $('[data-email-action=""]');
 		dropdown.toggleClass('hide', $(".email-checkbox:checked").length === 0);
+	}
+</script>
+
+<script>
+	$('.checkable').change(function() {
+		var set = $(this).closest('table').find('td:first-child .checkable');
+		var checked = $(this).is(':checked');
+
+		let show = false
+		$(set).each(function() {
+			if (show === false) {
+				if ($(this).is(':checked')) {
+					show = true
+				}
+			}
+		});
+		if (show) {
+			$('#handlerForm').removeClass('d-none');
+		} else {
+			$('#handlerForm').addClass('d-none');
+		}
+	})
+
+	function showOption(p) {
+		console.log(p)
+		if (p === '') {
+			$('#actionOption').html('');
+		} else if (p == 1) {
+			// change password
+			$('#actionOption').html(`
+			<div class="row">
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="password">Password</label>
+						<input type="text" name="password" id="password" class="form-control" required placeholder="Enter Your Password">
+					</div>
+				</div>
+				<div class="col-md-1">
+					<div class="form-group text-center">
+						<label for="">&nbsp;</label>
+						<button name="btn" value="handlerBulk" class="btn btn-primary" type="submit">Submit</button>
+					</div>
+				</div>
+			</div>
+			`);
+		} else if (p == 2) {
+			// suspend
+			$('#actionOption').html(`
+				<div class="col-md-1">
+					<div class="form-group text-center">
+						<label for="">&nbsp;</label>
+						<button name="btn" value="handlerBulk" class="btn btn-primary" type="submit">Submit</button>
+					</div>
+				</div>
+			`);
+		} else if (p == 4) {
+			// active
+			$('#actionOption').html(`
+				<div class="col-md-1">
+					<div class="form-group text-center">
+						<label for="">&nbsp;</label>
+						<button name="btn" value="handlerBulk" class="btn btn-primary" type="submit">Submit</button>
+					</div>
+				</div>
+			`);
+		} else if (p == 3) {
+			// team Leads
+			// ajax and get team Leaders
+			$.ajax({
+				url: '<?= base_url('/helper/getTeamLeaderList/') ?>',
+				type: 'get',
+				async: false,
+				success: function(result) {
+					//console.log(result)
+					$('#actionOption').html('');
+					$('#actionOption').html(result);
+				},
+				error: function() {
+					//console.log(result)
+					showFire(`error`, `Something Went Wrong on Server Side`);
+				}
+
+			});
+
+		} else {
+			$('#actionOption').html('');
+		}
 	}
 </script>
