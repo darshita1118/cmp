@@ -54,7 +54,7 @@ function getStatusTime($leadId)
 						<div class="col-md-3">
 							<div class="mb-3">
 								<label class="form-label">Mobile No.</label>
-								<input class="form-control" type="number" placeholder="Enter Mobile No." />
+								<input class="form-control" type="tel" name="mobile" placeholder="Search mobile no.." minlength="8" value="<?= isset($_GET['mobile']) ? $_GET['mobile'] : null ?>" maxlength="12" />
 							</div>
 
 						</div>
@@ -69,22 +69,22 @@ function getStatusTime($leadId)
 						<div class="col-md-3">
 							<div class="mb-3">
 								<label class="form-label">Status</label>
-								<select class="form-select">...
-									<option selected>--Select -- </option>
-									<option value="1">Admin</option>
-									<option value="2">Handler</option>
-
+								<select class="default-select2 form-select" name="status[]" id="status">
+									<option value="">--Select--</option>
+									<?php foreach ($statues as $status) : ?>
+										<option value="<?= $status['status_id'] ?>" <?= (in_array($status['status_id'], $_GET['status'] ?? [])) ? 'selected' : null ?>><?= $status['status_name'] ?> </option>
+									<?php endforeach; ?>
 								</select>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="mb-3">
 								<label class="form-label">Source</label>
-								<select class="form-select">...
-									<option selected>--Select-- </option>
-									<option value="1">Suspended</option>
-									<option value="2">Active</option>
-
+								<select class="default-select2 form-select" name="source[]" id="source">
+									<option value="">--Select--</option>
+									<?php foreach ($sources as $source) : ?>
+										<option value="<?= $source['source_id'] ?>" <?= (in_array($source['source_id'], $_GET['source'] ?? [])) ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
+									<?php endforeach; ?>
 								</select>
 
 							</div>
@@ -92,11 +92,11 @@ function getStatusTime($leadId)
 						<div class="col-md-3">
 							<div class="mb-3">
 								<label class="form-label">Department</label>
-								<select class="form-select">...
-									<option selected>--Department-- </option>
-									<option value="1">Admin</option>
-									<option value="2">Handler</option>
-
+								<select class="default-select2 form-select" name="department[]" id="department">
+									<option value="">--Select--</option>
+									<?php foreach ($departments as $dept) : ?>
+										<option value="<?= $dept['dept_id'] ?>" <?= (in_array($dept['dept_id'], $_GET['department'] ?? [])) ? 'selected' : null ?>><?= $dept['dept_name'] ?> </option>
+									<?php endforeach; ?>
 								</select>
 
 							</div>
@@ -104,23 +104,22 @@ function getStatusTime($leadId)
 						<div class="col-md-3">
 							<div class="mb-3">
 								<label class="form-label">Program</label>
-								<select class="default-select2 form-select">
-									<option value="AK">Test</option>
-									<option value="AK">Test</option>
-									<option value="AK">Test</option>
-									<option value="AK">Test</option>
-									<option value="AK">Test</option>
-									<option value="HI">Hawaii</option>
+								<select class="default-select2 form-select" name="program[]" id="program">
+									<option value="">--Select--</option>
+									<?php foreach ($courses as $program) : ?>
+										<option data-dept="<?= $program['dept_id'] ?>" data-level="<?= $program['level_id']  ?>" value="<?= $program['sc_id'] ?>" <?= (in_array($program['sc_id'], $_GET['program'] ?? [])) ? 'selected' : null ?>><?= $program['course_name'] ?> </option>
+									<?php endforeach; ?>
 								</select>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="mb-3">
 								<label class="form-label">Lead Nationality</label>
-								<select class="form-select">...
-									<option selected>--Select-- </option>
-									<option value="1">Suspended</option>
-									<option value="2">Active</option>
+								<select name="nationality[]" id="nationality" class="default-select2 form-select">
+									<option value="">--Select--</option>
+									<?php foreach ($student_nationalities as $nation) : ?>
+										<option value="<?= $nation['id'] ?>" <?= (in_array($nation['id'], $_GET['nationality'] ?? [])) ? 'selected' : null ?>><?= $nation['name'] ?> </option>
+									<?php endforeach; ?>
 								</select>
 
 							</div>

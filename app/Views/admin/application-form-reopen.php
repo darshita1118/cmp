@@ -24,17 +24,22 @@ $uri = current_url(true);
 $query = $uri->getQuery();
 
 ?>
+
 <!-- DataTables CSS -->
 <link href="<?= base_url() ?>assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
 <link href="<?= base_url() ?>assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
 <link href="<?= base_url() ?>assets/plugins/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet" />
 <link href="<?= base_url('assets/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') ?>" rel="stylesheet" />
+<link href="<?= base_url('assets/plugins/datatables.net-select-bs5/css/select.bootstrap5.min.css') ?>" rel="stylesheet" />
 <!-- daterange css -->
 <link href="<?= base_url() ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+<!-- Select CSS -->
+<link href="<?= base_url() ?>assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
+<link href="<?= base_url() ?>assets/plugins/select-picker/dist/picker.min.css" rel="stylesheet" />
 <!-- End CSS -->
 
 
-<!-- content -->
+<!-- Content -->
 
 <div class="panel panel-inverse">
 
@@ -84,8 +89,6 @@ $query = $uri->getQuery();
                             <div class="mb-3">
                                 <label class="form-label">Source</label>
                                 <select class="form-select" name="source[]" id="source" multiple>
-                                    <option selected>--Select-- </option>
-
                                     <?php foreach ($sources as $source) : ?>
                                         <option value="<?= $source['source_id'] ?>" <?= (in_array($source['source_id'], $_GET['source'] ?? [])) ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
                                     <?php endforeach; ?>
@@ -109,7 +112,6 @@ $query = $uri->getQuery();
                             <div class="mb-3">
                                 <label class="form-label">Handler</label>
                                 <select class="form-select" name="handlers[]" id="handlers" multiple>
-                                    <option selected>--Select-- </option>
                                     <?php foreach ($handlers as $handler) : ?>
                                         <option value="<?= $handler['lu_id'] ?>" <?= (in_array($handler['lu_id'], $_GET['handlers'] ?? [])) ? 'selected' : null ?>><?= $handler['user_name'] ?> </option>
                                     <?php endforeach; ?>
@@ -122,7 +124,6 @@ $query = $uri->getQuery();
                             <div class="mb-3">
                                 <label class="form-label">Lead Nationality</label>
                                 <select class="form-select" name="nationality[]" id="nationality" multiple>
-                                    <option selected>--Select-- </option>
                                     <?php foreach ($student_nationalities as $nation) : ?>
                                         <option value="<?= $nation['id'] ?>" <?= (in_array($nation['id'], $_GET['nationality'] ?? [])) ? 'selected' : null ?>><?= $nation['name'] ?> </option>
                                     <?php endforeach; ?>
@@ -130,8 +131,10 @@ $query = $uri->getQuery();
 
                             </div>
                         </div>
-                        <div class="col-md-3 mt-md-4">
-                            <button type="submit" class="btn btn-primary w-100px me-5px">Apply Filter</button>
+                        <div class="offcanvas-footer border-top mt-3">
+                            <div class="col-md-12 mt-md-4 text-center">
+                                <button type="submit" class="btn btn-primary w-100px mt-3">Apply Filter</button>
+                            </div>
                         </div>
                     </form>
 
@@ -188,7 +191,9 @@ $query = $uri->getQuery();
 </div>
 
 
+
 <!-- End Content -->
+
 
 <!-- DataTables JS -->
 <script src="<?= base_url() ?>assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -197,6 +202,8 @@ $query = $uri->getQuery();
 <script src="<?= base_url() ?>assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
 <script src="<?= base_url() ?>assets/plugins/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
 <script src="<?= base_url() ?>assets/plugins/datatables.net-fixedheader-bs5/js/fixedHeader.bootstrap5.min.js"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-select/js/dataTables.select.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-select-bs5/js/select.bootstrap5.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js') ?>"></script>
@@ -214,9 +221,10 @@ $query = $uri->getQuery();
 <script src="<?= base_url('assets/plugins/select2/dist/js/select2.min.js') ?>"></script>
 <script src="<?= base_url() ?>assets/plugins/select-picker/dist/picker.min.js"></script>
 
+
 <script>
-    // Other Select-Picker initialization
-    $('#department, #program, #status, #source, #nationality, #handler').picker({
+    // Select-Picker
+    $('#program,#status,#department,#source,#nationality, #handlers').picker({
         search: true
     });
     $('#offcanvasTop .selectpicker').picker();
@@ -261,19 +269,6 @@ $query = $uri->getQuery();
             $("#default-daterange input").val(
                 start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY")
             );
-            // Check if start and end are valid dates
-
-            //date formate 2024-01-28
-            if (start.isValid() && end.isValid()) {
-                // Set the values in the HTML input fields
-                $("#to").val(start.format("YYYY-MM-D"));
-                $("#from").val(end.format("YYYY-MM-D"));
-            } else {
-                // Clear the input fields if dates are not valid
-                $("#from").val("");
-                $("#to").val("");
-            }
-
         });
     };
 

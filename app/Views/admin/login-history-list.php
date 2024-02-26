@@ -3,12 +3,16 @@
 <link href="<?= base_url() ?>assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
 <link href="<?= base_url() ?>assets/plugins/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet" />
 <link href="<?= base_url('assets/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') ?>" rel="stylesheet" />
+<link href="<?= base_url('assets/plugins/datatables.net-select-bs5/css/select.bootstrap5.min.css') ?>" rel="stylesheet" />
 <!-- daterange css -->
 <link href="<?= base_url() ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+<!-- Select CSS -->
+<link href="<?= base_url() ?>assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
+<link href="<?= base_url() ?>assets/plugins/select-picker/dist/picker.min.css" rel="stylesheet" />
 <!-- End CSS -->
 
 
-<!-- content -->
+<!-- Content -->
 
 <div class="panel panel-inverse">
     <div class="panel-heading">
@@ -98,8 +102,10 @@
 
                             </div>
                         </div>
-                        <div class="col-md-3 mt-md-4">
-                            <button type="submit" class="btn btn-primary w-100px me-5px">Apply Filter</button>
+                        <div class="offcanvas-footer border-top mt-3">
+                            <div class="col-md-12 mt-md-4 text-center">
+                                <button type="submit" class="btn btn-primary w-100px mt-3">Apply Filter</button>
+                            </div>
                         </div>
                     </form>
 
@@ -160,6 +166,7 @@
 </div>
 
 
+
 <!-- End Content -->
 
 
@@ -170,6 +177,8 @@
 <script src="<?= base_url() ?>assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
 <script src="<?= base_url() ?>assets/plugins/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
 <script src="<?= base_url() ?>assets/plugins/datatables.net-fixedheader-bs5/js/fixedHeader.bootstrap5.min.js"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-select/js/dataTables.select.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-select-bs5/js/select.bootstrap5.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js') ?>"></script>
@@ -187,9 +196,10 @@
 <script src="<?= base_url('assets/plugins/select2/dist/js/select2.min.js') ?>"></script>
 <script src="<?= base_url() ?>assets/plugins/select-picker/dist/picker.min.js"></script>
 
+
 <script>
-    // Other Select-Picker initialization
-    $('#department, #program, #status, #source, #nationality').picker({
+    // Select-Picker
+    $('#sort,#type,#handler').picker({
         search: true
     });
     $('#offcanvasTop .selectpicker').picker();
@@ -234,19 +244,6 @@
             $("#default-daterange input").val(
                 start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY")
             );
-            // Check if start and end are valid dates
-
-            //date formate 2024-01-28
-            if (start.isValid() && end.isValid()) {
-                // Set the values in the HTML input fields
-                $("#to").val(start.format("YYYY-MM-D"));
-                $("#from").val(end.format("YYYY-MM-D"));
-            } else {
-                // Clear the input fields if dates are not valid
-                $("#from").val("");
-                $("#to").val("");
-            }
-
         });
     };
 

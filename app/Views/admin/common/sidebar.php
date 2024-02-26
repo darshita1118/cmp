@@ -5,12 +5,6 @@
 			<div class="navbar-header">
 				<a href="<?= base_url('/') ?>" class="navbar-brand"><span class="navbar-logo"></span> <b class="me-3px">LDM</b>
 					Admin</a>
-				<button type="button" class="navbar-mobile-toggler" data-bs-toggle="collapse" data-bs-target="#top-navbar">
-					<span class="fa-stack fa-lg">
-						<i class="far fa-square fa-stack-2x"></i>
-						<i class="fas fa-cog fa-stack-1x p-2"></i>
-					</span>
-				</button>
 				<button type="button" class="navbar-mobile-toggler" data-toggle="app-top-menu-mobile">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
@@ -29,9 +23,6 @@
 					</a>
 					<div class="dropdown-menu dropdown-menu-end me-1">
 						<a href="javascript:void();" class="dropdown-item"><?= session('name') ?></a>
-						<a href="#" class="dropdown-item">Edit Profile</a>
-						<a href="#" class="dropdown-item">Calendar</a>
-						<a href="#" class="dropdown-item">Settings</a>
 						<div class="dropdown-divider"></div>
 						<a href="<?= base_url('/admin/logout'); ?>" class="dropdown-item">Log Out</a>
 					</div>

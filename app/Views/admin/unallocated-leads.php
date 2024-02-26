@@ -22,6 +22,9 @@ function getStatusTime($leadId)
 <link href="<?= base_url('assets/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') ?>" rel="stylesheet" />
 <!-- daterange css -->
 <link href="<?= base_url() ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+<!-- Select CSS -->
+<link href="<?= base_url() ?>assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
+<link href="<?= base_url() ?>assets/plugins/select-picker/dist/picker.min.css" rel="stylesheet" />
 <!-- End CSS -->
 
 
@@ -46,6 +49,7 @@ function getStatusTime($leadId)
                     <path d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5m0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5m0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5"></path>
                 </svg>
             </a>
+
 
             <div class="offcanvas offcanvas-top ps-5 pe-5" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
                 <div class="offcanvas-header border-bottom">
@@ -72,17 +76,20 @@ function getStatusTime($leadId)
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
-                                <select class="form-select selectpicker" name="status[]" id="status" multiple>
+                                <select name="status[]" id="status" class="form-select selectpicker">
+                                    <option selected>--Select -- </option>
                                     <?php foreach ($statues as $status) : ?>
                                         <option value="<?= $status['status_id'] ?>" <?= (in_array($status['status_id'], $_GET['status'] ?? [])) ? 'selected' : null ?>><?= $status['status_name'] ?> </option>
                                     <?php endforeach; ?>
+
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Source</label>
-                                <select class="form-select selectpicker" name="source[]" id="source" multiple>
+                                <select name="source[]" id="source" class="form-select selectpicker">
+                                    <option selected>--Select-- </option>
                                     <?php foreach ($sources as $source) : ?>
                                         <option value="<?= $source['source_id'] ?>" <?= (in_array($source['source_id'], $_GET['source'] ?? [])) ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
                                     <?php endforeach; ?>
@@ -92,7 +99,8 @@ function getStatusTime($leadId)
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Department</label>
-                                <select class="form-select selectpicker" name="department[]" id="department" multiple>
+                                <select class="form-select selectpicker" name="department[]" id="department">...
+                                    <option selected>--Department-- </option>
                                     <?php foreach ($departments as $dept) : ?>
                                         <option value="<?= $dept['dept_id'] ?>" <?= (in_array($dept['dept_id'], $_GET['department'] ?? [])) ? 'selected' : null ?>><?= $dept['dept_name'] ?> </option>
                                     <?php endforeach; ?>
@@ -102,7 +110,8 @@ function getStatusTime($leadId)
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Program</label>
-                                <select class="form-select selectpicker" name="program[]" id="program" multiple>
+                                <select class="form-select selectpicker" name="program[]" id="program">
+                                    <option selected>--Choose Program-- </option>
                                     <?php foreach ($courses as $program) : ?>
                                         <option data-dept="<?= $program['dept_id'] ?>" data-level="<?= $program['level_id']  ?>" value="<?= $program['coi_id'] ?>" <?= (in_array($program['coi_id'], $_GET['program'] ?? [])) ? 'selected' : null ?>><?= $program['course_name'] ?> </option>
                                     <?php endforeach; ?>
@@ -112,15 +121,18 @@ function getStatusTime($leadId)
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Lead Nationality</label>
-                                <select class="form-select selectpicker" name="nationality[]" id="nationality" multiple>
+                                <select class="form-select selectpicker" name="nationality[]" id="nationality">
+                                    <option selected>--Select-- </option>
                                     <?php foreach ($student_nationalities as $nation) : ?>
                                         <option value="<?= $nation['id'] ?>" <?= (in_array($nation['id'], $_GET['nationality'] ?? [])) ? 'selected' : null ?>><?= $nation['name'] ?> </option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3 mt-md-4">
-                            <button type="submit" class="btn btn-primary w-100px me-5px">Apply Filter</button>
+                        <div class="offcanvas-footer border-top mt-3">
+                            <div class="col-md-12 mt-md-4 text-center">
+                                <button type="submit" class="btn btn-primary w-100px mt-3">Apply Filter</button>
+                            </div>
                         </div>
                     </form>
 
@@ -131,15 +143,34 @@ function getStatusTime($leadId)
     </div>
 
     <div class="panel-body">
+        <div class="col-md-6 mb-2">
+            <div class="form-group hide d-flex flex-row align-items-center" data-email-action="">
+                <div class="d-flex align-items-center me-3">
+                    <label for="" class="h5 me-3">Action</label>
+                    <select class="form-select selectpicker" required="">
+                        <option selected>--Select--</option>
+                        <option value="4">Active</option>
+                        <option value="">Suspend</option>
+                        <option value="">Change Password</option>
+                    </select>
+                </div>
+                <div class="d-flex align-items-center me-3">
+                    <label for="" class="h5 me-3">Password</label>
+                    <input type="password" class="form-control" name="" placeholder="Password">
+                </div>
+                <a href="" class="btn btn-info ms-3">Submit</a>
+            </div>
+        </div>
         <table id="data-table-fixed-header" class="table table-striped table-bordered align-middle w-100 text-wrap ">
             <thead>
                 <tr>
+                    <th><input type="checkbox" class="form-check-input" id="emailSelectAll" onclick="toggleAllCheckboxes()"></th>
                     <th width="1%">ID</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Mobile</th>
-                    <th>Department</th>
-                    <th>School/Program</th>
+                    <th>School/Department</th>
+                    <th>Program</th>
                     <th>Status</th>
                     <th>Source</th>
                     <th>Create At</th>
@@ -151,6 +182,7 @@ function getStatusTime($leadId)
                 $count = 1;
                 foreach ($leads as $lead) : ?>
                     <tr class="odd gradeX">
+                        <td><input type="checkbox" class="form-check-input email-checkbox" onclick="toggleRow(this)"></td>
                         <td width="1%" class="fw-bold"><?= $count ?></td>
                         <td><?= trim(ucwords($lead['lead_first_name'] . ' ' . $lead['lead_middle_name'] . ' ' . $lead['lead_last_name'])) ?></td>
                         <td><?= $lead['lead_email'] ?></td>
@@ -177,6 +209,7 @@ function getStatusTime($leadId)
 
 <!-- End Content -->
 
+
 <!-- DataTables JS -->
 <script src="<?= base_url() ?>assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?= base_url() ?>assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
@@ -201,9 +234,10 @@ function getStatusTime($leadId)
 <script src="<?= base_url('assets/plugins/select2/dist/js/select2.min.js') ?>"></script>
 <script src="<?= base_url() ?>assets/plugins/select-picker/dist/picker.min.js"></script>
 
+
 <script>
-    // Other Select-Picker initialization
-    $('#department, #program, #status, #source, #nationality, #handler').picker({
+    // Select-Picker
+    $('#program,#status,#department,#source,#nationality').picker({
         search: true
     });
     $('#offcanvasTop .selectpicker').picker();
@@ -248,19 +282,6 @@ function getStatusTime($leadId)
             $("#default-daterange input").val(
                 start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY")
             );
-            // Check if start and end are valid dates
-
-            //date formate 2024-01-28
-            if (start.isValid() && end.isValid()) {
-                // Set the values in the HTML input fields
-                $("#to").val(start.format("YYYY-MM-D"));
-                $("#from").val(end.format("YYYY-MM-D"));
-            } else {
-                // Clear the input fields if dates are not valid
-                $("#from").val("");
-                $("#to").val("");
-            }
-
         });
     };
 
@@ -279,4 +300,23 @@ function getStatusTime($leadId)
             handleRenderColorpicker();
         });
     });
+</script>
+<script>
+    function toggleAllCheckboxes() {
+        var emailCheckboxes = $(".email-checkbox");
+        emailCheckboxes.prop("checked", $("#emailSelectAll").prop("checked"));
+        toggleRow(emailCheckboxes);
+        toggleDropdown();
+    }
+
+    function toggleRow(row) {
+        var checkbox = $(row).find('.email-checkbox');
+        checkbox.prop('checked', !checkbox.prop('checked'));
+        toggleDropdown();
+    }
+
+    function toggleDropdown() {
+        var dropdown = $('[data-email-action=""]');
+        dropdown.toggleClass('hide', $(".email-checkbox:checked").length === 0);
+    }
 </script>

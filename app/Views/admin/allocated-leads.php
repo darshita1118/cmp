@@ -20,12 +20,16 @@ $handlers = getHandlerList([session('unique_id')]);
 <link href="<?= base_url() ?>assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
 <link href="<?= base_url() ?>assets/plugins/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet" />
 <link href="<?= base_url('assets/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') ?>" rel="stylesheet" />
+<link href="<?= base_url('assets/plugins/datatables.net-select-bs5/css/select.bootstrap5.min.css') ?>" rel="stylesheet" />
 <!-- daterange css -->
 <link href="<?= base_url() ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+<!-- Select CSS -->
+<link href="<?= base_url() ?>assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
+<link href="<?= base_url() ?>assets/plugins/select-picker/dist/picker.min.css" rel="stylesheet" />
 <!-- End CSS -->
 
+<!-- Content -->
 
-<!-- content -->
 
 <div class="panel panel-inverse">
 
@@ -74,7 +78,7 @@ $handlers = getHandlerList([session('unique_id')]);
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
-                                <select name="status[]" class="form-select">
+                                <select name="status[]" id="status" class="form-select selectpicker">
                                     <option selected>--Select -- </option>
                                     <?php foreach ($statues as $status) : ?>
                                         <option value="<?= $status['status_id'] ?>" <?= (in_array($status['status_id'], $_GET['status'] ?? [])) ? 'selected' : null ?>><?= $status['status_name'] ?> </option>
@@ -86,7 +90,7 @@ $handlers = getHandlerList([session('unique_id')]);
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Source</label>
-                                <select name="source[]" id="source" class="form-select">
+                                <select name="source[]" id="source" class="form-select selectpicker">
                                     <option selected>--Select-- </option>
                                     <?php foreach ($sources as $source) : ?>
                                         <option value="<?= $source['source_id'] ?>" <?= (in_array($source['source_id'], $_GET['source'] ?? [])) ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
@@ -96,8 +100,8 @@ $handlers = getHandlerList([session('unique_id')]);
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3">
-                                <label class="form-label" name="department[]" id="department">Department</label>
-                                <select class="form-select">...
+                                <label class="form-label">Department</label>
+                                <select class="form-select selectpicker" name="department[]" id="department">...
                                     <option selected>--Department-- </option>
                                     <?php foreach ($departments as $dept) : ?>
                                         <option value="<?= $dept['dept_id'] ?>" <?= (in_array($dept['dept_id'], $_GET['department'] ?? [])) ? 'selected' : null ?>><?= $dept['dept_name'] ?> </option>
@@ -108,7 +112,7 @@ $handlers = getHandlerList([session('unique_id')]);
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Program</label>
-                                <select class="form-select" name="program[]" id="program">
+                                <select class="form-select selectpicker" name="program[]" id="program">
                                     <option selected>--Chooes Program-- </option>
                                     <?php foreach ($courses as $program) : ?>
                                         <option data-dept="<?= $program['dept_id'] ?>" data-level="<?= $program['level_id']  ?>" value="<?= $program['coi_id'] ?>" <?= (in_array($program['coi_id'], $_GET['program'] ?? [])) ? 'selected' : null ?>><?= $program['course_name'] ?> </option>
@@ -118,8 +122,8 @@ $handlers = getHandlerList([session('unique_id')]);
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3">
-                                <label class="form-label" name="nationality[]" id="nationality">Lead Nationality</label>
-                                <select class="form-select">
+                                <label class="form-label">Lead Nationality</label>
+                                <select class="form-select selectpicker" name="nationality[]" id="nationality">
                                     <option selected>--Select-- </option>
                                     <?php foreach ($student_nationalities as $nation) : ?>
                                         <option value="<?= $nation['id'] ?>" <?= (in_array($nation['id'], $_GET['nationality'] ?? [])) ? 'selected' : null ?>><?= $nation['name'] ?> </option>
@@ -127,8 +131,10 @@ $handlers = getHandlerList([session('unique_id')]);
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3 mt-md-4">
-                            <button type="submit" class="btn btn-primary w-100px me-5px">Search</button>
+                        <div class="offcanvas-footer border-top mt-3">
+                            <div class="col-md-12 mt-md-4 text-center">
+                                <button type="submit" class="btn btn-primary w-100px mt-3">Apply Filter</button>
+                            </div>
                         </div>
                     </form>
 
@@ -222,6 +228,7 @@ $handlers = getHandlerList([session('unique_id')]);
 
 <!-- End Content -->
 
+
 <!-- DataTables JS -->
 <script src="<?= base_url() ?>assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?= base_url() ?>assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
@@ -229,6 +236,8 @@ $handlers = getHandlerList([session('unique_id')]);
 <script src="<?= base_url() ?>assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
 <script src="<?= base_url() ?>assets/plugins/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
 <script src="<?= base_url() ?>assets/plugins/datatables.net-fixedheader-bs5/js/fixedHeader.bootstrap5.min.js"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-select/js/dataTables.select.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-select-bs5/js/select.bootstrap5.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js') ?>"></script>
@@ -245,6 +254,74 @@ $handlers = getHandlerList([session('unique_id')]);
 <!-- Select2 JS -->
 <script src="<?= base_url('assets/plugins/select2/dist/js/select2.min.js') ?>"></script>
 <script src="<?= base_url() ?>assets/plugins/select-picker/dist/picker.min.js"></script>
+
+
+<script>
+    // Select-Picker
+    $('#program,#status,#department,#source,#nationality').picker({
+        search: true
+    });
+    $('#offcanvasTop .selectpicker').picker();
+
+    $(".default-select2").select2({
+        dropdownParent: $('#offcanvasTop')
+    });
+
+    // Datepicker JS
+
+    var handleRenderDateRangePicker = function() {
+        $("#default-daterange").daterangepicker({
+            opens: "right",
+            format: "MM/DD/YYYY",
+            separator: " to ",
+            startDate: moment(),
+            endDate: moment(),
+            showDropdowns: true,
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+            locale: {
+                applyLabel: 'Apply',
+                cancelLabel: 'Cancel',
+                fromLabel: 'From',
+                toLabel: 'To',
+                customRangeLabel: 'Custom Range',
+                weekLabel: 'W',
+                daysOfWeek: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+                monthNames: [
+                    "January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ],
+                firstDay: 1
+            }
+        }, function(start, end) {
+            $("#default-daterange input").val(
+                start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY")
+            );
+        });
+    };
+
+    var FormPlugins = (function() {
+        "use strict";
+        return {
+            init: function() {
+                handleRenderDateRangePicker();
+            },
+        };
+    })();
+
+    $(document).ready(function() {
+        FormPlugins.init();
+        $(document).on("theme-reload", function() {
+            handleRenderColorpicker();
+        });
+    });
+</script>
 
 <script>
     function transfer(params) {

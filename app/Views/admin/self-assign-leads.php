@@ -13,18 +13,21 @@ function getStatusTime($leadId)
 }
 
 ?>
-
 <!-- DataTables CSS -->
 <link href="<?= base_url() ?>assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
 <link href="<?= base_url() ?>assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
 <link href="<?= base_url() ?>assets/plugins/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet" />
 <link href="<?= base_url('assets/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css') ?>" rel="stylesheet" />
+<link href="<?= base_url('assets/plugins/datatables.net-select-bs5/css/select.bootstrap5.min.css') ?>" rel="stylesheet" />
 <!-- daterange css -->
 <link href="<?= base_url() ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+<!-- Select CSS -->
+<link href="<?= base_url() ?>assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
+<link href="<?= base_url() ?>assets/plugins/select-picker/dist/picker.min.css" rel="stylesheet" />
 <!-- End CSS -->
 
 
-<!-- content -->
+<!-- Content -->
 
 <div class="panel panel-inverse">
 
@@ -54,7 +57,7 @@ function getStatusTime($leadId)
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body mt-md-3">
-                    <form action="" method="get" class="row">
+                    <form action="" class="row">
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Mobile No.</label>
@@ -73,18 +76,19 @@ function getStatusTime($leadId)
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
-                                <select name="status[]" id="status" class="form-select">
+                                <select name="status[]" id="status" class="form-select selectpicker">
                                     <option selected>--Select -- </option>
                                     <?php foreach ($statues as $status) : ?>
                                         <option value="<?= $status['status_id'] ?>" <?= (in_array($status['status_id'], $_GET['status'] ?? [])) ? 'selected' : null ?>><?= $status['status_name'] ?> </option>
                                     <?php endforeach; ?>
+
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Source</label>
-                                <select name="source[]" id="source" class="form-select">
+                                <select name="source[]" id="source" class="form-select selectpicker">
                                     <option selected>--Select-- </option>
                                     <?php foreach ($sources as $source) : ?>
                                         <option value="<?= $source['source_id'] ?>" <?= (in_array($source['source_id'], $_GET['source'] ?? [])) ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
@@ -95,7 +99,7 @@ function getStatusTime($leadId)
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Department</label>
-                                <select class="form-select" name="department[]" id="department">
+                                <select class="form-select selectpicker" name="department[]" id="department">...
                                     <option selected>--Department-- </option>
                                     <?php foreach ($departments as $dept) : ?>
                                         <option value="<?= $dept['dept_id'] ?>" <?= (in_array($dept['dept_id'], $_GET['department'] ?? [])) ? 'selected' : null ?>><?= $dept['dept_name'] ?> </option>
@@ -106,7 +110,7 @@ function getStatusTime($leadId)
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Program</label>
-                                <select name="program[]" id="program" class="form-select">
+                                <select class="form-select selectpicker" name="program[]" id="program">
                                     <option selected>--Chooes Program-- </option>
                                     <?php foreach ($courses as $program) : ?>
                                         <option data-dept="<?= $program['dept_id'] ?>" data-level="<?= $program['level_id']  ?>" value="<?= $program['coi_id'] ?>" <?= (in_array($program['coi_id'], $_GET['program'] ?? [])) ? 'selected' : null ?>><?= $program['course_name'] ?> </option>
@@ -117,7 +121,7 @@ function getStatusTime($leadId)
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Lead Nationality</label>
-                                <select name="nationality[]" id="nationality" class="form-select">
+                                <select class="form-select selectpicker" name="nationality[]" id="nationality">
                                     <option selected>--Select-- </option>
                                     <?php foreach ($student_nationalities as $nation) : ?>
                                         <option value="<?= $nation['id'] ?>" <?= (in_array($nation['id'], $_GET['nationality'] ?? [])) ? 'selected' : null ?>><?= $nation['name'] ?> </option>
@@ -125,8 +129,10 @@ function getStatusTime($leadId)
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3 mt-md-4">
-                            <button type="submit" class="btn btn-primary w-100px me-5px">Search</button>
+                        <div class="offcanvas-footer border-top mt-3">
+                            <div class="col-md-12 mt-md-4 text-center">
+                                <button type="submit" class="btn btn-primary w-100px mt-3">Apply Filter</button>
+                            </div>
                         </div>
                     </form>
 
@@ -180,7 +186,10 @@ function getStatusTime($leadId)
 
 </div>
 
+
+
 <!-- End Content -->
+
 
 <!-- DataTables JS -->
 <script src="<?= base_url() ?>assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -189,6 +198,8 @@ function getStatusTime($leadId)
 <script src="<?= base_url() ?>assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
 <script src="<?= base_url() ?>assets/plugins/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
 <script src="<?= base_url() ?>assets/plugins/datatables.net-fixedheader-bs5/js/fixedHeader.bootstrap5.min.js"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-select/js/dataTables.select.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables.net-select-bs5/js/select.bootstrap5.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js') ?>"></script>
@@ -206,9 +217,10 @@ function getStatusTime($leadId)
 <script src="<?= base_url('assets/plugins/select2/dist/js/select2.min.js') ?>"></script>
 <script src="<?= base_url() ?>assets/plugins/select-picker/dist/picker.min.js"></script>
 
+
 <script>
-    // Other Select-Picker initialization
-    $('#department, #program, #status, #source, #nationality, #handler').picker({
+    // Select-Picker
+    $('#program,#status,#department,#source,#nationality').picker({
         search: true
     });
     $('#offcanvasTop .selectpicker').picker();
@@ -253,19 +265,6 @@ function getStatusTime($leadId)
             $("#default-daterange input").val(
                 start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY")
             );
-            // Check if start and end are valid dates
-
-            //date formate 2024-01-28
-            if (start.isValid() && end.isValid()) {
-                // Set the values in the HTML input fields
-                $("#to").val(start.format("YYYY-MM-D"));
-                $("#from").val(end.format("YYYY-MM-D"));
-            } else {
-                // Clear the input fields if dates are not valid
-                $("#from").val("");
-                $("#to").val("");
-            }
-
         });
     };
 
