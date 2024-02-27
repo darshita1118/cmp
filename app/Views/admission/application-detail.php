@@ -93,7 +93,7 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
     .form-label {
         font-weight: 700;
         font-size: 14px;
-        color: #787878;
+        color: var(--bs-gray-600);
     }
 
     input:focus {
@@ -102,17 +102,19 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
     }
 
     .profile img {
-        width: 50px;
-        height: 50px;
-        margin-top: -5px;
-        margin-bottom: -5px;
-        border-radius: 30px;
-        margin-right: 10px;
+        width: 100px;
+        border: 3px solid #fff;
+        -webkit-box-shadow: 0 .5rem 1.5rem .5rem rgba(0, 0, 0, .075);
+        box-shadow: 0 .5rem 1.5rem .5rem rgba(0, 0, 0, .075);
     }
 
     .form-control p-0:focus {
         border-color: transparent;
         box-shadow: none;
+    }
+
+    .details h4 {
+        color: var(--bs-app-theme-active);
     }
 </style>
 <!--Personal Details -->
@@ -122,11 +124,11 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
     <div class="panel-heading">
         <ol class="pt-1 panel-title">
             <h5><i class="fa fa-file-lines fa-lg me-2"></i>
-                Your Application under process</h5>
+                Your Application Under Process</h5>
         </ol>
 
         <div class="panel-heading-btn">
-            <a href="<?= base_url($controller . '/' . 'print/' . $lid . '/' . $sid) ?>" class="btn btn-sm btn-icon btn-default" onclick="printPage()" class="btn btn-sm btn-icon btn-default" data-bs-toggle="tooltip" data-bs-placement="left" tittle="Print form"><i class="fa fa-print"></i></a>
+            <a href="<?= base_url($controller . '/' . 'print/' . $lid . '/' . $sid) ?>" class="btn btn-sm btn-icon btn-default" target="_blank" class=" btn btn-sm btn-icon btn-default" data-bs-toggle="tooltip" data-bs-placement="left" tittle="Print form"><i class="fa fa-print"></i></a>
             <a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
         </div>
 
@@ -135,14 +137,14 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
     <div class="panel-body">
         <div class="details">
             <div class="card border-0">
-                <div class="card-header bg-none  h3 d-flex align-items-center justify-content-between">
+                <div class="card-header bg-none  h3 d-flex align-items-center justify-content-center">
 
                     <div class="panel panel-inverse panel-with-tabs">
                         <div class="panel-heading p-0">
                             <ul class="nav nav-tabs nav-tabs-inverse h6">
 
                                 <li class="nav-item">
-                                    <a href="#nav-tab-1" data-bs-toggle="tab" class="nav-link active">Person Detail</a>
+                                    <a href="#nav-tab-1" data-bs-toggle="tab" class="nav-link active">Personal Detail</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#nav-tab-2" data-bs-toggle="tab" class="nav-link ">Academics</a>
@@ -154,60 +156,71 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
                         </div>
                     </div>
 
-                    <div class="profile float-end">
-                        <img src="<?= base_url('assets/img/user/user-1.jpg') ?>" alt="">
-                    </div>
 
                 </div>
-                <div class=" p-3 panel-body  ">
+                <div class="p-3 panel-body">
                     <div class="tab-content">
                         <div class="tab-pane fade active show" id="nav-tab-1">
-                            <div class="student-details">
-                                <h4 class="fw-700">Student Details:</h4>
+
+                            <div class="student-details mb-3">
+                                <h4 class="fw-700">Student Details</h4>
                                 <form action="">
-                                    <div class=" row">
-                                        <div class="col-md-3 mb-3">
-                                            <label class="form-label">Name</label>
-                                            <input class="form-control p-0  border-0 border-bottom " type="text" id="name" name="name" readonly value="<?= ucwords(trim(($sidInfo['si_first_name'] ?? '') . ' ' . ($sidInfo['si_middle_name'] ?? '') . ' ' . ($sidInfo['si_last_name'] ?? ''))); ?>" placeholder="Name" required="" />
+                                    <div class="row">
+                                        <div class="form-group col-md-2 order-md-1 order-lg-2 order-xl-2">
+                                            <label class="form-label">Photo</label>
+                                            <div class="profile">
+                                                <img src="<?= base_url('assets/img/user/user-1.jpg') ?>" alt="">
+                                            </div>
 
                                         </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label for="" class="form-label">Mobile No.</label>
-                                            <input type="text" class="form-control p-0 border-0 border-bottom " readonly value="<?= $contact['sci_country_code'] ?? ''; ?>-<?= $contact['sci_mobile'] ?? ''; ?>" placeholder="Mobile No." required="" />
+                                        <div class="col-md-10">
+                                            <div class="row">
+                                                <div class="col-md-3 mb-3">
+                                                    <label class="form-label">Name</label>
+                                                    <input class="form-control p-0  border-0 border-bottom " type="text" id="name" name="name" readonly value="<?= ucwords(trim(($sidInfo['si_first_name'] ?? '') . ' ' . ($sidInfo['si_middle_name'] ?? '') . ' ' . ($sidInfo['si_last_name'] ?? ''))); ?>" placeholder="Name" required="" />
+
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="" class="form-label">Mobile No.</label>
+                                                    <input type="text" class="form-control p-0 border-0 border-bottom " readonly value="<?= $contact['sci_country_code'] ?? ''; ?>-<?= $contact['sci_mobile'] ?? ''; ?>" placeholder="Mobile No." required="" />
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label class="form-label">Email</label>
+                                                    <input class="form-control p-0 border-0 border-bottom" type="email" readonly id="email" name="email" value="<?= $contact['sci_email'] ?? ''; ?>" placeholder="Email" required="" />
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label class="form-label">Gender</label>
+                                                    <input class="form-control p-0 border-0 border-bottom" type="type" readonly id="gender" name="gender" class="form-control p-0 form-control p-0-solid" value="<?php if (($other['gender'] ?? '') == 0) echo 'Male'; ?><?php if (($other['gender'] ?? '') == 1) echo 'Female'; ?><?php if (($other['gender'] ?? '') == 2) echo 'Other'; ?>" placeholder="Gender" required="" />
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="" class="form-label">DOB</label>
+                                                    <input type="text" class="form-control p-0 border-0 border-bottom" readonly id="dob" name="dob" value="<?= $other['dob'] ?? ''; ?>" required="" />
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label class="form-label">Category</label>
+                                                    <input class="form-control p-0 border-0 border-bottom" id="cat" name="cat" type="type" readonly placeholder="Category" value="<?= $studentCategory ?>" required="" />
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label class="form-label">Religion</label>
+                                                    <input class="form-control p-0 border-0 border-bottom" type="type" id="religion" name="religion" readonly value="<?= $studentReligion; ?>" required="" />
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label class="form-label"><?= $other['id_name'] ?? '' ?></label>
+                                                    <input class="form-control p-0 border-0 border-bottom" type="text" readonly id="aadhar" name="aadhar" value="<?= $other['sip_no'] ?? ''; ?>" required="" />
+                                                </div>
+                                            </div>
+
                                         </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label class="form-label">Email:</label>
-                                            <input class="form-control p-0 border-0 border-bottom" type="email" readonly id="email" name="email" value="<?= $contact['sci_email'] ?? ''; ?>" placeholder="Email" required="" />
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label class="form-label">Gender:</label>
-                                            <input class="form-control p-0 border-0 border-bottom" type="type" readonly id="gender" name="gender" class="form-control p-0 form-control p-0-solid" value="<?php if (($other['gender'] ?? '') == 0) echo 'Male'; ?><?php if (($other['gender'] ?? '') == 1) echo 'Female'; ?><?php if (($other['gender'] ?? '') == 2) echo 'Other'; ?>" placeholder="Gender" required="" />
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label for="" class="form-label">DOB</label>
-                                            <input type="text" class="form-control p-0 border-0 border-bottom" readonly id="dob" name="dob" value="<?= $other['dob'] ?? ''; ?>" required="" />
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label class="form-label">Category:</label>
-                                            <input class="form-control p-0 border-0 border-bottom" id="cat" name="cat" type="type" readonly placeholder="Category" value="<?= $studentCategory ?>" required="" />
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label class="form-label">Religion:</label>
-                                            <input class="form-control p-0 border-0 border-bottom" type="type" id="religion" name="religion" readonly value="<?= $studentReligion; ?>" required="" />
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label class="form-label"><?= $other['id_name'] ?? '' ?>:</label>
-                                            <input class="form-control p-0 border-0 border-bottom" type="text" readonly id="aadhar" name="aadhar" value="<?= $other['sip_no'] ?? ''; ?>" required="" />
-                                        </div>
+
                                     </div>
                                 </form>
                             </div>
-                            <div class="program-details">
-                                <h4 class="py-4 fw-700">Program and Enrollment Details:</h4>
+                            <div class="program-details mb-3">
+                                <h4 class="fw-700">Program and Enrollment Details</h4>
                                 <form action="">
                                     <div class="row">
                                         <div class="col-md-3 mb-3 form-group">
-                                            <label class="form-label">Sid</label>
+                                            <label class="form-label">SID</label>
                                             <input class="form-control p-0 border-0 border-bottom" type="text" id="sid" name="sid" readonly value="<?php echo $sid; ?>" placeholder="SID" required="" />
                                         </div>
                                         <div class="col-md-3 mb-3">
@@ -241,8 +254,8 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
                                     </div>
                                 </form>
                             </div>
-                            <div class="parent-details">
-                                <h4 class="py-4 fw-700">Parent's Details:</h4>
+                            <div class="parent-details mb-3">
+                                <h4 class="fw-700">Parent's Details</h4>
                                 <form action="">
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
@@ -251,26 +264,26 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label class="form-label">Mother's Name</label>
-                                            <input class="form-control p-0 border-0 border-bottom" type="text" id="mother_name" name="mother_name" readonly value="<?= $parentDetail['mother_name'] ?? ''; ?>" placeholder="Father Name" />
+                                            <input class="form-control p-0 border-0 border-bottom" type="text" id="mother_name" name="mother_name" readonly value="<?= $parentDetail['mother_name'] ?? ''; ?>" placeholder="Mother Name" />
                                         </div>
                                         <div class="col-md-3 mb-3">
-                                            <label class="form-label">Parent's Email:</label>
-                                            <input class="form-control p-0 border-0 border-bottom" type="text" id="parent_email" name="parent_email" readonly value="<?= $parentDetail['parent_email'] ?? ''; ?>" placeholder="Parent's Mobile" />
+                                            <label class="form-label">Parent's Email</label>
+                                            <input class="form-control p-0 border-0 border-bottom" type="text" id="parent_email" name="parent_email" readonly value="<?= $parentDetail['parent_email'] ?? ''; ?>" placeholder="Parent's Email" />
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="" class="form-label">Parent's Mobile No.</label>
-                                            <input type="text" id="parent_mobile" name="parent_mobile" class="form-control p-0 border-0 border-bottom" readonly value="<?= $parentDetail['parent_mobile'] ?? ''; ?>" placeholder="Parent's Mobile" />
+                                            <input type="text" id="parent_mobile" name="parent_mobile" class="form-control p-0 border-0 border-bottom" readonly value="<?= $parentDetail['parent_mobile'] ?? ''; ?>" placeholder="Parent's Mobile No." />
                                         </div>
                                         <div class=" col-md-3 mb-3">
                                             <label class="form-label">Father's Annual Income</label>
                                             <input class="form-control p-0 border-0 border-bottom" type="text" id="father_income" name="father_income" readonly value="<?= $parentDetail['father_income'] ?? ''; ?>" placeholder="Father's Annual Income" />
                                         </div>
                                         <div class=" col-md-3 mb-3">
-                                            <label class="form-label">mother's Annual Income</label>
+                                            <label class="form-label">Mother's Annual Income</label>
                                             <input class="form-control p-0 border-0 border-bottom" type="text" id="mother_income" name="mother_income" readonly value="<?= $parentDetail['mother_income'] ?? ''; ?>" placeholder="Mother's Annual Income" />
                                         </div>
                                         <div class=" col-md-3 mb-3">
-                                            <label class="form-label">Landline No.:</label>
+                                            <label class="form-label">Landline No.</label>
                                             <input class="form-control p-0 border-0 border-bottom" id="landline" name="landline" value="<?= $other['landline'] ?? ''; ?>" placeholder="Landline No." />
                                         </div>
                                     </div>
@@ -279,16 +292,16 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
                             <?php $i = 0;
                             foreach ($address as $row) : ?>
                                 <div class="current-address">
-                                    <h4 class="py-4 fw-700"> <?php if (count($address) < 2) {
-                                                                    echo 'Permanent and Current';
-                                                                } else {
-                                                                    if ($i == 1) echo 'Permanent';
-                                                                    else echo 'Current';
-                                                                } ?> Address: </h4>
+                                    <h4 class="fw-700"> <?php if (count($address) < 2) {
+                                                            echo 'Permanent and Current';
+                                                        } else {
+                                                            if ($i == 1) echo 'Permanent';
+                                                            else echo 'Current';
+                                                        } ?> Address </h4>
                                     <form action="">
                                         <div class="row">
                                             <div class="col-md-3 mb-3">
-                                                <label class="form-label">Street Name: </label>
+                                                <label class="form-label">Street Name</label>
                                                 <input class="form-control p-0 border-0 border-bottom" type="text" readonly name="street_address" value="<?= $row['street_address'] ?? ''; ?>" placeholder="House or Flat No, Street Name/Village Name" />
                                             </div>
                                             <div class="col-md-3 mb-3">
@@ -314,79 +327,89 @@ $photoUrl = isset($student_docs[$photo_key]) ? $student_docs[$photo_key]['sd_url
                                 </div>
                         </div>
                     </div>
-                    <div class="p-3  tab-content ">
+                    <div class="tab-content">
                         <div class="tab-pane fade  show" id="nav-tab-2">
                             <div class="student-details">
-                                <h4 class="py-4 fw-700">Student Details:</h4>
-                                <table class="table">
-                                    <thead class="thead-dark">
-                                        <tr class="" style="width: 100%">
-                                            <th style="width:20%">Class</th>
-                                            <th style="width:20%">Board/University</th>
-                                            <th style="width:20%">Institute/School Name</th>
-                                            <th style="width:10%">Passing Year</th>
-                                            <th style="width:5%">Max Marks</th>
-                                            <th style="width:5%">Obtained Marks</th>
-                                            <th style="width:10%">Result</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($education as $row) : ?>
-                                            <tr>
-                                                <td>
-                                                    <?= $row['el_name'] ?? ''; ?>
-                                                </td>
-                                                <td>
-                                                    <?= $row['board_university'] ?? ''; ?>
-                                                </td>
-                                                <td>
-                                                    <?= $row['institute_school'] ?? ''; ?>
-                                                </td>
-                                                <td>
-                                                    <?= $row['year'] ?? ''; ?>
-                                                </td>
-                                                <td>
-                                                    <?= $row['total_marks'] ?? ''; ?>
-                                                </td>
-                                                <td>
-                                                    <?= $row['obtain_marks'] ?? ''; ?>
-                                                </td>
-                                                <td>
-                                                    <?= $row['grade_precentage'] ?? ''; ?>(
-                                                    <?php if ($row['grade_type'] ?? '' == 1) echo "Grade";
-                                                    else echo "%"; ?>)
-                                                </td>
+                                <h4 class="fw-700">Academic Details</h4>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                            <tr class="" style="width: 100%">
+                                                <th>Class</th>
+                                                <th>Board/University</th>
+                                                <th>Institute/School Name</th>
+                                                <th>Passing Year</th>
+                                                <th>Max Marks</th>
+                                                <th>Obtained Marks</th>
+                                                <th>Result</th>
                                             </tr>
-                                        <?php endforeach; ?>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($education as $row) : ?>
+                                                <tr>
+                                                    <td>
+                                                        <?= $row['el_name'] ?? ''; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $row['board_university'] ?? ''; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $row['institute_school'] ?? ''; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $row['year'] ?? ''; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $row['total_marks'] ?? ''; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $row['obtain_marks'] ?? ''; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $row['grade_precentage'] ?? ''; ?>(
+                                                        <?php if ($row['grade_type'] ?? '' == 1) echo "Grade";
+                                                        else echo "%"; ?>)
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
 
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="p-3 tab-content ">
+                    <div class="tab-content">
 
-                        <div class=" tab-pane fade show" id="nav-tab-3">
-                            <h3>Uploaded Documents: </h3>
+                        <div class="tab-pane fade show" id="nav-tab-3">
 
-                            <div class="d-flex justify-content-between p-4">
-                                <?php foreach ($student_docs as $student) :
-                                    if ($student['sd_url'] == $photoUrl) :
-                                        continue;
-                                    endif;
-                                ?>
-                                    <div class="h5 text-center">
-                                        <h6><?= $student['dt_name'] ?></h6>
-                                        <?php if (pathinfo($student['sd_url'], PATHINFO_EXTENSION) == 'pdf') : ?>
-                                            <iframe class="card-img" src="https://docs.google.com/gview?url=<?= $url . substr($student['sd_url'] ?? './', '1') ?>&embedded=true"></iframe>
-                                        <?php else : ?>
-                                            <a href="<?= $url . substr($student['sd_url'] ?? './', '1') ?>" target="_blank">
-                                                <img class="card-img" src="<?= base_url() . 'ldm.merishiksha.org' . substr($student['sd_url'] ?? './', '1') ?>"></a>
-                                        <?php endif; ?>
-                                    </div>
+                            <h4 class="fw-700">Uploaded Documents</h4>
 
-                                <?php endforeach; ?>
+                            <div class="documents p-2">
+                                <div class="row">
+                                    <?php foreach ($student_docs as $student) :
+                                        if ($student['sd_url'] == $photoUrl) :
+                                            continue;
+                                        endif;
+                                    ?>
+                                        <div class="col-md-3 text-center mb-2">
+                                            <h6><?= $student['dt_name'] ?></h6>
+                                            <hr>
+                                            <?php if (pathinfo($student['sd_url'], PATHINFO_EXTENSION) == 'pdf') : ?>
+                                                <iframe class="card-img" src="https://docs.google.com/gview?url=<?= $url . substr($student['sd_url'] ?? './', '1') ?>&embedded=true"></iframe>
+                                            <?php else : ?>
+                                                <a href="<?= $url . substr($student['sd_url'] ?? './', '1') ?>" target="_blank">
+                                                    <div class="card">
+                                                        <img class="card-img" src="<?= base_url() . 'ldm.merishiksha.org' . substr($student['sd_url'] ?? './', '1') ?>">
+                                                    </div>
+                                                </a>
+                                            <?php endif; ?>
+                                        </div>
+
+                                    <?php endforeach; ?>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

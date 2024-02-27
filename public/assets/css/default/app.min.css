@@ -22711,7 +22711,7 @@ a:focus {
 
 .nav.nav-tabs.nav-tabs-inverse .nav-item .nav-link.active {
     color: var(--bs-component-color);
-    background-color: var(--bs-component-bg)
+    background-color: var(--bs-gray-400)
 }
 
 .nav.nav-tabs.nav-tabs-v2 {

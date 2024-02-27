@@ -83,9 +83,7 @@
                     <div class="col-md-3">
                         <div class="mb-3">
                             <label class="form-label" for="status">Lead Status</label>
-                            <select class="form-select" id="status" name="status" required="" onchange="getInfo($(this).find(':selected').attr('data-getinfo')
-                                                ); getScore($(this).find(':selected').attr('data-statusscore')
-                                                , 'status')">
+                            <select class="form-select" id="status" name="status" required="" onchange="getInfo($(this).find(':selected').attr('data-getinfo')); getScore($(this).find(':selected').attr('data-statusscore'), 'status')">
                                 <option value="">--Select--</option>
                                 <?php foreach ($statues as $status) : ?>
                                     <option data-statusscore='<?= $status['score'] ?>' data-getinfo='<?= $status['status_get_more_info'] ?>' value="<?= $status['status_id'] ?>" <?= (old('status') ?? $profile_detail['lead_status']) == $status['status_id'] ? 'selected' : null ?>><?= $status['status_name'] ?> </option>
