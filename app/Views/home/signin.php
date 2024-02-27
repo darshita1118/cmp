@@ -8,9 +8,9 @@
     <div class="news-feed">
         <div class="news-image" style="background-image: url(<?= base_url('assets/img/login-bg/login-bg-11.jpg') ?>)"></div>
         <div class="news-caption">
-            <h4 class="caption-title"><b>CMP</b> Admin </h4>
+            <h4 class="caption-title"><b>LDM</b> Admin </h4>
             <p>
-                The CMP Admin app for iPhone®, iPad®, and Android™. 
+                The LDM Admin app for iPhone®, iPad®, and Android™.
             </p>
         </div>
     </div>
@@ -22,9 +22,9 @@
             <div class="brand">
                 <div class="d-flex align-items-center">
                     <span class="logo"></span>
-                    <b>CMP</b> Admin
+                    <b>LDM</b> Admin
                 </div>
-                <small>Welcome to CMP Admin</small>
+                <small>Welcome to LDM Admin</small>
             </div>
             <div class="icon">
                 <i class="fa fa-sign-in-alt"></i>
@@ -55,7 +55,7 @@
                 </div>
                 <hr class="bg-gray-600 opacity-2">
                 <div class="text-gray-600 text-center  mb-0">
-                    &copy; CMP Admin All Right Reserved 2024
+                    &copy; LDM Admin All Right Reserved 2024
                 </div>
             </form>
         </div>

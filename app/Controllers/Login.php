@@ -26,18 +26,18 @@ class Login extends BaseController
         $data = [];
 
         try {
-            $modelSession = new ApplicationModel('lms_sessions', 'ls_id', SETTINGDB);
-            $sessionData = $modelSession->select('session_tb_suffix')->where('session_status', 1)->where('session_delete_status', 0)->orderBy('ls_id', 'desc')->findAll();
+            $modelSession = new ApplicationModel('tbl_admission_session', 'sid', SETTINGDB);
+            $sessionData = $modelSession->select(['name', 'start_year'])->where('status', 1)->orderBy('sid', 'desc')->findAll();
             // Example array
-            $sessionMakingYear = [];
-            // Iterate over each value and trim to last 4 digits
-            foreach ($sessionData as $value) {
+            // $sessionMakingYear = [];
+            // // Iterate over each value and trim to last 4 digits
+            // foreach ($sessionData as $value) {
 
-                array_push($sessionMakingYear, substr((string)$value['session_tb_suffix'], -4)); // Convert to string and get last 4 characters
-            }
+            //     array_push($sessionMakingYear, substr((string)$value['session_tb_suffix'], -4)); // Convert to string and get last 4 characters
+            // }
             // Get unique values only
-            $sessionUniqueValues = array_unique($sessionMakingYear);
-            $data['sessionData'] = $sessionUniqueValues;
+            //$sessionUniqueValues = array_unique($sessionMakingYear);
+            $data['sessionData'] = $sessionData;
         } catch (\Throwable $th) {
             session()->setFlashdata('toastr', ['error' => 'No Data present in Session.']);
             // return redirect()->withInput()->to('');
@@ -121,21 +121,21 @@ class Login extends BaseController
         }
         $data = [];
         try {
-            $modelSession = new ApplicationModel('lms_sessions', 'ls_id', SETTINGDB);
-            $sessionData = $modelSession->select('session_tb_suffix')->where('session_status', 1)->where('session_delete_status', 0)->orderBy('ls_id', 'desc')->findAll();
+            $modelSession = new ApplicationModel('tbl_admission_session', 'sid', SETTINGDB);
+            $sessionData = $modelSession->select(['name', 'start_year'])->where('status', 1)->orderBy('sid', 'desc')->findAll();
             // Example array
-            $sessionMakingYear = [];
-            // Iterate over each value and trim to last 4 digits
-            foreach ($sessionData as $value) {
+            // $sessionMakingYear = [];
+            // // Iterate over each value and trim to last 4 digits
+            // foreach ($sessionData as $value) {
 
-                array_push($sessionMakingYear, substr((string)$value['session_tb_suffix'], -4)); // Convert to string and get last 4 characters
-            }
+            //     array_push($sessionMakingYear, substr((string)$value['session_tb_suffix'], -4)); // Convert to string and get last 4 characters
+            // }
             // Get unique values only
-            $sessionUniqueValues = array_unique($sessionMakingYear);
-            $data['sessionData'] = $sessionUniqueValues;
+            //$sessionUniqueValues = array_unique($sessionMakingYear);
+            $data['sessionData'] = $sessionData;
         } catch (\Throwable $th) {
             session()->setFlashdata('toastr', ['error' => 'No Data present in Session.']);
-            // return redirect()->withInput()->to('/super-login');
+            // return redirect()->withInput()->to('');
         }
 
         if ($this->request->getMethod() == "post") {

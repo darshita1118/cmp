@@ -13,7 +13,8 @@ class CheckHandlerStatus implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         // it execute when call logout function
-        if ($request->uri->getPath() == 'handler/logout') {
+        //if ($request->uri->getPath() == 'handler/logout') {
+        if (url_is('handler/logout')) {
             return true;
         }
 
