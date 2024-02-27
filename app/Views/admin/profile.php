@@ -228,7 +228,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                                                     </div>
                                                                 </td>
                                                                 <td>
-                                                                    <a href="<?= base_url('handler/process-application/' . $profileDetail['lid'] . '/' . $sidData['sid']) ?>" class="btn btn-sm btn-warning me-1 btn-icon" title="Proceed Application"> <i class="fa fa-file-pen"></i> Proceed Application</a>
+                                                                    <a href="<?= base_url('admin/process-application/' . $profileDetail['lid'] . '/' . $sidData['sid']) ?>" class="btn btn-sm btn-warning me-1 btn-icon" title="Proceed Application"> <i class="fa fa-file-pen"></i> Proceed Application</a>
                                                                 </td>
                                                             <?php else : ?>
                                                                 <td>
@@ -237,7 +237,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                                                     </div>
                                                                 </td>
                                                                 <td>
-                                                                    <a href="<?= base_url('handler/process-application/' . $profileDetail['lid'] . '/' . $sidData['sid']) ?>" class="btn btn-sm btn-warning me-1 btn-icon" title="Application Under Process"> <i class="fa fa-file-pen"></i> Application Under Process</a>
+                                                                    <a href="<?= base_url('admin/process-application/' . $profileDetail['lid'] . '/' . $sidData['sid']) ?>" class="btn btn-sm btn-warning me-1 btn-icon" title="Application Under Process"> <i class="fa fa-file-pen"></i> Application Under Process</a>
                                                                 </td>
                                                             <?php endif; ?>
                                                         <?php else : ?>
@@ -248,7 +248,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <a href="<?= base_url('handler/apply-now/' . $profileDetail['lid']) ?>" class="btn btn-sm btn-warning me-1 btn-icon" title="Generate Sid"> <i class="fa fa-file-pen"></i>Generate Sid</a>
+                                                                <a href="<?= base_url('admin/apply-now/' . $profileDetail['lid']) ?>" class="btn btn-sm btn-warning me-1 btn-icon" title="Generate Sid"> <i class="fa fa-file-pen"></i>Generate Sid</a>
                                                             </td>
                                                         <?php endif; ?>
 
@@ -438,7 +438,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                                                 <!--begin::Messages-->
                                                                 <div id="messageContainer" class="message-container">
                                                                     <?php foreach ($remarks as $remark) : ?>
-                                                                        <?php if ($remark['handler_id'] == session('id')) : ?>
+                                                                        <?php if ($remark['handler_id'] == session('unique_id')) : ?>
                                                                             <!--begin::Message Out-->
                                                                             <div class="d-flex flex-column mb-3">
                                                                                 <div class="">
