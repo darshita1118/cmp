@@ -31,7 +31,8 @@ function getMessage($leadId)
 function getHandlerList($notIn = [])
 {
     $handlerModel = new ApplicationModel('lms_users_' . session('year'), 'lu_id', 'reg_setting_db');
-    $handlers = $handlerModel->select(['lu_id', 'user_name', 'user_role', 'user_report_to'])->where(['user_status' => 1, 'user_deleted_status' => 0, 'user_report_to' => session('id')]);
+    $reportTo = $handlerModel->select('user_report_to')->where('lu_id', session('id'))->first();
+    $handlers = $handlerModel->select(['lu_id', 'user_name', 'user_role', 'user_report_to'])->where(['user_status' => 1, 'user_deleted_status' => 0, 'user_report_to' => $reportTo['user_report_to']]);
     if (!empty($notIn)) {
         $handlers->whereNotIn('lu_id', $notIn);
     }
