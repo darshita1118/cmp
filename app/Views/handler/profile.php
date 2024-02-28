@@ -84,17 +84,13 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
 
 ?>
 <link href="<?= base_url('assets/plugins/select2/dist/css/select2.min.css') ?>" rel="stylesheet" />
-<script src="<?= base_url('assets/plugins/select2/dist/js/select2.min.js') ?>"></script>
-
 <!-- Time -->
 <!-- required files -->
 <link href="<?= base_url('assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css') ?>" rel="stylesheet" />
-<script src="<?= base_url('assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js') ?>"></script>
 
 <!-- date -->
 <link href=" <?= base_url('assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') ?>" rel="stylesheet" />
 
-<script src=" <?= base_url('assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js') ?>"></script>
 
 <style>
     .timeline::before {
@@ -131,8 +127,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
             margin-top: 0;
         }
     }
-</style>
-<style>
+
     input {
         margin-bottom: 10px;
     }
@@ -145,7 +140,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
     <div class="panel-heading">
         <ol class="breadcrumb panel-title">
             <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-            <li class="breadcrumb-item"><a href="javascript:;">Leads</a></li>
+            <li class="breadcrumb-item"><a href="javascript:;">Assign Leads</a></li>
             <li class="breadcrumb-item active">Lead</li>
         </ol>
 
@@ -672,26 +667,24 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="program">Program:</label>
-                        <select type="text" id="program" name="program" onchange="$('#level').val($(this).find(':selected').attr('data-level')); $('#dept').val($(this).find(':selected').attr('data-dept'));" class="form-control form-control-solid default-select2" required="">
-                            <option value="">--select program--</option>
+                        <select type="text" id="program" name="program" onchange="$('#level').val($(this).find(':selected').attr('data-level')); $('#dept').val($(this).find(':selected').attr('data-dept'));" class="default-select2 form-select" required>
                             <?php foreach ($courses as $course) : ?>
                                 <option data-level='<?= $course['level_id'] ?>' data-dept='<?= $course['dept_id'] ?>' value="<?= $course['coi_id'] ?>" <?= (old('program') ?? $profileDetail['lead_programe']) == $course['coi_id'] ? 'selected' : null ?>><?= $course['course_name'] ?> </option>
                             <?php endforeach; ?>
                         </select>
                         <input type="hidden" name="level" value="5" id="level">
                         <input type="hidden" name="dept" value="16" id="dept">
-
                     </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" name="btn" class="btn btn-theme" type="submit" value="lead-program">Save Changes</button>
+                    <button type="submit" name="btn" class="btn btn-theme" value="lead-program">Save Changes</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
 
 <!-- Lead Status Model -->
 <div class="modal fade" id="modalleadst">
@@ -711,12 +704,11 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                 <label for="status">Lead
                                     Status</label>
 
-                                <select class="form-control form-control-solid default-select2" id="status" name="status" required="" onchange="getInfoProfile($(this).find(':selected').attr('data-getinfo')
+                                <select class="form-select default-select2" id="status" name="status" required onchange="getInfoProfile($(this).find(':selected').attr('data-getinfo')
                                                     );">
                                     <?php foreach ($status_list as $status) : ?>
                                         <option data-statusscore='<?= $status['score'] ?>' data-getinfo='<?= $status['status_get_more_info'] ?>' value="<?= $status['status_id'] ?>" <?= (old('status') ?? $profileDetail['lead_status']) == $status['status_id'] ? 'selected' : null ?>><?= $status['status_name'] ?> </option>
                                     <?php endforeach; ?>
-
                                 </select>
 
                             </div>
@@ -851,7 +843,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                     <div class="row">
                         <div class="flex-fill col-md-4">
                             <label for="handler">Choose Handler:</label>
-                            <select id="handler" name="handler" class="form-control selectpicker" required="">
+                            <select id="handler" name="handler" class="form-control default-select2" required="">
                                 <option value="">--Choose Handler--</option>
                                 <?php foreach ($handlers as $handler) : ?>
                                     <option value="<?= $handler['lu_id'] ?>"><?= $handler['user_name'] ?></option>
@@ -869,41 +861,36 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
         </div>
     </div>
 </div>
+
+
 <!-- Select2 JS -->
 <script src="<?= base_url('assets/plugins/select2/dist/js/select2.min.js') ?>"></script>
-<script src="<?= base_url() ?>assets/plugins/select-picker/dist/picker.min.js"></script>
+
+<script src=" <?= base_url('assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js') ?>"></script>
+
+<script src="<?= base_url('assets/js/iconify.min.js') ?>" type="text/javascript"></script>
+<!-- required files -->
+<script src="<?= base_url() ?>assets/plugins/ionicons/dist/ionicons/ionicons.js"></script>
+<script src="<?= base_url('assets/js/custum.js') ?>"></script>
+
 
 
 <script>
-    // Select-Picker
-    $('#handler').picker({
-        search: true
-    });
-    $('#offcanvasTop .selectpicker').picker();
-
-    $(".default-select2").select2({
-        dropdownParent: $('#offcanvasTop')
-    });
     $("#timepicker").timepicker();
 
-    $('#modalprog').on('shown.bs.modal', function() {
-        $(".default-select2").select2({
-            dropdownParent: $('#modalprog')
+
+    $('#modalprog,#modalleadst,#modaladdress,#modalaltrcont,#modaltrnld').on('shown.bs.modal', function() {
+        $(".default-select2", this).select2({
+            dropdownParent: $(this)
         });
     });
+
     $("#datepicker-autoClose").datepicker({
         todayHighlight: true,
         autoclose: true
     });
 </script>
-
-<script src="<?= base_url('assets/js/iconify.min.js') ?>" type="text/javascript"></script>
-<!-- required files -->
-<script src="<?= base_url() ?>assets/plugins/ionicons/dist/ionicons/ionicons.js"></script>
-<script>
-    const base_url = '<?= base_url() ?>'
-</script>
-<script src="<?= base_url('assets/js/custum.js') ?>"></script>
 
 <script>
     let stateList = [];

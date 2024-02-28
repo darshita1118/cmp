@@ -4,7 +4,7 @@
 		<div id="header" class="app-header">
 			<div class="navbar-header">
 				<a href="<?= base_url('/') ?>" class="navbar-brand"><span class="navbar-logo"></span> <b class="me-3px">LDM</b>
-					Admin</a>
+				</a>
 				<button type="button" class="navbar-mobile-toggler" data-toggle="app-top-menu-mobile">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>

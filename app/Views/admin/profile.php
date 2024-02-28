@@ -659,6 +659,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
 </div>
 
 <!-- Program Model -->
+
 <div class="modal fade" id="modalprog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -671,7 +672,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="program">Program:</label>
-                        <select type="text" id="program" name="program" onchange="$('#level').val($(this).find(':selected').attr('data-level')); $('#dept').val($(this).find(':selected').attr('data-dept'));" class="form-control form-control-solid default-select2" required="">
+                        <select type="text" id="program" name="program" onchange="$('#level').val($(this).find(':selected').attr('data-level')); $('#dept').val($(this).find(':selected').attr('data-dept'));" class="form-select" required="">
                             <option value="">--select program--</option>
                             <?php foreach ($courses as $course) : ?>
                                 <option data-level='<?= $course['level_id'] ?>' data-dept='<?= $course['dept_id'] ?>' value="<?= $course['coi_id'] ?>" <?= (old('program') ?? $profileDetail['lead_programe']) == $course['coi_id'] ? 'selected' : null ?>><?= $course['course_name'] ?> </option>
@@ -710,7 +711,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                 <label for="status">Lead
                                     Status</label>
 
-                                <select class="form-control form-control-solid default-select2" id="status" name="status" required="" onchange="getInfoProfile($(this).find(':selected').attr('data-getinfo')
+                                <select class="form-select" id="status" name="status" required="" onchange="getInfoProfile($(this).find(':selected').attr('data-getinfo')
                                                     );">
                                     <?php foreach ($status_list as $status) : ?>
                                         <option data-statusscore='<?= $status['score'] ?>' data-getinfo='<?= $status['status_get_more_info'] ?>' value="<?= $status['status_id'] ?>" <?= (old('status') ?? $profileDetail['lead_status']) == $status['status_id'] ? 'selected' : null ?>><?= $status['status_name'] ?> </option>

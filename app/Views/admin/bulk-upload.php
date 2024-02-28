@@ -81,8 +81,8 @@
                         </div>
                     </div>
                     <input type="hidden" name="department" value="<?= set_value('department') ?? '' ?>" id="department">
-                    <div>
-                        <button type="submit" name="btn" value="upload-lead" class="btn btn-primary w-100px me-5px">Add Lead</button>
+                    <div class="text-center">
+                        <button type="submit" name="btn" value="upload-lead" class="btn btn-primary w-100px me-5px">Submit</button>
                     </div>
                 </div>
             </fieldset>
