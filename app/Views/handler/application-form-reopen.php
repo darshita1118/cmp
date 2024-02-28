@@ -113,6 +113,18 @@ $query = $uri->getQuery();
 
                         <div class="col-md-3">
                             <div class="mb-3">
+                                <label class="form-label">Handler</label>
+                                <select class="form-select" name="handlers[]" id="handlers" multiple>
+                                    <option value="">--Select--</option>
+                                    <?php foreach ($handlers as $handler) : ?>
+                                        <option value="<?= $handler['lu_id'] ?>" <?= (in_array($handler['lu_id'], $_GET['handlers'] ?? [])) ? 'selected' : null ?>><?= $handler['user_name'] ?> </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="mb-3">
                                 <label class="form-label">Lead Nationality</label>
                                 <select class="form-select" name="nationality[]" id="nationality" multiple>
                                     <?php foreach ($student_nationalities as $nation) : ?>
@@ -122,8 +134,10 @@ $query = $uri->getQuery();
 
                             </div>
                         </div>
-                        <div class="col-md-3 mt-md-4">
-                            <button type="submit" class="btn btn-primary w-100px me-5px">Apply Filter</button>
+                        <div class="offcanvas-footer border-top mt-3">
+                            <div class="col-md-12 mt-md-4 text-center">
+                                <button type="submit" class="btn btn-primary w-100px mt-3">Apply Filter</button>
+                            </div>
                         </div>
                     </form>
 
@@ -184,6 +198,14 @@ $query = $uri->getQuery();
                 endforeach; ?>
             </tbody>
         </table>
+        <hr>
+        <div class="pagin">
+            <div class="col-lg-12 text-center">
+                <div id='pagination' class='pagination-nav'>
+                    <?= $pager->links() ?>
+                </div>
+            </div>
+        </div>
 
     </div>
 

@@ -32,7 +32,7 @@
 			headerOffset: $('#header').height()
 		},
 		responsive: true,
-		pageLength: 10,
+		pageLength: 50,
 	};
 
 	$('#data-table-fixed-header').DataTable(options);

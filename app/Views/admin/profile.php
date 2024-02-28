@@ -203,7 +203,8 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                                             <td class="field">Lead Status</td>
                                                             <td>
                                                                 <div class="text-body text-opacity-60">
-                                                                    Not Given
+                                                                    <?php $newArray = array_column($status_list, 'status_name', 'status_id'); ?>
+                                                                    <?= $newArray[$profileDetail['lead_status']]; ?>
                                                                 </div>
                                                             </td>
                                                             <td>

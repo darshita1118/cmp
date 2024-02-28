@@ -68,7 +68,7 @@ $admissionStatus = [
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Mobile No.</label>
-                                <input type="number" name="mobile" class="form-control" placeholder="Search mobile no.." minlength="8" value="<?= isset($_GET['mobile']) ? $_GET['mobile'] : null ?>" maxlength="12">
+                                <input type="tel" name="mobile" class="form-control" placeholder="Search mobile no.." minlength="8" value="<?= isset($_GET['mobile']) ? $_GET['mobile'] : null ?>" maxlength="12">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -173,6 +173,14 @@ $admissionStatus = [
                 endforeach; ?>
             </tbody>
         </table>
+        <hr>
+        <div class="pagin">
+            <div class="col-lg-12 text-center">
+                <div id='pagination' class='pagination-nav'>
+                    <?= $pager->links() ?>
+                </div>
+            </div>
+        </div>
 
     </div>
 
@@ -274,4 +282,3 @@ $admissionStatus = [
         });
     });
 </script>
-

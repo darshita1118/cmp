@@ -204,7 +204,8 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                                             <td class="field">Lead Status</td>
                                                             <td>
                                                                 <div class="text-body text-opacity-60">
-                                                                    Not Given
+                                                                    <?php $newArray = array_column($status_list, 'status_name', 'status_id'); ?>
+                                                                    <?= $newArray[$profileDetail['lead_status']]; ?>
                                                                 </div>
                                                             </td>
                                                             <td>
@@ -850,7 +851,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                     <div class="row">
                         <div class="flex-fill col-md-4">
                             <label for="handler">Choose Handler:</label>
-                            <select id="handler" name="handler" class="form-control form-control-lg form-control-solid" required="">
+                            <select id="handler" name="handler" class="form-control selectpicker" required="">
                                 <option value="">--Choose Handler--</option>
                                 <?php foreach ($handlers as $handler) : ?>
                                     <option value="<?= $handler['lu_id'] ?>"><?= $handler['user_name'] ?></option>
@@ -868,8 +869,21 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
         </div>
     </div>
 </div>
+<!-- Select2 JS -->
+<script src="<?= base_url('assets/plugins/select2/dist/js/select2.min.js') ?>"></script>
+<script src="<?= base_url() ?>assets/plugins/select-picker/dist/picker.min.js"></script>
+
 
 <script>
+    // Select-Picker
+    $('#handler').picker({
+        search: true
+    });
+    $('#offcanvasTop .selectpicker').picker();
+
+    $(".default-select2").select2({
+        dropdownParent: $('#offcanvasTop')
+    });
     $("#timepicker").timepicker();
 
     $('#modalprog').on('shown.bs.modal', function() {

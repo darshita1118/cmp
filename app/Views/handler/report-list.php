@@ -131,8 +131,10 @@ $query = $uri->getQuery();
 
                             </div>
                         </div>
-                        <div class="col-md-3 mt-md-4">
-                            <button type="submit" class="btn btn-primary w-100px me-5px">Apply Filter</button>
+                        <div class="offcanvas-footer border-top mt-3">
+                            <div class="col-md-12 mt-md-4 text-center">
+                                <button type="submit" class="btn btn-primary w-100px mt-3">Apply Filter</button>
+                            </div>
                         </div>
                     </form>
 
