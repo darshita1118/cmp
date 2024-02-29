@@ -23,19 +23,19 @@
                     <div class="col-md-3">
                         <div class="mb-3">
                             <label class="form-label" for="firstname">First Name</label>
-                            <input class="form-control" type="text" name="firstname" id="firstname" required="" value="<?= old('firstname') ?? '' ?>" data-validation-required-message="This First Name field is required" placeholder="First Name" /><span class="form-text text-muted">Please enter Your name</span>
+                            <input class="form-control" type="text" name="firstname" id="firstname" required="" value="<?= old('firstname') ?? '' ?>" data-validation-required-message="This First Name field is required" placeholder="First Name" /><span class="form-text text-muted">Please enter your first name</span>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="mb-3">
                             <label class="form-label" for="middlename">Middle Name</label>
-                            <input class="form-control" type="text" name="middlename" id="middlename" placeholder="Middle Name" value="<?= old('middlename') ?? '' ?>" data-validation-required-message="This Middle Name field is required"><span class="form-text text-muted">Please enter Your name</span>
+                            <input class="form-control" type="text" name="middlename" id="middlename" placeholder="Middle Name" value="<?= old('middlename') ?? '' ?>" data-validation-required-message="This Middle Name field is required"><span class="form-text text-muted">Please enter your middle name</span>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="mb-3">
                             <label class="form-label" for="lastname">Last Name</label>
-                            <input class="form-control" type="text" name="lastname" id="lastname" placeholder="Last Name" value="<?= old('lastname') ?? '' ?>" data-validation-required-message="This Last Name field is required" /><span class="form-text text-muted">Please enter Your name</span>
+                            <input class="form-control" type="text" name="lastname" id="lastname" placeholder="Last Name" value="<?= old('lastname') ?? '' ?>" data-validation-required-message="This Last Name field is required" /><span class="form-text text-muted">Please enter your last name</span>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -69,7 +69,7 @@
                                     <option value="<?= $dept['dept_id'] ?>" <?= old('department') == $dept['dept_id'] ? 'selected' : null ?>><?= $dept['dept_name'] ?></option>
                                 <?php endforeach; ?>
 
-                            </select><span class="form-text text-muted">Please enter handler role</span>
+                            </select><span class="form-text text-muted">Please Select Department</span>
 
                         </div>
                     </div>
@@ -78,16 +78,16 @@
                         <div class="mb-3">
                             <label class="form-label">Program</label>
                             <select id="programnameid" name="programe" class="form-select" required="">
-                                <option value="">--Select A Programe--</option>
+                                <option value="">--Select A Programme--</option>
 
-                            </select><span class="form-text text-muted">Please select program</span>
+                            </select><span class="form-text text-muted">Please Select Program</span>
 
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="mb-3">
                             <label class="form-label" for="status">Lead Status</label>
-                            <select class="form-select" id="status" name="status" required="" onchange="getInfo($(this).find(':selected').attr('data-getinfo')
+                            <select class="form-select" id="status" name="status" required onchange="getInfo($(this).find(':selected').attr('data-getinfo')
                                                 ); getScore($(this).find(':selected').attr('data-statusscore')
                                                 , 'status')">
                                 <option value="">--Select--</option>
@@ -95,7 +95,7 @@
                                     <option data-statusscore='<?= $status['score'] ?>' data-getinfo='<?= $status['status_get_more_info'] ?>' value="<?= $status['status_id'] ?>" <?= old('status') == $status['status_id'] ? 'selected' : null ?>><?= $status['status_name'] ?> </option>
                                 <?php endforeach; ?>
 
-                            </select><span class="form-text text-muted">Please enter Lead status</span>
+                            </select><span class="form-text text-muted">Please Select Lead status</span>
 
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                                 <?php foreach ($sources as $source) : ?>
                                     <option data-sourcescore='<?= $source['source_score'] ?>' value="<?= $source['source_id'] ?>" <?= old('source') == $source['source_id'] ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
                                 <?php endforeach; ?>
-                            </select><span class="form-text text-muted">Please select lead handler</span>
+                            </select><span class="form-text text-muted">Please Select Lead score</span>
 
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                                     <option value="<?= $nation['id'] ?>" <?= old('nationality') == $nation['id'] ? 'selected' : null ?>><?= $nation['name'] ?> </option>
                                 <?php endforeach; ?>
 
-                            </select><span class="form-text text-muted">Please enter handler status</span>
+                            </select><span class="form-text text-muted">Please enter Lead Nationality</span>
 
                         </div>
                     </div>
@@ -135,7 +135,8 @@
                     <input type="hidden" id='statusinfo' name="statusinfo" value="<?= old('statusinfo') ?? '0' ?>">
                     <input type="hidden" id='scorestatus' max name="score[status]" value="<?= old('score')['status'] ?? '0' ?>">
                     <input type="hidden" id='scoresource' name="score[source]" value="<?= old('score')['source'] ?? '0' ?>">
-                    <div>
+                    <hr>
+                    <div class="text-center">
                         <button type="submit" class="btn btn-primary w-100px me-5px">Add Lead</button>
                     </div>
                 </div>

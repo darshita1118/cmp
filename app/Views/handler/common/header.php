@@ -9,7 +9,7 @@
     <meta content="" name="author">
 
     <!-- required assests -->
-
+    <link rel="icon" href="<?php echo base_url('favicon.ico'); ?>" type="image/x-icon">
     <link href="<?= base_url('assets/css/vendor.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assets/css/default/app.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assets/css/font-6/css/all.css') ?>" rel="stylesheet">

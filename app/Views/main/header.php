@@ -7,7 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
     <meta content="" name="description">
     <meta content="" name="author">
-
+    <link rel="icon" href="<?php echo base_url('favicon.ico'); ?>" type="image/x-icon">
     <link href="<?= base_url('assets/css/font-6/css/all.css') ?>" rel="stylesheet">
 
     <!-- Include jQuery -->

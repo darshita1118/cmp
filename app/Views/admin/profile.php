@@ -672,7 +672,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="program">Program:</label>
-                        <select type="text" id="program" name="program" onchange="$('#level').val($(this).find(':selected').attr('data-level')); $('#dept').val($(this).find(':selected').attr('data-dept'));" class="form-select" required="">
+                        <select type="text" id="program" name="program" onchange="$('#level').val($(this).find(':selected').attr('data-level')); $('#dept').val($(this).find(':selected').attr('data-dept'));" class="form-select default-select2" required="">
                             <option value="">--select program--</option>
                             <?php foreach ($courses as $course) : ?>
                                 <option data-level='<?= $course['level_id'] ?>' data-dept='<?= $course['dept_id'] ?>' value="<?= $course['coi_id'] ?>" <?= (old('program') ?? $profileDetail['lead_programe']) == $course['coi_id'] ? 'selected' : null ?>><?= $course['course_name'] ?> </option>
@@ -851,7 +851,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                     <div class="row">
                         <div class="flex-fill col-md-4">
                             <label for="handler">Choose Handler:</label>
-                            <select id="handler" name="handler" class="form-control form-control-lg form-control-solid" required="">
+                            <select id="handler" name="handler" class="form-select default-select2" required="">
                                 <option value="">--Choose Handler--</option>
                                 <?php foreach ($handlers as $handler) : ?>
                                     <option value="<?= $handler['lu_id'] ?>"><?= $handler['user_name'] ?></option>
@@ -876,6 +876,11 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
     $('#modalprog').on('shown.bs.modal', function() {
         $(".default-select2").select2({
             dropdownParent: $('#modalprog')
+        });
+    });
+    $('#modaltrnld').on('shown.bs.modal', function() {
+        $(".default-select2").select2({
+            dropdownParent: $('#modaltrnld')
         });
     });
     $("#datepicker-autoClose").datepicker({

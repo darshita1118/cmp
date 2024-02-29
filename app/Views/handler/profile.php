@@ -84,13 +84,14 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
 
 ?>
 <link href="<?= base_url('assets/plugins/select2/dist/css/select2.min.css') ?>" rel="stylesheet" />
+<script src="<?= base_url('assets/plugins/select2/dist/js/select2.min.js') ?>"></script>
 <!-- Time -->
 <!-- required files -->
 <link href="<?= base_url('assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css') ?>" rel="stylesheet" />
 
 <!-- date -->
 <link href=" <?= base_url('assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') ?>" rel="stylesheet" />
-
+<script src="<?= base_url('assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js') ?>"></script>
 
 <style>
     .timeline::before {
@@ -704,7 +705,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                                 <label for="status">Lead
                                     Status</label>
 
-                                <select class="form-select default-select2" id="status" name="status" required onchange="getInfoProfile($(this).find(':selected').attr('data-getinfo')
+                                <select class="form-select" id="status" name="status" required onchange="getInfoProfile($(this).find(':selected').attr('data-getinfo')
                                                     );">
                                     <?php foreach ($status_list as $status) : ?>
                                         <option data-statusscore='<?= $status['score'] ?>' data-getinfo='<?= $status['status_get_more_info'] ?>' value="<?= $status['status_id'] ?>" <?= (old('status') ?? $profileDetail['lead_status']) == $status['status_id'] ? 'selected' : null ?>><?= $status['status_name'] ?> </option>
@@ -843,7 +844,7 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
                     <div class="row">
                         <div class="flex-fill col-md-4">
                             <label for="handler">Choose Handler:</label>
-                            <select id="handler" name="handler" class="form-control default-select2" required="">
+                            <select id="handler" name="handler" class="default-select2 form-select" required="">
                                 <option value="">--Choose Handler--</option>
                                 <?php foreach ($handlers as $handler) : ?>
                                     <option value="<?= $handler['lu_id'] ?>"><?= $handler['user_name'] ?></option>
@@ -863,34 +864,33 @@ $name = ucwords(trim($profileDetail['lead_first_name'] . ' ' . $profileDetail['l
 </div>
 
 
-<!-- Select2 JS -->
-<script src="<?= base_url('assets/plugins/select2/dist/js/select2.min.js') ?>"></script>
-
-<script src=" <?= base_url('assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js') ?>"></script>
-
-<script src="<?= base_url('assets/js/iconify.min.js') ?>" type="text/javascript"></script>
-<!-- required files -->
-<script src="<?= base_url() ?>assets/plugins/ionicons/dist/ionicons/ionicons.js"></script>
-<script src="<?= base_url('assets/js/custum.js') ?>"></script>
-
-
-
 <script>
     $("#timepicker").timepicker();
 
-
-    $('#modalprog,#modalleadst,#modaladdress,#modalaltrcont,#modaltrnld').on('shown.bs.modal', function() {
-        $(".default-select2", this).select2({
-            dropdownParent: $(this)
+    $('#modalprog').on('shown.bs.modal', function() {
+        $(".default-select2").select2({
+            dropdownParent: $('#modalprog')
         });
     });
-
+    $('#modaltrnld').on('shown.bs.modal', function() {
+        $(".default-select2").select2({
+            dropdownParent: $('#modaltrnld')
+        });
+    });
     $("#datepicker-autoClose").datepicker({
         todayHighlight: true,
         autoclose: true
     });
 </script>
+<script src="<?= base_url('assets/js/iconify.min.js') ?>" type="text/javascript"></script>
+<!-- required files -->
+<script src="<?= base_url() ?>assets/plugins/ionicons/dist/ionicons/ionicons.js"></script>
+<script>
+    const base_url = '<?= base_url() ?>'
+</script>
+<script src="<?= base_url('assets/js/custum.js') ?>"></script>
+
+
 
 <script>
     let stateList = [];

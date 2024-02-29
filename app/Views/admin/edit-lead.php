@@ -171,7 +171,8 @@
                     <input type="hidden" id='statusinfo' name="statusinfo" value="<?= old('statusinfo') ?? '0' ?>">
                     <input type="hidden" id='scorestatus' max name="score[status]" value="<?= old('score')['status'] ?? '0' ?>">
                     <input type="hidden" id='scoresource' name="score[source]" value="<?= old('score')['source'] ?? '0' ?>">
-                    <div>
+                    <hr>
+                    <div class="text-center">
                         <button type="submit" class="btn btn-primary w-100px me-5px">Edit Lead</button>
                     </div>
                 </div>
