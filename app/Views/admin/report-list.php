@@ -45,7 +45,7 @@ $query = $uri->getQuery();
     <div class="panel-heading">
         <ol class="breadcrumb panel-title">
             <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-            <li class="breadcrumb-item"><a href="javascript:;">By Self</a></li>
+            <li class="breadcrumb-item"><a href="javascript:;">Reports</a></li>
             <li class="breadcrumb-item active"><?= $pageInfo['title'] ?></li>
             <div class="p-2">
                 <span class="badge bg-warning text-white rounded-pill fs-6"><?= $total_records ?? 0 ?></span>
@@ -210,7 +210,14 @@ $query = $uri->getQuery();
                 endforeach; ?>
             </tbody>
         </table>
-
+        <hr>
+        <div class="pagin">
+            <div class="col-lg-12 text-center">
+                <div id='pagination' class='pagination-nav'>
+                    <?= $pager->links() ?>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

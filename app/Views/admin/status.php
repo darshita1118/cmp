@@ -19,7 +19,10 @@
 				<span class="badge bg-warning text-white rounded-pill fs-6"><?= $total_status ?? 0 ?></span>
 			</div>
 		</ol>
-
+		<div class="panel-heading-btn">
+			<a href="<?= base_url('admin/create_status') ?>" class="btn btn-sm btn-icon btn-default"> <i class="fa fa-user-plus" data-bs-toggle="tooltip" data-bs-placement="left" title="New Status"></i></a>
+			<a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
+		</div>
 	</div>
 
 
@@ -27,7 +30,7 @@
 		<table id="data-table-fixed-header" class="table table-striped table-bordered align-middle w-100 text-wrap ">
 			<thead>
 				<tr>
-					<th>#S. No. </th>
+					<th>Sno. </th>
 					<th>Status Name </th>
 					<th>Status Type </th>
 					<th>Status Info </th>
@@ -49,7 +52,7 @@
 						<td><?= $row['score'] ?></td>
 						<td>
 							<a href="<?= base_url('admin/edit-status/' . $row['status_id']) ?>" class="btn btn-icon btn-sm btn-warning"><i class="fa fa-pen"></i></a>
-							<a href="<?= base_url('admin/delete/status/' . $row['status_id']) ?>" class="btn btn-icon btn-sm btn-danger"><i class="fa fa-trash-can"></i></a>
+							<a href="<?= base_url('admin/delete/status/' . $row['status_id']) ?>" class="btn btn-danger btn-icon btn-sm delete-lead" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash-can"></i></a>
 						</td>
 					</tr>
 				<?php $count++;

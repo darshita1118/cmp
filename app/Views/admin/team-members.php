@@ -10,11 +10,11 @@
 	<div class="panel-heading">
 		<ol class="breadcrumb panel-title">
 			<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-			<li class="breadcrumb-item"><a href="javascript:;">Leads</a></li>
-			<li class="breadcrumb-item active">All Leads</li>
-			<div class="p-2">
-				<span class="badge bg-warning text-white rounded-pill fs-6"><?= $total_records ?? '0' ?></span>
-			</div>
+			<li class="breadcrumb-item"><a href="javascript:;">Counsellors</a></li>
+			<li class="breadcrumb-item">All Counsellors
+			</li>
+			<li class="breadcrumb-item active">Team Members
+			</li>
 		</ol>
 
 
@@ -39,7 +39,7 @@
 		<table id="data-table-fixed-header" class="table table-striped table-bordered align-middle w-100 text-wrap">
 			<thead>
 				<tr>
-					<th width=" 1%">ID</th>
+					<th width="1%">ID</th>
 					<th>Name</th>
 					<th>Email</th>
 					<th>Mobile</th>

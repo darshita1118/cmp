@@ -46,7 +46,7 @@ $query = $uri->getQuery();
     <div class="panel-heading">
         <ol class="breadcrumb panel-title">
             <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-            <li class="breadcrumb-item"><a href="javascript:;">By Self</a></li>
+            <li class="breadcrumb-item"><a href="javascript:;">Application Form</a></li>
             <li class="breadcrumb-item active">Reopened Application Form</li>
             <div class="p-2">
                 <span class="badge bg-warning text-white rounded-pill fs-6"><?= $total_leads ?? 0 ?></span>
@@ -180,13 +180,21 @@ $query = $uri->getQuery();
                         <td><?= $lead['source_name'] ?></td>
                         <td><?= date('d/m/Y H:i:s', strtotime($lead['sl_created_at'])) ?></td>
                         <td nowrap="">
-                            <a href="<?= base_url('admin/edit-application-form/' . $lead['lead_id'] . '/' . $lead['sid']) ?>" class="btn btn-sm btn-warning me-1" data-bs-toggle="tooltip" title="Process Application"> <i class="fa fa-file-pen"></i> Edit App. Form</a>
+                            <a href="<?= base_url('admin/edit-application-form/' . $lead['lead_id'] . '/' . $lead['sid']) ?>" class="btn btn-sm btn-warning me-1" data-bs-toggle="tooltip" title="Process Application"> <i class="fa fa-file-pen"></i> Edit</a>
                         </td>
                     </tr>
                 <?php $count++;
                 endforeach; ?>
             </tbody>
         </table>
+        <hr>
+        <div class="pagin">
+            <div class="col-lg-12 text-center">
+                <div id='pagination' class='pagination-nav'>
+                    <?= $pager->links() ?>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

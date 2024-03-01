@@ -33,8 +33,8 @@ function getTLName($handler)
 	<div class="panel-heading">
 		<ol class="breadcrumb panel-title">
 			<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-			<li class="breadcrumb-item"><a href="javascript:;">Counselors</a></li>
-			<li class="breadcrumb-item active">All Counselors</li>
+			<li class="breadcrumb-item"><a href="javascript:;">Counsellors</a></li>
+			<li class="breadcrumb-item active">All Counsellors</li>
 			<div class="p-2">
 				<span class="badge bg-warning text-white rounded-pill fs-6"><?= $total_handlers ?? 0 ?></span>
 			</div>
@@ -148,7 +148,7 @@ function getTLName($handler)
 							<a href="<?= base_url('admin/edit-handler/' . $handler['lu_id']) ?>" class="btn btn-icon btn-sm btn-primary me-1" data-bs-toggle="tooltip" title="Edit"><i class="fa fa-file-pen"></i></a>
 							<?php if ($handler['user_role'] == 1) : ?>
 								<a href="<?= base_url('admin/team-members/' . $handler['lu_id']) ?>" class="btn btn-icon btn-sm btn-warning" data-bs-toggle="tooltip" title="Team"><i class="fa fa-users"></i></a><?php endif; ?>
-							<a href="<?= base_url('admin/delete/handler/' . $handler['lu_id']) ?>" class="btn btn-icon btn-sm btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash-can"></i></a>
+							<a href="<?= base_url('admin/delete/handler/' . $handler['lu_id']) ?>" class="btn btn-danger btn-icon btn-sm delete-lead" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash-can"></i></a>
 
 						</td>
 					</tr>
@@ -156,6 +156,14 @@ function getTLName($handler)
 				endforeach; ?>
 			</tbody>
 		</table>
+		<hr>
+		<div class="pagin">
+			<div class="col-lg-12 text-center">
+				<div id='pagination' class='pagination-nav'>
+					<?= $pager->links() ?>
+				</div>
+			</div>
+		</div>
 	</div>
 
 </div>

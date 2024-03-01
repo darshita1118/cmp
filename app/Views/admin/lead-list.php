@@ -152,13 +152,6 @@ function getStatusTime($leadId)
 				<a href="#" class="btn btn-info ms-3">Submit</a>
 			</div>
 		</div>
-
-
-
-
-
-
-
 		<!-- html -->
 		<table id="data-table-fixed-header" class="table table-striped table-bordered align-middle w-100 text-wrap ">
 			<thead>
@@ -192,7 +185,8 @@ function getStatusTime($leadId)
 						<td><?= date('d/m/Y H:i:s', strtotime($lead['lead_created_at'])) ?></td>
 						<td>
 							<a href="<?= base_url('admin/edit-lead/' . $lead['lid']) ?>" class="btn btn-warning btn-icon btn-sm" data-bs-toggle="tooltip" title="Edit"><i class="fa fa-pen"></i></a>
-							<a href="<?= base_url('admin/delete/lead/' . $lead['lid']) ?>" class="btn btn-danger btn-icon btn-sm" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash-can"></i></a>
+							<a href="<?= base_url('admin/delete/lead/' . $lead['lid']) ?>" class="btn btn-danger btn-icon btn-sm delete-lead" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash-can"></i></a>
+
 						</td>
 					</tr>
 				<?php $count++;

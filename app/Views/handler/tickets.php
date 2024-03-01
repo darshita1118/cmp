@@ -1,121 +1,2250 @@
-<div class="mailbox">
+<link href="<?= base_url('assets/plugins/summernote/dist/summernote-lite.css') ?>" rel="stylesheet" />
+<script src="<?= base_url('assets/plugins/summernote/dist/summernote-lite.min.js') ?>"></script>
+<link href="<?= base_url('assets/plugins/bootstrap-icons/font/bootstrap-icons.css') ?>" rel="stylesheet" />
+<style>
+    .mailbox .list-email>li.list-group-item .email-title {
+        width: 872px;
+    }
 
-    <div class="mailbox-sidebar">
-        <div class="mailbox-sidebar-header d-flex justify-content-center">
-            <a href="#emailNav" data-bs-toggle="collapse" class="btn btn-dark btn-sm me-auto d-block d-lg-none">
-                <i class="fa fa-cog"></i>
-            </a>
-            <a href="email_compose.html" class="btn btn-dark ps-40px pe-40px btn-sm">
-                Compose
-            </a>
-        </div>
-        <div class="mailbox-sidebar-content collapse d-lg-block" id="emailNav">
+    .email-desc::before {
+        display: none;
+    }
 
-            <div data-scrollbar="true" data-height="100%" data-skip-mobile="true">
-                <div class="nav-title"><b>FOLDERS</b></div>
-                <ul class="nav nav-inbox">
-                    <li class="active"><a href="email_inbox.html"><i class="fa fa-hdd fa-lg fa-fw me-2"></i> Inbox <span class="badge bg-gray-600 fs-10px rounded-pill ms-auto fw-bolder pt-4px pb-5px px-8px">52</span></a></li>
-                    <li><a href="email_inbox.html"><i class="fa fa-flag fa-lg fa-fw me-2"></i> Important</a></li>
-                    <li><a href="email_inbox.html"><i class="fa fa-envelope fa-lg fa-fw me-2"></i> Sent</a></li>
-                    <li><a href="email_inbox.html"><i class="fa fa-save fa-lg fa-fw me-2"></i> Drafts</a></li>
-                    <li><a href="email_inbox.html"><i class="fa fa-trash-alt fa-lg fa-fw me-2"></i> Trash</a></li>
+    .panel .panel-heading .tab-overflow {
+        flex: 1;
+        overflow-x: auto;
+        /* Allows horizontal scrolling when tabs overflow */
+        -webkit-overflow-scrolling: touch;
+        /* Enables smooth scrolling on iOS devices */
+        scrollbar-width: none;
+    }
+
+    .status {
+        width: auto;
+        padding: .15rem .75rem;
+        border-radius: .42rem;
+        color: #1bc5bd;
+        background-color: #c9f7f5;
+    }
+
+
+    .tab-overflow .nav.nav-tabs.nav-tabs-inverse>li>a {
+        background: var(--bs-app-theme-active);
+    }
+
+    @media screen and (max-width:876px) {
+
+
+        .mailbox .list-email>li.list-group-item .email-title {
+            width: 200px;
+        }
+    }
+
+    /* change this css from main css file */
+</style>
+<div class="">
+    <div class="panel panel-inverse panel-with-tabs">
+        <div class="panel-heading p-0">
+            <div class="tab-overflow">
+                <ul class="nav nav-tabs nav-tabs-inverse">
+                    <li class="nav-item">
+                        <a href="#nav-tab-1" data-bs-toggle="tab" class="nav-link "><i class="bi bi-gem">&nbsp;</i>Create Ticket &nbsp;&nbsp;<span class="badge bg-warning fs-10px rounded-pill">12</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#nav-tab-2" data-bs-toggle="tab" class="nav-link active"><i class="fa-solid fa-envelope-open-text">&nbsp;</i>Inbox &nbsp;&nbsp;<span class="badge bg-warning fs-10px rounded-pill ">52</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#nav-tab-3" data-bs-toggle="tab" class="nav-link "><i class="fa-solid fa-envelope-open-text">&nbsp;</i>Answer&nbsp;&nbsp;<span class="badge bg-warning fs-10px rounded-pill">4021</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#nav-tab-4" data-bs-toggle="tab" class="nav-link "><i class="fa-solid fa-envelope-open-text">&nbsp;</i>Transerferd&nbsp;&nbsp;<span class="badge bg-warning fs-10px rounded-pill">342</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#nav-tab-5" data-bs-toggle="tab" class="nav-link "><i class="fa-solid fa-envelope-open-text">&nbsp;</i>Closed&nbsp;&nbsp;<span class="badge bg-warning fs-10px rounded-pill">340</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#nav-tab-6" data-bs-toggle="tab" class="nav-link "><i class="fa-solid fa-envelope-open-text">&nbsp;</i>My Ticket&nbsp;&nbsp;<span class="badge bg-warning fs-10px rounded-pill">40</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#nav-tab-7" data-bs-toggle="tab" class="nav-link "><i class="fa-solid fa-envelope-open-text">&nbsp;</i>Team Tickets&nbsp;&nbsp;<span class="badge bg-warning fs-10px rounded-pill">0</span></a>
+                    </li>
                 </ul>
             </div>
         </div>
-    </div>
+        <div class="panel-body tab-content">
+            <div class="tab-pane fade" id="nav-tab-1">
+                <h4 class="py-2">Create New Ticket</h4>
+                <div class="row d-flex">
+                    <div class="col-md-6  mb-3">
+                        <label class="form-label">Tittle:</label>
+                        <select class="form-select">
+                            <option selected>--Select-- </option>
+                            <option value="1">Handlers</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6  mb-3">
+                        <label class="form-label">Subject</label>
+                        <input class="form-control" type="text" placeholder="Enter Name" />
+                    </div>
+                </div>
+                <div class="summernote" name="content"></div>
+                <div class="row my-3 align-items-center">
 
+                    <div class="col-md-4 col-12" style="line-height: 1px;">
+                        <p class="text-primary">Attachment (Max. size 500 kb for image file and 2 mb for pdf file.)</p>
+                        <input type="file" class="form-control " />
+                    </div>
 
-    <div class="mailbox-content">
-        <div class="mailbox-content-header">
-            <div class="btn-toolbar">
-                <div class="btn-group me-2">
-                    <a href="javascript:;" class="btn btn-white btn-sm"><i class="fa fa-fw fa-reply"></i> <span class="d-none d-lg-inline">Reply</span></a>
-                </div>
-                <div class="btn-group me-2">
-                    <a href="javascript:;" class="btn btn-white btn-sm"><i class="fa fa-fw fa-trash"></i> <span class="d-none d-lg-inline">Delete</span></a>
-                    <a href="javascript:;" class="btn btn-white btn-sm"><i class="fa fa-fw fa-archive"></i> <span class="d-none d-lg-inline">Archive</span></a>
-                </div>
-                <div class="btn-group ms-auto me-2">
-                    <a href="email_inbox.html" class="btn btn-white btn-sm disabled"><i class="fa fa-fw fa-arrow-up"></i></a>
-                    <a href="email_inbox.html" class="btn btn-white btn-sm"><i class="fa fa-fw fa-arrow-down"></i></a>
-                </div>
-                <div class="btn-group">
-                    <a href="email_inbox.html" class="btn btn-white btn-sm"><i class="fa fa-fw fa-times"></i></a>
+                    <div class="col-md-3 col-12 pt-1"><button class="btn btn-primary ms-md-5">Submit</button><button class="btn btn-default ms-3">Cancle</button></div>
+
                 </div>
             </div>
-        </div>
-        <div class="mailbox-content-body">
-            <div data-scrollbar="true" data-height="100%" data-skip-mobile="true">
-                <div class="p-3">
-                    <h3 class="mb-3">Bootstrap v5.0 is coming soon</h3>
-                    <div class="d-flex mb-3">
-                        <a href="javascript:;">
-                            <img class="rounded-pill" width="48" alt="" src="<?= base_url('assets/img/user/user-12.jpg') ?>">
-                        </a>
-                        <div class="ps-3">
-                            <div class="email-from text-dark fs-14px mb-3px fw-bold">
-                                from <a href="" class="">abc@gmail.com</a>
-                            </div>
-                            <div class="mb-3px"><i class="fa fa-clock fa-fw"></i> Today, 8:30 AM</div>
-                            <div class="email-to">
-                                To: <a href="" class="">xyz@gmail.com</a>
-                            </div>
+
+            <div class="tab-pane fade active show" id="nav-tab-2">
+                <div class="mailbox-content">
+                    <div class="mailbox-content-body" style="overflow-x: auto;">
+                        <table class="table ">
+                            <thead class="border-bottom card-header">
+                                <tr class="text-left text-uppercase ">
+                                    <th class="pb-3">
+                                        <span class="text-dark-75">Category</span>
+                                    </th>
+                                    <th class="py-3" style="min-width: 250px; max-width: 350px; width:60%"><span class="text-dark-75">Subject</span></th>
+                                    <th class="py-3"><span class="text-dark-75">Status</span></th>
+                                    <th class="py-3"><span class="text-dark-75">Last Updated</span></th>
+
+                                </tr>
+                            </thead>
+                            <tbody style="overflow-y: auto; height:200px">
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mailbox-content-footer d-flex align-items-center">
+                        <div class="text-dark fw-bold">1,232 messages</div>
+                        <div class="btn-group ms-auto">
+
+                            <button class="btn btn-white btn-sm">
+                                <i class="fa fa-fw fa-chevron-left"></i>
+                            </button>
+                            <button class="btn btn-white btn-sm">
+                                <i class="fa fa-fw fa-chevron-right"></i>
+                            </button>
                         </div>
                     </div>
-                    <hr class="bg-gray-500">
-                    <ul class="attached-document clearfix">
-                        <li class="fa-file">
-                            <div class="document-file">
-                                <a href="javascript:;">
-                                    <i class="fa fa-file-pdf"></i>
-                                </a>
-                            </div>
-                            <div class="document-name"><a href="javascript:;" class="text-decoration-none">flight_ticket.pdf</a></div>
-                        </li>
-                        <li class="fa-camera">
-                            <div class="document-file">
-                                <a href="javascript:;">
-                                    <img src="../assets/img/gallery/gallery-11.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="document-name"><a href="javascript:;" class="text-decoration-none">front_end_mockup.jpg</a></div>
-                        </li>
-                    </ul>
-                    <p class="text-dark">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vel auctor nisi, vel auctor orci. <br>
-                        Aenean in pretium odio, ut lacinia tellus. Nam sed sem ac enim porttitor vestibulum vitae at erat.
-                    </p>
-                    <p class="text-dark">
-                        Curabitur auctor non orci a molestie. Nunc non justo quis orci viverra pretium id ut est. <br>
-                        Nullam vitae dolor id enim consequat fermentum. Ut vel nibh tellus. <br>
-                        Duis finibus ante et augue fringilla, vitae scelerisque tortor pretium. <br>
-                        Phasellus quis eros erat. Nam sed justo libero.
-                    </p>
-                    <p class="text-dark">
-                        Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.<br>
-                        Sed tempus dapibus libero ac commodo.
-                    </p>
-                    <br>
-                    <br>
-                    <p class="text-dark">
-                        Best Regards,<br>
-                        kriti.<br><br>
-                        Information Technology Department,<br>
-                        Senior Front End Designer<br>
-                    </p>
                 </div>
+
+            </div>
+            <div class="tab-pane  fade" id="nav-tab-3">
+                <div class="mailbox-content">
+                    <div class="mailbox-content-body" style="overflow-x: auto;">
+                        <table class="table ">
+                            <thead class="border-bottom card-header">
+                                <tr class="text-left text-uppercase ">
+                                    <th class="pb-3">
+                                        <span class="text-dark-75">Category</span>
+                                    </th>
+                                    <th class="py-3" style="min-width: 250px; max-width: 350px; width:60%"><span class="text-dark-75">Subject</span></th>
+                                    <th class="py-3"><span class="text-dark-75">Status</span></th>
+                                    <th class="py-3"><span class="text-dark-75">Last Updated</span></th>
+
+                                </tr>
+                            </thead>
+                            <tbody style="overflow-y: auto; height:200px">
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mailbox-content-footer d-flex align-items-center">
+                        <div class="text-dark fw-bold">1,232 messages</div>
+                        <div class="btn-group ms-auto">
+
+                            <button class="btn btn-white btn-sm">
+                                <i class="fa fa-fw fa-chevron-left"></i>
+                            </button>
+                            <button class="btn btn-white btn-sm">
+                                <i class="fa fa-fw fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-        </div>
-        <div class="mailbox-content-footer d-flex align-items-center justify-content-end">
-            <div class="btn-group me-2">
-                <a href="email_inbox.html" class="btn btn-white btn-sm disabled"><i class="fa fa-fw fa-arrow-up"></i></a>
-                <a href="email_inbox.html" class="btn btn-white btn-sm"><i class="fa fa-fw fa-arrow-down"></i></a>
+            <div class="tab-pane  fade" id="nav-tab-4">
+                <div class="mailbox-content">
+                    <div class="mailbox-content-body" style="overflow-x: auto;">
+                        <table class="table ">
+                            <thead class="border-bottom card-header">
+                                <tr class="text-left text-uppercase ">
+                                    <th class="pb-3">
+                                        <span class="text-dark-75">Category</span>
+                                    </th>
+                                    <th class="py-3" style="min-width: 250px; max-width: 350px; width:60%"><span class="text-dark-75">Subject</span></th>
+                                    <th class="py-3"><span class="text-dark-75">Status</span></th>
+                                    <th class="py-3"><span class="text-dark-75">Last Updated</span></th>
+
+                                </tr>
+                            </thead>
+                            <tbody style="overflow-y: auto; height:200px">
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mailbox-content-footer d-flex align-items-center">
+                        <div class="text-dark fw-bold">1,232 messages</div>
+                        <div class="btn-group ms-auto">
+
+                            <button class="btn btn-white btn-sm">
+                                <i class="fa fa-fw fa-chevron-left"></i>
+                            </button>
+                            <button class="btn btn-white btn-sm">
+                                <i class="fa fa-fw fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="btn-group">
-                <a href="email_inbox.html" class="btn btn-white btn-sm"><i class="fa fa-fw fa-times"></i></a>
+
+            <div class="tab-pane  fade" id="nav-tab-5">
+                <div class="mailbox-content">
+                    <div class="mailbox-content-body" style="overflow-x: auto;">
+                        <table class="table ">
+                            <thead class="border-bottom card-header">
+                                <tr class="text-left text-uppercase ">
+                                    <th class="pb-3">
+                                        <span class="text-dark-75">Category</span>
+                                    </th>
+                                    <th class="py-3" style="min-width: 250px; max-width: 350px; width:60%"><span class="text-dark-75">Subject</span></th>
+                                    <th class="py-3"><span class="text-dark-75">Status</span></th>
+                                    <th class="py-3"><span class="text-dark-75">Last Updated</span></th>
+
+                                </tr>
+                            </thead>
+                            <tbody style="overflow-y: auto; height:200px">
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mailbox-content-footer d-flex align-items-center">
+                        <div class="text-dark fw-bold">1,232 messages</div>
+                        <div class="btn-group ms-auto">
+
+                            <button class="btn btn-white btn-sm">
+                                <i class="fa fa-fw fa-chevron-left"></i>
+                            </button>
+                            <button class="btn btn-white btn-sm">
+                                <i class="fa fa-fw fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="tab-pane  fade" id="nav-tab-6">
+                <div class="mailbox-content">
+                    <div class="mailbox-content-body" style="overflow-x: auto;">
+                        <table class="table ">
+                            <thead class="border-bottom card-header">
+                                <tr class="text-left text-uppercase ">
+                                    <th class="pb-3">
+                                        <span class="text-dark-75">Category</span>
+                                    </th>
+                                    <th class="py-3" style="min-width: 250px; max-width: 350px; width:60%"><span class="text-dark-75">Subject</span></th>
+                                    <th class="py-3"><span class="text-dark-75">Status</span></th>
+                                    <th class="py-3"><span class="text-dark-75">Last Updated</span></th>
+
+                                </tr>
+                            </thead>
+                            <tbody style="overflow-y: auto; height:200px">
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mailbox-content-footer d-flex align-items-center">
+                        <div class="text-dark fw-bold">1,232 messages</div>
+                        <div class="btn-group ms-auto">
+
+                            <button class="btn btn-white btn-sm">
+                                <i class="fa fa-fw fa-chevron-left"></i>
+                            </button>
+                            <button class="btn btn-white btn-sm">
+                                <i class="fa fa-fw fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="tab-pane  fade" id="nav-tab-7">
+                <div class="mailbox-content">
+                    <div class="mailbox-content-body" style="overflow-x: auto;">
+                        <table class="table ">
+                            <thead class="border-bottom card-header">
+                                <tr class="text-left text-uppercase ">
+                                    <th class="pb-3">
+                                        <span class="text-dark-75">Category</span>
+                                    </th>
+                                    <th class="py-3" style="min-width: 250px; max-width: 350px; width:60%"><span class="text-dark-75">Subject</span></th>
+                                    <th class="py-3"><span class="text-dark-75">Status</span></th>
+                                    <th class="py-3"><span class="text-dark-75">Last Updated</span></th>
+
+                                </tr>
+                            </thead>
+                            <tbody style="overflow-y: auto; height:200px">
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                                <tr class="border-bottom tr-hover read ">
+
+                                    <td class="px-3 py-1">
+                                        <div class="text-dark-75 ">
+                                            <span class=""><b>CC</b>/<del>To</del>/<del>Transferred</del></span><br>
+                                            <span class="label label-light-primary label-inline">Examination</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bolder ">#14828</span>
+                                        <p class="unread-sub mb-0 subject">Missed MA History 2nd Semister March Exam</p>
+
+                                    </td>
+                                    <td>
+                                        <span class="text-bold "><span class="status">Replied</span></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold ">27 Feb</span>
+
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mailbox-content-footer d-flex align-items-center">
+                        <div class="text-dark fw-bold">1,232 messages</div>
+                        <div class="btn-group ms-auto">
+
+                            <button class="btn btn-white btn-sm">
+                                <i class="fa fa-fw fa-chevron-left"></i>
+                            </button>
+                            <button class="btn btn-white btn-sm">
+                                <i class="fa fa-fw fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-
 </div>
+<script>
+    $(".summernote").summernote({
+        placeholder: 'Discription',
+        height: "200"
+    });
+</script>
+<script src="<?= base_url('assets/js/demo/email-inbox.demo.js') ?>"></script>

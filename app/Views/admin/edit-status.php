@@ -35,7 +35,7 @@
                                         <option value="1" <?= ((old('type') ?? $statusDetail['status_type']) == 1) ? 'selected' : null ?>>Show Handler</option>
                                         <option value="0" <?= ((old('type') ?? $statusDetail['status_type']) == '0') ? 'selected' : null ?>>Not Show</option>
 
-                                    </select><span class="form-text text-muted">Please enter status type</span>
+                                    </select><span class="form-text text-muted">Select status type</span>
 
                                 </div>
                             </div>
@@ -47,7 +47,7 @@
                                         <option value="1" <?= ((old('info') ?? $statusDetail['status_get_more_info']) == 1) ? 'selected' : null ?>>Get Message </option>
                                         <option value="2" <?= ((old('info') ?? $statusDetail['status_get_more_info']) == 2) ? 'selected' : null ?>>Get Message and Time </option>
                                         <option value="0" <?= ((old('info') ?? $statusDetail['status_get_more_info']) == '0') ? 'selected' : null ?>>No Message</option>
-                                    </select><span class="form-text text-muted">Please enter status info</span>
+                                    </select><span class="form-text text-muted">Select status info</span>
 
                                 </div>
                             </div>
@@ -68,8 +68,8 @@
                                     </fieldset>
                                 <?php endif; ?>
 
-
-                                <div>
+                                <hr>
+                                <div class="text-center">
                                     <button type="submit" name="btn" value="edit-status" class="btn btn-primary me-5px">Edit Status</button>
                                 </div>
                             </div>

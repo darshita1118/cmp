@@ -23,13 +23,13 @@
                             <div class="col-md-3">
                                 <div class="mb-3">
                                     <label class="form-label">Source Name</label>
-                                    <input class="form-control" type="text" id="name" name="name" placeholder="Enter Source Name" value="<?= old('email') ?? $sourceDetail['source_name'] ?>" /><span class="form-text text-muted">Please enter Source name</span>
+                                    <input class="form-control" type="text" id="name" name="name" placeholder="Enter Source Name" value="<?= old('email') ?? $sourceDetail['source_name'] ?>" /><span class="form-text text-muted">Enter your source name</span>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="mb-3">
                                     <label class="form-label">Source Score</label>
-                                    <input class="form-control" type="number" name="score" id="score" placeholder="Enter Source Score" value="<?= old('score') ?? $sourceDetail['source_score'] ?>" required /><span class="form-text text-muted">Please Enter Source Score</span>
+                                    <input class="form-control" type="number" name="score" id="score" placeholder="Enter Source Score" value="<?= old('score') ?? $sourceDetail['source_score'] ?>" required /><span class="form-text text-muted">Enter source score</span>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -39,7 +39,7 @@
                                         <option selected>--Select Status Type-- </option>
                                         <option value="1" <?= ((old('status') ?? $sourceDetail['source_status']) == 1) ? 'selected' : null ?>>Active</option>
                                         <option value="0" <?= ((old('status') ?? $sourceDetail['source_status']) == '0') ? 'selected' : null ?>>Dective</option>
-                                    </select><span class="form-text text-muted">Please Select Status Type</span>
+                                    </select><span class="form-text text-muted">Please select status type</span>
 
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                                         <?php foreach ($handlers as $handler) : ?>
                                             <option value="<?= $handler['id'] ?>" <?= ((old('handler') ?? ($sourceDetail['handler_id'] ?? '')) == $handler['id']) ? 'selected' : null ?>><?= $handler['name'] ?>(<?= $handler['email'] ?>)</option>
                                         <?php endforeach; ?>
-                                    </select><span class="form-text text-muted">Please Select Counsellor</span>
+                                    </select><span class="form-text text-muted">Please select counsellor</span>
 
                                 </div>
                             </div>
@@ -63,8 +63,8 @@
                                 </fieldset>
                             <?php endif; ?>
 
-
-                            <div>
+                            <hr>
+                            <div class="text-center">
 
                                 <button type="submit" name="btn" value="edit-source" class="btn btn-primary me-5px">Edit Source</button>
                             </div>

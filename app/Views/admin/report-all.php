@@ -43,10 +43,7 @@ function getStatusTime($leadId)
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">Home</a></li>
                 <li class="breadcrumb-item">Reports</a></li>
-                <li class="breadcrumb-item">Counslar Work Report</li>
-                <div class="p-2">
-                    <span class="badge bg-warning text-white rounded-pill fs-6"><?= $total_leads ?? 0 ?></span>
-                </div>
+                <li class="breadcrumb-item">Counsellor Work Report</li>
             </ol>
         </h4>
         <div class="panel-heading-btn">
@@ -82,7 +79,8 @@ function getStatusTime($leadId)
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
-                                <select class="default-select2 form-select" name="status[]" id="status" multiple>
+                                <select class="default-select2 form-select" name="status[]" id="status">
+                                    <option selected>--Select-- </option>
                                     <?php foreach ($statues as $status) : ?>
                                         <option value="<?= $status['status_id'] ?>" <?= (in_array($status['status_id'], $_GET['status'] ?? [])) ? 'selected' : null ?>><?= $status['status_name'] ?> </option>
                                     <?php endforeach; ?>
@@ -92,7 +90,8 @@ function getStatusTime($leadId)
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Source</label>
-                                <select class="default-select2 form-select" name="source[]" id="source" multiple>
+                                <select class="default-select2 form-select" name="source[]" id="source">...
+                                    <option selected>--Select-- </option>
                                     <?php foreach ($sources as $source) : ?>
                                         <option value="<?= $source['source_id'] ?>" <?= (in_array($source['source_id'], $_GET['source'] ?? [])) ? 'selected' : null ?>><?= $source['source_name'] ?> </option>
                                     <?php endforeach; ?>
@@ -105,7 +104,7 @@ function getStatusTime($leadId)
                             <div class="mb-3">
                                 <label class="form-label">Program</label>
                                 <select name="program[]" id="program" class="default-select2 form-select">
-
+                                    <option selected>--Select-- </option>
                                     <?php foreach ($courses as $program) : ?>
                                         <option value="<?= $program['sc_id'] ?>" <?= (in_array($program['sc_id'], $_GET['program'] ?? [])) ? 'selected' : null ?>><?= $program['course_name'] ?> </option>
                                     <?php endforeach; ?>
@@ -116,8 +115,8 @@ function getStatusTime($leadId)
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Handler</label>
-                                <select name="handlers[]" id="handlers" class="default-select2 form-select" multiple>
-
+                                <select class="default-select2 form-select" name="handlers[]" id="handlers">
+                                    <option selected>--Select-- </option>
                                     <?php foreach ($handlers as $handler) : ?>
                                         <option value="<?= $handler['lu_id'] ?>" <?= (in_array($handler['lu_id'], $_GET['handlers'] ?? [])) ? 'selected' : null ?>><?= $handler['user_name'] ?> </option>
                                     <?php endforeach; ?>
@@ -127,7 +126,8 @@ function getStatusTime($leadId)
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Lead Nationality</label>
-                                <select class="default-select2 form-select" name="nationality[]" id="nationality" multiple>
+                                <select class="form-select" name="nationality[]" id="nationality">
+                                    <option selected>--Select-- </option>
                                     <?php foreach ($student_nationalities as $nation) : ?>
                                         <option value="<?= $nation['id'] ?>" <?= (in_array($nation['id'], $_GET['nationality'] ?? [])) ? 'selected' : null ?>><?= $nation['name'] ?> </option>
                                     <?php endforeach; ?>
@@ -135,8 +135,10 @@ function getStatusTime($leadId)
 
                             </div>
                         </div>
-                        <div class="col-md-3 mt-md-4">
-                            <button type="submit" class="btn btn-primary w-100px me-5px">Apply Filter</button>
+                        <div class="offcanvas-footer border-top mt-3">
+                            <div class="col-md-12 mt-md-4 text-center">
+                                <button type="submit" class="btn btn-primary w-100px mt-3">Apply Filter</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -174,7 +176,7 @@ function getStatusTime($leadId)
 
         <div class="border">
             <div class="profile-content col-md-8 m-auto">
-                <h3 class="text-center ">Work Report History</h3>
+                <h3 class="text-center mt-3">Counsellor Work Report</h3>
                 <div class="tab-content p-0">
                     <div class="tab-pane fade show active" id="profile-post">
                         <div class="timeline ">
@@ -286,7 +288,6 @@ function getStatusTime($leadId)
 </script>
 
 <style>
-
     @media (max-width: 575.98px) {
         .timeline .timeline-content {
             margin-top: 70px;

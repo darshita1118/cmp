@@ -27,7 +27,8 @@
                                 <option selected>--Select Type-- </option>
                                 <option value="1" <?= (old('type') == 1) ? 'selected' : null ?>>Show Handler</option>
                                 <option value="0" <?= (old('type') == '0') ? 'selected' : null ?>>Not Show</option>
-                            </select>
+                            </select><span class="form-text text-muted">Select Status Type</span>
+
 
                         </div>
                     </div>
@@ -40,18 +41,21 @@
                                 <option value="2" <?= (old('info') == 2) ? 'selected' : null ?>>Get Message and Time </option>
                                 <option value="0" <?= (old('info') == '0') ? 'selected' : null ?>>No Message</option>
 
-                            </select>
+                            </select><span class="form-text text-muted">Select status info</span>
+
 
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="mb-3">
                             <label class="form-label">Status Score</label>
-                            <input class="form-control" type="number" name="score" id="score" placeholder="Enter score" value="<?= old('score') ?? '' ?>" required />
+                            <input class="form-control" type="number" name="score" id="score" placeholder="Enter score" value="<?= old('score') ?? '' ?>" required /><span class="form-text text-muted">Please Enter status score</span>
+
 
                         </div>
                     </div>
-                    <div>
+                    <hr>
+                    <div class="text-center">
                         <button type="submit" name="btn" value="create-status" class="btn btn-primary me-5px">Add Status</button>
                     </div>
                 </div>

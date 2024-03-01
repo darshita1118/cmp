@@ -19,7 +19,10 @@
 				<span class="badge bg-warning text-white rounded-pill fs-6"><?= $total_source ?? 0 ?></span>
 			</div>
 		</ol>
-
+		<div class="panel-heading-btn">
+			<a href="<?= base_url('admin/create_source') ?>" class="btn btn-sm btn-icon btn-default"> <i class="fa fa-user-plus" data-bs-toggle="tooltip" data-bs-placement="left" title="New Source"></i></a>
+			<a href="javascript:;" class="btn btn-sm btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
+		</div>
 	</div>
 
 
@@ -44,7 +47,7 @@
 						<td><?= $row['source_score'] ?></td>
 						<td nowrap="">
 							<a href="<?= base_url('admin/edit-source/' . $row['source_id']) ?>" class="btn btn-warning btn-icon btn-sm"><i class="fa fa-pen"></i></a>
-							<a href="<?= base_url('admin/delete/source/' . $row['source_id']) ?>" class="btn btn-danger btn-icon btn-sm"><i class="fa fa-trash-can"></i></a>
+							<a href="<?= base_url('admin/delete/source/' . $row['source_id']) ?>" class="btn btn-danger btn-icon btn-sm delete-lead" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash-can"></i></a>
 						</td>
 					</tr>
 				<?php $count++;

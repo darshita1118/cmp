@@ -221,6 +221,14 @@ $handlers = getHandlerList([session('unique_id')]);
                 </div>
             </div>
         </table>
+        <hr>
+        <div class="pagin">
+            <div class="col-lg-12 text-center">
+                <div id='pagination' class='pagination-nav'>
+                    <?= $pager->links() ?>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>

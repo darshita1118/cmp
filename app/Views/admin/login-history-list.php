@@ -19,7 +19,7 @@
         <ol class="breadcrumb panel-title">
             <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
             <li class="breadcrumb-item"><a href="javascript:;">Login History</a></li>
-            <li class="breadcrumb-item active">Login History Counselors</li>
+            <li class="breadcrumb-item active">Login History Counsellors</li>
             <div class="p-2">
                 <span class="badge bg-warning text-white rounded-pill fs-6"><?= $total_records ?? '0' ?></span>
             </div>
@@ -160,6 +160,14 @@
                 endforeach; ?>
             </tbody>
         </table>
+        <hr>
+        <div class="pagin">
+            <div class="col-lg-12 text-center">
+                <div id='pagination' class='pagination-nav'>
+                    <?= $pager->links() ?>
+                </div>
+            </div>
+        </div>
     </div>
 
 

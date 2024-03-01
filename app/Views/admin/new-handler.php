@@ -3,8 +3,8 @@
     <div class="panel-heading">
         <ol class="breadcrumb panel-title">
             <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-            <li class="breadcrumb-item"><a href="javascript:;">Counselors</a></li>
-            <li class="breadcrumb-item active">Create Counselor</li>
+            <li class="breadcrumb-item"><a href="javascript:;">Counsellors</a></li>
+            <li class="breadcrumb-item active">Create Counsellor</li>
         </ol>
     </div>
 
@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="mb-3">
-                            <label class="form-label">Counselor Status</label>
+                            <label class="form-label">Counsellor Status</label>
                             <select class="form-select" name="status" required id="exampleSelect2">
                                 <option selected>--Select-- </option>
                                 <option value="0" <?= old('status') == '0' ? 'selected' : null ?>>Suspended</option>
@@ -66,9 +66,9 @@
 
                         </div>
                     </div>
-
-                    <div>
-                        <button type="submit" name="btn" value="submit" class="btn btn-primary me-5px">Add Counselor</button>
+                    <hr>
+                    <div class="text-center">
+                        <button type="submit" name="btn" value="submit" class="btn btn-primary me-5px">Add Counsellor</button>
                     </div>
                 </div>
             </fieldset>
