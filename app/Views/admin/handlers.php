@@ -321,7 +321,7 @@ function getTLName($handler)
 					<div class="col-md-1 ms-2">
 					<div class="form-group align-items-center">
 						<label for="">&nbsp;
-						</label><button name="btn" value="btn-submit" class="btn btn-primary" type="submit" style="padding-top: 5px;">Submit</button>
+						</label><button name="btn" value="handlerBulk" class="btn btn-primary" type="submit" style="padding-top: 5px;">Submit</button>
 					</div>
 					</div>
 			`);
@@ -331,7 +331,7 @@ function getTLName($handler)
 			<div class="col-md-1 ms-2">
 					<div class="form-group align-items-center">
 						<label for="">&nbsp;
-						</label><button name="btn" value="btn-submit" class="btn btn-primary" type="submit" style="padding-top: 5px;">Submit</button>
+						</label><button name="btn" value="handlerBulk" class="btn btn-primary" type="submit" style="padding-top: 5px;">Submit</button>
 					</div>
 					</div>
 			`);
@@ -341,7 +341,7 @@ function getTLName($handler)
 			<div class="col-md-1 ms-2">
 					<div class="form-group align-items-center">
 						<label for="">&nbsp;
-						</label><button name="btn" value="btn-submit" class="btn btn-primary" type="submit" style="padding-top: 5px;">Submit</button>
+						</label><button name="btn" value="handlerBulk" class="btn btn-primary" type="submit" style="padding-top: 5px;">Submit</button>
 					</div>
 					</div>
 			`);
