@@ -135,7 +135,7 @@ function getTLName($handler)
 				<?php $count = 1;
 				foreach ($handlers as $handler) : ?>
 					<tr class="odd gradeX">
-						<td><input type="checkbox" class="form-check-input email-checkbox" onclick="toggleRow(this)"></td>
+						<td><input type="checkbox" form="handlerForm" name="hid[]" value="<?= $handler['lu_id'] ?>" class="form-check-input email-checkbox" onclick="toggleRow(this)"></td>
 						<td width="1%" class="fw-bold"><?= $count ?></td>
 						<td><?= $handler['user_name'] ?></td>
 						<td><?= $handler['user_email'] ?></td>
